@@ -1,0 +1,134 @@
+.theme-btn {
+	display: inline-block;
+	border: 0;
+	z-index: 1;
+	position: relative;
+	border-radius: 100px;
+	padding: 15px 40px;
+	color: $white;
+	font-family: $base-font;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 30px;
+	text-transform: capitalize;
+	background: linear-gradient(270deg, #E8B00B 0%, #04B07D 100%);
+	transition: all .3s ease-in-out;
+	overflow: hidden;
+
+	&:after {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(270deg, #04B07D 0%, #E8B00B 100%);
+		transition: all .3s ease-in-out;
+		opacity: 0;
+		z-index: -1;
+		visibility: hidden;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $white;
+	}
+
+	&:hover:after {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	@include media-query(991px) {
+		font-size: 14px;
+	}
+
+	@include media-query(767px) {
+		padding: 8px 18px;
+		font-size: 14px;
+	}
+}
+
+.theme-btn-s2 {
+	background: $theme-primary-color;
+	color: $text-color;
+	display: inline-block;
+	padding: 15px 35px;
+	border-radius: 8px;
+	text-transform: capitalize;
+	z-index: 1;
+	position: relative;
+	border: transparent;
+	color: $white;
+	text-align: center;
+	font-family: Sora;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 30px;
+	transition: opacity 0.5s ease-out;
+
+	&:after {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 55px;
+		@include linear-gradient-bg(left, #00ded8, #00a7d5);
+		transition: opacity 0.5s ease-out;
+		opacity: 0;
+		z-index: -1;
+	}
+
+	@include media-query(991px) {
+		font-size: 14px;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		background: darken($theme-primary-color, 5%);
+		// @include linear-gradient-bg(left, #00ded8, #00a7d5);
+		color: $white;
+	}
+
+	&:hover:after {
+		opacity: 1;
+	}
+
+	@include media-query(767px) {
+		padding: 8px 18px;
+		font-size: 12px;
+	}
+}
+
+
+
+.view-cart-btn {
+	@extend .theme-btn;
+	display: block;
+	margin-top: 15px;
+	border-radius: 5px;
+	padding: 10px 45px;
+
+
+
+	&:after {
+		display: none;
+	}
+
+	&:hover {
+		background-color: darken($theme-primary-color, 8%);
+	}
+
+	&.s1 {
+		background: #ddd;
+
+		&:hover {
+			background-color: darken(#ddd, 8%);
+		}
+	}
+
+}

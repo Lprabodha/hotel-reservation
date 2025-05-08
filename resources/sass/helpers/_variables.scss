@@ -1,0 +1,30 @@
+/*---------------------------
+	Fonts
+----------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+
+// fonts
+$base-font-size: 15;
+$base-font: 'Sora', sans-serif;
+$heading-font: 'Playfair Display', serif;
+
+// color
+$dark-gray: #273958;//
+$body-color: #687693;
+$white: #fff;
+$light: #8188a9;
+$black: #000;
+$small-black: #333;
+$cyan: #797C80;//
+
+$theme-primary-color: #2979FE;//
+$theme-primary-color-s2: #071e93;
+$body-bg-color: #fff;
+$section-color: #F1F6FF;//
+$text-color:#120D2B;//
+$text-light-color: #424740;//
+$heading-color: $dark-gray;
+$border-color: rgba(18, 13, 43, 0.12);//
+$border-color-s2: #d8e0f1;

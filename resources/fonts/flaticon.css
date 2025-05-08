@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "flaticon";
+  src: url("./flaticon.ttf?7be827e199392bb56ae95dacf43f5036") format("truetype"), url("./flaticon.woff?7be827e199392bb56ae95dacf43f5036") format("woff"), url("./flaticon.woff2?7be827e199392bb56ae95dacf43f5036") format("woff2"), url("./flaticon.eot?7be827e199392bb56ae95dacf43f5036#iefix") format("embedded-opentype"), url("./flaticon.svg?7be827e199392bb56ae95dacf43f5036#flaticon") format("svg");
+}
+i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
+  font-family: flaticon !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-loupe:before {
+  content: "\f101";
+}
+
+.flaticon-shopping-cart:before {
+  content: "\f102";
+}
+
+.flaticon-shopping-cart-1:before {
+  content: "\f103";
+}
+
+.flaticon-shopping-bag:before {
+  content: "\f104";
+}
+
+.flaticon-shopping-cart-2:before {
+  content: "\f105";
+}
+
+.flaticon-placeholder:before {
+  content: "\f106";
+}
+
+.flaticon-email:before {
+  content: "\f107";
+}
+
+.flaticon-play-button:before {
+  content: "\f108";
+}
+
+.flaticon-user:before {
+  content: "\f109";
+}
+
+.flaticon-quotation:before {
+  content: "\f10a";
+}
+
+.flaticon-quotation-1:before {
+  content: "\f10b";
+}
+
+.flaticon-house:before {
+  content: "\f10c";
+}
+
+.flaticon-phone-call:before {
+  content: "\f10d";
+}
+
+.flaticon-badge:before {
+  content: "\f10e";
+}
+
+.flaticon-vegan:before {
+  content: "\f10f";
+}
+
+.flaticon-diary:before {
+  content: "\f110";
+}
+
+.flaticon-support:before {
+  content: "\f111";
+}
+
+.flaticon-family:before {
+  content: "\f112";
+}
+
+.flaticon-broken-arm:before {
+  content: "\f113";
+}
+
+.flaticon-wounded:before {
+  content: "\f114";
+}
+
+.flaticon-handcuffs:before {
+  content: "\f115";
+}
+
+.flaticon-graduation-cap:before {
+  content: "\f116";
+}
+
+.flaticon-book:before {
+  content: "\f117";
+}
+
+.flaticon-auction:before {
+  content: "\f118";
+}
+
+.flaticon-balance:before {
+  content: "\f119";
+}/*# sourceMappingURL=flaticon.css.map */
