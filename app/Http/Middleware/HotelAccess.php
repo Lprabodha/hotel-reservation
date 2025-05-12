@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class HotelAccess
 {
@@ -20,7 +19,7 @@ class HotelAccess
         $hotelId = $request->route('hotel');
 
         if (Auth::user()->hasRole(['hotel manager', 'hotel clerk'])) {
-            if (!Auth::user()->hotels->contains($hotelId)) {
+            if (! Auth::user()->hotels->contains($hotelId)) {
                 abort(403, 'Unauthorized access to this hotel.');
             }
         }
