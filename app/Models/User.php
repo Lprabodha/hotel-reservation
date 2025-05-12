@@ -45,4 +45,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class);
+    }
+
+    public function assignedHotels()
+    {
+        if ($this->hasRole(['hotel manager', 'hotel clerk'])) {
+            return $this->hotels;
+        }
+
+        return collect([]);
+    }
 }
