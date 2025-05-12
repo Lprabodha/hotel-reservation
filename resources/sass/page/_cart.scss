@@ -1,0 +1,285 @@
+/*===========================
+12. cart-page-style
+===========================*/
+.cart-area{
+
+    .cart-wrapper{
+        box-shadow: 0px 5px 15px 0px rgba(68, 68, 68, 0.1);
+
+        table {
+            @media(max-width:991px){
+                width: 1022px;
+            }
+        }
+
+        form {
+
+            @media(max-width:991px){
+                overflow: scroll;
+                overflow-y: hidden;
+            }
+        }
+        
+        
+    }
+
+
+    .cart-wrap td,
+    .cart-wrap th {
+        width: 10%;
+        border-bottom: 1px solid #f0f0f094;
+        text-align: center;
+        font-weight: 400;
+        color: #414141;
+
+        ul{
+          list-style: none;
+        }
+    }
+    .cart-wrap th {
+      border-bottom: 1px solid #f0f0f094;
+      padding: 40px 0;
+    }
+    
+    .cart-wrap thead {
+        background: #fff;
+        color: #505050;
+        padding: 40px;
+    }
+    .cart-area form {
+        margin: auto;
+        text-align: center;
+        background: #fff;    
+    }
+    .cart-wrap .product {
+        width: 15%;
+         padding: 40px 15px;
+    }
+    .cart-wrap .chack-in-out {
+        width: 20%;
+            padding: 40px 15px;
+    }
+    .cart-wrap .product ul{
+        text-align: left;
+        padding-left: 30px;
+        list-style: none;
+    }
+    .cart-wrap .product ul li{
+      padding-bottom: 5px;
+    }
+    .cart-wrap .product a {
+        font-size: 16px;
+        color: #a5a4a4;
+    }
+
+    .cart-wrap .product-2 {
+        text-align: left;
+        padding-left: 55px;
+    }
+    
+    .cart-wrap .product a:hover {
+        color: $theme-primary-color;
+    }
+    
+    .cart-wrap th {
+        height: 80px;
+        font-weight: 700;
+    }
+     .cart-wrap td {
+        padding: 40px 25px;
+
+        &.action{
+            ul{
+                display: flex;
+                justify-content: center;
+                list-style: none;
+
+                .w-btn-view{
+                    a{
+                        line-height: 45px;
+                    }
+                }
+            }
+        }
+    }
+
+    .cart-wrap td span{
+        display: block;
+        width: 100px;
+        height: 38px;
+        line-height: 34px;
+        color: #ee9902;
+        font-size: 14px;
+        border: 1.5px solid #ee9902;
+        border-radius: 4px;
+    }
+    .cart-wrap td.Del span{
+      color: #4ABA4E;
+      border: 1.5px solid #4ABA4E;
+    }
+    .cart-wrap td.can span{
+      color: #D85656;
+      border: 1.5px solid #D85656;
+    }
+    .cart-wrap td.pro span{
+      color: #691A5F;
+      border: 1.5px solid #691A5F;
+    }
+    
+    .cart-wrap .name{
+        width: 15%;
+    }
+    .cart-wrap .action a{
+        display: block;
+        width: 40px;
+        height: 38px;
+        line-height: 45px;
+        background: #414141;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+
+        .fi{
+            &::before{
+                font-size: 20px;
+            }
+        }
+    }
+    .cart-wrap .action a:hover{
+        background: $theme-primary-color;
+    }
+    .cart-wrap .action li.c-btn{
+       margin-right: 10px;
+       a{
+           background-color: $theme-primary-color;
+       }
+    }
+    .order-wrap{
+      padding: 0;
+    }
+     .cart-wrap tr:nth-child(even) {
+      background: #FCFCFC;
+    }
+
+    .cart-wrap .quantity {
+        position: relative;
+        max-width: 110px;
+        margin: 0 auto;
+    }
+    .quantity input {
+        width: 105px;
+        padding: 0px 35px;
+        text-align: center;
+        height: 36px;
+        position: relative;
+        background: #f2f2f5;
+        border: none;
+        border-radius: 40px;
+    }
+    .quantity .qtybutton {
+        position: absolute;
+        top: 0;
+        left: 0px;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 28px;
+        font-size: 18px;
+        cursor: pointer;
+        color: #333;
+        background: #fafaff;
+        border-radius: 30px;
+    }
+    .cart-wrap .quantity .qtybutton {
+        top: 50%;
+        left: 5px;
+        transform: translateY(-51%);
+        -webkit-transform: translateY(-51%);
+        -moz-transform: translateY(-51%);
+    
+    }
+    .cart-wrap .quantity .qtybutton.dec{
+      border-left: none;
+    }
+    .cart-wrap .quantity .qtybutton.inc {
+        right: 5px;
+        left: auto;
+        border-right: none;
+    }
+
+    .submit-btn-area {
+        padding: 40px;
+
+        ul{
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+
+            @media(max-width:450px){
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+
+            li{
+                &:last-child{
+                    margin-left: 20px;
+
+                    @media(max-width:450px){
+                        margin-left: 3px;
+                        margin-top: 5px;
+                      }
+                }
+            }
+        }
+
+        button {
+            padding: 15px 40px;
+            border: none;
+            background: $small-black;
+            color: $white;
+            transition: all .3s;
+            outline: none;
+            border-radius: 40px;
+             
+            &:hover{
+                background: $theme-primary-color;
+            }
+        }
+        .theme-btn{
+            text-transform: capitalize;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 27px;
+        }
+    }
+    
+    
+    .cart-product-list{
+
+        ul{
+         border-top: 1px solid #f0f0f094;
+         padding-top: 20px;
+         list-style: none;
+
+         li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0px 30px;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 21px;
+            color: #414141;
+            padding-bottom: 30px;
+
+            &.cart-b{
+                border-top: 1px solid #f0f0f094;
+                border-bottom: 1px solid #f0f0f094;
+                color:$theme-primary-color;
+                padding-top: 30px;
+                font-weight: 600;
+              }
+          }
+       }
+    }
+}
+  

@@ -1,0 +1,192 @@
+/*--------------------------------------------------------------
+10. wpo-faq-page
+--------------------------------------------------------------*/
+.wpo-faq-section{
+
+    .wpo-section-title{
+        text-align: center;
+
+        h2{
+            display: inline-block;
+        }
+    }
+
+    .accordion-item{
+        border: 0;
+        border: 1px solid #e1e1e1;
+        padding: 5px 20px;
+        margin-bottom: 20px;
+
+
+        .accordion-body{
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        button{
+            padding: 20px;
+            border:0;
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+            font-size: 18px;
+            color: $heading-color;
+            text-align: left;
+            font-family: $base-font;
+
+            &::after{
+                background: none;
+                font-family: "themify";
+                content: "\e622";
+                font-size: 15px;
+                transform: rotate(0deg);
+                font-weight: 700;
+            }
+
+            
+            &.collapsed{
+                color: #373b3e;
+
+                &::after{
+                    content: "\e61a";
+                }
+            }
+            &:focus{
+                box-shadow: none;
+                outline: none;
+                border-color: #e1e1e1;
+                
+            }
+
+            
+        }
+
+        .accordion-collapse{
+            border: 0;
+        }
+    }
+
+    .accordion-button{
+        background: transparent;
+    }
+}
+
+
+/*-----------------------------------------------------
+#4.1 faq section
+------------------------------------------------------*/
+
+.question-area {
+    background: #fcfcfc;
+    padding-top: 100px;
+
+    @media(max-width: 991px) {
+        padding-top: 80px;
+    
+    }
+    @media(max-width: 767px) {
+        padding-top: 60px;
+    
+    }
+}
+
+.question-area .wpo-section-title {
+    text-align: center;
+    h2{
+        display: inline-block;
+    }
+
+    @media(max-width: 590px) {
+        text-align: left;
+    
+    }
+}
+
+.question-touch {
+    max-width: 570px;
+    margin: auto;
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(68, 68, 68, 0.1);
+    box-shadow: 0px 5px 15px 0px rgba(68, 68, 68, 0.1);
+    padding: 50px;
+    text-align: center;
+    padding-top: 60px;
+}
+
+@media(max-width: 590px) {
+    .question-touch {
+        padding: 15px;
+    }
+
+}
+
+@media(max-width: 991px) {
+    .faq-pb {
+        margin-top: 15px;
+    }
+
+}
+
+.question-touch h2 {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 35px;
+}
+
+.question-touch .half-col{
+    width: 100%;
+}
+.question-touch input,
+.question-touch textarea {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: none;
+    border-radius: 0;
+    border-bottom: 1px solid #ddd;
+    border-top: none;
+    box-shadow: none;
+    margin-bottom: 22px;
+}
+
+.question-touch input:focus,
+.question-touch textarea:focus {
+    outline: none;
+    background: none;
+    border-radius: 0;
+    border-bottom: 1px solid #eeeeee;
+    box-shadow: none;
+}
+
+.question-touch textarea {
+    height: 160px;
+}
+
+
+.question-touch ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #888;
+    font-size: 14px;
+}
+
+.question-touch ::-moz-placeholder {
+    /* Firefox 19+ */
+
+    color: #888;
+    font-size: 14px;
+}
+
+.question-touch :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #888;
+    font-size: 14px;
+}
+
+.question-touch :-moz-placeholder {
+    /* Firefox 18- */
+
+    color: #888;
+    font-size: 14px;
+}

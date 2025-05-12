@@ -1,0 +1,125 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?7be827e199392bb56ae95dacf43f5036") format("truetype"),
+url("./flaticon.woff?7be827e199392bb56ae95dacf43f5036") format("woff"),
+url("./flaticon.woff2?7be827e199392bb56ae95dacf43f5036") format("woff2"),
+url("./flaticon.eot?7be827e199392bb56ae95dacf43f5036#iefix") format("embedded-opentype"),
+url("./flaticon.svg?7be827e199392bb56ae95dacf43f5036#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "loupe": "\f101",
+    "shopping-cart": "\f102",
+    "shopping-cart-1": "\f103",
+    "shopping-bag": "\f104",
+    "shopping-cart-2": "\f105",
+    "placeholder": "\f106",
+    "email": "\f107",
+    "play-button": "\f108",
+    "user": "\f109",
+    "quotation": "\f10a",
+    "quotation-1": "\f10b",
+    "house": "\f10c",
+    "phone-call": "\f10d",
+    "badge": "\f10e",
+    "vegan": "\f10f",
+    "diary": "\f110",
+    "support": "\f111",
+    "family": "\f112",
+    "broken-arm": "\f113",
+    "wounded": "\f114",
+    "handcuffs": "\f115",
+    "graduation-cap": "\f116",
+    "book": "\f117",
+    "auction": "\f118",
+    "balance": "\f119",
+);
+
+.flaticon-loupe:before {
+    content: map-get($flaticon-map, "loupe");
+}
+.flaticon-shopping-cart:before {
+    content: map-get($flaticon-map, "shopping-cart");
+}
+.flaticon-shopping-cart-1:before {
+    content: map-get($flaticon-map, "shopping-cart-1");
+}
+.flaticon-shopping-bag:before {
+    content: map-get($flaticon-map, "shopping-bag");
+}
+.flaticon-shopping-cart-2:before {
+    content: map-get($flaticon-map, "shopping-cart-2");
+}
+.flaticon-placeholder:before {
+    content: map-get($flaticon-map, "placeholder");
+}
+.flaticon-email:before {
+    content: map-get($flaticon-map, "email");
+}
+.flaticon-play-button:before {
+    content: map-get($flaticon-map, "play-button");
+}
+.flaticon-user:before {
+    content: map-get($flaticon-map, "user");
+}
+.flaticon-quotation:before {
+    content: map-get($flaticon-map, "quotation");
+}
+.flaticon-quotation-1:before {
+    content: map-get($flaticon-map, "quotation-1");
+}
+.flaticon-house:before {
+    content: map-get($flaticon-map, "house");
+}
+.flaticon-phone-call:before {
+    content: map-get($flaticon-map, "phone-call");
+}
+.flaticon-badge:before {
+    content: map-get($flaticon-map, "badge");
+}
+.flaticon-vegan:before {
+    content: map-get($flaticon-map, "vegan");
+}
+.flaticon-diary:before {
+    content: map-get($flaticon-map, "diary");
+}
+.flaticon-support:before {
+    content: map-get($flaticon-map, "support");
+}
+.flaticon-family:before {
+    content: map-get($flaticon-map, "family");
+}
+.flaticon-broken-arm:before {
+    content: map-get($flaticon-map, "broken-arm");
+}
+.flaticon-wounded:before {
+    content: map-get($flaticon-map, "wounded");
+}
+.flaticon-handcuffs:before {
+    content: map-get($flaticon-map, "handcuffs");
+}
+.flaticon-graduation-cap:before {
+    content: map-get($flaticon-map, "graduation-cap");
+}
+.flaticon-book:before {
+    content: map-get($flaticon-map, "book");
+}
+.flaticon-auction:before {
+    content: map-get($flaticon-map, "auction");
+}
+.flaticon-balance:before {
+    content: map-get($flaticon-map, "balance");
+}

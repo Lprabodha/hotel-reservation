@@ -1,0 +1,124 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+Theme Name:     Click2Checkin – Travel,Resort & Hotel Boking HTML5 Template
+Version:        1.0.0
+-------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+
+1. General
+	1.1 Theme Reset Style
+	1.2 Global Elements
+
+2. header
+	2.1 topbar
+	2.2 navigation
+
+3. content
+	3.1 hero-section
+	3.2 service-section
+	3.3 booking-section
+	3.4 popular-places-section
+	3.5 places-videos-section
+	3.6 featured-section
+	3.6 featured-section
+	3.7 authorlist-section
+	3.8 testimonial-section
+	3.9 places-section
+	3.10 blog-section
+
+4. wpo-footer
+
+5. Home-style-2
+   5.1 service-section-s2
+   5.2 authorlist-section-s2
+
+6. Home-style-3
+   6.1 videos-section
+   6.2 wpo-room-area
+
+7. places-single
+
+8. service single page
+
+9. Room-single-pages
+
+10. wpo-faq-page
+
+11. login-design
+
+12. cart-page-style
+
+13. checkout-page-style
+
+14. blog-pg-section
+
+15. blog-single-section
+
+16. contact-pg-section
+
+17. error-404-section
+
+
+----------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+1. General
+----------------------------------------------------------------*/
+
+// helpers
+@import "helpers/variables";
+@import "helpers/functions";
+@import "helpers/mixins";
+
+// base
+@import "base/base";
+
+
+// components
+@import "components/section-title";
+@import "components/buttons";
+@import "components/form";
+@import "components/social-links";
+@import "components/page-title";
+@import "components/preloader";
+@import "components/blog-sidebar";
+@import "components/pagination";
+
+// layout
+@import "layout/header";
+@import "layout/hero-slider";
+@import "layout/footer";
+
+// components
+@import "components/sticky-header";
+
+
+// page
+@import "page/home-default";
+@import "page/home-style-s2";
+@import "page/home-style-s3";
+@import "page/places-single";
+@import "page/service";
+@import "page/hotel-single";
+@import "page/faq";
+@import "page/auth-page";
+@import "page/cart";
+@import "page/checkout";
+
+
+@import "page/blog";
+
+@import "page/blog-single";
+
+@import "page/contact";
+
+@import "page/error-404";
+
+
+
+

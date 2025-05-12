@@ -1,0 +1,252 @@
+/*--------------------------------------------------------------
+8. service single page
+--------------------------------------------------------------*/
+.service-single-section {
+	.service-single-content {
+		h2 {
+			font-size: 35px;
+			font-size: calc-rem-value(35);
+			margin: 0 0 0.7em; 
+			text-transform: capitalize;
+
+			@include media-query(991px) {
+				font-size: 25px;
+				font-size: calc-rem-value(25);
+			}
+
+			@include media-query(767px) {
+				font-size: 22px;
+				font-size: calc-rem-value(22);
+			}
+		}
+
+		h3 {
+			font-size: 30px;
+			font-size: calc-rem-value(30);
+			text-transform: capitalize;
+			margin: 0 0 1em;
+			
+			@include media-query(991px) {
+				font-size: 22px;
+				font-size: calc-rem-value(22);
+			}
+
+			@include media-query(767px) {
+				font-size: 20px;
+				font-size: calc-rem-value(20);
+			}
+		}
+
+		p {
+			margin-bottom: 1.3em;
+		}
+
+		.service-single-img {
+			position: relative;
+			margin-bottom: 60px;
+
+			@include media-query(991px) {
+				margin-bottom: 50px;
+			}
+		}
+
+		.why-choose-section {
+			padding-top: 15px;
+
+			.feature-grids {
+				margin: 0 -15px;
+
+				@include media-query(767px) {
+					margin: 0 -7.5px;
+				}
+
+				.grid {
+					background: $white;
+					width: calc(33% - 30px);
+					float: left;
+					margin: 0 15px 30px;
+					padding: 40px 30px;
+					box-shadow: 0px 0px 20px 0px rgba(102, 102, 102, 0.1);
+					position: relative;
+					overflow: hidden;
+					@include transition-time(0.5s);
+
+					@include media-query(1199px) {
+						padding: 20px;
+						margin: 0 5px 30px;
+						width: calc(35% - 30px);
+					}
+
+					@include media-query(991px) {
+						width: calc(50% - 30px);
+						margin: 0 15px 30px;
+					}
+
+					@include media-query(767px) {
+						width: calc(50% - 15px);
+						margin: 0 7.5px 30px;
+					}
+
+					@include media-query(600px) {
+						width: calc(100% - 15px);
+						float: none;
+					}
+				}
+
+				.fi:before {
+					font-size: 45px;
+					color: $theme-primary-color;
+				}
+
+				.grid h3 {
+					font-size: 19px;
+					margin: 0.5em 0 0.73em;
+
+					@include media-query(1199px) {
+						font-size: 16px;
+					}
+				}
+
+				.grid p {
+					margin: 0;
+				}
+
+				.hover-icon {
+					position: absolute;
+					right: -40px;
+					top: -40px;
+
+					.fi:before {
+						font-size: 100px;
+						color: transparentize($white, 0.9);
+					}
+				}
+
+				
+			}
+		}
+
+		.tab-area {
+			margin-top: 40px;
+
+			.tablinks {
+				border-top: 1px solid #eeeeee;
+				margin-bottom: 15px;
+
+				ul {
+					overflow: hidden;
+					border-bottom: 0;
+				}
+
+				li {
+					width: 25%;
+					float: left;
+					position: relative;
+
+					@include media-query(500px) {
+						width: auto;
+					}
+				}
+
+				ul > li + li:before {
+					content: "";
+					background: #787878;
+					width: 5px;
+					height: 2px;
+					position: absolute;
+					left: -30px;
+					top: 50%;
+
+					@include media-query(500px) {
+						display: none;
+					}
+				}
+
+				a {
+					font-size: 18px;
+					color: $text-color;
+					padding: 25px 0;
+					display: block;
+					position: relative;
+					border: 0;
+
+					@include media-query(767px) {
+						font-size: 16px;
+					}
+
+					@include media-query(500px) {
+						padding: 25px 15px;
+					}
+
+					&:before {
+						content: "";
+						background: $theme-primary-color;
+						width: 100%;
+						height: 2px;
+						position: absolute;
+						left: 0;
+						top: 0;
+						opacity: 0;
+					}
+				}
+
+				li a.active:before {
+					opacity: 1;
+				}
+				li a:hover,
+				li a:focus,
+				li a.active{
+					border: none;
+				}
+
+				li.active a {
+					text-decoration: none;
+				}
+			}
+
+			.tab-pane > p:first-child {
+				font-size: 20px;
+				margin-bottom: 1.3em;
+
+				@include media-query(767px) {
+					font-size: 16px;
+				}
+			}
+
+			.tab-pane > p:last-child {
+				margin-bottom: 0;
+			}
+
+			.img-area {
+				margin: 0 -15px;
+				padding: 40px 0 30px;
+				overflow: hidden;
+
+				@include media-query(767px) {
+					margin: 0 -7.5px;
+					padding: 30px 0 20px;
+				}
+
+				img {
+					width: calc(50% - 30px);
+					float: left;
+					margin:  0 15px 30px;
+
+					@include media-query(767px) {
+						width: calc(50% - 15px);
+						float: left;
+						margin:  0 7.5px 30px;
+					}
+
+					@include media-query(500px) {
+						width: calc(100% - 15px);
+						float: none;
+					}
+				}
+			}
+
+		}
+
+
+	}
+}

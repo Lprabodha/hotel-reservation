@@ -1,0 +1,444 @@
+/*===============================
+13. checkout-page-style
+================================*/
+
+.wpo-checkout-area {
+  .checkout-wrap {
+    background: #fff;
+
+    ul {
+      list-style: none;
+    }
+  }
+
+  #open2 {
+    display: block;
+  }
+
+  #open3 {
+    display: none;
+  }
+
+  #open4 {
+    display: none;
+  }
+
+  .create-account p {
+    margin-bottom: 15px;
+  }
+
+  .create-account {
+    display: none;
+    padding: 20px;
+  }
+
+  .create-account span {
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
+
+  .create-account input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ebebeb;
+    margin-bottom: 25px;
+    padding-left: 20px;
+    border-radius: 40px;
+  }
+
+  .create-account input:focus {
+    outline: none;
+  }
+
+  .create-account button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 50px;
+    background: #333;
+    color: #fff;
+    width: 108px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+
+  .create-account button:hover {
+    background: $theme-primary-color;
+  }
+
+  .coupon {
+    position: relative;
+    cursor: pointer;
+    cursor: pointer;
+    background: #fffbf5;
+  }
+
+  .coupon:before {
+    position: absolute;
+    right: 30px;
+    top: 21px;
+    content: "\e64b";
+    font-family: 'themify';
+
+  }
+
+  .coupon span {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+
+  .coupon label {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 18px;
+    color: #0F0F0F;
+    cursor: pointer;
+    padding: 20px 20px;
+    border-left: 4px solid $theme-primary-color;
+    transition: all .3s;
+    width: 100%;
+
+    @media(max-width:767px) {
+      font-size: 15px;
+    }
+  }
+
+  .caupon-wrap {
+    background: $white;
+    margin-bottom: 20px;
+    transition: all .3s;
+    box-shadow: 0px 5px 15px 0px rgba(62, 65, 159, 0.1);
+  }
+
+  .active-border {
+    transition: all .3s;
+  }
+
+  .s1.active-border .coupon-active label,
+  .s3.coupon-2 .coupon-3 label {
+    border-left: none;
+    border-top: 4px solid $theme-primary-color;
+    border-bottom: 1px solid #ffe5dc;
+  }
+
+  .s2 .coupon-3 {
+    border-top: 4px solid $theme-primary-color;
+  }
+
+  .s2.coupon-2 .coupon-3 {
+    border-top: 0;
+  }
+
+  .s2 .coupon-3 label {
+    border-left: 0;
+    border-bottom: 1px solid #ffe5dc;
+  }
+
+  .s2.coupon-2 .coupon-3 label {
+    border-left: 4px solid $theme-primary-color;
+    border-bottom: 0;
+  }
+
+  .billing-adress .form-style input,
+  .billing-adress .form-style select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    height: 40px;
+    background: #fff;
+    border-radius: 2px;
+    border: none;
+    border: 1px solid #ebebeb;
+    border-radius: 40px;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .billing-adress .form-style select {
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    background: transparent url(../images/select-icon2.png) no-repeat calc(100% - 15px) center;
+    position: relative;
+  }
+
+  .billing-adress {
+    padding: 30px;
+  }
+
+  .note-area textarea {
+    width: 100%;
+    height: 150px;
+    padding-top: 10px;
+    margin-bottom: 0;
+    padding-left: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .biling-item-2 {
+    margin-top: 20px;
+    position: relative;
+
+    label.fontsize {
+      margin-bottom: 20px;
+      padding-left: 30px;
+    }
+  }
+
+  .biling-item-2 .billing-adress {
+    padding: 0;
+  }
+
+
+
+  .payment-name ul {
+    display: flex;
+    justify-content: flex-start;
+
+    @media(max-width:575px) {
+      flex-wrap: wrap;
+    }
+
+  }
+
+  .payment-area form {
+    overflow: unset !important;
+  }
+
+  .payment-name ul li {
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  .payment-name ul li input {
+    margin-right: 0;
+  }
+
+  .payment-name ul li {
+    margin-right: 15px;
+
+    @media(max-width:575px) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .payment-area h2 {
+    padding-bottom: 40px;
+    margin-bottom: 0;
+  }
+
+  .payment-select {
+    padding: 40px 0;
+  }
+
+  .payment-select ul {
+    display: flex;
+
+    @media(max-width:575px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .payment-select ul li {
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5B5B5B;
+  }
+
+  .payment-select label {
+    font-size: 18px;
+    font-weight: 600;
+
+    @media(max-width:575px) {
+      font-size: 14px;
+    }
+  }
+
+  .payment-area h2 {
+    font-size: 20px;
+    color: #878787;
+    font-weight: 700;
+  }
+
+  .payment-area h2 span {
+    font-size: 30px;
+    color: #ff493c;
+  }
+
+  .payment-area {
+    width: 100%;
+  }
+
+  .payment-name ul li input {
+    margin-right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .payment-name ul li input:checked~label {
+    border: 1px solid #ff493c;
+  }
+
+  .payment-name label {
+    width: 100%;
+    border: 1px solid transparent;
+  }
+
+  .payment-name .visa label {
+    border: 1px solid #0057A0;
+  }
+
+  .payment-name .mas label {
+    border: 1px solid #CC0000;
+  }
+
+  .payment-name .ski label {
+    border: 1px solid #691A5F;
+  }
+
+  .payment-name .pay label {
+    border: 1px solid #019CDE;
+  }
+
+  .payment-option {
+    padding: 30px;
+  }
+
+  .payment-name {
+    display: none;
+  }
+
+  .payment-name.active {
+    display: block;
+  }
+
+  .payment-option.active .payment-name {
+    display: none !important;
+  }
+
+  .payment-area .form-style input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    height: 40px;
+    background: #fff;
+    border-radius: 2px;
+    border: none;
+    border: 1px solid #ebebeb;
+    border-radius: 40px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .payment-area .form-style select {
+
+
+    &:focus {
+      outline: none;
+
+    }
+  }
+
+  .payment-area .contact-form {
+    margin-top: 40px;
+  }
+
+  .cout-order-area {
+    box-shadow: 0px 5px 15px 0px rgba(62, 65, 159, 0.1);
+  }
+
+  .cout-order-area .oreder-item ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+    color: #414141;
+
+    &.s-total {
+      font-weight: 400;
+    }
+  }
+
+  .cout-order-area .oreder-item ul .o-header {
+    color: #0F0F0F;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .cout-order-area .oreder-item ul .o-middle {
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .cout-order-area .oreder-item ul .o-bottom {
+    border-top: 1px solid #ebebeb;
+    color: $theme-primary-color;
+    font-weight: 600;
+  }
+
+  .create-account.active {
+    display: block;
+  }
+
+  .contact-form {
+    .form-control {
+      appearance: auto;
+      width: 100%;
+    }
+    .nice-select {
+      width: 100%;
+      margin-bottom: 15px;
+      padding-left: 10px;
+      height: 40px;
+      background: #fff;
+      border-radius: 2px;
+      border: none;
+      border: 1px solid #ebebeb;
+      border-radius: 40px;
+      margin-top: 10px;
+      line-height: 27px;
+      &:focus{
+           box-shadow: 0 0 0 0.25rem transparent;
+      }
+    }
+
+    input,
+    select {
+      margin-top: 10px;
+    }
+  }
+
+  .submit-btn-area {
+    margin-top: 20px;
+
+    .theme-btn {
+      text-transform: capitalize;
+    }
+  }
+}
