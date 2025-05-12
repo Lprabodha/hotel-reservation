@@ -15,7 +15,7 @@
                                     consectetur adipiscing elit sed do eiusmod tempor
                                     incididunt ut labore.</p>
                                 <div class="hero-btn wow fadeInLeftSlow" data-wow-duration="1800ms">
-                                    <a href="hotel-single.html" class="theme-btn">find your hotel</a>
+                                    <a href="{{route('hotel',['slug' => Str::uuid()])}}" class="theme-btn">find your hotel</a>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="input-item s2">
-                                    <a href="hotel-single.html" class="theme-btn-s2">search hotel</a>
+                                    <a href="{{route('hotels')}}" class="theme-btn-s2">search hotel</a>
                                 </div>
                             </form>
                         </div>
@@ -252,7 +252,7 @@
                     <div class="wpo-section-title s2 wow fadeInRightSlow" data-wow-duration="1700ms">
                         <span>// beautiful videos</span>
                         <h2>Explore the World Through Beautiful Videos.</h2>
-                        <a href="about.html" class="theme-btn">list your property</a>
+                        <a href="{{route('about-us')}}" class="theme-btn">list your property</a>
                     </div>
                 </div>
                 <div class="col-xl-7 order-xl-1 col-12">
@@ -429,7 +429,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Whispering Pines</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Whispering Pines</a></h2>
                             <span><i class="ti-location-pin"></i> Pine Tree Lane, Whisperwood</span>
                         </div>
                     </div>
@@ -457,7 +457,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Serenity Vista In</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Serenity Vista In</a></h2>
                             <span><i class="ti-location-pin"></i>Serenity Avenue, Tranquil Town</span>
                         </div>
                     </div>
@@ -485,7 +485,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Blissful Retreat Lodge</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Blissful Retreat Lodge</a></h2>
                             <span><i class="ti-location-pin"></i>321 Bliss Way, Serene Valley</span>
                         </div>
                     </div>
@@ -513,7 +513,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Radiant Moon Hotel</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Radiant Moon Hotel</a></h2>
                             <span><i class="ti-location-pin"></i>Moonlight Boulevard, Starryville</span>
                         </div>
                     </div>
@@ -541,7 +541,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Whispering Pines</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Whispering Pines</a></h2>
                             <span><i class="ti-location-pin"></i>Pine Tree Lane, Whisperwood</span>
                         </div>
                     </div>
@@ -569,7 +569,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Velvet Sands Hotel</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Velvet Sands Hotel</a></h2>
                             <span><i class="ti-location-pin"></i>753 Velvet Shore, Sandy Shores</span>
                         </div>
                     </div>
@@ -597,7 +597,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Majestic Peaks Resort</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Majestic Peaks Resort</a></h2>
                             <span><i class="ti-location-pin"></i>951 Majestic View, Mountainville</span>
                         </div>
                     </div>
@@ -625,14 +625,14 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h2><a href="hotel-single.html">Tranquil Oasis Inn</a></h2>
+                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Tranquil Oasis Inn</a></h2>
                             <span><i class="ti-location-pin"></i>258 Oasis Street, Calmington</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="featured-all-btn">
-                <a href="hotel.html" class="theme-btn-s2">view all hotels</a>
+                <a href="{{route('hotels')}}" class="theme-btn-s2">view all hotels</a>
             </div>
         </div>
     </section>
@@ -646,7 +646,7 @@
                     <div class="wpo-section-title s2 wow fadeInLeftSlow" data-wow-duration="1700ms">
                         <span>// author list</span>
                         <h2>Discover the Talented Authors in Our Click2Checkin.</h2>
-                        <a href="about.html" class="theme-btn">list your property</a>
+                        <a href="{{route('about-us')}}" class="theme-btn">list your property</a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-12">
