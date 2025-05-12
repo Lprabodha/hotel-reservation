@@ -7,7 +7,7 @@
                     <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                         <div class="widget about-widget">
                             <div class="logo widget-title">
-                                <img src="images/logo.svg" alt="blog">
+                                <img src="{{asset('images/logo.svg')}}" alt="blog">
                             </div>
                             <p>Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
                                 posuere ac ut. Dignissim convallis aenean et tortor.</p>

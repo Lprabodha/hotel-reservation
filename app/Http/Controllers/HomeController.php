@@ -28,6 +28,11 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
-        return view('pages/about-us');
+        return view('pages.about-us');
+    }
+
+    public function contact()
+    {
+        return view('pages.contact-us');
     }
 }

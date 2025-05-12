@@ -1,77 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    <div class="wpo-login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="wpo-accountWrapper" action="#">
+                        <div class="wpo-accountInfo image">
+                            <img src="{{asset('images/login.png')}}" alt="">
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="wpo-accountForm form-style">
+                            <div class="fromTitle">
+                                <h2>Signup</h2>
+                                <p>Sign into your pages account</p>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your name here..">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <label>Email</label>
+                                    <input type="text" id="email" name="email" placeholder="Your email here..">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input class="pwd2" type="password" placeholder="Your password here.."
+                                            value="sfsg" name="pass">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default reveal3" type="button"><i
+                                                    class="ti-eye"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input class="pwd3" type="password" placeholder="Your password here.."
+                                            value="ssres" name="pass">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default reveal2" type="button"><i
+                                                    class="ti-eye"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <button type="submit" class="wpo-accountBtn">Sign Up</button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                            <h4 class="or"><span>OR</span></h4>
+                            <ul class="wpo-socialLoginBtn">
+                                <li><button class="facebook" tabindex="0" type="button"><span><i
+                                                class="ti-facebook"></i></span></button></li>
+                                <li><button class="twitter" tabindex="0" type="button"><span><i
+                                                class="ti-twitter"></i></span></button></li>
+                                <li><button class="linkedin" tabindex="0" type="button"><span><i
+                                                class="ti-linkedin"></i></span></button></li>
+                            </ul>
+                            <p class="subText">Don't have an account? <a href="{{route('login')}}">Create free account</a>
+                            </p>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

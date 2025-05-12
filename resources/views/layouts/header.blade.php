@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-lg-2 col-md-4 col-4">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="{{route('home')}}"><img src="images/logo.svg"
+                                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/logo.svg')}}"
                                             alt="logo"></a>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{route('contact-us')}}">Contact</a></li>
                                     </ul>
 
                                 </div><!-- end of nav-collapse -->
@@ -125,7 +125,7 @@
                                         </select>
                                     </div>
                                     <div class="close-form">
-                                        <a class="theme-btn" href="login.html">sign up</a>
+                                        <a class="theme-btn" href="{{route('login')}}">sign up</a>
                                     </div>
                                 </div>
                             </div>
