@@ -14,8 +14,8 @@
                         <div class="col col-md-5 col-sm-12 col-12">
                             <div class="contact-info">
                                 <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="faq.html">FAQ Us</a></li>
+                                    <li><a href="{{route('about-us')}}">About Us</a></li>
+                                    <li><a href="{{route('faq')}}">FAQ Us</a></li>
                                     <li><a href="#"><i class="ti-facebook"></i></a></li>
                                     <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
                                     <li><a href="#"><i class="ti-instagram"></i></a></li>
@@ -55,60 +55,6 @@
                                     <ul class="nav navbar-nav mb-2 mb-lg-0">
                                         <li><a href="{{route('home')}}">Home</a></li>
                                         <li><a href="{{route('about-us')}}">about us</a></li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">places</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="places.html">places</a></li>
-                                                <li><a href="places-single.html">places single</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Pages</a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item-has-children">
-                                                    <a href="#">service</a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="service.html">service 1</a></li>
-                                                        <li><a href="service-s2.html">service 2</a></li>
-                                                        <li><a href="service-single.html">service single</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="booking.html">booking</a></li>
-                                                <li><a href="author.html">author</a></li>
-                                                <li><a href="testimonial.html">testimonial</a></li>
-                                                <li class="menu-item-has-children">
-                                                    <a href="#">hotel</a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="hotel.html">hotel</a></li>
-                                                        <li><a href="hotel-single.html">hotel single</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                                <li><a href="faq.html">FAQ</a></li>
-                                                <li><a href="login.html">login</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Blog</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog.html">Blog right sidebar</a></li>
-                                                <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html">Blog fullwidth</a></li>
-                                                <li class="menu-item-has-children">
-                                                    <a href="#">Blog details</a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="blog-single.html">Blog details right sidebar</a>
-                                                        </li>
-                                                        <li><a href="blog-single-left-sidebar.html">Blog details left
-                                                                sidebar</a></li>
-                                                        <li><a href="blog-single-fullwidth.html">Blog details
-                                                                fullwidth</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
                                         <li><a href="{{route('contact-us')}}">Contact</a></li>
                                     </ul>
 
