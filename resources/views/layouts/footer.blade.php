@@ -95,7 +95,7 @@
                                             </defs>
                                         </svg>
                                     </div>
-                                    hotely@bookfi.com
+                                    service@click2checkin.com
                                 </li>
                             </ul>
                             <div class="social-widget">
@@ -162,7 +162,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col col-xs-6 col-lg-6 col-md-12 col-12">
-                        <p class="copyright"> Copyright &copy; 2023 Hotely by <a href="index.html">wpOceans</a>. All
+                        <p class="copyright"> Copyright &copy; <script>document.write(new Date().getFullYear());</script> Click2Checkin</a>. All
                             Rights Reserved.</p>
                     </div>
                     <div class="col col-xs-6 col-lg-6 col-md-12 col-12">

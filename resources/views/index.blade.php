@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- start of hero -->
-    <section class="hero-section-s3">
+     <section class="hero-section-s3">
         <div class="hero-wraper">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
@@ -143,7 +142,7 @@
                 <div class="col-lg-9 col-12">
                     <div class="wpo-section-title s2  wow fadeInUp" data-wow-duration="1200ms">
                         <span>// why choose us</span>
-                        <h2>some of the reasons why choose hotely.</h2>
+                        <h2>some of the reasons why choose Click2Checkin.</h2>
                     </div>
                 </div>
             </div>
@@ -646,7 +645,7 @@
                 <div class="col-xl-4 col-12">
                     <div class="wpo-section-title s2 wow fadeInLeftSlow" data-wow-duration="1700ms">
                         <span>// author list</span>
-                        <h2>Discover the Talented Authors in Our hotely.</h2>
+                        <h2>Discover the Talented Authors in Our Click2Checkin.</h2>
                         <a href="about.html" class="theme-btn">list your property</a>
                     </div>
                 </div>

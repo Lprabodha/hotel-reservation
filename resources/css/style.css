@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------
 [Master Stylesheet]
-Theme Name:     Hotely – Travel,Resort & Hotel Boking HTML5 Template
+Theme Name:     Click2Checkin – Travel,Resort & Hotel Boking HTML5 Template
 Version:        1.0.0
 -------------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -144,10 +144,10 @@ img {
   position: relative;
   overflow: hidden;
 }
-
+/*
 .wow {
   visibility: hidden;
-}
+} */
 
 .fi:before {
   margin: 0;

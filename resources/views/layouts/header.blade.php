@@ -7,7 +7,7 @@
                             <div class="contact-intro">
                                 <ul>
                                     <li><i class="fi ti-location-pin"></i>28 Street, New York City, USA</li>
-                                    <li><i class="fi flaticon-email"></i>hotely@gmail.com</li>
+                                    <li><i class="fi flaticon-email"></i>service@click2checkin.com </li>
                                 </ul>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-lg-2 col-md-4 col-4">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="index.html"><img src="images/logo.svg"
+                                    <a class="navbar-brand" href="{{route('home')}}"><img src="images/logo.svg"
                                             alt="logo"></a>
                                 </div>
                             </div>
@@ -53,16 +53,8 @@
                                 <div id="navbar" class="collapse navbar-collapse navigation-holder">
                                     <button class="menu-close"><i class="ti-close"></i></button>
                                     <ul class="nav navbar-nav mb-2 mb-lg-0">
-                                        <li class="menu-item-has-children">
-                                            <a class="active" href="#">Home</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="index.html">Home style 1</a></li>
-                                                <li><a href="index-2.html">Home style 2</a></li>
-                                                <li><a class="active" href="index-3.html">Home style 3</a></li>
-                                                <li><a href="index-4.html">Home style 4</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">about us</a></li>
+                                        <li><a href="{{route('home')}}">Home</a></li>
+                                        <li><a href="{{route('about-us')}}">about us</a></li>
                                         <li class="menu-item-has-children">
                                             <a href="#">places</a>
                                             <ul class="sub-menu">
