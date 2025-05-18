@@ -26,12 +26,10 @@ jobs:
           # Mark the directory as safe to avoid Git dubious ownership error
           git config --global --add safe.directory /var/www/hotel-reservation
 
-          # Navigate or clone repo
-          if [ ! -d "/var/www/hotel-reservation" ]; then
-            git clone https://github.com/Lprabodha/hotel-reservation /var/www/hotel-reservation
-          fi
-
+          # Go to the repo directory
           cd /var/www/hotel-reservation
+
+          # Reset any local changes and pull latest from main
           git reset --hard
           git pull origin main
 
