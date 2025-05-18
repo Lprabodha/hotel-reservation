@@ -5,9 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="wpo-accountWrapper" action="#">
+                    <form class="wpo-accountWrapper"method="POST" action="{{ route('register') }}">
+                        @csrf
                         <div class="wpo-accountInfo image">
-                            <img src="{{asset('images/login.png')}}" alt="">
+                            <img src="{{ asset('images/login.png') }}" alt="">
                         </div>
                         <div class="wpo-accountForm form-style">
                             <div class="fromTitle">
@@ -17,28 +18,51 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your name here..">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        id="name" name="name" placeholder="Your name here.."
+                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <label>Email</label>
-                                    <input type="text" id="email" name="email" placeholder="Your email here..">
+                                    <label>{{ __('Email Address') }}</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                        id="email" name="email" placeholder="Your email here.."
+                                        value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input class="pwd2" type="password" placeholder="Your password here.."
-                                            value="sfsg" name="pass">
+                                        <input type="password" placeholder="Your password here.." 
+                                            name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal3" type="button"><i
                                                     class="ti-eye"></i></button>
                                         </span>
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input class="pwd3" type="password" placeholder="Your password here.."
-                                            value="ssres" name="pass">
+                                        <input  id="password-confirm" type="password" placeholder="Your password here.."
+                                            name="password_confirmation" required autocomplete="new-password">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal2" type="button"><i
                                                     class="ti-eye"></i></button>
@@ -58,7 +82,7 @@
                                 <li><button class="linkedin" tabindex="0" type="button"><span><i
                                                 class="ti-linkedin"></i></span></button></li>
                             </ul>
-                            <p class="subText">Don't have an account? <a href="{{route('login')}}">Create free account</a>
+                            <p class="subText">Don't have an account? <a href="{{ route('login') }}">Create free account</a>
                             </p>
                         </div>
                     </form>
