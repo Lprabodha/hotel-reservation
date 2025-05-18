@@ -28,9 +28,6 @@ jobs:
           echo "Navigating to project directory: \$PROJECT_DIR"
           cd $PROJECT_DIR
 
-          # Ensure the directory is marked as safe
-          git config --global --add safe.directory \$PROJECT_DIR
-
           # Reset and pull latest changes
           echo "Pulling latest changes from main branch..."
           git reset --hard
