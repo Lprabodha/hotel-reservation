@@ -26,7 +26,7 @@ jobs:
           PROJECT_DIR="/var/www/hotel-reservation/"
 
           echo "Fixing ownership to avoid Git permission issues..."
-          sudo chown -R ubuntu:ubuntu \$PROJECT_DIR
+          sudo chown -R ubuntu:ubuntu $PROJECT_DIR
 
           echo "Navigating to project directory: \$PROJECT_DIR"
           cd $PROJECT_DIR
