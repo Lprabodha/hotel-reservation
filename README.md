@@ -1,7 +1,8 @@
 # 🏨 Hotel Reservation System
 
 ![Laravel](https://img.shields.io/badge/Laravel-10.x-red?style=flat-square&logo=laravel)
-![License](https://img.shields.io/github.com/Lprabodha/hotel-reservation?style=flat-square)
+![Open Source](https://img.shields.io/badge/license-MIT-green)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
 A web-based hotel reservation platform built with **Laravel**. Supports multi-hotel management for customers, hotel managers, clerks, and travel companies to handle room bookings, check-ins, check-outs, billing, and reporting.
 
