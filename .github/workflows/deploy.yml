@@ -44,7 +44,7 @@ jobs:
 
           echo "Installing and building frontend assets..."
           npm install
-          npm run prod
+          npm run build
 
           echo "Setting correct permissions..."
           sudo chown -R www-data:www-data \$PROJECT_DIR/storage \$PROJECT_DIR/bootstrap/cache
