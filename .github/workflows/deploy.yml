@@ -42,6 +42,10 @@ jobs:
           echo "Running database migrations..."
           php artisan migrate --force
 
+          echo "Fixing Laravel permissions..."
+          sudo chown -R www-data:www-data storage bootstrap/cache
+          sudo chmod -R 775 storage bootstrap/cache
+
           echo "Installing and building frontend assets..."
           npm install
           npm run build
