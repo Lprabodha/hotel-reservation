@@ -17,7 +17,7 @@ A web-based hotel reservation platform built with **Laravel**. Supports multi-ho
 - **Reporting**: Daily reports and analytics.
 - **Role-based Access**: Super Admin, Hotel Manager, Clerk, Customer, Travel Company.
 - **Secure Authentication**: Robust login system using Spatie Laravel Permission.
-- **Responsive UI**: Built with [Tailwind CSS](https://tailwindcss.com/) or [Bootstrap](https://getbootstrap.com/) (choose your preference).
+- **Responsive UI**: Built with [Bootstrap](https://getbootstrap.com/).
 - **CI/CD**: GitHub Actions for auto-deployment to AWS EC2.
 
 ---
