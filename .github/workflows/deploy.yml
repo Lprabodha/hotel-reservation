@@ -23,6 +23,9 @@ jobs:
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
           set -e
 
+          # Mark the directory as safe to avoid Git dubious ownership error
+          git config --global --add safe.directory /var/www/hotel-reservation
+
           # Navigate or clone repo
           if [ ! -d "/var/www/hotel-reservation" ]; then
             git clone https://github.com/Lprabodha/hotel-reservation /var/www/hotel-reservation
@@ -43,7 +46,7 @@ jobs:
           npm run prod
 
           # Set correct permissions (adjust user if needed)
-          chown -R www-data:www-data /var/www/hotel-reservation/storage /var/www/hotel-reservation/bootstrap/cache
+          sudo chown -R www-data:www-data /var/www/hotel-reservation/storage /var/www/hotel-reservation/bootstrap/cache
 
           # Reload Nginx
           sudo systemctl reload nginx
