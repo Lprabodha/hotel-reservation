@@ -23,7 +23,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
           set -e
 
-          PROJECT_DIR="/var/www/hotel-reservation"
+          PROJECT_DIR="/var/www/hotel-reservation/"
 
           echo "Navigating to project directory: \$PROJECT_DIR"
           cd \$PROJECT_DIR
