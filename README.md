@@ -1,61 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏨 Hotel Reservation System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-10.x-red?style=flat-square&logo=laravel)
+![License](https://img.shields.io/github/license/yourusername/hotel-reservation?style=flat-square)
+![CI](https://github.com/yourusername/hotel-reservation/actions/workflows/deploy.yml/badge.svg)
 
-## About Laravel
+A web-based hotel reservation platform built with **Laravel**. Supports multi-hotel management for customers, hotel managers, clerks, and travel companies to handle room bookings, check-ins, check-outs, billing, and reporting.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Multi-hotel support**: Manage multiple hotels, each with its own rooms and staff.
+- **Flexible Booking**: Customers & travel companies can book single or multiple rooms per reservation.
+- **Check-in / Check-out**: Intuitive flows for front desk operations.
+- **Billing & Payments**: Automatic billing, payment tracking, and no-show auto-billing.
+- **Reporting**: Daily reports and analytics.
+- **Role-based Access**: Super Admin, Hotel Manager, Clerk, Customer, Travel Company.
+- **Secure Authentication**: Robust login system using Spatie Laravel Permission.
+- **Responsive UI**: Built with [Tailwind CSS](https://tailwindcss.com/) or [Bootstrap](https://getbootstrap.com/) (choose your preference).
+- **CI/CD**: GitHub Actions for auto-deployment to AWS EC2.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Backend**: Laravel 10
+- **Database**: MySQL / MariaDB
+- **Authorization**: Spatie Laravel-Permission
+- **Frontend**: Tailwind CSS / Bootstrap
+- **Dev Tools**: Composer, NPM, GitHub Actions, EC2
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## ⚙️ Installation & Local Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/hotel-reservation.git
+   cd hotel-reservation
+   ```
 
-### Premium Partners
+2. **Install dependencies:**
+   ```bash
+   composer install
+   npm install
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+3. **Setup environment:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Contributing
+4. **Configure database:**
+   - Update `.env` with your database credentials.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Run migrations and seeders:**
+   ```bash
+   php artisan migrate --seed
+   ```
 
-## Code of Conduct
+6. **Start the development server:**
+   ```bash
+   php artisan serve
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7. **Access the app:**
+   - Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧑‍💻 User Roles
 
-## License
+| Role           | Permissions                                    |
+|----------------|------------------------------------------------|
+| Super Admin    | Full system access, manage all hotels & users  |
+| Hotel Manager  | Manage assigned hotel, rooms, reports          |
+| Hotel Clerk    | Handle bookings, check-ins/outs                |
+| Travel Company | Book rooms in bulk at negotiated rates         |
+| Customer       | Book/manage personal reservations              |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🚚 Deployment (CI/CD)
+
+Deployed to AWS EC2 via GitHub Actions.
+
+### Setup
+
+1. **Add these GitHub repository secrets:**
+   - `SERVER_IP`
+   - `SSH_PRIVATE_KEY`
+
+2. **Configure deployment workflow:**
+   - Edit `.github/workflows/deploy.yml` as needed for your environment.
+
+3. **Deploy:**
+   - Push to the `main` branch. Deployment is triggered automatically.
+
+---
+
+## 🤝 Contributing
+
+We love contributions from the community!  
+
+### How to Contribute
+
+1. **Fork the repository**
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feat/YourFeatureName
+   ```
+3. **Make your changes and commit:**
+   ```bash
+   git commit -m "Add your descriptive commit message"
+   ```
+4. **Push your branch:**
+   ```bash
+   git push origin feat/YourFeatureName
+   ```
+5. **Open a Pull Request** and describe your changes
+
+Please ensure code quality and add relevant tests. For major features, open an issue for discussion first.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 Authors
+
+- Tharindu Nuwan
+- Amandi
+- Chathumi
+- Sadunika
+
+---
+
+Happy coding! 😊
