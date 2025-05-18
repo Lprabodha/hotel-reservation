@@ -1,8 +1,7 @@
 # 🏨 Hotel Reservation System
 
 ![Laravel](https://img.shields.io/badge/Laravel-10.x-red?style=flat-square&logo=laravel)
-![License](https://img.shields.io/github/license/yourusername/hotel-reservation?style=flat-square)
-![CI](https://github.com/yourusername/hotel-reservation/actions/workflows/deploy.yml/badge.svg)
+![License](https://img.shields.io/github.com/Lprabodha/hotel-reservation?style=flat-square)
 
 A web-based hotel reservation platform built with **Laravel**. Supports multi-hotel management for customers, hotel managers, clerks, and travel companies to handle room bookings, check-ins, check-outs, billing, and reporting.
 
@@ -24,7 +23,7 @@ A web-based hotel reservation platform built with **Laravel**. Supports multi-ho
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Laravel 10
+- **Backend**: Laravel 12
 - **Database**: MySQL / MariaDB
 - **Authorization**: Spatie Laravel-Permission
 - **Frontend**: Tailwind CSS / Bootstrap
@@ -36,7 +35,7 @@ A web-based hotel reservation platform built with **Laravel**. Supports multi-ho
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/hotel-reservation.git
+   git clone https://github.com/Lprabodha/hotel-reservation
    cd hotel-reservation
    ```
 
