@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address')->index();
-            $table->string('city')->index();
+            $table->string('location');
             $table->string('phone')->nullable()->index();
             $table->string('email')->unique()->index();
             $table->integer('star_rating')->default(0)->index();
