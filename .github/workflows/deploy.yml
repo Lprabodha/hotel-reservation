@@ -26,7 +26,7 @@ jobs:
           PROJECT_DIR="/var/www/hotel-reservation/"
 
           echo "Navigating to project directory: \$PROJECT_DIR"
-          cd \$PROJECT_DIR
+          cd $PROJECT_DIR
 
           # Ensure the directory is marked as safe
           git config --global --add safe.directory \$PROJECT_DIR
