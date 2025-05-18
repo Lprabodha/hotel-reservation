@@ -23,30 +23,34 @@ jobs:
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
           set -e
 
-          # Mark the directory as safe to avoid Git dubious ownership error
-          git config --global --add safe.directory /var/www/hotel-reservation
+          PROJECT_DIR="/var/www/hotel-reservation"
 
-          # Go to the repo directory
-          cd /var/www/hotel-reservation
+          echo "Navigating to project directory: \$PROJECT_DIR"
+          cd \$PROJECT_DIR
 
-          # Reset any local changes and pull latest from main
+          # Ensure the directory is marked as safe
+          git config --global --add safe.directory \$PROJECT_DIR
+
+          # Reset and pull latest changes
+          echo "Pulling latest changes from main branch..."
           git reset --hard
           git pull origin main
 
-          # Composer install/update
+          echo "Installing PHP dependencies..."
           composer install --no-interaction --prefer-dist --optimize-autoloader
 
-          # Run migrations
+          echo "Running database migrations..."
           php artisan migrate --force
 
-          # Install Node.js dependencies and build assets
+          echo "Installing and building frontend assets..."
           npm install
           npm run prod
 
-          # Set correct permissions (adjust user if needed)
-          sudo chown -R www-data:www-data /var/www/hotel-reservation/storage /var/www/hotel-reservation/bootstrap/cache
+          echo "Setting correct permissions..."
+          sudo chown -R www-data:www-data \$PROJECT_DIR/storage \$PROJECT_DIR/bootstrap/cache
 
-          # Reload Nginx
+          echo "Reloading Nginx..."
           sudo systemctl reload nginx
+
+          echo "✅ Deployment completed successfully!"
         EOF
-        echo "Deployment completed successfully!"
