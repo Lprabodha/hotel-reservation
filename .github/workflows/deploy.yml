@@ -39,8 +39,8 @@ jobs:
           echo "Installing PHP dependencies..."
           composer install --no-interaction --prefer-dist --optimize-autoloader
 
-          echo "Running database migrations..."
-          php artisan migrate --force
+          echo "Running database migrations & seeders..."
+          php artisan migrate:fresh --seed --force
 
           echo "Fixing Laravel permissions..."
           sudo chown -R www-data:www-data storage bootstrap/cache
