@@ -32,3 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['checkRole
     Route::get('/hotels', [HotelController::class, 'index'])->name('hotels');
     Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
 });
+
+Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');

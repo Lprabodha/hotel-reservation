@@ -5,3 +5,6 @@ import "./jquery.dlmenu";
 // import "./modernizr.custom";
 // import "./bootstrap.bundle.min";
 import.meta.glob(["../images/**", "../fonts/**"]);
+
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;

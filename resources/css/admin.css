@@ -1,0 +1,28 @@
+.admin-layout {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    background-color: #212529 !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sidebar .nav-link {
+    padding: 1rem 1.5rem;
+    border-left: 4px solid transparent;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #343a40;
+    border-left-color: #0d6efd;
+}
+
+.sidebar .nav-link.active {
+    background-color: #343a40;
+    border-left-color: #0d6efd;
+}
