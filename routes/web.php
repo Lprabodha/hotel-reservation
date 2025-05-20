@@ -34,29 +34,53 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['checkRole
 });
 
 Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    return view('admin.dashboard');
+})->name('admin.dashboard');
 
 Route::get('/admin/users', function () {
-        return view('admin.users.index');
-    })->name('admin.users.index');
+    return view('admin.users.index');
+})->name('admin.users.index');
 
 Route::get('/users/create', function () {
-        return view('admin.users.create');
-    })->name('admin.users.create');
+    return view('admin.users.create');
+})->name('admin.users.create');
 
 Route::get('/users/{user}/edit', function () {
-        return view('admin.users.edit');
-    })->name('admin.users.edit');
+    return view('admin.users.edit');
+})->name('admin.users.edit');
 
-Route::get('/hotels', function () {
-        return view('admin.hotels.index');
-    })->name('admin.hotels.index');
+Route::get('/admin/hotels', function () {
+    return view('admin.hotels.index');
+})->name('admin.hotels.index');
 
 Route::get('/hotels/create', function () {
-        return view('admin.hotels.create');
-    })->name('admin.hotels.create');
+    return view('admin.hotels.create');
+})->name('admin.hotels.create');
 
 Route::get('/hotels/{hotel}/edit', function () {
-        return view('admin.hotels.edit');
-    })->name('admin.hotels.edit');
+    return view('admin.hotels.edit');
+})->name('admin.hotels.edit');
+
+Route::get('/rooms', function () {
+    return view('admin.rooms.index');
+})->name('admin.rooms.index');
+
+Route::get('/rooms/create', function () {
+    return view('admin.rooms.create');
+})->name('admin.rooms.create');
+
+Route::get('/reservations', function () {
+    return view('admin.reservations.index');
+})->name('admin.reservations.index');
+
+Route::get('/reservations/create', function () {
+    return view('admin.reservations.create');
+})->name('admin.reservations.create');
+
+Route::get('/rooms/{room}/edit', function () {
+    return view('admin.rooms.edit');
+})->name('admin.rooms.edit');
+
+Route::get('/reservations/{reservation}/edit', function () {
+    return view('admin.reservations.edit');
+})->name('admin.reservations.edit');

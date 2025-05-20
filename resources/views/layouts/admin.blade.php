@@ -37,8 +37,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
+                            <a class="nav-link text-white" href="{{ route('admin.reservations.index') }}">
                                 <i class="bi bi-calendar-check me-2"></i> Reservations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('admin.rooms.index') }}">
+                                <i class="bi bi-door-closed me-2"></i> Rooms
                             </a>
                         </li>
                     </ul>
