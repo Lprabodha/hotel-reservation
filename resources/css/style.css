@@ -6895,6 +6895,7 @@ input[type=checkbox]:checked + label:before {
   background-color: #2979FE;
   border-color: #2979FE;
   color: #fff;
+  margin-left: 15px;
 }
 
 input[type=checkbox]:disabled + label:before {

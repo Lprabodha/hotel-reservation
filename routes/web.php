@@ -48,3 +48,15 @@ Route::get('/users/create', function () {
 Route::get('/users/{user}/edit', function () {
         return view('admin.users.edit');
     })->name('admin.users.edit');
+
+Route::get('/hotels', function () {
+        return view('admin.hotels.index');
+    })->name('admin.hotels.index');
+
+Route::get('/hotels/create', function () {
+        return view('admin.hotels.create');
+    })->name('admin.hotels.create');
+
+Route::get('/hotels/{hotel}/edit', function () {
+        return view('admin.hotels.edit');
+    })->name('admin.hotels.edit');
