@@ -22,12 +22,12 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">
+                            <a class="nav-link text-white" href="/dashboard">
                                 <i class="bi bi-speedometer2 me-2"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
+                            <a class="nav-link text-white" href="{{ route('admin.users.index') }}">
                                 <i class="bi bi-people me-2"></i> Users
                             </a>
                         </li>

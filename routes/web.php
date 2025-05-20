@@ -36,3 +36,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['checkRole
 Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+
+Route::get('/admin/users', function () {
+        return view('admin.users.index');
+    })->name('admin.users.index');
+
+Route::get('/users/create', function () {
+        return view('admin.users.create');
+    })->name('admin.users.create');
+
+Route::get('/users/{user}/edit', function () {
+        return view('admin.users.edit');
+    })->name('admin.users.edit');

@@ -26,3 +26,28 @@
     background-color: #343a40;
     border-left-color: #0d6efd;
 }
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.actions-column {
+    width: 120px;
+}
+
+.badge {
+    font-size: 0.85em;
+    padding: 0.5em 0.75em;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.bi {
+    vertical-align: middle;
+}
