@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reservation_id')->constrained()->onDelete('cascade');
             $table->decimal('room_charges', 10, 2);
-            $table->decimal('restaurant_charges', 10, 2)->default(0);
-            $table->decimal('room_service_charges', 10, 2)->default(0);
-            $table->decimal('laundry_charges', 10, 2)->default(0);
-            $table->decimal('telephone_charges', 10, 2)->default(0);
-            $table->decimal('club_facility_charges', 10, 2)->default(0);
+            $table->decimal('extra_charges', 10, 2)->default(0);
+            $table->decimal('discount', 10, 2)->default(0);
+            $table->decimal('taxes', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2);
+            $table->enum('status', ['unpaid', 'partial', 'paid'])->default('unpaid');
             $table->timestamps();
         });
     }

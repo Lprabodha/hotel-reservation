@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('star_rating')->default(0)->index();
             $table->text('description')->nullable();
             $table->string('website')->nullable()->index();
+            $table->string('images')->nullable();
             $table->boolean('active')->default(true)->index();
             $table->timestamps();
         });
