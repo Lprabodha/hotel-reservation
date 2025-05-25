@@ -26,7 +26,11 @@ Route::controller(HotelController::class)->group(function () {
     Route::get('/hotel/{slug}', 'view')->name('hotel');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['checkRole:hotel-clerk,hotel-manager,super-admin']], function () {
+Route::group([
+    'prefix' => 'admin', 
+    'as' => 'admin.', 
+    'middleware' => ['auth', 'role_or_permission:hotel-clerk|hotel-manager|super-admin']
+], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
     Route::get('/hotels', [HotelController::class, 'index'])->name('hotels');
