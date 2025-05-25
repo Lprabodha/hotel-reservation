@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('phone')->nullable()->index();
+            $table->enum('type', ['luxury', 'boutique', 'budget', 'business', 'resort'])->default('budget')->index();
             $table->string('email')->unique()->index();
             $table->integer('star_rating')->default(0)->index();
             $table->text('description')->nullable();
+            $table->text('address')->nullable();
+            $table->text('country')->nullable();
             $table->string('website')->nullable()->index();
             $table->string('images')->nullable();
             $table->boolean('active')->default(true)->index();

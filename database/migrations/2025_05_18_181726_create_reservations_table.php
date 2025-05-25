@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('payment_status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
             $table->enum('payment_method', ['cash', 'credit_card', 'online'])->nullable();
             $table->string('confirmation_number')->unique();
+            $table->text('note')->nullable();
             $table->boolean('auto_cancelled')->default(false);
             $table->boolean('no_show_billed')->default(false);
             $table->timestamps();
