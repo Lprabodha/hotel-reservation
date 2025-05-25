@@ -30,7 +30,6 @@ export default defineConfig({
                 "resources/css/admin/lib/bootstrap.min.css",
                 "resources/css/admin/lib/apexcharts.css",
                 "resources/css/admin/lib/dataTables.min.css",
-                "resources/css/admin/lib/editor-katex.min.css",
                 "resources/css/admin/lib/editor.atom-one-dark.min.css",
                 "resources/css/admin/lib/editor.quill.snow.css",
                 "resources/css/admin/lib/flatpickr.min.css",
@@ -42,6 +41,7 @@ export default defineConfig({
                 "resources/css/admin/lib/file-upload.css",
                 "resources/css/admin/lib/audioplayer.css",
                 "resources/css/admin/style.css",
+                "resources/sass/admin/main.scss",
 
                 // Admin JS
                 "resources/js/admin/lib/jquery-3.7.1.min.js",

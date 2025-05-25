@@ -1,9 +1,9 @@
 /** ================================= Table Of Contents =================================== /
-1. Abstract Css 
-    1.1 Function Css 
-    1.2 Variables Css 
-    1.3 Mixins Css 
-    
+1. Abstract Css
+    1.1 Function Css
+    1.2 Variables Css
+    1.3 Mixins Css
+
 
 2. Component Css
     2.1 Preloader Css
@@ -63,13 +63,13 @@
 / ================================= Table Of Contents =================================== **/
 
 // abstracts sass
-@import './abstracts/_index';
+@import 'abstracts/_index';
 
 // base sass
-@import './utilities/_index';
+@import 'utilities/_index';
 
 // components sass
-@import './components/_index';
+@import 'components/_index';
 
-// layout sass 
-@import './layout/_index';
+// layout sass
+@import 'layout/_index';
