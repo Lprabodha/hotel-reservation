@@ -34,7 +34,9 @@
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror" name="password"
+                                                required autocomplete="current-password" placeholder="Enter your password">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default reveal6" type="button"><i
                                                         class="ti-eye"></i></button>
@@ -64,15 +66,16 @@
                                     </div>
                                 </div>
                                 <h4 class="or"><span>OR</span></h4>
-                                <ul class="wpo-socialLoginBtn">
-                                    <li><button class="facebook" tabindex="0" type="button"><span><i
-                                                    class="ti-facebook"></i></span></button></li>
-                                    <li><button class="twitter" tabindex="0" type="button"><span><i
-                                                    class="ti-twitter"></i></span></button></li>
-                                    <li><button class="linkedin" tabindex="0" type="button"><span><i
-                                                    class="ti-linkedin"></i></span></button></li>
-                                </ul>
-                                <p class="subText">Don't have an account? <a href="{{ route('register') }}">Create free
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ route('social.login', 'google') }}"
+                                        class="btn btn-light border d-flex align-items-center px-4 py-2 rounded shadow-sm"
+                                        style="gap: 12px; font-weight: 500; font-size: 16px;">
+                                        <img src="{{ asset('images/google-icon.png') }}" alt="Google"
+                                            style="width:20px; height:20px;">
+                                        <span>Log in with Google</span>
+                                    </a>
+                                </div>
+                                <p class="subText mt-1">Don't have an account? <a href="{{ route('register') }}">Create free
                                         account</a>
                                 </p>
                             </div>

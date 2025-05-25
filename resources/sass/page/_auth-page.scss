@@ -228,6 +228,25 @@ input[type=checkbox]:checked:disabled+label:before {
     color: $theme-primary-color;
 }
 
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-google:hover {
+    background: #f7f7f7;
+    text-decoration: none;
+}
+
 .wpo-socialLoginBtn {
     display: flex;
     align-items: center;
@@ -236,6 +255,7 @@ input[type=checkbox]:checked:disabled+label:before {
     flex-wrap: wrap;
     list-style: none;
 }
+
 
 .wpo-socialLoginBtn li button {
     height: 40px;
