@@ -6989,12 +6989,29 @@ input[type=checkbox]:checked:disabled + label:before {
   font-weight: 400;
   color: #fff;
 }
+.wpo-socialLoginBtn li a {
+  height: 40px;
+  width: 50px;
+  min-width: 50px;
+  font-size: 15px;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #fff;
+}
 
 .wpo-socialLoginBtn li button.facebook {
   background: #3b5998;
 }
 
 .wpo-socialLoginBtn li button.linkedin {
+  background: #0077B5;
+}
+.wpo-socialLoginBtn li a.google {
   background: #0077B5;
 }
 
