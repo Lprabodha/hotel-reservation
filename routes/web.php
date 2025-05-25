@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
@@ -7,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
+
+Route::controller(SocialController::class)->group(function () {
+    Route::get('login/{provider}', 'redirect')->name('social.login');
+    Route::get('login/{provider}/callback', 'callback');
+});
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');

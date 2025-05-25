@@ -44,8 +44,9 @@
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" placeholder="Your password here.." 
-                                            name="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        <input type="password" placeholder="Your password here.." name="password"
+                                            class="form-control @error('password') is-invalid @enderror" required
+                                            autocomplete="new-password">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal3" type="button"><i
                                                     class="ti-eye"></i></button>
@@ -61,7 +62,7 @@
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input  id="password-confirm" type="password" placeholder="Your password here.."
+                                        <input id="password-confirm" type="password" placeholder="Your password here.."
                                             name="password_confirmation" required autocomplete="new-password">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal2" type="button"><i
@@ -75,12 +76,12 @@
                             </div>
                             <h4 class="or"><span>OR</span></h4>
                             <ul class="wpo-socialLoginBtn">
-                                <li><button class="facebook" tabindex="0" type="button"><span><i
-                                                class="ti-facebook"></i></span></button></li>
-                                <li><button class="twitter" tabindex="0" type="button"><span><i
-                                                class="ti-twitter"></i></span></button></li>
-                                <li><button class="linkedin" tabindex="0" type="button"><span><i
-                                                class="ti-linkedin"></i></span></button></li>
+                                <li>
+                                    <a href="{{ route('social.login', 'google') }}" class="google" tabindex="0"
+                                        >
+                                        <span><i class="ti-google"></i></span>
+                                    </a>
+                                </li>
                             </ul>
                             <p class="subText">Don't have an account? <a href="{{ route('login') }}">Create free account</a>
                             </p>
