@@ -31,7 +31,7 @@
     text-align: center;
     padding: 50px;
     @media (max-width:499px) {
-       padding: 20px 15px; 
+       padding: 20px 15px;
     }
 }
 
@@ -43,9 +43,9 @@
     flex-direction: column;
     justify-content: center;
      @media (max-width:499px) {
-       padding: 20px 15px; 
+       padding: 20px 15px;
     }
-    
+
 }
 
 .wpo-accountInfoHeader {
@@ -228,6 +228,25 @@ input[type=checkbox]:checked:disabled+label:before {
     color: $theme-primary-color;
 }
 
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-google:hover {
+    background: #f7f7f7;
+    text-decoration: none;
+}
+
 .wpo-socialLoginBtn {
     display: flex;
     align-items: center;
@@ -237,7 +256,22 @@ input[type=checkbox]:checked:disabled+label:before {
     list-style: none;
 }
 
+
 .wpo-socialLoginBtn li button {
+    height: 40px;
+    width: 50px;
+    min-width: 50px;
+    font-size: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #fff;
+}
+.wpo-socialLoginBtn li a {
     height: 40px;
     width: 50px;
     min-width: 50px;
@@ -257,6 +291,9 @@ input[type=checkbox]:checked:disabled+label:before {
 }
 
 .wpo-socialLoginBtn li button.linkedin {
+    background: #0077B5;
+}
+.wpo-socialLoginBtn li a.google {
     background: #0077B5;
 }
 
@@ -343,7 +380,7 @@ input[type=checkbox]:checked:disabled+label:before {
 
 .wpo-accountForm {
     @media (max-width:499px) {
-          padding: 20px 15px; 
+          padding: 20px 15px;
    }
 }
 @media(max-width: 992px) {

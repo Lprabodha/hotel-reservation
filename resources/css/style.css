@@ -6966,16 +6966,72 @@ input[type=checkbox]:checked:disabled + label:before {
   color: #2979FE;
 }
 
+.wpo-socialLoginBtn .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #db4437; /* Google Red */
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.btn-google:hover {
+    background: #f7f7f7;
+    text-decoration: none;
+}
+
+.wpo-socialLoginBtn .social-btn:hover {
+    background-color: #c23321;
+    color: #fff;
+}
+
 .wpo-socialLoginBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  list-style: none;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.wpo-socialLoginBtn li {
+    display: inline-block;
 }
 
 .wpo-socialLoginBtn li button {
+  height: 40px;
+  width: 50px;
+  min-width: 50px;
+  font-size: 15px;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #fff;
+}
+.wpo-socialLoginBtn li a {
   height: 40px;
   width: 50px;
   min-width: 50px;
@@ -6995,6 +7051,9 @@ input[type=checkbox]:checked:disabled + label:before {
 }
 
 .wpo-socialLoginBtn li button.linkedin {
+  background: #0077B5;
+}
+.wpo-socialLoginBtn li a.google {
   background: #0077B5;
 }
 

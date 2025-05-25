@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'provider',
+        'provider_id',
+
     ];
 
     /**
@@ -50,6 +53,11 @@ class User extends Authenticatable
     public function hotels()
     {
         return $this->belongsToMany(Hotel::class);
+    }
+
+    public function getRoleName()
+    {
+        return $this->roles->pluck('name')[0];
     }
 
     public function assignedHotels()
