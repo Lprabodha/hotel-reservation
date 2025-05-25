@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Hotel::class);
     }
 
+    public function getRoleName()
+    {
+        return $this->roles->pluck('name')[0];
+    }
+
     public function assignedHotels()
     {
         if ($this->hasRole(['hotel manager', 'hotel clerk'])) {
