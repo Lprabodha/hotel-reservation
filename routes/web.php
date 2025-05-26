@@ -44,5 +44,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
     Route::post('hotels/store', [AdminHotelController::class, 'store'])->name('hotels.store');
+    Route::get('/hotels/{hotel}', [AdminHotelController::class, 'show'])->name('hotels.show');
     Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
 });

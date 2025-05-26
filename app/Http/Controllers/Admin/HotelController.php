@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreHotelRequest;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HotelController extends Controller
 {
@@ -26,17 +30,69 @@ class HotelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHotelRequest $request)
     {
-        //
+        try {
+            $imagesPaths = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                    $path = Storage::disk('s3')->putFileAs(
+                        'hotels',
+                        $image,
+                        $filename,
+                        'public'
+                    );
+
+                    if ($path) {
+                        $imagesPaths[] = 'hotels/' . $filename;
+                    }
+                }
+            }
+
+            $hotel = Hotel::create([
+                'name' => $request->name,
+                'location' => $request->location,
+                'phone' => $request->phone,
+                'type' => $request->type,
+                'email' => $request->email,
+                'star_rating' => $request->star_rating ?? 0,
+                'description' => $request->description,
+                'address' => $request->address,
+                'country' => $request->country,
+                'website' => $request->website,
+                'images' => $imagesPaths,
+                'active' => $request->active ?? false,
+            ]);
+
+            return redirect()
+                ->route('admin.hotels.index')
+                ->with('success', 'Hotel created successfully!');
+        } catch (\Exception $e) {
+            if (!empty($imagesPaths)) {
+                foreach ($imagesPaths as $imagePath) {
+                    Storage::disk('s3')->delete($imagePath);
+                }
+            }
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to create hotel. Please try again.');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Hotel $hotel)
     {
-        //
+         $imageUrls = $this->getImageUrls($hotel->images ?? []);
+        //  dd($hotel->images);
+        
+        return view('admin.hotel.show', [
+            'hotel' => $hotel,
+            'imageUrls' => $imageUrls
+        ]);
     }
 
     /**
@@ -62,4 +118,19 @@ class HotelController extends Controller
     {
         //
     }
+
+    private function getImageUrls(array $imagePaths)
+    {
+        return collect($imagePaths)->map(function ($path) {
+            logger("Checking path: $path");
+            $exists = Storage::disk('s3')->exists($path);
+            logger("Exists? " . ($exists ? 'yes' : 'no'));
+
+            if ($exists) {
+                return Storage::disk('s3')->url($path);
+            }
+            return null;
+        })->filter()->values()->toArray();
+    }
+
 }
