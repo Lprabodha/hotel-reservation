@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHotelRequest;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -16,7 +17,9 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('admin.hotel.index');
+        $hotels = Hotel::all();
+
+        return view('admin.hotel.index', compact('hotels'));
     }
 
     /**
@@ -66,9 +69,10 @@ class HotelController extends Controller
             ]);
 
             return redirect()
-                ->route('admin.hotels.index')
+                ->route('admin.hotels')
                 ->with('success', 'Hotel created successfully!');
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             if (!empty($imagesPaths)) {
                 foreach ($imagesPaths as $imagePath) {
                     Storage::disk('s3')->delete($imagePath);

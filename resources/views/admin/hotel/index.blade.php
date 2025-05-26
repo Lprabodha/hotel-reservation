@@ -10,100 +10,67 @@
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <th>
                             <div class="form-check style-check d-flex align-items-center">
                                 <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">
-                                    S.L
-                                </label>
+                                <label class="form-check-label">#</label>
                             </div>
                         </th>
-                        <th scope="col">Invoice</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Issued Date</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th>Hotel Name</th>
+                        <th>Phone</th>
+                        <th>Type</th>
+                        <th>Country</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <div class="form-check style-check d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">
-                                    01
-                                </label>
-                            </div>
-                        </td>
-                        <td><a href="javascript:void(0)" class="text-primary-600">#526534</a></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="assets/images/user-list/user-list1.png" alt=""
-                                    class="flex-shrink-0 me-12 radius-8">
-                                <h6 class="text-md mb-0 fw-medium flex-grow-1">Kathryn Murphy</h6>
-                            </div>
-                        </td>
-                        <td>25 Jan 2024</td>
-                        <td>$200.00</td>
-                        <td> <span
-                                class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm">Paid</span>
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
-                            </a>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="lucide:edit"></iconify-icon>
-                            </a>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check style-check d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">
-                                    05
-                                </label>
-                            </div>
-                        </td>
-                        <td><a href="javascript:void(0)" class="text-primary-600">#105986</a></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="assets/images/user-list/user-list5.png" alt=""
-                                    class="flex-shrink-0 me-12 radius-8">
-                                <h6 class="text-md mb-0 fw-medium flex-grow-1">Leslie Alexander</h6>
-                            </div>
-                        </td>
-                        <td>15 March 2024</td>
-                        <td>$150.00</td>
-                        <td> <span
-                                class="bg-warning-focus text-warning-main px-24 py-4 rounded-pill fw-medium text-sm">Pending</span>
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
-                            </a>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="lucide:edit"></iconify-icon>
-                            </a>
-                            <a href="javascript:void(0)"
-                                class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                                <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
-                            </a>
-                        </td>
-                    </tr>
+                    {{-- @dd($hotels) --}}
+                    @forelse($hotels as $index => $hotel)
+                        <tr>
+                            <td>
+                                <div class="form-check style-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">{{ $index + 1 }}</label>
+                                </div>
+                            </td>
+                            <td>{{ $hotel->name }}</td>
+                            <td>{{ $hotel->phone }}</td>
+                            <td>{{ $hotel->type->label() }}</td>
+                            <td>{{ $hotel->country ?? 'N/A' }}</td>
+                            <td>
+                                <span class="px-24 py-4 rounded-pill fw-medium text-sm 
+                                    {{ $hotel->active ? 'bg-success-focus text-success-main' : 'bg-danger-focus text-danger-main' }}">
+                                    {{ $hotel->active ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="#"
+                                   class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                                    <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
+                                </a>
+                                <a href="#"
+                                   class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                                    <iconify-icon icon="lucide:edit"></iconify-icon>
+                                </a>
+                                <form action="#" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center border-0"
+                                            onclick="return confirm('Are you sure you want to delete this hotel?')">
+                                        <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center">No Hotels Stored Yet To Display.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 @endsection
