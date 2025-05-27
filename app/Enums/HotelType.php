@@ -18,11 +18,11 @@ enum HotelType:string
     public function label(): string
     {
         return match($this) {
-            self::LUXURY => 'Luxury Hotel',
-            self::BOUTIQUE => 'Boutique Hotel',
-            self::BUDGET => 'Budget Hotel',
-            self::BUSINESS => 'Business Hotel',
-            self::RESORT => 'Resort Hotel',
+            self::LUXURY => 'Luxury',
+            self::BOUTIQUE => 'Boutique',
+            self::BUDGET => 'Budget',
+            self::BUSINESS => 'Business',
+            self::RESORT => 'Resort',
         };
     }
 

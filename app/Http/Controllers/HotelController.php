@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
+
 class HotelController extends Controller
 {
     public function index()
     {
-        return view('hotel.index');
+        $hotels = Hotel::all();
+        return view('hotel.index', compact('hotels'));
     }
 
     public function view($slug)

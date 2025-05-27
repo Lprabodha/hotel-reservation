@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- start of breadcumb-section -->
+    {{-- @dd($hotels) --}}
     <div class="wpo-breadcumb-area">
         <div class="container">
             <div class="row">
@@ -9,7 +10,7 @@
                     <div class="wpo-breadcumb-wrap">
                         <h2>Hotel</h2>
                         <ul>
-                            <li><a href="{{route('home')}}">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><span>Hotel</span></li>
                         </ul>
                     </div>
@@ -31,7 +32,44 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn" data-wow-duration="2000ms">
+
+                @forelse ($hotels as $hotel)
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
+                        data-wow-duration="2000ms">
+                        <div class="featured-card">
+                            <div class="image">
+                                <img src="{{ Storage::disk('s3')->url($hotel->images[0]) }}" alt="Hotel Image"
+                                    width="263px" height="240px">
+                            </div>
+                            <div class="content">
+                                <div class="top-content">
+                                    <ul>
+                                        <li>
+                                            <span>{{ $hotel->type->label() }}</span>
+                                            <span class="date">Type</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ $hotel->star_rating }}</span>
+                                            <span class="date">Rating</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ $hotel->country }}</span>
+                                            <span class="date">Country</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h2><a href="#">{{ $hotel->name }}</a></h2>
+                                <span><i class="ti-location-pin"></i>{{ $hotel->location }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                @empty
+                    <div>No Hotels Available at this moment to show...</div>
+                @endforelse
+            </div>
+            {{-- <div class="row"> --}}
+            {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn" data-wow-duration="2000ms">
                     <div class="featured-card">
                         <div class="image">
                             <img src="{{asset('images/featured/1.jpg')}}" alt="">
@@ -57,8 +95,8 @@
                             <span><i class="ti-location-pin"></i> Pine Tree Lane, Whisperwood</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn" data-wow-duration="2000ms">
+                </div> --}}
+            {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn" data-wow-duration="2000ms">
                     <div class="featured-card">
                         <div class="image">
                             <img src="{{asset('images/featured/2.jpg')}}" alt="">
@@ -246,8 +284,8 @@
                             <span><i class="ti-location-pin"></i>258 Oasis Street, Calmington</span>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+            {{-- </div> --}}
         </div>
     </section>
     <!-- end of featured-->

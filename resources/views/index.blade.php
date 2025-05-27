@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-     <section class="hero-section-s3">
+    <section class="hero-section-s3">
         <div class="hero-wraper">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
@@ -15,7 +15,8 @@
                                     consectetur adipiscing elit sed do eiusmod tempor
                                     incididunt ut labore.</p>
                                 <div class="hero-btn wow fadeInLeftSlow" data-wow-duration="1800ms">
-                                    <a href="{{route('hotel',['slug' => Str::uuid()])}}" class="theme-btn">find your hotel</a>
+                                    <a href="{{ route('hotel', ['slug' => Str::uuid()]) }}" class="theme-btn">find your
+                                        hotel</a>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="input-item s2">
-                                    <a href="{{route('hotels')}}" class="theme-btn-s2">search hotel</a>
+                                    <a href="{{ route('hotels') }}" class="theme-btn-s2">search hotel</a>
                                 </div>
                             </form>
                         </div>
@@ -252,7 +253,7 @@
                     <div class="wpo-section-title s2 wow fadeInRightSlow" data-wow-duration="1700ms">
                         <span>// beautiful videos</span>
                         <h2>Explore the World Through Beautiful Videos.</h2>
-                        <a href="{{route('about-us')}}" class="theme-btn">list your property</a>
+                        <a href="{{ route('about-us') }}" class="theme-btn">list your property</a>
                     </div>
                 </div>
                 <div class="col-xl-7 order-xl-1 col-12">
@@ -266,8 +267,7 @@
                                             data-type="iframe">
                                             <div class="icon">
                                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                                    <path
-                                                        d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
+                                                    <path d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
                                                         fill="#120D2B" />
                                                 </svg>
                                             </div>
@@ -283,8 +283,7 @@
                                             data-type="iframe">
                                             <div class="icon">
                                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                                    <path
-                                                        d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
+                                                    <path d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
                                                         fill="#120D2B" />
                                                 </svg>
                                             </div>
@@ -300,8 +299,7 @@
                                             data-type="iframe">
                                             <div class="icon">
                                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                                    <path
-                                                        d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
+                                                    <path d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
                                                         fill="#120D2B" />
                                                 </svg>
                                             </div>
@@ -317,8 +315,7 @@
                                             data-type="iframe">
                                             <div class="icon">
                                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                                    <path
-                                                        d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
+                                                    <path d="M12 7L-6.52533e-07 13.9282L-4.68497e-08 0.0717964L12 7Z"
                                                         fill="#120D2B" />
                                                 </svg>
                                             </div>
@@ -406,7 +403,39 @@
                 </div>
             </div>
             <div class="gallery-container gallery-fancybox masonry-gallery row">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
+                @forelse ($hotels as $hotel)
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
+                        data-wow-duration="2000ms">
+                        <div class="featured-card">
+                            <div class="image">
+                                <img src="{{ Storage::disk('s3')->url($hotel->images[0]) }}" alt="Hotel Main Image" width="263px" height="240px">
+                            </div>
+                            <div class="content">
+                                <div class="top-content">
+                                    <ul>
+                                        <li>
+                                            <span>{{ $hotel->type->label() }}</span>
+                                            <span class="date">Type</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ $hotel->star_rating }}</span>
+                                            <span class="date">Rating</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ $hotel->country }}</span>
+                                            <span class="date">Country</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h2><a href="#">{{ $hotel->name }}</a></h2>
+                                <span><i class="ti-location-pin"></i>{{ $hotel->location }}</span>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div>No Hotels Listed At This Moment</div>
+                @endforelse
+                {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
                     data-wow-duration="2000ms">
                     <div class="featured-card">
                         <div class="image">
@@ -433,8 +462,8 @@
                             <span><i class="ti-location-pin"></i> Pine Tree Lane, Whisperwood</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn"
+                </div> --}}
+                {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn"
                     data-wow-duration="2000ms">
                     <div class="featured-card">
                         <div class="image">
@@ -629,10 +658,10 @@
                             <span><i class="ti-location-pin"></i>258 Oasis Street, Calmington</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="featured-all-btn">
-                <a href="{{route('hotels')}}" class="theme-btn-s2">view all hotels</a>
+                <a href="{{ route('hotels') }}" class="theme-btn-s2">view all hotels</a>
             </div>
         </div>
     </section>
@@ -646,7 +675,7 @@
                     <div class="wpo-section-title s2 wow fadeInLeftSlow" data-wow-duration="1700ms">
                         <span>// author list</span>
                         <h2>Discover the Talented Authors in Our Click2Checkin.</h2>
-                        <a href="{{route('about-us')}}" class="theme-btn">list your property</a>
+                        <a href="{{ route('about-us') }}" class="theme-btn">list your property</a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-12">
@@ -1062,5 +1091,4 @@
         </div>
     </section>
     <!-- end of blog-->
-
 @endsection
