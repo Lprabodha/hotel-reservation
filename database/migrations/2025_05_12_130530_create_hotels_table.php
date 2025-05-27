@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique()->index();
             $table->string('location');
             $table->string('phone')->nullable()->index();
             $table->enum('type', ['luxury', 'boutique', 'budget', 'business', 'resort'])->default('budget')->index();
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('country')->nullable();
             $table->string('website')->nullable()->index();
-            $table->string('images')->nullable();
+            $table->json('images')->nullable();
             $table->boolean('active')->default(true)->index();
             $table->timestamps();
         });

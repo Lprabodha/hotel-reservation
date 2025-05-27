@@ -9,6 +9,7 @@ class Hotel extends Model
 {
     protected $fillable = [
         'name',
+        'slug',
         'location',
         'phone',
         'type',
@@ -19,14 +20,14 @@ class Hotel extends Model
         'country',
         'website',
         'images',
-        'active',
+        'active'
     ];
 
     protected $casts = [
         'type' => HotelType::class,
         'active' => 'boolean',
         'star_rating' => 'integer',
-        'images' => 'array',
+        'images' => 'array'
     ];
     
     public function users()
@@ -37,5 +38,10 @@ class Hotel extends Model
     public function rooms()
     {
         return $this->hasMany(Room::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
     }
 }

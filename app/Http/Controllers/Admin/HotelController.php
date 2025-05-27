@@ -53,8 +53,18 @@ class HotelController extends Controller
                 }
             }
 
+            $slug = Str::slug($request->name);
+            $originalSlug = $slug;
+            $counter = 1;
+
+            while (Hotel::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
             $hotel = Hotel::create([
                 'name' => $request->name,
+                'slug' => $slug,
                 'location' => $request->location,
                 'phone' => $request->phone,
                 'type' => $request->type,
@@ -88,11 +98,12 @@ class HotelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Hotel $hotel)
+    public function show($slug)
     {
-         $imageUrls = $this->getImageUrls($hotel->images ?? []);
-        //  dd($hotel->images);
-        
+        $hotel = Hotel::where('slug', $slug)->firstOrFail();
+
+        $imageUrls = $this->getImageUrls($hotel->images ?? []);
+
         return view('admin.hotel.show', [
             'hotel' => $hotel,
             'imageUrls' => $imageUrls
@@ -126,9 +137,7 @@ class HotelController extends Controller
     private function getImageUrls(array $imagePaths)
     {
         return collect($imagePaths)->map(function ($path) {
-            logger("Checking path: $path");
             $exists = Storage::disk('s3')->exists($path);
-            logger("Exists? " . ($exists ? 'yes' : 'no'));
 
             if ($exists) {
                 return Storage::disk('s3')->url($path);

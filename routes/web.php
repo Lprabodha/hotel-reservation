@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
+use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
     Route::post('hotels/store', [AdminHotelController::class, 'store'])->name('hotels.store');
-    Route::get('/hotels/{hotel}', [AdminHotelController::class, 'show'])->name('hotels.show');
-    Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
+    Route::get('/hotels/{slug}', [AdminHotelController::class, 'show'])->name('hotels.show');
+    // Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
+    Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
+    Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('rooms/store', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 });
