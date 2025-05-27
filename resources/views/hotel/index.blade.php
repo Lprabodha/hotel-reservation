@@ -38,8 +38,10 @@
                         data-wow-duration="2000ms">
                         <div class="featured-card">
                             <div class="image">
-                                <img src="{{ Storage::disk('s3')->url($hotel->images[0]) }}" alt="Hotel Image"
-                                    width="263px" height="240px">
+                                <img src="{{ $hotel->images && count($hotel->images) > 0
+                                    ? Storage::disk('s3')->url($hotel->images[0])
+                                    : Vite::asset('resources/images/default-hotel.webp') }}"
+                                    alt="Hotel Image" width="263px" height="240px">
                             </div>
                             <div class="content">
                                 <div class="top-content">
