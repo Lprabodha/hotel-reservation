@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('room_number')->unique();
             $table->enum('room_type', ['single', 'double', 'triple', 'quad', 'suite', 'family']);
             $table->integer('occupancy');
-            $table->string('images')->nullable();
+            $table->json('images')->nullable();
             $table->decimal('price_per_night', 10, 2);
             $table->boolean('is_available')->default(true);
             $table->text('description')->nullable();

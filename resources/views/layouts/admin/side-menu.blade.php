@@ -4,13 +4,34 @@
     </button>
     <div>
         <a href="index.html" class="sidebar-logo">
-            <img src="{{Vite::asset('resources/images/admin/logo.png') }}" alt="site logo" class="light-logo">
-            <img src="{{Vite::asset('resources/images/admin/logo-light.png') }}" alt="site logo" class="dark-logo">
-            <img src="{{Vite::asset('resources/images/admin/logo-icon.png') }}" alt="site logo" class="logo-icon">
+            <img src="{{ Vite::asset('resources/images/admin/logo.png') }}" alt="site logo" class="light-logo">
+            <img src="{{ Vite::asset('resources/images/admin/logo.png') }}" alt="site logo" class="dark-logo">
+            <img src="{{ Vite::asset('resources/images/admin/logo-icon.png') }}" alt="site logo" class="logo-icon">
         </a>
     </div>
     <div class="sidebar-menu-area">
         <ul class="sidebar-menu" id="sidebar-menu">
+            <li>
+                <a href="/admin" class="d-flex align-items-center">
+                    <iconify-icon icon="mage:dashboard-check-fill" width="25" height="25"></iconify-icon>
+                    <span class="ms-2">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center">
+                    <iconify-icon icon="emojione-monotone:hotel" width="25" height="25"></iconify-icon>
+                    <span class="ms-2">Hotels</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.rooms') }}" class="d-flex align-items-center">
+                    <iconify-icon icon="cbi:roomsother" width="25" height="25"></iconify-icon>
+                    <span class="ms-2">Rooms</span>
+                </a>
+            </li>
+        </ul>
+        {{-- <ul class="sidebar-menu" id="sidebar-menu">
             <li class="dropdown">
                 <a href="javascript:void(0)">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
@@ -448,6 +469,6 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul> --}}
     </div>
 </aside>
