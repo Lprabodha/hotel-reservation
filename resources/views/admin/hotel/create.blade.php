@@ -20,7 +20,7 @@
                                 placeholder="Enter Hotel Name" value="{{ old('name') }}" required>
                         </div>
                         @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -36,7 +36,7 @@
                                 value="{{ old('location') }}" required>
                         </div>
                         @error('location')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -51,7 +51,7 @@
                                 placeholder="Enter Email" value="{{ old('email') }}" required>
                         </div>
                         @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -66,7 +66,7 @@
                                 placeholder="+1 (555) 000-0000" value="{{ old('phone') }}">
                         </div>
                         @error('phone')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -89,7 +89,7 @@
                             </select>
                         </div>
                         @error('type')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -110,7 +110,7 @@
                             </select>
                         </div>
                         @error('star_rating')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -125,7 +125,7 @@
                                 placeholder="https://example.com" value="{{ old('website') }}">
                         </div>
                         @error('website')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -141,7 +141,7 @@
                                 value="{{ old('country') }}">
                         </div>
                         @error('country')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -156,7 +156,7 @@
                                 placeholder="Enter Full Address">{{ old('address') }}</textarea>
                         </div>
                         @error('address')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -171,7 +171,7 @@
                                 placeholder="Enter Hotel Description">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -187,7 +187,7 @@
                         </div>
                         <small class="text-muted">You can select multiple images</small>
                         @error('images')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
 
