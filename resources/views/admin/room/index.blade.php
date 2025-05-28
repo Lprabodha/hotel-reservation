@@ -45,8 +45,8 @@
                                     {{ $room->is_available ? 'Available' : 'Unavailable' }}
                                 </span>
                             </td>
-                            <td>
-                                <a href="#
+                            <td class="d-flex gap-2 items-center">
+                                <a href="#"
                                    class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                                 </a>

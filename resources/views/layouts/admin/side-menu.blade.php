@@ -12,20 +12,20 @@
     <div class="sidebar-menu-area">
         <ul class="sidebar-menu" id="sidebar-menu">
             <li>
-                <a href="/admin" class="d-flex align-items-center">
+                <a href="/admin" class="d-flex align-items-center gap-2">
                     <iconify-icon icon="mage:dashboard-check-fill" width="25" height="25"></iconify-icon>
                     <span class="ms-2">Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center">
+                <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center gap-2">
                     <iconify-icon icon="emojione-monotone:hotel" width="25" height="25"></iconify-icon>
                     <span class="ms-2">Hotels</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.rooms') }}" class="d-flex align-items-center">
+                <a href="{{ route('admin.rooms') }}" class="d-flex align-items-center gap-2">
                     <iconify-icon icon="cbi:roomsother" width="25" height="25"></iconify-icon>
                     <span class="ms-2">Rooms</span>
                 </a>

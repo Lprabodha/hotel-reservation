@@ -101,6 +101,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
     Route::post('hotels/store', [AdminHotelController::class, 'store'])->name('hotels.store');
     Route::get('/hotels/{slug}', [AdminHotelController::class, 'show'])->name('hotels.show');
+    Route::get('/hotels/{hotel}/edit', [AdminHotelController::class, 'edit'])->name('hotels.edit');
+    Route::patch('/hotels/{hotel}', [AdminHotelController::class, 'update'])->name('hotels.update');
     // Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
     Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
     Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');

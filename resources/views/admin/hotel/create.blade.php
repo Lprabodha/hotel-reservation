@@ -205,12 +205,10 @@
                     <!-- Submit Buttons -->
                     <div class="col-12">
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary-600">
-                                <iconify-icon icon="material-symbols:save"></iconify-icon>
+                            <button type="submit" class="btn rounded-pill btn-info-600 radius-8 px-20 py-11">
                                 Save Hotel
                             </button>
-                            <a href="{{ route('admin.hotels') }}" class="btn btn-secondary-600">
-                                <iconify-icon icon="material-symbols:cancel"></iconify-icon>
+                            <a href="{{ route('admin.hotels') }}" class="btn rounded-pill btn-light-100 text-dark radius-8 px-20 py-11">
                                 Cancel
                             </a>
                         </div>

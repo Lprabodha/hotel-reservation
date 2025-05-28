@@ -57,8 +57,10 @@
                                 <option value="">Select Type</option>
                                 <option value="single" {{ old('room_type') == 'single' ? 'selected' : '' }}>Single</option>
                                 <option value="double" {{ old('room_type') == 'double' ? 'selected' : '' }}>Double</option>
+                                <option value="triple" {{ old('room_type') == 'triple' ? 'selected' : '' }}>Triple</option>
+                                <option value="quad" {{ old('room_type') == 'quad' ? 'selected' : '' }}>Quad</option>
                                 <option value="suite" {{ old('room_type') == 'suite' ? 'selected' : '' }}>Suite</option>
-                                <option value="deluxe" {{ old('room_type') == 'deluxe' ? 'selected' : '' }}>Deluxe</option>
+                                <option value="family" {{ old('room_type') == 'family' ? 'selected' : '' }}>Family</option>
                             </select>
                         </div>
                         @error('room_type')
@@ -113,26 +115,16 @@
                         @enderror
                     </div>
 
-                    <!-- Availability -->
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_available" value="1"
-                                id="is_available" {{ old('is_available', true) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="is_available">
-                                Room is Available
-                            </label>
-                        </div>
-                    </div>
+                    <!-- Hidden input for set the Availability -->
+                    <input class="form-check-input" type="hidden" name="is_available" value="1" id="is_available">
 
                     <!-- Submit Buttons -->
                     <div class="col-12">
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary-600">
-                                <iconify-icon icon="material-symbols:save"></iconify-icon>
+                            <button type="submit" class="btn rounded-pill btn-info-600 radius-8 px-20 py-11">
                                 Save Room
                             </button>
-                            <a href="{{ route('admin.rooms') }}" class="btn btn-secondary-600">
-                                <iconify-icon icon="material-symbols:cancel"></iconify-icon>
+                            <a href="{{ route('admin.rooms') }}" class="btn rounded-pill btn-light-100 text-dark radius-8 px-20 py-11">
                                 Cancel
                             </a>
                         </div>
