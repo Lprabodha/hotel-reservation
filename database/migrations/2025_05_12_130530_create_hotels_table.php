@@ -27,6 +27,7 @@ return new class extends Migration
             $table->json('images')->nullable();
             $table->boolean('active')->default(true)->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

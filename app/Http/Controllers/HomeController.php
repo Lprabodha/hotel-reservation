@@ -24,6 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $hotels = Hotel::all();
+
         return view('index', compact('hotels'));
     }
 

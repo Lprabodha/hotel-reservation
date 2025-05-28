@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use App\Http\Requests\StoreRoomRequest;
 use App\Models\Hotel;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RoomController extends Controller
 {
@@ -18,6 +18,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = Room::with('hotel')->latest()->get();
+
         return view('admin.room.index', compact('rooms'));
     }
 
@@ -27,6 +28,7 @@ class RoomController extends Controller
     public function create()
     {
         $hotels = Hotel::active()->orderBy('name')->get();
+
         return view('admin.room.create', compact('hotels'));
     }
 
@@ -40,10 +42,10 @@ class RoomController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
                     $path = Storage::disk('s3')->putFileAs('rooms', $image, $filename, 'public');
                     if ($path) {
-                        $imagePaths[] = 'rooms/' . $filename;
+                        $imagePaths[] = 'rooms/'.$filename;
                     }
                 }
             }
@@ -81,7 +83,7 @@ class RoomController extends Controller
 
         return view('admin.room.show', [
             'hotel' => $room,
-            'imageUrls' => $imageUrls
+            'imageUrls' => $imageUrls,
         ]);
     }
 
@@ -117,6 +119,7 @@ class RoomController extends Controller
             if ($exists) {
                 return Storage::disk('s3')->url($path);
             }
+
             return null;
         })->filter()->values()->toArray();
     }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_available')->default(true);
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

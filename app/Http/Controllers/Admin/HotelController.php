@@ -39,7 +39,7 @@ class HotelController extends Controller
             $imagesPaths = [];
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
                     $path = Storage::disk('s3')->putFileAs(
                         'hotels',
                         $image,
@@ -48,7 +48,7 @@ class HotelController extends Controller
                     );
 
                     if ($path) {
-                        $imagesPaths[] = 'hotels/' . $filename;
+                        $imagesPaths[] = 'hotels/'.$filename;
                     }
                 }
             }
@@ -58,7 +58,7 @@ class HotelController extends Controller
             $counter = 1;
 
             while (Hotel::where('slug', $slug)->exists()) {
-                $slug = $originalSlug . '-' . $counter;
+                $slug = $originalSlug.'-'.$counter;
                 $counter++;
             }
 
@@ -83,7 +83,7 @@ class HotelController extends Controller
                 ->with('success', 'Hotel created successfully!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            if (!empty($imagesPaths)) {
+            if (! empty($imagesPaths)) {
                 foreach ($imagesPaths as $imagePath) {
                     Storage::disk('s3')->delete($imagePath);
                 }
@@ -106,7 +106,7 @@ class HotelController extends Controller
 
         return view('admin.hotel.show', [
             'hotel' => $hotel,
-            'imageUrls' => $imageUrls
+            'imageUrls' => $imageUrls,
         ]);
     }
 
@@ -142,8 +142,8 @@ class HotelController extends Controller
             if ($exists) {
                 return Storage::disk('s3')->url($path);
             }
+
             return null;
         })->filter()->values()->toArray();
     }
-
 }

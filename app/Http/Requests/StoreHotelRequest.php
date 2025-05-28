@@ -33,7 +33,7 @@ class StoreHotelRequest extends FormRequest
             'country' => 'nullable|string|max:255',
             'website' => 'nullable|url|max:255',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
-            'active' => 'nullable|boolean'
+            'active' => 'nullable|boolean',
         ];
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->timestamp('paid_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

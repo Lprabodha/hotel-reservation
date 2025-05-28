@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Enums\HotelType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hotel extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'slug',
@@ -20,16 +23,16 @@ class Hotel extends Model
         'country',
         'website',
         'images',
-        'active'
+        'active',
     ];
 
     protected $casts = [
         'type' => HotelType::class,
         'active' => 'boolean',
         'star_rating' => 'integer',
-        'images' => 'array'
+        'images' => 'array',
     ];
-    
+
     public function users()
     {
         return $this->belongsToMany(User::class);

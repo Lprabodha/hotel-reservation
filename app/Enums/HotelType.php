@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum HotelType:string
+enum HotelType: string
 {
     case LUXURY = 'luxury';
     case BOUTIQUE = 'boutique';
@@ -17,7 +17,7 @@ enum HotelType:string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::LUXURY => 'Luxury',
             self::BOUTIQUE => 'Boutique',
             self::BUDGET => 'Budget',
@@ -32,6 +32,7 @@ enum HotelType:string
         foreach (self::cases() as $case) {
             $options[$case->value] = $case->label();
         }
+
         return $options;
     }
 }

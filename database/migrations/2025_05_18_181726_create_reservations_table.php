@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('auto_cancelled')->default(false);
             $table->boolean('no_show_billed')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
