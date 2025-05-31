@@ -93,7 +93,6 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         $hotels = Hotel::all();
-
         return view('admin.room.edit', compact('room', 'hotels'));
     }
 
@@ -107,10 +106,10 @@ class RoomController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
+                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                     $path = Storage::disk('s3')->putFileAs('rooms', $image, $filename, 'public');
                     if ($path) {
-                        $imagePaths[] = 'rooms/'.$filename;
+                        $imagePaths[] = 'rooms/' . $filename;
                     }
                 }
             }
@@ -129,7 +128,6 @@ class RoomController extends Controller
             return redirect()->route('admin.rooms.index')->with('success', 'Room updated successfully!');
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
-
             return back()->withInput()->with('error', 'Failed to update room.');
         }
     }
