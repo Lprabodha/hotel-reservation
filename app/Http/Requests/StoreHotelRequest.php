@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreHotelRequest extends FormRequest
 {
@@ -24,7 +25,11 @@ class StoreHotelRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'email' => 'required|email|unique:hotels,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('hotels', 'email')->ignore($this->hotel?->id),
+            ],
             'phone' => 'nullable|string|max:20',
             'type' => 'required|in:luxury,boutique,budget,business,resort',
             'star_rating' => 'nullable|integer|between:0,5',

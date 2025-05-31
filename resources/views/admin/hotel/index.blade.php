@@ -44,16 +44,16 @@
                                     {{ $hotel->active ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-flex gap-2 items-center">
                                 <a href="#"
                                    class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('admin.hotels.edit', $hotel->id) }}"
                                    class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="lucide:edit"></iconify-icon>
                                 </a>
-                                <form action="#" method="POST" class="d-inline">
+                                <form action="{{ route('admin.hotels.destroy', $hotel->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

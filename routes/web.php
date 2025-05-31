@@ -96,14 +96,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
-    // Route::get('/hotels', [HotelController::class, 'index'])->name('hotels');
+    
+    /* Routes for hotels */
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
     Route::post('hotels/store', [AdminHotelController::class, 'store'])->name('hotels.store');
-    Route::get('/hotels/{slug}', [AdminHotelController::class, 'show'])->name('hotels.show');
-    // Route::get('/hotel/{slug}', [HotelController::class, 'view'])->name('hotel');
+    Route::get('hotels/{slug}', [AdminHotelController::class, 'show'])->name('hotels.show');
+    Route::get('hotels/{hotel}/edit', [AdminHotelController::class, 'edit'])->name('hotels.edit');
+    Route::patch('hotels/{hotel}', [AdminHotelController::class, 'update'])->name('hotels.update');
+    Route::delete('hotels/{hotel}', [AdminHotelController::class, 'destroy'])->name('hotels.destroy');
+   
+    /* Routes for rooms */
     Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
     Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('rooms/store', [RoomController::class, 'store'])->name('rooms.store');
     Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+    Route::put('rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::get('rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::delete('rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
 });
