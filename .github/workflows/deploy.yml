@@ -47,8 +47,8 @@ jobs:
           sudo chmod -R 775 storage bootstrap/cache
 
           echo "Installing and building frontend assets..."
-          npm install
-          npm run build
+          # npm install
+          # npm run build
 
           echo "✅ Deployment completed successfully!"
         EOF
