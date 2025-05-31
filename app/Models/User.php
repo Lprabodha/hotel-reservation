@@ -57,7 +57,8 @@ class User extends Authenticatable
 
     public function getRoleName()
     {
-        return $this->roles->pluck('name')[0];
+        return $this->roles->pluck('name')->first() ?? 'No Role';
+
     }
 
     public function assignedHotels()
@@ -78,5 +79,16 @@ class User extends Authenticatable
         ]);
 
         return $user->assignRole('super-admin');
+    }
+
+    public function getRolesColorAttribute()
+    {
+        return [
+            'super-admin' => 'success',
+            'travel-company' => 'info',
+            'customer' => 'success',
+            'hotel-manager' => 'warning',
+            'hotel-clerk' => 'warning',
+        ][$this->roles[0]->name] ?? 'dark';
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -39,7 +41,40 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_role:hotel-clerk,hotel-manager,super-admin']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::controller(UserController::class)->group(function () {
+        // Users
+        Route::name('users.')->group(function () {
+            Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+                Route::get('/users', 'users')->name('index');
+                Route::post('/get-users', 'getUsers')->name('get');
+                Route::post('/change-role', 'changeUserRole')->name('role.change');
+                Route::post('/delete-users', 'deleteUser')->name('delete');
+
+                Route::name('role.')->group(function () {
+                    Route::get('/users/roles', 'userRoles')->name('index');
+                    Route::post('/users/get-roles', 'getUserRole')->name('get');
+                    Route::get('/users/create-roles', 'createRole')->name('create');
+                    Route::post('/users/save-roles', 'saveRole')->name('save');
+                    Route::get('/users/update-roles/{id}', 'updateRole')->name('update');
+                    Route::post('/users/edit-roles', 'editRole')->name('edit');
+                    Route::post('/users/delete-role', 'deleteRole')->name('delete');
+                });
+
+                Route::name('permissions.')->group(function () {
+                    Route::get('/users/permissions', 'userPermission')->name('index');
+                    Route::post('/users/get-permissions', 'getPermissions')->name('get');
+                    Route::get('/users/create-permissions', 'createPermissions')->name('create');
+                    Route::post('/users/save-permissions', 'savePermissions')->name('save');
+                    Route::get('/users/update-permissions/{id}', 'updatePermissions')->name('update');
+                    Route::post('/users/edit-permissions', 'editPermissions')->name('edit');
+                    Route::post('/users/delete-permissions', 'deletePermissions')->name('delete');
+                });
+            });
+        });
+    });
+
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
     // Route::get('/hotels', [HotelController::class, 'index'])->name('hotels');
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
