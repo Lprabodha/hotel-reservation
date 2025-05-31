@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7824e4c1c3a640d577cc0f7d49bdd43f",
+    "content-hash": "1287a40629f6ba909406136018a2f9f4",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -285,6 +285,65 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "devrabiul/laravel-toaster-magic",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devrabiul/laravel-toaster-magic.git",
+                "reference": "7ed4e8ca410c7e27356a7fab21b17780c53b3571"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/devrabiul/laravel-toaster-magic/zipball/7ed4e8ca410c7e27356a7fab21b17780c53b3571",
+                "reference": "7ed4e8ca410c7e27356a7fab21b17780c53b3571",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ToastMagic": "Devrabiul\\ToastMagic\\Facades\\ToastMagic"
+                    },
+                    "providers": [
+                        "Devrabiul\\ToastMagic\\ToastMagicServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Devrabiul\\ToastMagic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Rabiul",
+                    "email": "devrabiul@gmail.com"
+                }
+            ],
+            "description": "Laravel Toaster Magic is a lightweight, flexible toast library for Laravel projects, with no jQuery, Bootstrap, or Tailwind dependency.",
+            "homepage": "https://github.com/devrabiul/laravel-toaster-magic",
+            "keywords": [
+                "dynamic-notifications",
+                "flash-notifications",
+                "laravel",
+                "laravel-toastr",
+                "magic",
+                "notifications",
+                "php",
+                "toaster",
+                "toastr"
+            ],
+            "support": {
+                "issues": "https://github.com/devrabiul/laravel-toaster-magic/issues",
+                "source": "https://github.com/devrabiul/laravel-toaster-magic/tree/v1.0.4"
+            },
+            "time": "2025-05-26T18:13:47+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -8922,12 +8981,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
