@@ -7,12 +7,12 @@
     <div class="dashboard-main-body">
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-            <h6 class="fw-semibold mb-0">Manage Users</h6>
+            <h6 class="fw-semibold mb-0">Manage Customers</h6>
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                        Users
+                        Customers
                     </a>
                 </li>
             </ul>
@@ -20,13 +20,13 @@
 
         <div class="card basic-data-table">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Users</h5>
+                <h5 class="card-title mb-0">Customers</h5>
                 <div class="ms-auto">
                     <button type="button"
                         class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2"
                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
-                        Add User
+                        Add Customers
                     </button>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -121,7 +121,7 @@
                     "orderable": true
                 },
                 {
-                    "data": "role",
+                    "data": "status",
                     "searchable": true,
                     "orderable": true
                 },

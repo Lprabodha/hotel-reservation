@@ -43,7 +43,7 @@ class UserController extends Controller
             0 => 'id',
             1 => 'name',
             2 => 'email',
-            3 => 'role',
+            3 => 'status',
             4 => 'action',
         ];
 
@@ -54,21 +54,24 @@ class UserController extends Controller
         $dir = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $posts = User::offset($start)
+            $posts = User::role('customer')
+                ->offset($start)
                 ->limit($limit)
                 ->orderBy('id', 'desc')
                 ->get();
             $totalFiltered = User::count();
         } else {
             $search = $request->input('search.value');
-            $posts = User::where('name', 'like', "%{$search}%")
+            $posts = User::role('customer')
+                ->where('name', 'like', "%{$search}%")
                 ->orWhere('id', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
-            $totalFiltered = User::where('name', 'like', "%{$search}%")
+            $totalFiltered = User::role('customer')
+                ->where('name', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
                 ->orWhere('id', 'like', "%{$search}%")
                 ->count();
@@ -81,8 +84,8 @@ class UserController extends Controller
                 $nestedData['id'] = $r->id;
                 $nestedData['name'] = $r->name;
                 $nestedData['email'] = $r->email;
-                $nestedData['role'] = '<span class="bg-'.$r->roles_color.'-focus text-'.$r->roles_color.'-main px-24 py-4 rounded-pill fw-medium">'.$r->roles[0]->name.'</span>';
-                $nestedData['action'] = '<a class="btn btn-outline-primary-600 radius-8 px-20 py-11" data-data='.base64_encode($r).' data-bs-toggle="modal" data-bs-target="#changeRole"><i class="fas fa-edit"></i> Change Role</a>&nbsp;&nbsp;<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser('.$r->id.')"> <i class="fas fa-trash"></i> Delete</a>';
+                $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
+                $nestedData['action'] = '<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser(' . $r->id . ')"> <i class="fas fa-trash"></i> Delete</a>';
                 $data[] = $nestedData;
             }
         }
