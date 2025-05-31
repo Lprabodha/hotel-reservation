@@ -4,7 +4,7 @@
     <div class="dashboard-main-body">
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-            <h6 class="fw-semibold mb-0">Form Validation</h6>
+            <h6 class="fw-semibold mb-0">Create Travel Companies</h6>
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li>-</li>
-                <li class="fw-medium">Form Validation</li>
+                <li class="fw-medium">Create Travel Companies</li>
             </ul>
         </div>
 
@@ -21,90 +21,79 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Input Status</h5>
+                        <h5 class="card-title mb-0">Create Travel Companies</h5>
                     </div>
                     <div class="card-body">
-                        <form class="row gy-3 needs-validation" novalidate>
+                        <form class="row gy-3" action="{{ route('admin.travel-companies.store') }}" method="POST">
+                            @csrf
                             <div class="col-md-6">
-                                <label class="form-label">First Name</label>
-                                <div class="icon-field has-validation">
+                                <label class="form-label">Company Name</span></label>
+                                <div class="icon-field">
                                     <span class="icon">
-                                        <iconify-icon icon="f7:person"></iconify-icon>
+                                        <iconify-icon icon="f7:house-alt-fill"></iconify-icon>
                                     </span>
-                                    <input type="text" name="#0" class="form-control" placeholder="Enter First Name"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Please provide first name
-                                    </div>
+                                    <input type="text" name="company_name"
+                                        class="form-control @error('company_name') is-invalid @enderror"
+                                        placeholder="Enter Company Name" value="{{ old('company_name') }}">
+                                    @error('company_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
-                                <div class="icon-field has-validation">
-                                    <span class="icon">
-                                        <iconify-icon icon="f7:person"></iconify-icon>
-                                    </span>
-                                    <input type="text" name="#0" class="form-control" placeholder="Enter Last Name"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Please provide last name
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Email</label>
-                                <div class="icon-field has-validation">
+                                <label class="form-label">Email  <span class="text-danger">*</span></label>
+                                <div class="icon-field">
                                     <span class="icon">
                                         <iconify-icon icon="mage:email"></iconify-icon>
                                     </span>
-                                    <input type="email" name="#0" class="form-control" placeholder="Enter Email"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Please provide email address
-                                    </div>
+                                    <input type="email" name="email"
+                                        class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <label class="form-label">Phone</label>
-                                <div class="icon-field has-validation">
+                                <div class="icon-field">
                                     <span class="icon">
                                         <iconify-icon icon="solar:phone-calling-linear"></iconify-icon>
                                     </span>
-                                    <input type="text" name="#0" class="form-control"
-                                        placeholder="+1 (555) 000-0000" required>
-                                    <div class="invalid-feedback">
-                                        Please provide phone number
-                                    </div>
+                                    <input type="text" name="contact_number"
+                                        class="form-control @error('contact_number') is-invalid @enderror"
+                                        placeholder="+1 (555) 000-0000" value="{{ old('contact_number') }}">
+                                    @error('contact_number')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Password</label>
-                                <div class="icon-field has-validation">
+                                <label class="form-label">Address</label>
+                                <div class="icon-field">
                                     <span class="icon">
-                                        <iconify-icon icon="solar:lock-password-outline"></iconify-icon>
+                                        <iconify-icon icon="f7:map"></iconify-icon>
                                     </span>
-                                    <input type="password" name="#0" class="form-control" placeholder="*******"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Please provide password
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Confirm Password</label>
-                                <div class="icon-field has-validation">
-                                    <span class="icon">
-                                        <iconify-icon icon="solar:lock-password-outline"></iconify-icon>
-                                    </span>
-                                    <input type="password" name="#0" class="form-control" placeholder="*******"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Please confirm password
-                                    </div>
+                                    <input type="text" name="address"
+                                        class="form-control @error('address') is-invalid @enderror"
+                                        placeholder="Enter Company address" value="{{ old('address') }}">
+                                    @error('address')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button class="btn btn-primary-600" type="submit">Submit form</button>
+                                <button class="btn btn-primary-600" type="submit">Save Company</button>
                             </div>
                         </form>
                     </div>

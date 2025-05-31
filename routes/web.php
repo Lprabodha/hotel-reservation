@@ -91,6 +91,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
                 Route::get('/hotel-clerks', 'index')->name('index');
                 Route::post('/show-hotel-clerks', 'show')->name('show');
+                Route::get('/hotel-clerks/create', 'create')->name('create');
+                Route::post('/hotel-clerks/store', 'store')->name('store');
+                Route::get('/hotel-clerks/{id}', 'edit')->name('edit');
+                Route::post('/hotel-clerks/update', 'update')->name('update');
+                Route::post('/hotel-clerks/destroy', 'destroy')->name('destroy');
             });
         });
     });
@@ -101,6 +106,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
                 Route::get('/travel-companies', 'index')->name('index');
                 Route::post('/show-travel-companies', 'show')->name('show');
                 Route::get('/travel-companies/create', 'create')->name('create');
+                Route::post('/travel-companies/store', 'store')->name('store');
+                Route::get('/travel-companies/{id}', 'edit')->name('edit');
+                Route::post('/travel-companies/update', 'update')->name('update');
+                Route::post('/travel-companies/destroy', 'destroy')->name('destroy');
             });
         });
     });

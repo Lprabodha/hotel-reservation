@@ -9,7 +9,8 @@
             <h6 class="fw-semibold mb-0">Manage Hotel Clerks</h6>
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
-                    <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
+                    <a href="{{ route('admin.hotel-clerks.create') }}"
+                        class="d-flex align-items-center gap-1 hover-text-primary">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
                         Hotel Clerks
                     </a>
@@ -21,12 +22,11 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Hotel Clerks</h5>
                 <div class="ms-auto">
-                    <button type="button"
-                        class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a href="{{ route('admin.hotel-clerks.create') }}"
+                        class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
                         <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
                         Add Hotel Clerks
-                    </button>
+                    </a>
                 </div>
             </div>
 

@@ -65,16 +65,6 @@
                                         class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
                                     Travel Companies</a>
                             </li>
-                            <li>
-                                <a href="add-user.html"><i
-                                        class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
-                                    User Permissions</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.users.role.index') }}"><i
-                                        class="ri-circle-fill circle-icon text-warning-main w-auto"></i>
-                                    User Roles</a>
-                            </li>
                         </ul>
                     </li>
                 @endif
