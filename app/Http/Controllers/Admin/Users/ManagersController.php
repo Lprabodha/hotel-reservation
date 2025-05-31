@@ -1,43 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class ManagersController extends Controller
 {
-    public function users()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return view('admin.users.index');
+        return view('admin.users.hotel-managers.index');
     }
 
-    public function userRoles()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        return view('admin.users.roles.index');
+        //
     }
 
-    public function deleteUser(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        User::find($request->id)->delete();
-
-        return response()->json(['success' => 'User Delete successfully!']);
+        //
     }
 
-    public function changeUserRole(Request $request)
-    {
-        $user = User::find($request->id);
-        $role = Role::find($request->role_id);
-
-        $user->roles()->detach();
-        $role->users()->attach($user);
-
-        return response()->json(['success' => 'User Role Change Successfully!']);
-    }
-
-    public function getUsers(Request $request)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Request $request)
     {
         $columns = [
             0 => 'id',
@@ -54,7 +52,7 @@ class UserController extends Controller
         $dir = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $posts = User::role('customer')
+            $posts = User::role('hotel-manager')
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy('id', 'desc')
@@ -62,7 +60,7 @@ class UserController extends Controller
             $totalFiltered = User::count();
         } else {
             $search = $request->input('search.value');
-            $posts = User::role('customer')
+            $posts = User::role('hotel-manager')
                 ->where('name', 'like', "%{$search}%")
                 ->orWhere('id', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
@@ -70,7 +68,7 @@ class UserController extends Controller
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
-            $totalFiltered = User::role('customer')
+            $totalFiltered = User::role('hotel-manager')
                 ->where('name', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
                 ->orWhere('id', 'like', "%{$search}%")
@@ -98,5 +96,29 @@ class UserController extends Controller
         ];
 
         echo json_encode($json_data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

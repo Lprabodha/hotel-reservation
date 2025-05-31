@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\Users\ClerksController;
+use App\Http\Controllers\Admin\Users\ManagersController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -70,6 +72,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
                     Route::post('/users/edit-permissions', 'editPermissions')->name('edit');
                     Route::post('/users/delete-permissions', 'deletePermissions')->name('delete');
                 });
+            });
+        });
+    });
+
+    Route::controller(ManagersController::class)->group(function () {
+        Route::name('managers.')->group(function () {
+            Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+                Route::get('/managers', 'index')->name('index');
+                Route::post('/show-managers', 'show')->name('show');
+            });
+        });
+    });
+
+    Route::controller(ClerksController::class)->group(function () {
+        Route::name('hotel-clerks.')->group(function () {
+            Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+                Route::get('/hotel-clerks', 'index')->name('index');
+                Route::post('/show-hotel-clerks', 'show')->name('show');
             });
         });
     });
