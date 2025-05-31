@@ -44,11 +44,11 @@
                             Customers</a>
                     </li>
                     <li>
-                        <a href="add-user.html"><i class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
+                        <a href="{{route('admin.managers.index')}}"><i class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
                             Hotel Managers</a>
                     </li>
                     <li>
-                        <a href="add-user.html"><i class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
+                        <a href="{{route('admin.hotel-clerks.index')}}"><i class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
                             Hotel Clerks</a>
                     </li>
                     <li>
