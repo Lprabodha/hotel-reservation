@@ -61,7 +61,7 @@
                                     Hotel Clerks</a>
                             </li>
                             <li>
-                                <a href="add-user.html"><i
+                                <a href="{{ route('admin.travel-companies.index') }}"><i
                                         class="ri-circle-fill circle-icon text-primary-main w-auto"></i>
                                     Travel Companies</a>
                             </li>

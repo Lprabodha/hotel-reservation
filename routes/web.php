@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\ClerksController;
 use App\Http\Controllers\Admin\Users\ManagersController;
+use App\Http\Controllers\Admin\Users\TravelCompaniesController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -94,9 +95,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
         });
     });
 
+    Route::controller(TravelCompaniesController::class)->group(function () {
+        Route::name('travel-companies.')->group(function () {
+            Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+                Route::get('/travel-companies', 'index')->name('index');
+                Route::post('/show-travel-companies', 'show')->name('show');
+                Route::get('/travel-companies/create', 'create')->name('create');
+            });
+        });
+    });
+
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
-    
+
     /* Routes for hotels */
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
@@ -105,7 +116,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels/{hotel}/edit', [AdminHotelController::class, 'edit'])->name('hotels.edit');
     Route::patch('hotels/{hotel}', [AdminHotelController::class, 'update'])->name('hotels.update');
     Route::delete('hotels/{hotel}', [AdminHotelController::class, 'destroy'])->name('hotels.destroy');
-   
+
     /* Routes for rooms */
     Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
     Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');
