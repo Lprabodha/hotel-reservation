@@ -38,7 +38,7 @@ class StoreRoomRequest extends FormRequest
         ];
     }
 
-        public function messages(): array
+    public function messages(): array
     {
         return [
             'hotel_id.required' => 'A hotel must be selected for this room.',

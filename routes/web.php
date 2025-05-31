@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\ClerksController;
 use App\Http\Controllers\Admin\Users\ManagersController;
+use App\Http\Controllers\Admin\Users\TravelCompaniesController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -90,13 +91,32 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
                 Route::get('/hotel-clerks', 'index')->name('index');
                 Route::post('/show-hotel-clerks', 'show')->name('show');
+                Route::get('/hotel-clerks/create', 'create')->name('create');
+                Route::post('/hotel-clerks/store', 'store')->name('store');
+                Route::get('/hotel-clerks/{id}', 'edit')->name('edit');
+                Route::post('/hotel-clerks/update', 'update')->name('update');
+                Route::post('/hotel-clerks/destroy', 'destroy')->name('destroy');
+            });
+        });
+    });
+
+    Route::controller(TravelCompaniesController::class)->group(function () {
+        Route::name('travel-companies.')->group(function () {
+            Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+                Route::get('/travel-companies', 'index')->name('index');
+                Route::post('/show-travel-companies', 'show')->name('show');
+                Route::get('/travel-companies/create', 'create')->name('create');
+                Route::post('/travel-companies/store', 'store')->name('store');
+                Route::get('/travel-companies/{id}', 'edit')->name('edit');
+                Route::post('/travel-companies/update', 'update')->name('update');
+                Route::post('/travel-companies/destroy', 'destroy')->name('destroy');
             });
         });
     });
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
-    
+
     /* Routes for hotels */
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
@@ -105,7 +125,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels/{hotel}/edit', [AdminHotelController::class, 'edit'])->name('hotels.edit');
     Route::patch('hotels/{hotel}', [AdminHotelController::class, 'update'])->name('hotels.update');
     Route::delete('hotels/{hotel}', [AdminHotelController::class, 'destroy'])->name('hotels.destroy');
-   
+
     /* Routes for rooms */
     Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
     Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');
