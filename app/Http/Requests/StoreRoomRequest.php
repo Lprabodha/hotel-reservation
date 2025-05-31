@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRoomRequest extends FormRequest
 {
@@ -23,7 +24,11 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'hotel_id' => 'required|exists:hotels,id',
-            'room_number' => 'required|string|unique:rooms,room_number',
+            'room_number' => [
+                'required',
+                'string',
+                Rule::unique('rooms', 'room_number')->ignore($this->room?->id),
+            ],
             'room_type' => 'required|in:single,double,triple,quad,suite,family',
             'occupancy' => 'required|integer|min:1',
             'price_per_night' => 'required|numeric|min:0',

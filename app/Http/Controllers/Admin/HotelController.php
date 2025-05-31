@@ -183,9 +183,17 @@ class HotelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Hotel $hotel)
     {
-        //
+        if (is_array($hotel->images)) {
+            foreach ($hotel->images as $imagePath) {
+                Storage::disk('s3')->delete($imagePath);
+            }
+        }
+
+        $hotel->delete();
+
+        return redirect()->route('admin.hotels')->with('success', 'Hotel deleted successfully.');
     }
 
     private function getImageUrls(array $imagePaths)
