@@ -40,6 +40,7 @@ Route::group(['middleware' => ['check_role:customer,travel-company']], function 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/dashboard/reservations', 'reservations')->name('dashboard.reservations');
+        Route::get('/dashboard/user-profile', 'getUserProfile')->name('view.profile');
     });
 });
 
