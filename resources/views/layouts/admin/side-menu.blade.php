@@ -39,8 +39,20 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.rooms') }}" class="d-flex align-items-center gap-2">
-                        <iconify-icon icon="cbi:roomsother" width="25" height="25"></iconify-icon>
+                        <iconify-icon icon="mdi:guest-room" width="25" height="25"></iconify-icon>
                         <span class="ms-2">Rooms</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chat-message.html" class="d-flex align-items-center gap-2">
+                        <iconify-icon icon="tdesign:money" width="25" height="25"></iconify-icon>
+                        <span class="ms-2">Payments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chat.html" class="d-flex align-items-center gap-2">
+                        <iconify-icon icon="lsicon:report-filled" width="25" height="25"></iconify-icon>
+                        <span class="ms-2">Reports</span>
                     </a>
                 </li>
 
