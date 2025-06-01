@@ -12064,7 +12064,8 @@ div.dt-container .dt-paging .dt-paging-button:hover:hover, div.dt-container .dt-
 }
 
 .invalid-feedback {
-  color: var(--danger-main);
+  color: red;
+  font-size: 10px;
 }
 
 /* icon field css start */

@@ -10,7 +10,7 @@
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>
-                        <th>
+                        <th >
                             <div class="form-check style-check d-flex align-items-center">
                                 <input class="form-check-input" type="checkbox">
                                 <label class="form-check-label">#</label>
@@ -39,21 +39,21 @@
                             <td>{{ $hotel->type->label() }}</td>
                             <td>{{ $hotel->country ?? 'N/A' }}</td>
                             <td>
-                                <span class="px-24 py-4 rounded-pill fw-medium text-sm 
+                                <span class="px-24 py-4 rounded-pill fw-medium text-sm
                                     {{ $hotel->active ? 'bg-success-focus text-success-main' : 'bg-danger-focus text-danger-main' }}">
                                     {{ $hotel->active ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-flex gap-2 items-center">
                                 <a href="#"
                                    class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('admin.hotels.edit', $hotel->id) }}"
                                    class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="lucide:edit"></iconify-icon>
                                 </a>
-                                <form action="#" method="POST" class="d-inline">
+                                <form action="{{ route('admin.hotels.destroy', $hotel->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

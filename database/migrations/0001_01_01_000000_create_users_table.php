@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-
+            $table->boolean('is_active')->default(true)->index();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

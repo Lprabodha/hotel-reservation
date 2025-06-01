@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomRequest;
 use App\Models\Hotel;
 use App\Models\Room;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -90,25 +89,64 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Room $room)
     {
-        //
+        $hotels = Hotel::all();
+
+        return view('admin.room.edit', compact('room', 'hotels'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreRoomRequest $request, Room $room)
     {
-        //
+        try {
+            $imagePaths = $room->images ?? [];
+
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
+                    $path = Storage::disk('s3')->putFileAs('rooms', $image, $filename, 'public');
+                    if ($path) {
+                        $imagePaths[] = 'rooms/'.$filename;
+                    }
+                }
+            }
+
+            $room->update([
+                'hotel_id' => $request->hotel_id,
+                'room_number' => $request->room_number,
+                'room_type' => $request->room_type,
+                'occupancy' => $request->occupancy,
+                'price_per_night' => $request->price_per_night,
+                'is_available' => $request->is_available ?? true,
+                'description' => $request->description,
+                'images' => $imagePaths,
+            ]);
+
+            return redirect()->route('admin.rooms')->with('success', 'Room updated successfully!');
+        } catch (\Exception $e) {
+            logger()->error($e->getMessage());
+
+            return back()->withInput()->with('error', 'Failed to update room.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Room $room)
     {
-        //
+        if (is_array($room->images)) {
+            foreach ($room->images as $imagePath) {
+                Storage::disk('s3')->delete($imagePath);
+            }
+        }
+
+        $room->delete();
+
+        return redirect()->route('admin.rooms')->with('success', 'Room deleted successfully.');
     }
 
     private function getImageUrls(array $imagePaths)
