@@ -15,6 +15,15 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ManagersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:list-hotel-managers', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-hotel-managers', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-hotel-managers', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-hotel-managers', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -92,7 +101,7 @@ class ManagersController extends Controller
             5 => 'action',
         ];
 
-        $totalData = User::count();
+        $totalData = User::role('hotel-manager')->count();
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];

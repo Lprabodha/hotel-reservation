@@ -51,6 +51,26 @@ class RoleAndPermissionSeeder extends Seeder
             ['name' => 'edit-bookings'],
             ['name' => 'delete-bookings'],
 
+            ['name' => 'list-hotel-managers'],
+            ['name' => 'create-hotel-managers'],
+            ['name' => 'edit-hotel-managers'],
+            ['name' => 'delete-hotel-managers'],
+
+            ['name' => 'list-hotel-clerks'],
+            ['name' => 'create-hotel-clerks'],
+            ['name' => 'edit-hotel-clerks'],
+            ['name' => 'delete-hotel-clerks'],
+
+            ['name' => 'list-travel-companies'],
+            ['name' => 'create-travel-companies'],
+            ['name' => 'edit-travel-companies'],
+            ['name' => 'delete-travel-companies'],
+
+            ['name' => 'list-hotel-clerks'],
+            ['name' => 'create-hotel-clerks'],
+            ['name' => 'edit-hotel-clerks'],
+            ['name' => 'delete-hotel-clerks'],
+
             ['name' => 'list-reports'],
             ['name' => 'view-reports'],
 

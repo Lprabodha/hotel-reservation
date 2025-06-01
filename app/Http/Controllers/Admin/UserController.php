@@ -47,7 +47,7 @@ class UserController extends Controller
             4 => 'action',
         ];
 
-        $totalData = User::count();
+        $totalData = User::role('customer')->count();
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
@@ -59,7 +59,7 @@ class UserController extends Controller
                 ->limit($limit)
                 ->orderBy('id', 'desc')
                 ->get();
-            $totalFiltered = User::count();
+            $totalFiltered =  User::role('customer')->count();
         } else {
             $search = $request->input('search.value');
             $posts = User::role('customer')

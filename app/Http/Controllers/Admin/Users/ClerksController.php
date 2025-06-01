@@ -15,6 +15,15 @@ use Illuminate\Validation\Rule;
 
 class ClerksController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:list-hotel-clerks', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-hotel-clerks', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-hotel-clerks', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-hotel-clerks', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -73,7 +82,7 @@ class ClerksController extends Controller
 
             Mail::to($user->email)->send(new SendMail($data));
         } catch (\Exception $e) {
-            Log::error('Email failed to send: '.$e->getMessage());
+            Log::error('Email failed to send: ' . $e->getMessage());
         }
 
         return redirect()->route('admin.hotel-clerks.index')->with('success', 'Hotel Clerk created successfully.');
@@ -93,7 +102,7 @@ class ClerksController extends Controller
             5 => 'action',
         ];
 
-        $totalData = User::count();
+        $totalData = User::role('hotel-clerk')->count();
         $limit = $request->input('length');
         $start = $request->input('start');
 
@@ -145,7 +154,7 @@ class ClerksController extends Controller
                 $nestedData['email'] = $r->email;
                 $nestedData['hotel'] = $r->hotels()->first() ? $r->hotels()->first()->name : 'No Hotel Assigned';
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
-                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href='.route('admin.hotel-clerks.edit', $r->id).'> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser('.$r->id.')"> <i class="fas fa-trash"></i> Delete</a>';
+                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href=' . route('admin.hotel-clerks.edit', $r->id) . '> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser(' . $r->id . ')"> <i class="fas fa-trash"></i> Delete</a>';
                 $data[] = $nestedData;
             }
         }

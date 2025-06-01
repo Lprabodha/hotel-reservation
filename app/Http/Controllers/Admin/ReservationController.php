@@ -12,7 +12,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.reservations.index');
     }
 
     /**
@@ -34,9 +34,9 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        
     }
 
     /**
