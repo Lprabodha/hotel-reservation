@@ -24,10 +24,16 @@
 
             @if ($isAdminRoute)
 
+                <li>
+                    <a href="{{ route('admin.reservation.index') }}" class="d-flex align-items-center gap-2">
+                        <iconify-icon icon="tabler:brand-booking" width="25" height="25"></iconify-icon>
+                        <span class="ms-2">Reservation</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center gap-2">
-                        <iconify-icon icon="emojione-monotone:hotel" width="25" height="25"></iconify-icon>
+                        <iconify-icon icon="fa6-solid:hotel" width="25" height="25"></iconify-icon>
                         <span class="ms-2">Hotels</span>
                     </a>
                 </li>

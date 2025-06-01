@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
+use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Users\ClerksController;
@@ -119,8 +120,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
         });
     });
 
+    Route::controller(ReservationController::class)->group(function () {
+        Route::name('reservation.')->group(function () {
+            Route::get('/reservations', 'index')->name('index');
+            Route::post('/reservations', 'show')->name('show');
+            Route::get('/reservations/create', 'create')->name('create');
+            Route::post('/reservations/store', 'store')->name('store');
+            Route::get('/reservations/{id}', 'edit')->name('edit');
+            Route::post('/reservations/update', 'update')->name('update');
+            Route::post('/reservations/destroy', 'destroy')->name('destroy');
+        });
+    });
+
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
+
 
     /* Routes for hotels */
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
