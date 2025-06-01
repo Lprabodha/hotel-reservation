@@ -179,7 +179,7 @@ class ManagersController extends Controller
         $hotel = $manager->hotels()->first();
 
         if (! $hotel) {
-            return redirect()->route('admin.manager.index')->withErrors(['hotel_id' => 'This user is not assigned to any hotel.']);
+            return redirect()->route('admin.managers.index')->withErrors(['hotel_id' => 'This user is not assigned to any hotel.']);
         }
 
         return view('admin.users.hotel-managers.edit', compact('manager', 'hotel'));
