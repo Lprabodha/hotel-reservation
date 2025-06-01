@@ -35,7 +35,7 @@ Route::controller(HotelController::class)->group(function () {
 });
 
 // Authentication routes
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => ['check_role:customer,travel-company']], function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');

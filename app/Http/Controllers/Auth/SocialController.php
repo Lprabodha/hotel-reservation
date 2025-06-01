@@ -30,7 +30,10 @@ class SocialController extends Controller
         }
         Auth::login($user);
 
-        return redirect()->route('admin.dashboard');
+        if( $user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('dashboard');
     }
 
     public function oneTap($request)
