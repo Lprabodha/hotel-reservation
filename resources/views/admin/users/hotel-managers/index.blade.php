@@ -50,6 +50,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Hotel</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -90,6 +91,11 @@
                 },
                 {
                     "data": "email",
+                    "searchable": true,
+                    "orderable": true
+                },
+                {
+                    "data": "hotel",
                     "searchable": true,
                     "orderable": true
                 },

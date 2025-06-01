@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 
 class ManagersController extends Controller
 {
@@ -86,8 +87,9 @@ class ManagersController extends Controller
             0 => 'id',
             1 => 'name',
             2 => 'email',
-            3 => 'status',
-            4 => 'action',
+            3 => 'hotel',
+            4 => 'status',
+            5 => 'action',
         ];
 
         $totalData = User::count();
@@ -98,25 +100,40 @@ class ManagersController extends Controller
 
         if (empty($request->input('search.value'))) {
             $posts = User::role('hotel-manager')
+                ->with('hotels')
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy('id', 'desc')
                 ->get();
-            $totalFiltered = User::count();
+
+            $totalFiltered = User::role('hotel-manager')->count();
         } else {
             $search = $request->input('search.value');
+
             $posts = User::role('hotel-manager')
-                ->where('name', 'like', "%{$search}%")
-                ->orWhere('id', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
+                ->with('hotels')
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('id', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhereHas('hotels', function (Builder $q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        });
+                })
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order, $dir)
+                ->orderBy('id', 'desc')
                 ->get();
+
             $totalFiltered = User::role('hotel-manager')
-                ->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
-                ->orWhere('id', 'like', "%{$search}%")
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('id', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhereHas('hotels', function (Builder $q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        });
+                })
                 ->count();
         }
 
@@ -127,6 +144,7 @@ class ManagersController extends Controller
                 $nestedData['id'] = $r->id;
                 $nestedData['name'] = $r->name;
                 $nestedData['email'] = $r->email;
+                $nestedData['hotel'] = $r->hotels()->first() ? $r->hotels()->first()->name : 'No Hotel Assigned';
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
                 $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href=' . route('admin.managers.edit', $r->id) . '> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser(' . $r->id . ')"> <i class="fas fa-trash"></i> Delete</a>';
                 $data[] = $nestedData;
