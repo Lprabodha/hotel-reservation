@@ -26,39 +26,11 @@ export default defineConfig({
                 "resources/js/script.js",
 
                 // Admin CSS
-                "resources/css/admin/remixicon.css",
-                "resources/css/admin/lib/bootstrap.min.css",
-                "resources/css/admin/lib/apexcharts.css",
-                "resources/css/admin/lib/dataTables.min.css",
-                "resources/css/admin/lib/editor.atom-one-dark.min.css",
-                "resources/css/admin/lib/editor.quill.snow.css",
-                "resources/css/admin/lib/flatpickr.min.css",
-                "resources/css/admin/lib/full-calendar.css",
-                "resources/css/admin/lib/jquery-jvectormap-2.0.5.css",
-                "resources/css/admin/lib/magnific-popup.css",
-                "resources/css/admin/lib/slick.css",
-                "resources/css/admin/lib/prism.css",
-                "resources/css/admin/lib/file-upload.css",
-                "resources/css/admin/lib/audioplayer.css",
-                "resources/css/admin/style.css",
                 "resources/sass/admin/main.scss",
 
                 // Admin JS
-                "resources/js/admin/lib/jquery-3.7.1.min.js",
-                "resources/js/admin/lib/bootstrap.bundle.min.js",
-                "resources/js/admin/lib/apexcharts.min.js",
-                "resources/js/admin/lib/dataTables.min.js",
-                "resources/js/admin/lib/iconify-icon.min.js",
-                "resources/js/admin/lib/jquery-ui.min.js",
-                "resources/js/admin/lib/jquery-jvectormap-2.0.5.min.js",
-                "resources/js/admin/lib/jquery-jvectormap-world-mill-en.js",
-                "resources/js/admin/lib/magnifc-popup.min.js",
-                "resources/js/admin/lib/slick.min.js",
-                "resources/js/admin/lib/prism.js",
-                "resources/js/admin/lib/file-upload.js",
-                "resources/js/admin/lib/audioplayer.js",
-                "resources/js/admin/app.js",
                 "resources/js/admin/homeOneChart.js",
+                "resources/js/admin/app.js",
             ],
             refresh: true,
         }),
@@ -66,12 +38,21 @@ export default defineConfig({
             targets: [
                 {
                     src: "resources/images/**/*",
-                    dest: "images",
+                    dest: "../assets/images",
+                },
+
+                {
+                    src: "resources/css/admin/lib",
+                    dest: "../assets/css/admin/",
+                },
+                {
+                    src: "resources/fonts/admin/*",
+                    dest: "../assets/css/admin/fonts/",
                 },
 
                 {
                     src: "resources/js/*",
-                    dest: "js",
+                    dest: "../assets/js",
                 },
             ],
         }),
