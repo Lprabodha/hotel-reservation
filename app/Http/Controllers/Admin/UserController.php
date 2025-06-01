@@ -26,6 +26,11 @@ class UserController extends Controller
         return response()->json(['success' => 'User Delete successfully!']);
     }
 
+    public function getUserProfile()
+    {
+        return view('admin.users.user-profile');
+    }
+
     public function changeUserRole(Request $request)
     {
         $user = User::find($request->id);

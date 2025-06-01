@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
                 Route::post('/get-users', 'getUsers')->name('get');
                 Route::post('/change-role', 'changeUserRole')->name('role.change');
                 Route::post('/delete-users', 'deleteUser')->name('delete');
+                Route::get('/user-profile', 'getUserProfile')->name('view.profile');
 
                 Route::name('role.')->group(function () {
                     Route::get('/users/roles', 'userRoles')->name('index');

@@ -3,8 +3,7 @@
         <div class="col-auto">
             <div class="d-flex flex-wrap align-items-center gap-4">
                 <button type="button" class="sidebar-toggle">
-                    <iconify-icon icon="heroicons:bars-3-solid"
-                        class="icon text-2xl non-active"></iconify-icon>
+                    <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
                     <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
                 </button>
                 <button type="button" class="sidebar-mobile-toggle">
@@ -18,147 +17,6 @@
         </div>
         <div class="col-auto">
             <div class="d-flex flex-wrap align-items-center gap-3">
-                <button type="button" data-theme-toggle
-                    class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
-                <div class="dropdown d-none d-sm-inline-block">
-                    <button
-                        class="has-indicator w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"
-                        type="button" data-bs-toggle="dropdown">
-                        <img src="{{ Vite::asset('resources/images/admin/lang-flag.png') }}" alt="image"
-                            class="w-24 h-24 object-fit-cover rounded-circle">
-                    </button>
-                    <div class="dropdown-menu to-top dropdown-menu-sm">
-                        <div
-                            class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
-                            <div>
-                                <h6 class="text-lg text-primary-light fw-semibold mb-0">Choose Your Language
-                                </h6>
-                            </div>
-                        </div>
-
-                        <div class="max-h-400-px overflow-y-auto scroll-sm pe-8">
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="english">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag1.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">English</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="english">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="japan">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag2.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">Japan</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="japan">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="france">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag3.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">France</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="france">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="germany">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag4.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">Germany</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="germany">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="korea">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag5.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">South Korea</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="korea">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="bangladesh">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag6.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">Bangladesh</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="bangladesh">
-                            </div>
-
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between mb-16">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="india">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag7.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">India</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="india">
-                            </div>
-                            <div
-                                class="form-check style-check d-flex align-items-center justify-content-between">
-                                <label class="form-check-label line-height-1 fw-medium text-secondary-light"
-                                    for="canada">
-                                    <span
-                                        class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                        <img src="{{Vite::asset('resources/images/admin/flags/flag8.png') }}" alt=""
-                                            class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
-                                        <span class="text-md fw-semibold mb-0">Canada</span>
-                                    </span>
-                                </label>
-                                <input class="form-check-input" type="radio" name="crypto"
-                                    id="canada">
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- Language dropdown end -->
-
                 <div class="dropdown">
                     <button
                         class="has-indicator w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"
@@ -181,9 +39,9 @@
                                 class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                                 <div
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                    <span
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-3.png') }}" alt="">
+                                    <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-3.png') }}"
+                                            alt="">
                                         <span
                                             class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                                     </span>
@@ -204,9 +62,9 @@
                                 class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                                 <div
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                    <span
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-4.png') }}" alt="">
+                                    <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-4.png') }}"
+                                            alt="">
                                         <span
                                             class="w-8-px h-8-px  bg-neutral-300 rounded-circle position-absolute end-0 bottom-0"></span>
                                     </span>
@@ -227,9 +85,9 @@
                                 class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                                 <div
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                    <span
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-5.png') }}" alt="">
+                                    <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-5.png') }}"
+                                            alt="">
                                         <span
                                             class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                                     </span>
@@ -250,9 +108,9 @@
                                 class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                                 <div
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                    <span
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-6.png') }}" alt="">
+                                    <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-6.png') }}"
+                                            alt="">
                                         <span
                                             class="w-8-px h-8-px bg-neutral-300 rounded-circle position-absolute end-0 bottom-0"></span>
                                     </span>
@@ -273,9 +131,9 @@
                                 class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                                 <div
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                                    <span
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-7.png') }}" alt="">
+                                    <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-7.png') }}"
+                                            alt="">
                                         <span
                                             class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                                     </span>
@@ -341,7 +199,8 @@
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                                     <span
                                         class="w-44-px h-44-px bg-success-subtle text-success-main rounded-circle d-flex justify-content-center align-items-center flex-shrink-0">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-1.png') }}" alt="">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-1.png') }}"
+                                            alt="">
                                     </span>
                                     <div>
                                         <h6 class="text-md fw-semibold mb-4">Ronald Richards</h6>
@@ -375,7 +234,8 @@
                                     class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                                     <span
                                         class="w-44-px h-44-px bg-success-subtle text-success-main rounded-circle d-flex justify-content-center align-items-center flex-shrink-0">
-                                        <img src="{{Vite::asset('resources/images/admin/notification/profile-2.png') }}" alt="">
+                                        <img src="{{ Vite::asset('resources/images/admin/notification/profile-2.png') }}"
+                                            alt="">
                                     </span>
                                     <div>
                                         <h6 class="text-md fw-semibold mb-4">Annette Black</h6>
@@ -413,17 +273,17 @@
                 </div><!-- Notification dropdown end -->
 
                 <div class="dropdown">
-                    <button class="d-flex justify-content-center align-items-center rounded-circle"
-                        type="button" data-bs-toggle="dropdown">
-                        <img src="{{Vite::asset('resources/images/admin/user.png') }}" alt="image"
+                    <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
+                        data-bs-toggle="dropdown">
+                        <img src="{{ Vite::asset('resources/images/admin/user.png') }}" alt="image"
                             class="w-40-px h-40-px object-fit-cover rounded-circle">
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-sm">
                         <div
                             class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
                             <div>
-                                <h6 class="text-lg text-primary-light fw-semibold mb-2">Shaidul Islam</h6>
-                                <span class="text-secondary-light fw-medium text-sm">Admin</span>
+                                <h6 class="text-lg text-primary-light fw-semibold mb-2">{{Auth::user()->name }}</h6>
+                                <span class="text-secondary-light fw-medium text-sm">{{Auth::user()->getRoleNames()->first()}}</span>
                             </div>
                             <button type="button" class="hover-text-danger">
                                 <iconify-icon icon="radix-icons:cross-1" class="icon text-xl"></iconify-icon>
@@ -432,21 +292,9 @@
                         <ul class="to-top-list">
                             <li>
                                 <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="view-profile.html">
-                                    <iconify-icon icon="solar:user-linear"
-                                        class="icon text-xl"></iconify-icon> My Profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="email.html">
-                                    <iconify-icon icon="tabler:message-check"
-                                        class="icon text-xl"></iconify-icon> Inbox</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                    href="company.html">
-                                    <iconify-icon icon="icon-park-outline:setting-two"
-                                        class="icon text-xl"></iconify-icon> Setting</a>
+                                    href="{{route('admin.users.view.profile')}}">
+                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My
+                                    Profile</a>
                             </li>
                             <li>
                                 <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3"
