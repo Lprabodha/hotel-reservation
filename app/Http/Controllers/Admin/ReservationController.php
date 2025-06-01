@@ -34,10 +34,7 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
-    {
-        
-    }
+    public function show(Request $request) {}
 
     /**
      * Show the form for editing the specified resource.

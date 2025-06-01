@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
 use App\Models\Hotel;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
-use Illuminate\Database\Eloquent\Builder;
 
 class ManagersController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:list-hotel-managers', ['only' => ['index', 'show']]);
@@ -81,7 +80,7 @@ class ManagersController extends Controller
 
             Mail::to($user->email)->send(new SendMail($data));
         } catch (\Exception $e) {
-            Log::error('Email failed to send: ' . $e->getMessage());
+            Log::error('Email failed to send: '.$e->getMessage());
         }
 
         return redirect()->route('admin.managers.index')->with('success', 'Hotel manager created successfully.');
@@ -155,7 +154,7 @@ class ManagersController extends Controller
                 $nestedData['email'] = $r->email;
                 $nestedData['hotel'] = $r->hotels()->first() ? $r->hotels()->first()->name : 'No Hotel Assigned';
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
-                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href=' . route('admin.managers.edit', $r->id) . '> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser(' . $r->id . ')"> <i class="fas fa-trash"></i> Delete</a>';
+                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href='.route('admin.managers.edit', $r->id).'> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser('.$r->id.')"> <i class="fas fa-trash"></i> Delete</a>';
                 $data[] = $nestedData;
             }
         }
@@ -177,10 +176,6 @@ class ManagersController extends Controller
     {
         $manager = User::findOrFail($id);
         $hotel = $manager->hotels()->first();
-
-        if (! $hotel) {
-            return redirect()->route('admin.managers.index')->withErrors(['hotel_id' => 'This user is not assigned to any hotel.']);
-        }
 
         return view('admin.users.hotel-managers.edit', compact('manager', 'hotel'));
     }

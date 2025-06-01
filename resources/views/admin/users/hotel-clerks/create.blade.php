@@ -80,7 +80,7 @@
                                     </span>
                                     <select name="hotel_id" class="form-control @error('hotel_id') is-invalid @enderror">
                                         <option value="" selected disabled>Select Hotel</option>
-                                        @foreach (DB::table('hotels')->get() as $hotel)
+                                        @foreach (DB::table('hotels')->where('active', 1)->whereNull('deleted_at')->get() as $hotel)
                                             <option value="{{ $hotel->id }}"
                                                 {{ old('hotel_id') == $hotel->id ? 'selected' : '' }}>
                                                 {{ $hotel->name }}

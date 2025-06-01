@@ -192,6 +192,7 @@ class HotelController extends Controller
         }
 
         $hotel->delete();
+        $hotel->users()->detach();
 
         return redirect()->route('admin.hotels')->with('success', 'Hotel deleted successfully.');
     }
