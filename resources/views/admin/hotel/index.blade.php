@@ -10,7 +10,7 @@
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>
-                        <th>
+                        <th >
                             <div class="form-check style-check d-flex align-items-center">
                                 <input class="form-check-input" type="checkbox">
                                 <label class="form-check-label">#</label>
@@ -39,7 +39,7 @@
                             <td>{{ $hotel->type->label() }}</td>
                             <td>{{ $hotel->country ?? 'N/A' }}</td>
                             <td>
-                                <span class="px-24 py-4 rounded-pill fw-medium text-sm 
+                                <span class="px-24 py-4 rounded-pill fw-medium text-sm
                                     {{ $hotel->active ? 'bg-success-focus text-success-main' : 'bg-danger-focus text-danger-main' }}">
                                     {{ $hotel->active ? 'Active' : 'Inactive' }}
                                 </span>

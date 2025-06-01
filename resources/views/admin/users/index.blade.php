@@ -24,14 +24,14 @@
             </div>
 
             <div class="card-body">
-                <table id="user-table" class="table table-bordered table-striped">
+                <table id="user-table" class="table bordered-table mb-0">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

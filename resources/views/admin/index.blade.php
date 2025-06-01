@@ -766,3 +766,9 @@
         </div>
     </div>
 @endsection
+
+
+@section('scripts')
+    <script src="/assets/js/admin/lib/apexcharts.min.js"></script>
+    @vite(['resources/js/admin/homeOneChart.js'])
+@endsection
