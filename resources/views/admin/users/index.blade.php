@@ -21,13 +21,6 @@
         <div class="card basic-data-table">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Customers</h5>
-                <div class="ms-auto">
-                    <a href=""
-                        class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
-                        <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
-                        Add Customers
-                    </a>
-                </div>
             </div>
 
             <div class="card-body">

@@ -82,6 +82,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
                 Route::get('/managers', 'index')->name('index');
                 Route::post('/show-managers', 'show')->name('show');
+                Route::get('/managers/create', 'create')->name('create');
+                Route::post('/managers/store', 'store')->name('store');
+                Route::get('/managers/{id}', 'edit')->name('edit');
+                Route::post('/managers/update', 'update')->name('update');
+                Route::post('/managers/destroy', 'destroy')->name('destroy');
             });
         });
     });
