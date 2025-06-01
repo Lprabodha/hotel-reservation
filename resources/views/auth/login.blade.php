@@ -11,7 +11,7 @@
                         <form class="wpo-accountWrapper" action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="wpo-accountInfo image">
-                                <img src="{{ asset('images/login.png') }}" alt="">
+                                <img src="{{ Vite::asset('resources/images/img/login.png') }}" alt="Image">
                             </div>
                             <div class="wpo-accountForm form-style">
                                 <div class="fromTitle">

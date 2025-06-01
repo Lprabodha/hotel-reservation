@@ -90,19 +90,19 @@
             <div class="row">
                 <div class="col-lg-5 col-12">
                     <div class="wpo-section-title">
-                        <span>// popular places</span>
-                        <h2>discover more popular places here.</h2>
+                        <span>// Top Destinations</span>
+                        <h2>Discover more popular places here.</h2>
                     </div>
                 </div>
                 <div class="col-lg-7 col-12">
                     <div class="popular-slider owl-carousel">
                         <div class="places-item">
                             <div class="image">
-                                <img src="images/popular-places/1.jpg" alt="">
+                                <img src="images/popular-places/A.jpg" alt="">
                             </div>
                             <div class="content">
                                 <h2>
-                                    <a href="places-single.html">Singapore</a>
+                                    <a href="places-single.html">Galle</a>
                                 </h2>
                                 <span>806 places</span>
                             </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="content">
                                 <h2>
-                                    <a href="places-single.html">new York</a>
+                                    <a href="places-single.html">Kandy</a>
                                 </h2>
                                 <span>220 places</span>
                             </div>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="content">
                                 <h2>
-                                    <a href="places-single.html">Maldives</a>
+                                    <a href="places-single.html">Colombo</a>
                                 </h2>
                                 <span>648 places</span>
                             </div>
@@ -142,8 +142,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9 col-12">
                     <div class="wpo-section-title s2  wow fadeInUp" data-wow-duration="1200ms">
-                        <span>// why choose us</span>
-                        <h2>some of the reasons why choose Click2Checkin.</h2>
+                        <span>// Why Choose Us</span>
+                        <h2>Some of the reasons why choose Click2Checkin.</h2>
                     </div>
                 </div>
             </div>
@@ -159,8 +159,7 @@
                             </div>
                             <div class="right">
                                 <h2><a href="service-single.html">Luxurious Suites</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <span>Stay in modern, elegant rooms designed for comfort and relaxation.</span>
                             </div>
                         </div>
                     </div>
@@ -174,8 +173,7 @@
                             </div>
                             <div class="right">
                                 <h2><a href="service-single.html">24/7 Reception</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <span>Our support team is available anytime to assist with your needs.</span>
                             </div>
                         </div>
                     </div>
@@ -188,9 +186,8 @@
                                 </div>
                             </div>
                             <div class="right">
-                                <h2><a href="service-single.html">Free Wi-Fi: High</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <h2><a href="service-single.html">Free High-Speed Wi-Fi</a></h2>
+                                <span>Enjoy fast and reliable internet access during your stay.</span>
                             </div>
                         </div>
                     </div>
@@ -204,8 +201,7 @@
                             </div>
                             <div class="right">
                                 <h2><a href="service-single.html">Fitness Center</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <span>Stay active with fully equipped gyms available at many hotels.</span>
                             </div>
                         </div>
                     </div>
@@ -219,8 +215,7 @@
                             </div>
                             <div class="right">
                                 <h2><a href="service-single.html">Childcare Services</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <span>Safe and friendly childcare options for families with young children.</span>
                             </div>
                         </div>
                     </div>
@@ -234,8 +229,7 @@
                             </div>
                             <div class="right">
                                 <h2><a href="service-single.html">Airport Shuttle</a></h2>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor.</span>
+                                <span>Easy and convenient transportation to and from the airport.</span>
                             </div>
                         </div>
                     </div>
@@ -251,9 +245,8 @@
             <div class="row align-items-center">
                 <div class="col-xl-5 order-xl-2  col-12">
                     <div class="wpo-section-title s2 wow fadeInRightSlow" data-wow-duration="1700ms">
-                        <span>// beautiful videos</span>
-                        <h2>Explore the World Through Beautiful Videos.</h2>
-                        <a href="{{ route('about-us') }}" class="theme-btn">list your property</a>
+                        <span>// hotel highlights</span>
+                        <h2>Discover Stunning Hotels & Destinations Through Video Tours.</h2>
                     </div>
                 </div>
                 <div class="col-xl-7 order-xl-1 col-12">
@@ -361,7 +354,7 @@
                 <div class="col-lg-10 col-12">
                     <div class="wpo-section-title s2">
                         <span>// featured hotels</span>
-                        <h2>Discover the World's Most Captivating Featured Places</h2>
+                        <h2>Discover the Sri Lanka's Most Captivating Featured Places</h2>
                     </div>
                 </div>
             </div>
@@ -373,27 +366,27 @@
                                 <ul class="category-item">
                                     <li>
                                         <a data-filter=".new_york" href="#" class="featured-btn ">
-                                            new york
+                                            Colombo
                                         </a>
                                     </li>
                                     <li>
                                         <a data-filter=".all" href="#" class="featured-btn current">
-                                            Maldives
+                                            Galle
                                         </a>
                                     </li>
                                     <li>
                                         <a data-filter=".london" href="#" class="featured-btn">
-                                            london
+                                            Kandy
                                         </a>
                                     </li>
                                     <li>
                                         <a data-filter=".tokyo" href="#" class="featured-btn">
-                                            tokyo
+                                            Nuwara Eliya
                                         </a>
                                     </li>
                                     <li>
                                         <a data-filter=".paris" href="#" class="featured-btn">
-                                            paris
+                                            Jaffna
                                         </a>
                                     </li>
                                 </ul>
@@ -813,70 +806,107 @@
     </section>
     <!-- end of authorlist-->
 
-    <!-- start of testimonial-->
-    <section class="testimonial-section section-padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-12">
-                    <div class="wpo-section-title  wow fadeInUp" data-wow-duration="1200ms">
-                        <span>// customer testimonial</span>
-                        <h2>Delighting Our Customers, One Smile at a Time</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-slider owl-carousel">
-                <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
-                    <div class="top-content">
-                        <div class="image">
-                            <img src="images/testimonial/1.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h3>Eleanor Pena</h3>
-                            <span>Eleanor Pena</span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                            posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                            volutpat odio facilisis mauris.”</p>
-                    </div>
-                </div>
-                <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
-                    <div class="top-content">
-                        <div class="image">
-                            <img src="images/testimonial/2.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h3>Theresa Webb</h3>
-                            <span>Eleanor Pena</span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                            posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                            volutpat odio facilisis mauris.”</p>
-                    </div>
-                </div>
-                <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
-                    <div class="top-content">
-                        <div class="image">
-                            <img src="images/testimonial/3.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h3>Darrell Steward</h3>
-                            <span>Eleanor Pena</span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                            posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                            volutpat odio facilisis mauris.”</p>
-                    </div>
+    <!-- start of testimonial -->
+<section class="testimonial-section section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12">
+                <div class="wpo-section-title wow fadeInUp" data-wow-duration="1200ms">
+                    <span>// customer testimonials</span>
+                    <h2>Happy Guests Sharing Their Click2Checkin Experiences</h2>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- end of testimonial-->
+        <div class="testimonial-slider owl-carousel">
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/1.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Nadeesha Fernando</h3>
+                        <span>Frequent Traveler</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Booking with Click2Checkin was seamless! I found perfect hotels at great prices and enjoyed smooth check-in experiences everywhere.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/2.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Amal Perera</h3>
+                        <span>Business Traveler</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“I love how easy it is to compare hotels and book instantly through Click2Checkin. Their 24/7 support helped me during a last-minute change.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/3.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Kavindi Silva</h3>
+                        <span>Vacation Planner</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Click2Checkin made planning my family trip effortless. The hotel options were excellent, and the booking process was fast and reliable.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2000ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/4.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Ruwan Jayasuriya</h3>
+                        <span>Holidaymaker</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Thanks to Click2Checkin, I discovered amazing hotels in Sri Lanka I never knew about. The booking experience was quick and easy.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2200ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/5.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Ishani Wijesinghe</h3>
+                        <span>Solo Traveler</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“I felt safe booking with Click2Checkin because of their excellent customer service and reliable hotel options throughout Sri Lanka.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2400ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/6.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Sameera Rajapaksa</h3>
+                        <span>Adventure Seeker</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Click2Checkin helped me find great hotels close to adventure spots. Booking was hassle-free, and the support team was very helpful.”</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of testimonial -->
+
 
     <!-- start of places-->
     <section class="places-section section-padding">

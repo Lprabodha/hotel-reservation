@@ -65,10 +65,9 @@
                                     <div class="language">
                                         <select>
                                             <option value="" selected>English</option>
-                                            <option value="">Spanish</option>
-                                            <option value="">German</option>
-                                            <option value="">Arabic</option>
-                                        </select>
+                                            <option value="">Sinhala</option>
+                                            <option value="">Tamil</option>
+                                         </select>
                                     </div>
                                     <div class="close-form">
                                         <a class="theme-btn" href="{{route('login')}}">sign up</a>
