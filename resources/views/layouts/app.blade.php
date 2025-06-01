@@ -41,7 +41,7 @@
     <div id="app" class="page-wrapper">
         @include('layouts.header')
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
         @include('layouts.footer')
