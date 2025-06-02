@@ -401,10 +401,12 @@
                         data-wow-duration="2000ms">
                         <div class="featured-card">
                             <div class="image">
-                                <img src="{{ $hotel->images && count($hotel->images) > 0
-                                    ? Storage::disk('s3')->url($hotel->images[0])
-                                    : Vite::asset('resources/images/default-hotel.webp') }}"
-                                    alt="Hotel Image" width="263px" height="240px">
+                                <a href="{{ route('hotel', ['slug' => $hotel->slug]) }}">
+                                    <img src="{{ $hotel->images && count($hotel->images) > 0
+                                        ? Storage::disk('s3')->url($hotel->images[0])
+                                        : Vite::asset('resources/images/default-hotel.webp') }}"
+                                        alt="{{ $hotel->name }}" width="263px" height="240px">
+                                </a>
                             </div>
                             <div class="content">
                                 <div class="top-content">
@@ -423,7 +425,11 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h2><a href="#">{{ $hotel->name }}</a></h2>
+                                <h2>
+                                    <a href="{{ route('hotel', ['slug' => $hotel->slug]) }}">
+                                        {{ $hotel->name }}
+                                    </a>
+                                </h2>
                                 <span><i class="ti-location-pin"></i>{{ $hotel->location }}</span>
                             </div>
                         </div>
@@ -431,234 +437,14 @@
                 @empty
                     <div>No Hotels Listed At This Moment</div>
                 @endforelse
-                {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/1.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Whispering Pines</a></h2>
-                            <span><i class="ti-location-pin"></i> Pine Tree Lane, Whisperwood</span>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/2.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Serenity Vista In</a></h2>
-                            <span><i class="ti-location-pin"></i>Serenity Avenue, Tranquil Town</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all tokyo zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/3.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Blissful Retreat Lodge</a></h2>
-                            <span><i class="ti-location-pin"></i>321 Bliss Way, Serene Valley</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/4.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Radiant Moon Hotel</a></h2>
-                            <span><i class="ti-location-pin"></i>Moonlight Boulevard, Starryville</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all london zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/5.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Whispering Pines</a></h2>
-                            <span><i class="ti-location-pin"></i>Pine Tree Lane, Whisperwood</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all paris zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/6.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Velvet Sands Hotel</a></h2>
-                            <span><i class="ti-location-pin"></i>753 Velvet Shore, Sandy Shores</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all tokyo zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/7.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Majestic Peaks Resort</a></h2>
-                            <span><i class="ti-location-pin"></i>951 Majestic View, Mountainville</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all paris zoomIn"
-                    data-wow-duration="2000ms">
-                    <div class="featured-card">
-                        <div class="image">
-                            <img src="images/featured/8.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>$220</span>
-                                        <span class="date">Night</span>
-                                    </li>
-                                    <li>
-                                        <span>4.9</span>
-                                        <span class="date">Rating</span>
-                                    </li>
-                                    <li>
-                                        <span>08</span>
-                                        <span class="date">Beds</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h2><a href="{{route('hotel',['slug' => Str::uuid()])}}">Tranquil Oasis Inn</a></h2>
-                            <span><i class="ti-location-pin"></i>258 Oasis Street, Calmington</span>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
-            <div class="featured-all-btn">
-                <a href="{{ route('hotels') }}" class="theme-btn-s2">view all hotels</a>
-            </div>
+
+            @if (count($hotels) > 0)
+                <div class="featured-all-btn">
+                    <a href="{{ route('hotels') }}" class="theme-btn-s2">view all hotels</a>
+                </div>
+            @endif
+
         </div>
     </section>
     <!-- end of featured-->
@@ -807,105 +593,111 @@
     <!-- end of authorlist-->
 
     <!-- start of testimonial -->
-<section class="testimonial-section section-padding">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12">
-                <div class="wpo-section-title wow fadeInUp" data-wow-duration="1200ms">
-                    <span>// customer testimonials</span>
-                    <h2>Happy Guests Sharing Their Click2Checkin Experiences</h2>
+    <section class="testimonial-section section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="wpo-section-title wow fadeInUp" data-wow-duration="1200ms">
+                        <span>// customer testimonials</span>
+                        <h2>Happy Guests Sharing Their Click2Checkin Experiences</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slider owl-carousel">
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/1.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Nadeesha Fernando</h3>
+                            <span>Frequent Traveler</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“Booking with Click2Checkin was seamless! I found perfect hotels at great prices and enjoyed
+                            smooth check-in experiences everywhere.”</p>
+                    </div>
+                </div>
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/2.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Amal Perera</h3>
+                            <span>Business Traveler</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“I love how easy it is to compare hotels and book instantly through Click2Checkin. Their 24/7
+                            support helped me during a last-minute change.”</p>
+                    </div>
+                </div>
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/3.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Kavindi Silva</h3>
+                            <span>Vacation Planner</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“Click2Checkin made planning my family trip effortless. The hotel options were excellent, and the
+                            booking process was fast and reliable.”</p>
+                    </div>
+                </div>
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="2000ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/4.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Ruwan Jayasuriya</h3>
+                            <span>Holidaymaker</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“Thanks to Click2Checkin, I discovered amazing hotels in Sri Lanka I never knew about. The
+                            booking experience was quick and easy.”</p>
+                    </div>
+                </div>
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="2200ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/5.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Ishani Wijesinghe</h3>
+                            <span>Solo Traveler</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“I felt safe booking with Click2Checkin because of their excellent customer service and reliable
+                            hotel options throughout Sri Lanka.”</p>
+                    </div>
+                </div>
+                <div class="testimonial-card wow fadeInUp" data-wow-duration="2400ms">
+                    <div class="top-content">
+                        <div class="image">
+                            <img src="images/testimonial/6.jpg" alt="Customer Photo">
+                        </div>
+                        <div class="text">
+                            <h3>Sameera Rajapaksa</h3>
+                            <span>Adventure Seeker</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>“Click2Checkin helped me find great hotels close to adventure spots. Booking was hassle-free, and
+                            the support team was very helpful.”</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="testimonial-slider owl-carousel">
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/1.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Nadeesha Fernando</h3>
-                        <span>Frequent Traveler</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“Booking with Click2Checkin was seamless! I found perfect hotels at great prices and enjoyed smooth check-in experiences everywhere.”</p>
-                </div>
-            </div>
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/2.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Amal Perera</h3>
-                        <span>Business Traveler</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“I love how easy it is to compare hotels and book instantly through Click2Checkin. Their 24/7 support helped me during a last-minute change.”</p>
-                </div>
-            </div>
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/3.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Kavindi Silva</h3>
-                        <span>Vacation Planner</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“Click2Checkin made planning my family trip effortless. The hotel options were excellent, and the booking process was fast and reliable.”</p>
-                </div>
-            </div>
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="2000ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/4.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Ruwan Jayasuriya</h3>
-                        <span>Holidaymaker</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“Thanks to Click2Checkin, I discovered amazing hotels in Sri Lanka I never knew about. The booking experience was quick and easy.”</p>
-                </div>
-            </div>
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="2200ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/5.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Ishani Wijesinghe</h3>
-                        <span>Solo Traveler</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“I felt safe booking with Click2Checkin because of their excellent customer service and reliable hotel options throughout Sri Lanka.”</p>
-                </div>
-            </div>
-            <div class="testimonial-card wow fadeInUp" data-wow-duration="2400ms">
-                <div class="top-content">
-                    <div class="image">
-                        <img src="images/testimonial/6.jpg" alt="Customer Photo">
-                    </div>
-                    <div class="text">
-                        <h3>Sameera Rajapaksa</h3>
-                        <span>Adventure Seeker</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>“Click2Checkin helped me find great hotels close to adventure spots. Booking was hassle-free, and the support team was very helpful.”</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end of testimonial -->
+    </section>
+    <!-- end of testimonial -->
 
 
     <!-- start of places-->
