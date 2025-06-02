@@ -32,6 +32,8 @@
         'resources/css/style.css'
     ])
 
+    @yield('styles')
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -41,7 +43,7 @@
     <div id="app" class="page-wrapper">
         @include('layouts.header')
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
         @include('layouts.footer')

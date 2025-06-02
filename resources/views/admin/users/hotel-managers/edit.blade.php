@@ -44,8 +44,7 @@
                                         <iconify-icon icon="mdi:account" class="text-lg"></iconify-icon>
                                     </span>
                                     <input type="text" name="name"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        placeholder="Enter Name"
+                                        class="form-control @error('name') is-invalid @enderror" placeholder="Enter Name"
                                         value="{{ old('name', $manager->name) }}">
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -61,8 +60,7 @@
                                         <iconify-icon icon="ic:baseline-email" class="text-lg"></iconify-icon>
                                     </span>
                                     <input type="email" name="email"
-                                        class="form-control @error('email') is-invalid @enderror"
-                                        placeholder="Enter Email"
+                                        class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email"
                                         value="{{ old('email', $manager->email) }}">
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -77,11 +75,13 @@
                                     <span class="icon">
                                         <iconify-icon icon="mdi:hotel" class="text-lg"></iconify-icon>
                                     </span>
-                                    <select name="hotel_id" class="form-control @error('hotel_id') is-invalid @enderror">
-                                        <option value="" disabled>Select Hotel</option>
-                                        @foreach (DB::table('hotels')->get() as $item)
+                                    <select
+                                        class="form-control radius-8 form-select @error('hotel_id') is-invalid @enderror"
+                                        name="hotel_id">
+                                        <option disabled {{ old('hotel_id', $hotel->id ?? '') ? '' : 'selected' }}>Select Hotel</option>
+                                        @foreach (DB::table('hotels')->where('active', 1)->whereNull('deleted_at')->get() as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ old('hotel_id', $hotel->id) == $item->id ? 'selected' : '' }}>
+                                                {{ (int) old('hotel_id', $hotel->id ?? 0) === (int) $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach

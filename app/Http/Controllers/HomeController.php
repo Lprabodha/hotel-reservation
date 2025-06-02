@@ -42,4 +42,9 @@ class HomeController extends Controller
     {
         return view('pages.faq');
     }
+
+    public function reservation()
+    {
+        return view('reservation');
+    }
 }

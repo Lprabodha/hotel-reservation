@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-lg-2 col-md-4 col-4">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/logo.svg')}}"
+                                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{Vite::asset('resources/images/logo.png')}}"
                                             alt="logo"></a>
                                 </div>
                             </div>
