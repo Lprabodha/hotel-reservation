@@ -32,6 +32,8 @@
         'resources/css/style.css'
     ])
 
+    @yield('styles')
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 

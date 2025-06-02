@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
 
+
 @section('content')
     <div class="dashboard-main-body">
 
@@ -74,11 +75,12 @@
                                     <select
                                         class="form-control radius-8 form-select @error('hotel_id') is-invalid @enderror"
                                         name="hotel_id">
-                                        <option disabled>Select Hotel</option>
-                                        @foreach (DB::table('hotels')->get() as $hotel)
-                                            <option value="{{ $hotel->id }}"
-                                                {{ old('hotel_id', $clerk->hotel_id) == $hotel->id ? 'selected' : '' }}>
-                                                {{ $hotel->name }}
+                                        <option disabled {{ old('hotel_id', $hotel->id ?? '') ? '' : 'selected' }}>Select
+                                            Hotel</option>
+                                        @foreach (DB::table('hotels')->where('active', 1)->whereNull('deleted_at')->get() as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ (int) old('hotel_id', $hotel->id ?? 0) === (int) $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>

@@ -64,7 +64,7 @@ class UserController extends Controller
                 ->limit($limit)
                 ->orderBy('id', 'desc')
                 ->get();
-            $totalFiltered =  User::role('customer')->count();
+            $totalFiltered = User::role('customer')->count();
         } else {
             $search = $request->input('search.value');
             $posts = User::role('customer')

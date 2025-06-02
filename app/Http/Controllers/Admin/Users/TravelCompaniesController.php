@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Mail;
 
 class TravelCompaniesController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:list-travel-companies', ['only' => ['index', 'show']]);
@@ -80,7 +79,7 @@ class TravelCompaniesController extends Controller
 
                 Mail::to($email)->send(new SendMail($data));
             } catch (\Exception $e) {
-                Log::error('Email failed to send: ' . $e->getMessage());
+                Log::error('Email failed to send: '.$e->getMessage());
             }
         });
 
@@ -138,7 +137,7 @@ class TravelCompaniesController extends Controller
                 $nestedData['name'] = $r->name;
                 $nestedData['email'] = $r->email;
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
-                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href=' . route('admin.travel-companies.edit', $r->id) . '> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser(' . $r->id . ')"> <i class="fas fa-trash"></i> Delete</a>';
+                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href='.route('admin.travel-companies.edit', $r->id).'> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser('.$r->id.')"> <i class="fas fa-trash"></i> Delete</a>';
                 $data[] = $nestedData;
             }
         }
