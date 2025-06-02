@@ -27,6 +27,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/about-us', 'aboutUs')->name('about-us');
     Route::get('/contact-us', 'contact')->name('contact-us');
     Route::get('/faq', 'faq')->name('faq');
+    Route::get('/reservation', 'reservation')->name('reservation');
 });
 
 Route::controller(HotelController::class)->group(function () {
@@ -146,11 +147,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::delete('hotels/{hotel}', [AdminHotelController::class, 'destroy'])->name('hotels.destroy');
 
     /* Routes for rooms */
-    Route::get('rooms', [RoomController::class, 'index'])->name('rooms');
-    Route::get('rooms/create', [RoomController::class, 'create'])->name('rooms.create');
-    Route::post('rooms/store', [RoomController::class, 'store'])->name('rooms.store');
-    Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
-    Route::put('rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
-    Route::get('rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
-    Route::delete('rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+
+    Route::controller(RoomController::class)->prefix('rooms')->name('rooms.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{room}', 'show')->name('show');
+        Route::get('/get', 'getRooms')->name('get');
+        Route::put('/{room}', 'update')->name('update');
+        Route::get('/{room}/edit', 'edit')->name('edit');
+        Route::delete('/{room}', 'destroy')->name('destroy');
+    });
 });

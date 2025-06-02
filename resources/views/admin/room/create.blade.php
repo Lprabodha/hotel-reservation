@@ -124,7 +124,7 @@
                             <button type="submit" class="btn rounded-pill btn-info-600 radius-8 px-20 py-11">
                                 Save Room
                             </button>
-                            <a href="{{ route('admin.rooms') }}" class="btn rounded-pill btn-light-100 text-dark radius-8 px-20 py-11">
+                            <a href="{{ route('admin.rooms.index') }}" class="btn rounded-pill btn-light-100 text-dark radius-8 px-20 py-11">
                                 Cancel
                             </a>
                         </div>
