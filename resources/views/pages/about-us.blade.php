@@ -28,7 +28,6 @@
                 <div class="wpo-section-title s2 wow fadeInRightSlow" data-wow-duration="1700ms">
                     <span>// beautiful videos</span>
                     <h2>Explore the World Through Beautiful Videos.</h2>
-                    <a href="about.html" class="theme-btn">list your property</a>
                 </div>
             </div>
             <div class="col-xl-7 order-xl-1 col-12">
@@ -134,14 +133,14 @@
 <!-- end of places-videos-->
 
 
-<!-- start of testimonial-->
+<!-- start of testimonial -->
 <section class="testimonial-section section-padding">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
-                <div class="wpo-section-title  wow fadeInUp" data-wow-duration="1200ms">
-                    <span>// customer testimonial</span>
-                    <h2>Delighting Our Customers, One Smile at a Time</h2>
+                <div class="wpo-section-title wow fadeInUp" data-wow-duration="1200ms">
+                    <span>// customer testimonials</span>
+                    <h2>Happy Guests Sharing Their Click2Checkin Experiences</h2>
                 </div>
             </div>
         </div>
@@ -149,55 +148,92 @@
             <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
                 <div class="top-content">
                     <div class="image">
-                        <img src="images/testimonial/1.jpg" alt="">
+                        <img src="images/testimonial/1.jpg" alt="Customer Photo">
                     </div>
                     <div class="text">
-                        <h3>Eleanor Pena</h3>
-                        <span>Eleanor Pena</span>
+                        <h3>Nadeesha Fernando</h3>
+                        <span>Frequent Traveler</span>
                     </div>
                 </div>
                 <div class="content">
-                    <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                        posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                        volutpat odio facilisis mauris.”</p>
+                    <p>“Booking with Click2Checkin was seamless! I found perfect hotels at great prices and enjoyed smooth check-in experiences everywhere.”</p>
                 </div>
             </div>
             <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
                 <div class="top-content">
                     <div class="image">
-                        <img src="images/testimonial/2.jpg" alt="">
+                        <img src="images/testimonial/2.jpg" alt="Customer Photo">
                     </div>
                     <div class="text">
-                        <h3>Theresa Webb</h3>
-                        <span>Eleanor Pena</span>
+                        <h3>Amal Perera</h3>
+                        <span>Business Traveler</span>
                     </div>
                 </div>
                 <div class="content">
-                    <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                        posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                        volutpat odio facilisis mauris.”</p>
+                    <p>“I love how easy it is to compare hotels and book instantly through Click2Checkin. Their 24/7 support helped me during a last-minute change.”</p>
                 </div>
             </div>
             <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
                 <div class="top-content">
                     <div class="image">
-                        <img src="images/testimonial/3.jpg" alt="">
+                        <img src="images/testimonial/3.jpg" alt="Customer Photo">
                     </div>
                     <div class="text">
-                        <h3>Darrell Steward</h3>
-                        <span>Eleanor Pena</span>
+                        <h3>Kavindi Silva</h3>
+                        <span>Vacation Planner</span>
                     </div>
                 </div>
                 <div class="content">
-                    <p>“Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                        posuere ac ut. Dignissim convallis aenean et tortor at risus viverra. Sagittis eu
-                        volutpat odio facilisis mauris.”</p>
+                    <p>“Click2Checkin made planning my family trip effortless. The hotel options were excellent, and the booking process was fast and reliable.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2000ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/4.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Ruwan Jayasuriya</h3>
+                        <span>Holidaymaker</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Thanks to Click2Checkin, I discovered amazing hotels in Sri Lanka I never knew about. The booking experience was quick and easy.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2200ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/5.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Ishani Wijesinghe</h3>
+                        <span>Solo Traveler</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“I felt safe booking with Click2Checkin because of their excellent customer service and reliable hotel options throughout Sri Lanka.”</p>
+                </div>
+            </div>
+            <div class="testimonial-card wow fadeInUp" data-wow-duration="2400ms">
+                <div class="top-content">
+                    <div class="image">
+                        <img src="images/testimonial/6.jpg" alt="Customer Photo">
+                    </div>
+                    <div class="text">
+                        <h3>Sameera Rajapaksa</h3>
+                        <span>Adventure Seeker</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>“Click2Checkin helped me find great hotels close to adventure spots. Booking was hassle-free, and the support team was very helpful.”</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- end of testimonial-->
+<!-- end of testimonial -->
+
 
 <!-- start of places-->
 <section class="places-section section-padding">
