@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wpo-breadcumb-wrap">
-                        <h2>Hotel Details</h2>
+                        <h2>{{$hotel->name}}</h2>
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
                             <li><span>Hotel</span></li>
@@ -205,72 +205,6 @@
                                 <p> Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
                                     lacus vel facilisis. </p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="add-review">
-                        <div class="room-title">
-                            <h2>Add Review</h2>
-                        </div>
-                        <div class="wpo-blog-single-section review-form ">
-                            <div class="give-rat-sec">
-                                <p>Your rating *</p>
-                                <div class="give-rating">
-                                    <label>
-                                        <input type="radio" name="stars" value="1" />
-                                        <span class="icon">★</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="stars" value="2" />
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="stars" value="3" />
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="stars" value="4" />
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="stars" value="5" />
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                        <span class="icon">★</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="review-add">
-                                <div class="comment-respond">
-                                    <form id="commentform" class="comment-form">
-                                        <div class="form-inputs">
-                                            <input placeholder="Your Name*" type="text">
-                                            <input placeholder="Your Email*" type="email">
-                                        </div>
-                                        <div class="form-textarea">
-                                            <textarea id="comment" placeholder="Your Review"></textarea>
-                                        </div>
-                                        <div class="form-check">
-                                            <div class="shipp pb">
-                                                <input type="checkbox" id="c2" name="cc">
-                                                <label for="c2"><span></span>Save my name, email, and website in
-                                                    this browser for the next time I comment.</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-submit">
-                                            <input id="submit" value="Submit Now" type="submit">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!--Start Room area-->
                         </div>
                     </div>
                 </div>

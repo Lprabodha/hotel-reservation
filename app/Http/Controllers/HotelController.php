@@ -15,6 +15,12 @@ class HotelController extends Controller
 
     public function view($slug)
     {
-        return view('hotel.view');
+
+        $hotel = Hotel::where('slug', $slug)->firstOrFail();
+        if (! $hotel) {
+            abort(404, 'Hotel not found');
+        }
+
+        return view('hotel.view', compact('hotel'));
     }
 }
