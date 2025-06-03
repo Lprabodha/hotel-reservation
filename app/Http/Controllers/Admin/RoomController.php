@@ -95,7 +95,6 @@ class RoomController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      */
@@ -116,6 +115,7 @@ class RoomController extends Controller
     {
         $room->load('rates');
         $hotels = Hotel::all();
+
         return view('admin.room.edit', compact('room', 'hotels'));
     }
 
@@ -131,10 +131,10 @@ class RoomController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
                     $path = Storage::disk('s3')->putFileAs('rooms', $image, $filename, 'public');
                     if ($path) {
-                        $imagePaths[] = 'rooms/' . $filename;
+                        $imagePaths[] = 'rooms/'.$filename;
                     }
                 }
             }
@@ -161,11 +161,12 @@ class RoomController extends Controller
 
             DB::commit();
             ToastMagic::success('Room updated successfully!');
-            
+
             return redirect()->route('admin.rooms.index')->with('success', 'Room updated successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             logger()->error($e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to update room.');
         }
     }

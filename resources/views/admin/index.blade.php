@@ -4,16 +4,27 @@
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Dashboard</h6>
-            <ul class="d-flex align-items-center gap-2">
-                <li class="fw-medium">
-                    <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                        Dashboard
+
+            @if (!auth()->user()->hasRole('hotel-clerk'))
+                <ul class="d-flex align-items-center gap-2">
+                    <li class="fw-medium">
+                        <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
+                            <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>-</li>
+                    <li class="fw-medium">AI</li>
+                </ul>
+            @endif
+
+            @if (auth()->user()->hasRole('hotel-clerk'))
+                <div class="ms-auto m-2">
+                    <a href="{{route('admin.reservation.create')}}" class="btn btn-primary d-flex align-items-center gap-2">
+                        <i class="bi bi-plus-lg"></i> + New Reservation
                     </a>
-                </li>
-                <li>-</li>
-                <li class="fw-medium">AI</li>
-            </ul>
+                </div>
+            @endif
         </div>
 
         <div class="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
