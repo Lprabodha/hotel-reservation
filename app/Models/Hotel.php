@@ -47,4 +47,9 @@ class Hotel extends Model
     {
         return $query->where('active', true);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class)->withPivot('charge');
+    }
 }

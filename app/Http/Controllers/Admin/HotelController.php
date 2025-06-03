@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHotelRequest;
 use App\Models\Hotel;
+use App\Models\Service;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,7 +27,8 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return view('admin.hotel.create');
+        $services = Service::all();
+        return view('admin.hotel.create', compact('services'));
     }
 
     /**
@@ -34,6 +36,7 @@ class HotelController extends Controller
      */
     public function store(StoreHotelRequest $request)
     {
+        Log::info($request->all());
         try {
             $imagesPaths = [];
             if ($request->hasFile('images')) {
@@ -76,6 +79,19 @@ class HotelController extends Controller
                 'images' => $imagesPaths,
                 'active' => $request->active ?? false,
             ]);
+
+            if ($request->has('services')) {
+                $services = $request->input('services');
+
+                $attachData = [];
+                foreach ($services as $service) {
+                    if (!empty($service['id']) && isset($service['charge'])) {
+                        $attachData[$service['id']] = ['charge' => $service['charge']];
+                    }
+                }
+
+                $hotel->services()->attach($attachData);
+            }
 
             return redirect()
                 ->route('admin.hotels')
