@@ -84,7 +84,7 @@
                     </div>
 
                     <!-- Price Per Night -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label">Price Per Night ($) <span class="text-danger">*</span></label>
                         <div class="icon-field">
                             <span class="icon">
@@ -97,6 +97,24 @@
                         @error('price_per_night')
                             <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <!-- Daily Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Daily Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[daily]" class="form-control" placeholder="e.g. 100.00" value="{{ old('rate.daily') }}">
+                    </div>
+
+                    <!-- Weekly Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Weekly Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[weekly]" class="form-control" placeholder="e.g. 600.00" value="{{ old('rate.weekly') }}">
+                    </div>
+
+                    <!-- Monthly Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Monthly Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[monthly]" class="form-control" placeholder="e.g. 2200.00" value="{{ old('rate.monthly') }}">
                     </div>
 
                     <!-- Images -->

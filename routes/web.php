@@ -136,7 +136,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     });
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('/reservations', [DashboardController::class, 'reservations'])->name('reservations');
     /* Routes for hotels */
     Route::get('hotels', [AdminHotelController::class, 'index'])->name('hotels');
     Route::get('hotels/create', [AdminHotelController::class, 'create'])->name('hotels.create');
@@ -145,7 +145,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::get('hotels/{hotel}/edit', [AdminHotelController::class, 'edit'])->name('hotels.edit');
     Route::patch('hotels/{hotel}', [AdminHotelController::class, 'update'])->name('hotels.update');
     Route::delete('hotels/{hotel}', [AdminHotelController::class, 'destroy'])->name('hotels.destroy');
-
     /* Routes for rooms */
 
     Route::controller(RoomController::class)->prefix('rooms')->name('rooms.')->group(function () {

@@ -146,13 +146,13 @@
                     </div>
 
                     <!-- Address -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <label class="form-label">Address</label>
                         <div class="icon-field">
                             <span class="icon">
                                 <iconify-icon icon="mdi:map-marker"></iconify-icon>
                             </span>
-                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" rows="3"
+                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" rows="2"
                                 placeholder="Enter Full Address">{{ old('address') }}</textarea>
                         </div>
                         @error('address')
@@ -161,19 +161,41 @@
                     </div>
 
                     <!-- Description -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <label class="form-label">Description</label>
                         <div class="icon-field">
                             <span class="icon">
                                 <iconify-icon icon="material-symbols:description"></iconify-icon>
                             </span>
-                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="4"
+                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="2"
                                 placeholder="Enter Hotel Description">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                             <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <!-- Services Selection and Charges -->
+                    <div class="col-md-2">
+                        <label class="form-label">Services</label>
+                        <select id="service-select" class="form-control">
+                            <option value="">Select a Service</option>
+                            @foreach ($services as $service)
+                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-10">
+                        <label class="form-label">Selected Services with Charges</label>
+                        <div id="selected-services" class="d-flex flex-wrap gap-2">
+                            <!-- Service badges with charge input will appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Hidden input container for submitting -->
+                    <div id="service-inputs"></div>
+
 
                     <!-- Images -->
                     <div class="col-12">
@@ -191,16 +213,8 @@
                         @enderror
                     </div>
 
-                    <!-- Active Status -->
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="active" value="1"
-                                id="active" {{ old('active', true) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="active">
-                                Active Hotel
-                            </label>
-                        </div>
-                    </div>
+                    <!-- Active Status Active, hidden input -->
+                    <input type="hidden" name="active" value="1">
 
                     <!-- Submit Buttons -->
                     <div class="col-12">
@@ -217,4 +231,64 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const serviceSelect = document.getElementById('service-select');
+        const selectedServicesDiv = document.getElementById('selected-services');
+        const serviceInputsDiv = document.getElementById('service-inputs');
+        const selectedServices = new Map(); // id => { name, charge }
+
+        serviceSelect.addEventListener('change', function () {
+            const selectedId = this.value;
+            const selectedText = this.options[this.selectedIndex].text;
+
+            if (selectedId && !selectedServices.has(selectedId)) {
+                selectedServices.set(selectedId, { name: selectedText, charge: 0 });
+
+                // Create badge with charge input
+                const wrapper = document.createElement('div');
+                wrapper.className = 'border rounded px-3 py-2 d-flex align-items-center gap-2 bg-light shadow-sm';
+                wrapper.style.borderRadius = '12px';
+                wrapper.id = 'service-wrapper-' + selectedId;
+
+                wrapper.innerHTML = `
+                    <strong>${selectedText}</strong>
+                    <input type="number" step="0.01" min="0" placeholder="Charge"
+                        class="form-control form-control-sm" style="width: 100px;"
+                        oninput="document.getElementById('services-${selectedId}-charge').value = this.value">
+                    <button type="button" class="btn btn-sm btn-danger" title="Remove">
+                        &times;
+                    </button>
+                `;
+
+                // Remove logic
+                wrapper.querySelector('button').addEventListener('click', () => {
+                    selectedServices.delete(selectedId);
+                    wrapper.remove();
+                    document.getElementById('services-' + selectedId + '-id')?.remove();
+                    document.getElementById('services-' + selectedId + '-charge')?.remove();
+                });
+
+                selectedServicesDiv.appendChild(wrapper);
+
+                // Hidden inputs
+                const hiddenIdInput = document.createElement('input');
+                hiddenIdInput.type = 'hidden';
+                hiddenIdInput.name = `services[${selectedId}][id]`;
+                hiddenIdInput.value = selectedId;
+                hiddenIdInput.id = 'services-' + selectedId + '-id';
+
+                const hiddenChargeInput = document.createElement('input');
+                hiddenChargeInput.type = 'hidden';
+                hiddenChargeInput.name = `services[${selectedId}][charge]`;
+                hiddenChargeInput.value = '';
+                hiddenChargeInput.id = 'services-' + selectedId + '-charge';
+
+                serviceInputsDiv.appendChild(hiddenIdInput);
+                serviceInputsDiv.appendChild(hiddenChargeInput);
+            }
+
+            this.value = ''; // reset select
+        });
+    </script>
 @endsection
