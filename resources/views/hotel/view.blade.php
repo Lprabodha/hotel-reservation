@@ -26,7 +26,7 @@
                 @forelse ($allImageUrls as $imageUrl)
                     <div class="room-item">
                         <div class="room-img">
-                            <img src="{{ $imageUrl }}" alt="" width="250px" height="450px">
+                            <img src="{{ $imageUrl }}" alt="" width="350px" height="500px" style="object-fit: cover;">
                         </div>
                     </div>
                 @empty
@@ -136,7 +136,7 @@
                                 allowfullscreen></iframe>
                         </div>
                     </div> --}}
-                    <div class="room-review">
+                    {{-- <div class="room-review">
                         <div class="room-title">
                             <h2>Room Reviews</h2>
                         </div>
@@ -179,7 +179,7 @@
                                     lacus vel facilisis. </p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="blog-sidebar room-sidebar">
@@ -279,41 +279,53 @@
         </div>
     </div>
     <!--End Room-details area-->
-    <section class="">
+    <section class="pt-5">
         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-12">
+                    <div class="wpo-section-title s2 wow fadeInUp" data-wow-duration="1200ms">
+                        <span>// Rooms Available</span>
+                        <h2>Pick the Perfect Room, Make It Yours</h2>
+                    </div>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-card wow fadeInUp" data-wow-duration="1500ms">
-                        <div class="image">
-                            <img src="images/blog/img-1.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>24 SEP 2023</span>
-                                        <span class="date">DATE</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                </ul>
+                @forelse ($hotel->rooms as $room)
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="blog-card wow fadeInUp" data-wow-duration="1500ms">
+                            <div class="image">
+                                <img src="{{Storage::disk('s3')->url($room->images[0])}}" alt="" width="376px" height="240px" style="object-fit: cover;">
                             </div>
-                            <div class="text">
-                                <h2>
-                                    <a href="blog-single.html">Hotels Amidst Nature's Bounty for Nature
-                                        Enthusiasts.</a>
-                                </h2>
-                                <a href="blog-single.html" class="blog-btn">read more</a>
+                            <div class="content">
+                                <div class="top-content">
+                                    <ul>
+                                        <li>
+                                            <span>{{ $room->room_number }}</span>
+                                            <span class="date">NUMBER</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ ucfirst($room->room_type) }}</span>
+                                            <span class="date">TYPE</span>
+                                        </li>
+                                        <li>
+                                            <span>{{ $room->price_per_night }}</span>
+                                            <span class="date">PRICE</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="text">
+                                    <h2>
+                                        <a href="blog-single.html"></a>
+                                    </h2>
+                                    <a href="blog-single.html" class="blog-btn">Book Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    
+                @endforelse
+                
             </div>
         </div>
     </section>
