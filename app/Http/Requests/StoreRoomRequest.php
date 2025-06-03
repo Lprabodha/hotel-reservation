@@ -35,6 +35,11 @@ class StoreRoomRequest extends FormRequest
             'is_available' => 'nullable|boolean',
             'description' => 'nullable|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'rate' => 'nullable|array',
+            'rate.daily' => 'nullable|numeric|min:0',
+            'rate.weekly' => 'nullable|numeric|min:0',
+            'rate.monthly' => 'nullable|numeric|min:0',
+
         ];
     }
 

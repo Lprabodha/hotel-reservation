@@ -7,6 +7,8 @@ use App\Http\Requests\StoreRoomRequest;
 use App\Models\Hotel;
 use App\Models\Room;
 use AWS\CRT\HTTP\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -37,6 +39,7 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
+        DB::beginTransaction();
         try {
             $imagePaths = [];
 
@@ -50,7 +53,7 @@ class RoomController extends Controller
                 }
             }
 
-            Room::create([
+            $room = Room::create([
                 'hotel_id' => $request->hotel_id,
                 'room_number' => $request->room_number,
                 'room_type' => $request->room_type,
@@ -61,10 +64,24 @@ class RoomController extends Controller
                 'images' => $imagePaths,
             ]);
 
-            return redirect()->route('admin.rooms.index')
-                ->with('success', 'Room created successfully!');
+            foreach (['daily', 'weekly', 'monthly'] as $type) {
+                $amount = $request->input("rate.$type");
+                if ($amount !== null) {
+                    DB::table('room_rate')->insert([
+                        'room_id' => $room->id,
+                        'rate_type' => $type,
+                        'amount' => $amount,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('admin.rooms.index')->with('success', 'Room created successfully!');
         } catch (\Exception $e) {
-            logger()->error($e->getMessage());
+            DB::rollBack();
+            Log::error($e->getMessage());
 
             foreach ($imagePaths as $path) {
                 Storage::disk('s3')->delete($path);
@@ -73,6 +90,7 @@ class RoomController extends Controller
             return back()->withInput()->with('error', 'Failed to create room.');
         }
     }
+
 
     /**
      * Display the specified resource.
