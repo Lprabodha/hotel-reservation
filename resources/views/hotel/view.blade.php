@@ -7,9 +7,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wpo-breadcumb-wrap">
-                        <h2>{{$hotel->name}}</h2>
+                        <h2>{{ $hotel->name }}</h2>
                         <ul>
-                            <li><a href="{{route('home')}}">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><span>Hotel</span></li>
                         </ul>
                     </div>
@@ -23,38 +23,22 @@
     <div class="wpo-room-area-s2 section-padding pb-0">
         <div class="container-fluid">
             <div class="room-wrap room-active owl-carousel">
-                <div class="room-item">
-                    <div class="room-img">
-                        <img src="{{asset('images/room/1.jpg')}}" alt="">
+                @forelse ($allImageUrls as $imageUrl)
+                    <div class="room-item">
+                        <div class="room-img">
+                            <img src="{{ $imageUrl }}" alt="" width="250px" height="450px">
+                        </div>
                     </div>
-                </div>
-                <div class="room-item">
-                    <div class="room-img">
-                        <img src="{{asset('images/room/2.jpg')}}" alt="">
-                    </div>
-                </div>
-                <div class="room-item">
-                    <div class="room-img">
-                        <img src="{{asset('images/room/3.jpg')}}" alt="">
-                    </div>
-                </div>
-                <div class="room-item">
-                    <div class="room-img">
-                        <img src="{{asset('images/room/4.jpg')}}" alt="">
-                    </div>
-                </div>
-                <div class="room-item">
-                    <div class="room-img">
-                        <img src="{{asset('images/room/5.jpg')}}" alt="">
-                    </div>
-                </div>
+                @empty
+                    <div>No Images Available</div>
+                @endforelse
             </div>
         </div>
     </div>
     <!-- .room-area-start -->
 
     <!--Start Room-details area-->
-    <div class="Room-details-area section-padding">
+    <div class="Room-details-area section-padding pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-12">
@@ -62,19 +46,7 @@
                         <div class="room-title">
                             <h2>Description</h2>
                         </div>
-                        <p class="p-wrap">It's difficult to find examples of lorem ipsum in use before Letraset made
-                            it popular as a dummy text in the 1960s, although McClintock says he remembers coming
-                            across the lorem ipsum passage in a book of old metal type samples.</p>
-                        <p>So when is it okay to use lorem ipsum? First, lorem ipsum works well for staging. It's
-                            like the props in a furniture store—filler text makes it look like someone is home. The
-                            same Wordpress template might eventually be home to a fitness blog, a photography
-                            website, or the online journal of a cupcake fanatic. Lorem ipsum helps them imagine what
-                            the lived-in website might look like.</p>
-                        <p>Second, use lorem ipsum if you think the placeholder text will be too distracting. For
-                            specific projects, collaboration between copywriters and designers may be best, however,
-                            like Karen McGrane said, draft copy has a way of turning any meeting about layout
-                            decisions into a discussion about word choice. So don't be afraid to use lorem ipsum to
-                            keep everyone focused.</p>
+                        <p class="p-wrap">{{ $hotel->description }}</p>
                     </div>
                     <div class="room-details-service">
                         <div class="row">
@@ -98,27 +70,28 @@
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{asset('images/room/img-7.jpg')}}" alt="">
+                                            <img src="{{ $hotelsImagesUrls[0] }}" alt="" width="529px"
+                                                height="406px">
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{asset('images/room/img-8.jpg')}}" alt="">
+                                            <img src="{{ $roomsImagesUrls[0] }}" alt="" width="529px"
+                                                height="406px">
                                         </div>
                                     </div>
+                                    {{-- @dd($hotel) --}}
                                     <div class="col-md-5 col-sm-5">
                                         <div class="room-d-text2">
                                             <div class="room-title">
                                                 <h2>Room Services</h2>
                                             </div>
                                             <ul>
-                                                <li><a href="#">Daily Cleaning</a></li>
-                                                <li><a href="#">Special Swimming Pool</a></li>
-                                                <li><a href="#">Free Parking</a></li>
-                                                <li><a href="#">Free-to-use smartphone </a></li>
-                                                <li><a href="#">Free Wifi</a></li>
-                                                <li><a href="#">2 Elevator Available</a></li>
-                                                <li><a href="#">Room Side Belcony</a></li>
+                                                @forelse ($hotel->services as $service)
+                                                    <li><a href="#">{{ $service->name }}</a></li>
+                                                @empty
+                                                    <li>No services with this hotel</li>
+                                                @endforelse
                                             </ul>
                                         </div>
                                     </div>
@@ -126,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pricing-area">
+                    {{-- <div class="pricing-area">
                         <div class="room-title">
                             <h2>Pricing Plans</h2>
                         </div>
@@ -162,14 +135,14 @@
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.9147703055!2d-74.11976314309273!3d40.69740344223377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbd!4v1547528325671"
                                 allowfullscreen></iframe>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="room-review">
                         <div class="room-title">
                             <h2>Room Reviews</h2>
                         </div>
                         <div class="review-item">
                             <div class="review-img">
-                                <img src="{{asset('images/room/r1.jpg')}}" alt="">
+                                <img src="{{ asset('images/room/r1.jpg') }}" alt="">
                             </div>
                             <div class="review-text">
                                 <div class="r-title">
@@ -189,7 +162,7 @@
                         </div>
                         <div class="review-item">
                             <div class="review-img">
-                                <img src="{{asset('images/room/r2.jpg')}}" alt="">
+                                <img src="{{ asset('images/room/r2.jpg') }}" alt="">
                             </div>
                             <div class="review-text">
                                 <div class="r-title">
@@ -246,7 +219,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="widget recent-post-widget">
+                        {{-- <div class="widget recent-post-widget">
                             <h3>Related Posts</h3>
                             <div class="posts">
                                 <div class="post">
@@ -279,30 +252,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="widget wpo-instagram-widget">
                             <div class="widget-title">
                                 <h3>Discover Our Rooms</h3>
                             </div>
                             <ul class="d-flex">
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/1.jpg')}}"
-                                            alt=""></a>
-                                </li>
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/2.jpg')}}"
-                                            alt=""></a>
-                                </li>
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/3.jpg')}}"
-                                            alt=""></a>
-                                </li>
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/4.jpg')}}"
-                                            alt=""></a>
-                                </li>
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/5.jpg')}}"
-                                            alt=""></a>
-                                </li>
-                                <li><a href="hotel-single.html"><img src="{{asset('images/instragram/6.jpg')}}"
-                                            alt=""></a>
-                                </li>
+                                @forelse ($roomsImagesUrls as $roomImageUrl)
+                                    <li><a href="hotel-single.html"><img src="{{ $roomImageUrl }}" alt=""></a>
+                                    </li>
+                                @empty
+                                    <li><a href="hotel-single.html"><img src="{{ asset('images/instragram/1.jpg') }}"
+                                                alt=""></a></li>
+                                @endforelse
                             </ul>
                         </div>
                         <div class="wpo-contact-widget widget">
@@ -317,5 +279,42 @@
         </div>
     </div>
     <!--End Room-details area-->
-
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="blog-card wow fadeInUp" data-wow-duration="1500ms">
+                        <div class="image">
+                            <img src="images/blog/img-1.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <div class="top-content">
+                                <ul>
+                                    <li>
+                                        <span>24 SEP 2023</span>
+                                        <span class="date">DATE</span>
+                                    </li>
+                                    <li>
+                                        <span>02K</span>
+                                        <span class="date">Comment</span>
+                                    </li>
+                                    <li>
+                                        <span>02K</span>
+                                        <span class="date">Comment</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="text">
+                                <h2>
+                                    <a href="blog-single.html">Hotels Amidst Nature's Bounty for Nature
+                                        Enthusiasts.</a>
+                                </h2>
+                                <a href="blog-single.html" class="blog-btn">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

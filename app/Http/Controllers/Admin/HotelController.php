@@ -37,7 +37,6 @@ class HotelController extends Controller
      */
     public function store(StoreHotelRequest $request)
     {
-        Log::info($request->all());
         try {
             $imagesPaths = [];
             if ($request->hasFile('images')) {

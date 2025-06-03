@@ -395,8 +395,11 @@
                     </div>
                 </div>
             </div>
+            @php
+                $limitedHotels = $hotels->take(8);
+            @endphp
             <div class="gallery-container gallery-fancybox masonry-gallery row">
-                @forelse ($hotels as $hotel)
+                @forelse ($limitedHotels as $hotel)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-12 custom-grid all new_york zoomIn"
                         data-wow-duration="2000ms">
                         <div class="featured-card">
