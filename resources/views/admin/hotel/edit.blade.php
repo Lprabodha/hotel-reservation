@@ -126,12 +126,12 @@
                     </div>
 
                     <!-- Address -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <label class="form-label">Address</label>
                         <div class="icon-field">
                             <span class="icon"><iconify-icon icon="mdi:map-marker"></iconify-icon></span>
                             <textarea name="address" class="form-control @error('address') is-invalid @enderror"
-                                      rows="3">{{ old('address', $hotel->address) }}</textarea>
+                                      rows="2">{{ old('address', $hotel->address) }}</textarea>
                         </div>
                         @error('address')
                         <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
@@ -139,17 +139,51 @@
                     </div>
 
                     <!-- Description -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <label class="form-label">Description</label>
                         <div class="icon-field">
                             <span class="icon"><iconify-icon icon="material-symbols:description"></iconify-icon></span>
                             <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                                      rows="4">{{ old('description', $hotel->description) }}</textarea>
+                                      rows="2">{{ old('description', $hotel->description) }}</textarea>
                         </div>
                         @error('description')
                         <div style="color: red; font-size: 10px; padding-top: 3px;">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <!-- Services -->
+                    <div class="col-12">
+                        <label class="form-label">Services</label>
+                        <div class="row">
+                            @foreach($services as $service)
+                                @php
+                                    $assigned = $hotel->services->firstWhere('id', $service->id);
+                                @endphp
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input class="form-check-input me-2"
+                                                type="checkbox"
+                                                name="services[{{ $service->id }}][id]"
+                                                value="{{ $service->id }}"
+                                                {{ $assigned ? 'checked' : '' }}>
+                                            <label class="form-check-label ms-2">
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                        <input type="number"
+                                            step="0.01"
+                                            name="services[{{ $service->id }}][charge]"
+                                            class="form-control me-5"
+                                            style="width: 150px"
+                                            placeholder="Charge"
+                                            value="{{ old("services.{$service->id}.charge", $assigned ? $assigned->pivot->charge : '') }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
 
                     <!-- Current Images -->
                     @if ($hotel->images && is_array($hotel->images))
@@ -176,7 +210,7 @@
 
                     <!-- Active Status -->
                     <div class="col-12">
-                        <div class="form-check">
+                        <div class="form-check d-flex align-items-center gap-3">
                             <input class="form-check-input" type="checkbox" name="active" value="1"
                                    id="active" {{ old('active', $hotel->active) ? 'checked' : '' }}>
                             <label class="form-check-label" for="active">Active Hotel</label>

@@ -35,4 +35,9 @@ class Room extends Model
     {
         return $this->belongsTo(Hotel::class);
     }
+
+    public function rates()
+    {
+        return $this->hasMany(RoomRate::class);
+    }
 }

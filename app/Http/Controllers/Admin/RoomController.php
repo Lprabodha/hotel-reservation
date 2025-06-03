@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomRequest;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\RoomRate;
 use AWS\CRT\HTTP\Request;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -67,7 +69,7 @@ class RoomController extends Controller
             foreach (['daily', 'weekly', 'monthly'] as $type) {
                 $amount = $request->input("rate.$type");
                 if ($amount !== null) {
-                    DB::table('room_rate')->insert([
+                    RoomRate::insert([
                         'room_id' => $room->id,
                         'rate_type' => $type,
                         'amount' => $amount,
@@ -78,6 +80,8 @@ class RoomController extends Controller
             }
 
             DB::commit();
+            ToastMagic::success('Room added successfully!');
+
             return redirect()->route('admin.rooms.index')->with('success', 'Room created successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -110,6 +114,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
+        $room->load('rates');
         $hotels = Hotel::all();
         return view('admin.room.edit', compact('room', 'hotels'));
     }
@@ -117,8 +122,10 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(StoreRoomRequest $request, Room $room)
     {
+        DB::beginTransaction();
         try {
             $imagePaths = $room->images ?? [];
 
@@ -143,12 +150,26 @@ class RoomController extends Controller
                 'images' => $imagePaths,
             ]);
 
+            foreach (['daily', 'weekly', 'monthly'] as $type) {
+                $amount = $request->input("rate.$type");
+
+                RoomRate::updateOrInsert(
+                    ['room_id' => $room->id, 'rate_type' => $type],
+                    ['amount' => $amount, 'updated_at' => now(), 'created_at' => now()]
+                );
+            }
+
+            DB::commit();
+            ToastMagic::success('Room updated successfully!');
+            
             return redirect()->route('admin.rooms.index')->with('success', 'Room updated successfully!');
         } catch (\Exception $e) {
+            DB::rollBack();
             logger()->error($e->getMessage());
             return back()->withInput()->with('error', 'Failed to update room.');
         }
     }
+
 
     public function getRooms(Request $request)
     {
@@ -244,6 +265,8 @@ class RoomController extends Controller
         }
 
         $room->delete();
+
+        ToastMagic::success('Room deleted successfully!');
 
         return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully.');
     }

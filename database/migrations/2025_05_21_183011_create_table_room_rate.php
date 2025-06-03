@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_rate', function (Blueprint $table) {
+        Schema::create('room_rates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->enum('rate_type', ['daily', 'weekly', 'monthly']);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_rate');
+        Schema::dropIfExists('room_rates');
     }
 };

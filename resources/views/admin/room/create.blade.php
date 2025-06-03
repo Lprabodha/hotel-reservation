@@ -134,7 +134,7 @@
                     </div>
 
                     <!-- Hidden input for set the Availability -->
-                    <input class="form-check-input" type="hidden" name="is_available" value="1" id="is_available">
+                    <input type="hidden" name="is_available" value="1" id="is_available">
 
                     <!-- Submit Buttons -->
                     <div class="col-12">

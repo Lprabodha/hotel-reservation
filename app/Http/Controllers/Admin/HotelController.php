@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHotelRequest;
 use App\Models\Hotel;
 use App\Models\Service;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -93,6 +94,7 @@ class HotelController extends Controller
                 $hotel->services()->attach($attachData);
             }
 
+            ToastMagic::success('Hotel added successfully!');
             return redirect()
                 ->route('admin.hotels')
                 ->with('success', 'Hotel created successfully!');
@@ -130,7 +132,10 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        return view('admin.hotel.edit', compact('hotel'));
+        $services = Service::all();
+        $hotel->load('services');
+
+        return view('admin.hotel.edit', compact('hotel', 'services'));
     }
 
     /**
@@ -188,6 +193,17 @@ class HotelController extends Controller
                 'active' => $request->active ?? false,
             ]);
 
+            $services = [];
+            if ($request->has('services')) {
+                foreach ($request->services as $service) {
+                    if (!empty($service['id'])) {
+                        $services[$service['id']] = ['charge' => $service['charge']];
+                    }
+                }
+            }
+            $hotel->services()->sync($services);
+
+            ToastMagic::success('Hotel updated successfully!');
             return redirect()->route('admin.hotels')->with('success', 'Hotel updated successfully!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -209,6 +225,7 @@ class HotelController extends Controller
         $hotel->delete();
         $hotel->users()->detach();
 
+        ToastMagic::success('Hotel deleted successfully!');
         return redirect()->route('admin.hotels')->with('success', 'Hotel deleted successfully.');
     }
 

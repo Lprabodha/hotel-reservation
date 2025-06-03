@@ -35,7 +35,7 @@
 
     @vite(['resources/sass/admin/main.scss'])
 
-
+    {!! ToastMagic::styles() !!}
 </head>
 
 <body>
@@ -70,6 +70,7 @@
     @vite(['resources/js/admin/app.js'])
     @yield('scripts')
 
+    {!! ToastMagic::scripts() !!}
 </body>
 
 </html>

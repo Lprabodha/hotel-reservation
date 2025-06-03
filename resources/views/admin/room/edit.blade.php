@@ -78,7 +78,7 @@
                     </div>
 
                     <!-- Price Per Night -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label">Price Per Night ($) <span class="text-danger">*</span></label>
                         <div class="icon-field">
                             <span class="icon"><iconify-icon icon="mdi:currency-usd"></iconify-icon></span>
@@ -90,6 +90,31 @@
                             <div class="text-danger small">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <!-- Daily Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Daily Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[daily]" class="form-control"
+                            placeholder="e.g. 100.00"
+                            value="{{ old('rate.daily', optional($room->rates->where('rate_type', 'daily')->first())->amount) }}">
+                    </div>
+
+                    <!-- Weekly Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Weekly Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[weekly]" class="form-control"
+                            placeholder="e.g. 600.00"
+                            value="{{ old('rate.weekly', optional($room->rates->where('rate_type', 'weekly')->first())->amount) }}">
+                    </div>
+
+                    <!-- Monthly Rate -->
+                    <div class="col-md-4">
+                        <label class="form-label">Monthly Rate ($)</label>
+                        <input type="number" step="0.01" name="rate[monthly]" class="form-control"
+                            placeholder="e.g. 2200.00"
+                            value="{{ old('rate.monthly', optional($room->rates->where('rate_type', 'monthly')->first())->amount) }}">
+                    </div>
+
 
                     @if ($room->images && is_array($room->images))
                         <div class="col-12">
