@@ -28,6 +28,7 @@ class HotelController extends Controller
     public function create()
     {
         $services = Service::all();
+
         return view('admin.hotel.create', compact('services'));
     }
 
@@ -85,7 +86,7 @@ class HotelController extends Controller
 
                 $attachData = [];
                 foreach ($services as $service) {
-                    if (!empty($service['id']) && isset($service['charge'])) {
+                    if (! empty($service['id']) && isset($service['charge'])) {
                         $attachData[$service['id']] = ['charge' => $service['charge']];
                     }
                 }
@@ -148,7 +149,7 @@ class HotelController extends Controller
 
                 $imagesPaths = [];
                 foreach ($request->file('images') as $image) {
-                    $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                    $filename = Str::uuid().'.'.$image->getClientOriginalExtension();
                     $path = Storage::disk('s3')->putFileAs(
                         'hotels',
                         $image,
@@ -156,7 +157,7 @@ class HotelController extends Controller
                         'public'
                     );
                     if ($path) {
-                        $imagesPaths[] = 'hotels/' . $filename;
+                        $imagesPaths[] = 'hotels/'.$filename;
                     }
                 }
             }
@@ -167,7 +168,7 @@ class HotelController extends Controller
                 $originalSlug = $slug;
                 $counter = 1;
                 while (Hotel::where('slug', $slug)->where('id', '!=', $hotel->id)->exists()) {
-                    $slug = $originalSlug . '-' . $counter;
+                    $slug = $originalSlug.'-'.$counter;
                     $counter++;
                 }
             }
@@ -191,6 +192,7 @@ class HotelController extends Controller
             return redirect()->route('admin.hotels')->with('success', 'Hotel updated successfully!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to update hotel. Please try again.');
         }
     }
