@@ -26,11 +26,13 @@
                 @forelse ($allImageUrls as $imageUrl)
                     <div class="room-item">
                         <div class="room-img">
-                            <img src="{{ $imageUrl }}" alt="" width="350px" height="500px" style="object-fit: cover;">
+                            <img src="{{ $imageUrl }}" alt="" width="350px" height="500px"
+                                style="object-fit: cover;">
                         </div>
                     </div>
                 @empty
-                    <div>No Images Available</div>
+                    <img src="{{ Vite::asset('resources/images/default-hotel.webp') }}" alt="" width="350px" height="500px"
+                                style="object-fit: cover;">
                 @endforelse
             </div>
         </div>
@@ -70,13 +72,13 @@
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{ $hotelsImagesUrls[0] }}" alt="" width="529px"
+                                            <img src="{{ $hotelsImagesUrls[0] ?? Vite::asset('resources/images/default-hotel.webp') }}" alt="" width="529px"
                                                 height="406px">
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{ $roomsImagesUrls[0] }}" alt="" width="529px"
+                                            <img src="{{ $roomsImagesUrls[0] ?? Vite::asset('resources/images/default-room.jpg') }}" alt="" width="529px"
                                                 height="406px">
                                         </div>
                                     </div>
@@ -259,11 +261,9 @@
                             </div>
                             <ul class="d-flex">
                                 @forelse ($roomsImagesUrls as $roomImageUrl)
-                                    <li><a href="hotel-single.html"><img src="{{ $roomImageUrl }}" alt=""></a>
-                                    </li>
+                                    <li><a href="#"><img src="{{ $roomImageUrl }}" alt="" width="117px" height="100px"></a></li>
                                 @empty
-                                    <li><a href="hotel-single.html"><img src="{{ asset('images/instragram/1.jpg') }}"
-                                                alt=""></a></li>
+                                    <li><a href="#"><img src="{{ Vite::asset('resources/images/default-room.jpg') }}" alt=""  width="117px" height="100px"></a></li>
                                 @endforelse
                             </ul>
                         </div>
@@ -294,7 +294,8 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="blog-card wow fadeInUp" data-wow-duration="1500ms">
                             <div class="image">
-                                <img src="{{Storage::disk('s3')->url($room->images[0])}}" alt="" width="376px" height="240px" style="object-fit: cover;">
+                                <img src="{{ $room->images && count($room->images) > 0 ? Storage::disk('s3')->url($room->images[0]) : Vite::asset('resources/images/default-room.jpg') }}"
+                                    alt="" width="376px" height="240px" style="object-fit: cover;">
                             </div>
                             <div class="content">
                                 <div class="top-content">
@@ -313,19 +314,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="text">
-                                    <h2>
-                                        <a href="blog-single.html"></a>
-                                    </h2>
-                                    <a href="blog-single.html" class="blog-btn">Book Now</a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 @empty
-                    
+                    <div>No Rooms Available at this moment to show...</div>
                 @endforelse
-                
+
             </div>
         </div>
     </section>
