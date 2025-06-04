@@ -158,6 +158,10 @@
             background: linear-gradient(to right, #e67e22, #f39c12);
         }
 
+        input[type=checkbox] + label:before {
+            margin-left: 395px;
+        }
+
         /* Mobile adjustments */
         @media (max-width: 768px) {
 
@@ -244,7 +248,7 @@
                                         alt="No image">
                                 @endif
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Room {{ $room->room_number }} - {{ ucfirst($room->room_type) }}
                                     </h5>
