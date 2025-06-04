@@ -122,7 +122,96 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request) {}
+    public function show(Request $request)
+    {
+        $columns = [
+            0 => 'id',
+            1 => 'guest_email',
+            2 => 'hotel_name',
+            3 => 'reservation_date',
+            4 => 'status',
+            5 => 'action',
+        ];
+
+        $user = auth()->user();
+        $hotel = $user->hotels()->first();
+
+        $query = Reservation::query();
+
+        if (auth()->user()->roles()->pluck('name') !== 'super-admin') {
+            $query->where('hotel_id', $hotel->id);
+        }
+
+        $totalData = $query->count();
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        if (empty($request->input('search.value'))) {
+            $reservations = $query->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+            $totalFiltered = $totalData;
+        } else {
+            $search = $request->input('search.value');
+
+            $reservations = $query->where(function ($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                    ->orWhere('confirmation_number', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('payment_status', 'like', "%{$search}%");
+            })
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+
+            $totalFiltered = $query->where(function ($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                    ->orWhere('confirmation_number', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('payment_status', 'like', "%{$search}%");
+            })
+                ->count();
+        }
+
+        $data = [];
+
+        if ($reservations) {
+            foreach ($reservations as $r) {
+                $nestedData['id'] = $r->id;
+                $nestedData['guest_email'] = $r->user->email ?? 'N/A';
+                $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
+                $nestedData['reservation_date'] = $r->check_in_date;
+                $nestedData['status'] = match ($r->status) {
+                    'booked' => '<span class="badge bg-success">Booked</span>',
+                    'cancelled' => '<span class="badge bg-danger">Cancelled</span>',
+                    'no_show' => '<span class="badge bg-warning">No Show</span>',
+                    'checked_in' => '<span class="badge bg-primary">Checked In</span>',
+                    'checked_out' => '<span class="badge bg-secondary">Checked Out</span>',
+                    default => '<span class="badge bg-light">Unknown</span>',
+                };
+                $nestedData['action'] = '
+                    <a href="#" class="btn btn-outline-primary-600 radius-8 px-20 py-11">View</a>
+                    <a href="#" class="btn btn-outline-lilac-600 radius-8 px-20 py-11">Edit</a>
+                    <button onclick="deleteReservation(' . $r->id . ')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
+                ';
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data,
+        ];
+
+        return response()->json($json_data);
+    }
 
     /**
      * Show the form for editing the specified resource.

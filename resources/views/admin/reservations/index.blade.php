@@ -53,8 +53,6 @@
                             <th>ID</th>
                             <th>Guest Email</th>
                             <th>Hotel</th>
-                            <th>Room</th>
-                            <th>Type</th>
                             <th>Reservation Date</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -100,17 +98,7 @@
                     "orderable": true
                 },
                 {
-                    "data": "room_number",
-                    "searchable": true,
-                    "orderable": true
-                },
-                {
                     "data": "reservation_date",
-                    "searchable": true,
-                    "orderable": true
-                },
-                {
-                    "data": "type",
                     "searchable": true,
                     "orderable": true
                 },
