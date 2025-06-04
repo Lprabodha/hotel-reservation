@@ -45,7 +45,10 @@ class ReservationController extends Controller
         $reservations = Reservation::where('hotel_id', $hotel->id)->get();
 
         foreach ($reservations as $reservation) {
-            $period = CarbonPeriod::create($reservation->check_in_date, $reservation->check_out_date->subDay());
+            $period = CarbonPeriod::create(
+                Carbon::parse($reservation->check_in_date),
+                Carbon::parse($reservation->check_out_date)->subDay()
+            );
             foreach ($period as $date) {
                 $bookedDates[] = $date->format('Y-m-d');
             }
@@ -58,6 +61,7 @@ class ReservationController extends Controller
             'rooms' => $hotel->rooms,
             'bookedDates' => $bookedDates,
         ]);
+
     }
 
     /**
