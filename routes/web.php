@@ -136,7 +136,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
         });
     });
 
-
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/room-filter', [AdminDashboardController::class, 'fetchRooms'])->name('room-filter');
     Route::get('/get-customers', [AdminDashboardController::class, 'getCustomers'])->name('customers.list');

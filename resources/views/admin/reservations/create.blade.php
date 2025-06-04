@@ -65,7 +65,8 @@
             </div>
             <div class="card-body">
                 <div class="form-wizard">
-                    <form action="{{ route('admin.reservation.store') }}" method="post">
+                    <form action="{{ route('admin.reservation.store') }}" method="POST">
+                        @csrf
                         <div class="form-wizard-header overflow-x-auto scroll-sm pb-8 my-32">
                             <ul class="list-unstyled form-wizard-list d-flex gap-4">
                                 <li class="form-wizard-list__item active">
@@ -84,12 +85,6 @@
                                     <div class="form-wizard-list__line">
                                         <span class="count">3</span>
                                     </div>
-                                    <span class="text text-xs fw-semibold">Summary</span>
-                                </li>
-                                <li class="form-wizard-list__item">
-                                    <div class="form-wizard-list__line">
-                                        <span class="count">4</span>
-                                    </div>
                                     <span class="text text-xs fw-semibold">Completed</span>
                                 </li>
                             </ul>
@@ -101,19 +96,19 @@
                                 <div class="col-md-3">
                                     <label for="checkin" class="form-label">Check-In Date</label>
                                     <input type="date" id="checkin" value="{{ request('checkin') }}"
-                                        class="form-control wizard-required" required>
+                                        class="form-control wizard-required">
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="checkout" class="form-label">Check-Out Date</label>
                                     <input type="date" id="checkout" value="{{ request('checkout') }}"
-                                        class="form-control wizard-required" required>
+                                        class="form-control wizard-required">
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="guests" class="form-label">Guests</label>
                                     <input type="number" id="guests" class="form-control wizard-required"
-                                        placeholder="Number of Guests" required min="1" max="50" required>
+                                        placeholder="Number of Guests" required min="1" max="50">
                                 </div>
 
                                 <div class="col-md-3 d-flex align-items-end">
@@ -137,7 +132,7 @@
 
                                                         <div class="room-checkbox">
                                                             <input type="checkbox" id="room1" name="rooms[]"
-                                                                value="101" class="form-check-input">
+                                                                value="{{ $room->id }}" class="form-check-input">
                                                         </div>
                                                     </div>
                                                     <p class="card-text text-muted mb-2">Room Type: {{ $room->room_type }}
@@ -169,7 +164,7 @@
                             <div class="row gy-3">
                                 <div class="col-3">
                                     <label class="form-label">Customer Type * </label>
-                                    <select id="customerType" class="form-control" required>
+                                    <select id="customerType" class="form-control" name="customer_type">
                                         <option value="">-- Select --</option>
                                         <option value="individual">Individual Customer</option>
                                         <option value="travel_agency">Travel Agency</option>
@@ -177,26 +172,26 @@
                                 </div>
                                 <div class="col-3 d-none" id="customerEmailDiv">
                                     <label class="form-label">Select Customer Email*</label>
-                                    <select id="customerEmail" class="form-select ">
+                                    <select id="customerEmail" class="form-select" name="customer_email">
                                         <option value="">-- Select Customer --</option>
                                     </select>
                                 </div>
 
                                 <div class="col-3 d-none" id="travelAgencyDiv">
                                     <label class="form-label">Select Travel Agency*</label>
-                                    <select id="travelAgency" class="form-select ">
+                                    <select id="travelAgency" class="form-select" name="travel_agency">
                                         <option value="">-- Select Travel Agency --</option>
                                     </select>
                                 </div>
                                 <div class="col-3">
                                     <label class="form-label">Check In Date*</label>
                                     <input type="text" id="check_in_date" name="check_in_date" readonly
-                                        class="form-control wizard-required" required>
+                                        class="form-control wizard-required">
                                 </div>
                                 <div class="col-3">
                                     <label class="form-label">Check Out Date*</label>
                                     <input type="text" name="check_out_date" id="check_out_date" readonly
-                                        class="form-control wizard-required" required>
+                                        class="form-control wizard-required">
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">Special Requests</label>
@@ -205,20 +200,21 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">Card Number</label>
-                                    <input type="number" class="form-control wizard-required"
-                                        placeholder="Enter Card Number" name="card_number" required>
+                                    <input type="text" inputmode="numeric" maxlength="12"
+                                        class="form-control wizard-required" placeholder="Enter Card Number"
+                                        name="card_number">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">Card Expiration(MM/YY)</label>
-                                    <input type="text" class="form-control wizard-required"
-                                        placeholder="Enter Card Expiration" name="card_expire_date" required>
+                                    <input type="text" maxlength="6" class="form-control wizard-required"
+                                        placeholder="MM/YY" name="card_expire_date">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">CVV Number</label>
-                                    <input type="number" class="form-control wizard-required"name="csv"
-                                        placeholder="CVV Number" required>
+                                    <input type="number" maxlength="5" class="form-control wizard-required"name="csv"
+                                        placeholder="CVV Number">
                                 </div>
-                                <div class="form-group d-flex justify-content-end gap-3 mt-4">
+                                <div class="form-group d-flex justify-content-end gap-3 mt-5">
                                     <button type="button"
                                         class="form-wizard-previous-btn btn btn-secondary px-5">Back</button>
                                     <button type="button" class="form-wizard-next-btn btn btn-primary px-5">Next</button>
@@ -226,53 +222,18 @@
                             </div>
                         </fieldset>
 
-                        <!-- Step 4 -->
-                        <!-- Step 3: Reservation Summary -->
                         <fieldset class="wizard-fieldset">
                             <div class="text-center mb-4">
-                                <h6 class="text-md text-primary">Reservation Summary</h6>
-                            </div>
-                            <div class="row gy-3">
-                                <div class="col-6">
-                                    <label class="form-label">Customer / Company Name</label>
-                                    <input type="text" id="summaryCustomer" class="form-control" readonly>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">Guests</label>
-                                    <input type="text" id="summaryGuests" class="form-control" readonly>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">Check-In Date</label>
-                                    <input type="text" id="summaryCheckin" class="form-control" readonly>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label">Check-Out Date</label>
-                                    <input type="text" id="summaryCheckout" class="form-control" readonly>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Selected Rooms</label>
-                                    <textarea id="summaryRooms" class="form-control" rows="3" readonly></textarea>
-                                </div>
-                            </div>
+                                <h6 class="text-md text-success">Reservation Added</h6>
+                                <p class="text-muted mb-0">The reservation has been successfully added to the system. You
+                                    can now manage or edit the booking if necessary.</p>
 
-                            <div class="form-group d-flex justify-content-end gap-3 mt-4">
+                            </div>
+                            <div class="form-group d-flex justify-content-end gap-3 mt-5">
                                 <button type="button"
                                     class="form-wizard-previous-btn btn btn-secondary px-5">Back</button>
-                                <button type="button" class="form-wizard-next-btn btn btn-primary px-5">Next</button>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="wizard-fieldset">
-                            <div class="text-center mb-4">
-                                <img src="assets/images/gif/success-img3.gif" alt="Success" class="mb-3"
-                                    style="width: 120px;">
-                                <h6 class="text-md text-success">Congratulations</h6>
-                                <p class="text-muted mb-0">Well done! You have successfully completed.</p>
-                            </div>
-                            <div class="form-group d-flex justify-content-end gap-3 mt-4">
-                                <button type="button"
-                                    class="form-wizard-previous-btn btn btn-secondary px-5">Back</button>
-                                <button type="submit" class="form-wizard-submit btn btn-success px-5">Submit
+                                <button type="submit" onclick="makeReservation()"
+                                    class="form-wizard-submit btn btn-success px-5">Submit
                                     Reservation</button>
                             </div>
                         </fieldset>
@@ -309,7 +270,7 @@
             const travelAgencySelect = document.getElementById('travelAgency');
 
             const cardNumberInput = document.querySelector('input[placeholder="Enter Card Number"]');
-            const cardExpirationInput = document.querySelector('input[placeholder="Enter Card Expiration"]');
+            const cardExpirationInput = document.querySelector('input[placeholder="MM/YY"]');
             const cvvInput = document.querySelector('input[placeholder="CVV Number"]');
 
             function showStep(index) {
@@ -320,17 +281,27 @@
 
             function isCardDetailsRequired(checkinDate) {
                 const now = new Date();
-                const currentHour = now.getHours();
 
                 const today7pm = new Date();
-                today7pm.setHours(19, 0, 0, 0); // Set to 7:00 PM today
+                today7pm.setHours(19, 0, 0, 0);
+
+                const tomorrow7pm = new Date(today7pm);
+                tomorrow7pm.setDate(today7pm.getDate() + 1);
 
                 const checkin = new Date(checkinDate);
 
-                // If current time is after 7PM OR Check-in is for tomorrow or future
-                if (now >= today7pm || checkin.toDateString() !== now.toDateString()) {
+                const nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const checkinDateOnly = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate());
+
+                const oneDay = 24 * 60 * 60 * 1000;
+                const diffDays = Math.round((checkinDateOnly - nowDate) / oneDay);
+
+                const isBetween7PMTodayAnd7PMTomorrow = now >= today7pm && now < tomorrow7pm;
+
+                if (isBetween7PMTodayAnd7PMTomorrow && diffDays === 1) {
                     return true;
                 }
+
                 return false;
             }
 
@@ -403,7 +374,6 @@
                             return;
                         }
 
-                        // ✅ Check if card details are required
                         if (isCardDetailsRequired(checkinDate)) {
                             if (!cardNumberInput.value || !cardExpirationInput.value || !cvvInput
                                 .value) {
@@ -542,6 +512,9 @@
             });
         });
 
+        document.querySelector('input[name="card_number"]').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 12); // Only digits, max 12
+        });
 
         $(document).ready(function() {
             $('#customerType').on('change', function() {
@@ -583,5 +556,70 @@
                 }
             });
         });
+
+
+        function makeReservation() {
+            const formData = new FormData();
+
+            const selectedRooms = Array.from(document.querySelectorAll('input[name="rooms[]"]:checked'))
+                .map(room => room.value);
+
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+
+            const customerType = document.getElementById('customerType').value;
+            const customerEmail = document.getElementById('customerEmail').value;
+            const travelAgency = document.getElementById('travelAgency').value;
+            const check_in_date = document.getElementById('check_in_date').value;
+            const check_out_date = document.getElementById('check_out_date').value;
+            const specialRequests = document.querySelector('textarea[name="special_requests"]').value;
+
+            const cardNumber = document.querySelector('input[name="card_number"]').value;
+            const cardExpireDate = document.querySelector('input[name="card_expire_date"]').value;
+            const csv = document.querySelector('input[name="csv"]').value;
+
+            formData.append('checkin', checkin);
+            formData.append('checkout', checkout);
+            formData.append('guests', guests);
+            formData.append('customer_type', customerType);
+            formData.append('customer_email', customerEmail);
+            formData.append('travel_agency', travelAgency);
+            formData.append('check_in_date', check_in_date);
+            formData.append('check_out_date', check_out_date);
+            formData.append('special_requests', specialRequests);
+            formData.append('card_number', cardNumber);
+            formData.append('card_expire_date', cardExpireDate);
+            formData.append('csv', csv);
+
+            selectedRooms.forEach((roomId, index) => {
+                formData.append(`rooms[${index}]`, roomId);
+            });
+
+            const toast = new ToastMagic();
+
+            fetch("{{ route('admin.reservation.store') }}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong');
+                    }
+                })
+                .then(data => {
+                    toast.success("Success!", "Reservation Created Successfully!");
+                    window.location.href =
+                        "{{ route('admin.reservation.index') }}";
+                })
+                .catch(error => {
+                    toast.success("Error!", "Failed to create reservation. Please try again.");
+                });
+        }
     </script>
 @endsection

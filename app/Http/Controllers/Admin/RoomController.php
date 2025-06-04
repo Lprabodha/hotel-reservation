@@ -122,7 +122,6 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
     public function update(StoreRoomRequest $request, Room $room)
     {
         DB::beginTransaction();
@@ -170,7 +169,6 @@ class RoomController extends Controller
             return back()->withInput()->with('error', 'Failed to update room.');
         }
     }
-
 
     public function getRooms(Request $request)
     {

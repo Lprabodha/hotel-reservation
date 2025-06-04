@@ -47,5 +47,5 @@ class HotelController extends Controller
 
             return null;
         })->filter()->values()->toArray();
-}
+    }
 }

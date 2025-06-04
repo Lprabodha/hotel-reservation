@@ -95,6 +95,7 @@ class HotelController extends Controller
             }
 
             ToastMagic::success('Hotel added successfully!');
+
             return redirect()
                 ->route('admin.hotels')
                 ->with('success', 'Hotel created successfully!');
@@ -196,7 +197,7 @@ class HotelController extends Controller
             $services = [];
             if ($request->has('services')) {
                 foreach ($request->services as $service) {
-                    if (!empty($service['id'])) {
+                    if (! empty($service['id'])) {
                         $services[$service['id']] = ['charge' => $service['charge']];
                     }
                 }
@@ -204,6 +205,7 @@ class HotelController extends Controller
             $hotel->services()->sync($services);
 
             ToastMagic::success('Hotel updated successfully!');
+
             return redirect()->route('admin.hotels')->with('success', 'Hotel updated successfully!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -227,6 +229,7 @@ class HotelController extends Controller
         $hotel->users()->detach();
 
         ToastMagic::success('Hotel deleted successfully!');
+
         return redirect()->route('admin.hotels')->with('success', 'Hotel deleted successfully.');
     }
 
