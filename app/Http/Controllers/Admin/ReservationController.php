@@ -133,12 +133,11 @@ class ReservationController extends Controller
             5 => 'action',
         ];
 
-        $user = auth()->user();
-        $hotel = $user->hotels()->first();
-
         $query = Reservation::query();
 
-        if (auth()->user()->roles()->pluck('name') !== 'super-admin') {
+        if (! auth()->user()->hasRole('super-admin')) {
+            $user = auth()->user();
+            $hotel = $user->hotels()->first();
             $query->where('hotel_id', $hotel->id);
         }
 
@@ -197,7 +196,7 @@ class ReservationController extends Controller
                 $nestedData['action'] = '
                     <a href="#" class="btn btn-outline-primary-600 radius-8 px-20 py-11">View</a>
                     <a href="#" class="btn btn-outline-lilac-600 radius-8 px-20 py-11">Edit</a>
-                    <button onclick="deleteReservation(' . $r->id . ')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
+                    <button onclick="deleteReservation('.$r->id.')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
                 ';
                 $data[] = $nestedData;
             }
