@@ -26,8 +26,8 @@
         <div class="row align-items-center">
             <div class="col-xl-5 order-xl-2  col-12">
                 <div class="wpo-section-title s2 wow fadeInRightSlow" data-wow-duration="1700ms">
-                    <span>// beautiful videos</span>
-                    <h2>Explore the World Through Beautiful Videos.</h2>
+                    <span>// About Click2Checkin™</span>
+                    <p>Click2Checkin is a smart hotel reservation system built to simplify bookings for travelers and hotel staff.<br> With real-time availability, multi-user support, and a user-friendly design, it makes hotel management and reservations seamless.<br> Fast, secure and accessible Click2Checkin is your gateway to hassle-free stays.</p>
                 </div>
             </div>
             <div class="col-xl-7 order-xl-1 col-12">
@@ -235,7 +235,7 @@
 <!-- end of testimonial -->
 
 
-<!-- start of places-->
+<!-- start of places
 <section class="places-section section-padding">
     <div class="container">
         <div class="wraper">
@@ -337,10 +337,10 @@
             </div>
         </div>
     </div>
-</section>
-<!-- end of places-->
+</section>//
+end of places-->
 
-<!-- start of blog-->
+<!-- start of blog
 <section class="blog-section section-padding">
     <div class="container">
         <div class="row justify-content-center">
@@ -449,6 +449,6 @@
             </div>
         </div>
     </div>
-</section>
-<!-- end of blog-->
+</section> 
+end of blog-->
 @endsection

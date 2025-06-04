@@ -9,11 +9,9 @@
                             <div class="logo widget-title">
                                 <img src="{{asset('images/logo.svg')}}" alt="blog">
                             </div>
-                            <p>Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                                posuere ac ut. Dignissim convallis aenean et tortor.</p>
+                            <p>Discover the best stays across Sri Lanka with ease and trusted reviews.</p>
                             <br>
-                            <p>Ac turpis egestas sed tempus. Nulla aliquet porttitor lacus luctus accumsan tortor
-                                posuere ac ut.</p>
+                            <p>Book your perfect getaway quickly and enjoy a hassle-free travel experience.</p>
 
                         </div>
                     </div>
@@ -34,7 +32,7 @@
                                                 fill="#2979FE" />
                                         </svg>
                                     </div>
-                                    885 Bunn School RdHenry, Tennessee(TN), 38236
+                                    123 Galle Road, Colombo, Sri Lanka
                                 </li>
                                 <li>
                                     <div class="icon">
@@ -57,7 +55,7 @@
                                             </defs>
                                         </svg>
                                     </div>
-                                    (570) 731-4462
+                                    +94 77 123 4567
                                 </li>
                                 <li>
                                     <div class="icon">
@@ -95,7 +93,7 @@
                                             </defs>
                                         </svg>
                                     </div>
-                                    service@click2checkin.com
+                                    info@click2checkin.com
                                 </li>
                             </ul>
                             <div class="social-widget">
@@ -128,13 +126,14 @@
                         <div class="widget subscribe-widget">
                             <div class="widget-title">
                                 <h3>subscribe newsletter:</h3>
+                                <p style="color:rgb(12, 41, 60) ;">Stay updated with the latest hotel deals and travel tips in Sri Lanka.</p>
                             </div>
                             <form>
                                 <input type="text" class="form-control" placeholder="Enter your email:">
                                 <input class="theme-btn-s2" type="submit" value="subscribe now">
                                 <label class="checkbox">
                                     <input class="checks" type="checkbox" />
-                                    <span>I agree to email receive.</span>
+                                    <span>I agree to receive email.</span>
                                 </label>
 
                             </form>
@@ -143,15 +142,15 @@
                     <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                         <div class="widget link-widget">
                             <div class="widget-title">
-                                <h3>popular places:</h3>
+                                <h3>Popular Destinations:</h3>
                             </div>
                             <ul>
-                                <li><a href="places-single.html">Eiffel Tower - France</a></li>
-                                <li><a href="places-single.html">Taj Mahal - India</a></li>
-                                <li><a href="places-single.html">Great Wall of China - China</a></li>
-                                <li><a href="places-single.html">Machu Picchu - Peru</a></li>
-                                <li><a href="places-single.html">Pyramids of Giza - Egypt</a></li>
-                                <li><a href="places-single.html"> Colosseum - Italy</a></li>
+                                <li><a href="https://sigiriyafortress.com/">Sigiriya Rock Fortress</a></li>
+                                <li><a href="https://www.tripadvisor.com/Tourism-g616035-Ella_Uva_Province-Vacations.html">Ella</a></li>
+                                <li><a href="https://www.tripadvisor.com/Tourism-g608524-Nuwara_Eliya_Central_Province-Vacations.html">Nuwara Eliya</a></li>
+                                <li><a href="https://www.tripadvisor.com/Attraction_Review-g644047-d15708228-Reviews-Unawatuna_Beach-Unawatuna_Galle_District_Southern_Province.html">Unawatuna Beach</a></li>
+                                <li><a href="https://sridaladamaligawa.lk/">Kandy Temple of the Tooth</a></li>
+                                <li><a href="https://www.yalasrilanka.lk/">Yala National Park</a></li>
                             </ul>
                         </div>
                     </div>

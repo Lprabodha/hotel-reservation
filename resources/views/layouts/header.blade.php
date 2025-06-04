@@ -6,8 +6,8 @@
                         <div class="col col-md-7 col-sm-12 col-12">
                             <div class="contact-intro">
                                 <ul>
-                                    <li><i class="fi ti-location-pin"></i>28 Street, New York City, USA</li>
-                                    <li><i class="fi flaticon-email"></i>service@click2checkin.com </li>
+                                    <li><i class="fi ti-location-pin"></i>Galle Road, Colombo, SL</li>
+                                    <li><i class="fi flaticon-email"></i>info@click2checkin.com </li>
                                 </ul>
                             </div>
                         </div>
