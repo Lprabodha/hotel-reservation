@@ -25,7 +25,7 @@
                         <div class="header-booking wow fadeInRightSlow" data-wow-duration="1400ms">
                             <div class="title">
                                 <h3>search room</h3>
-                                <span>Find and booked your seate</span>
+                                <span>Discover and book your perfect stay</span>
                             </div>
                             <form>
                                 <div class="input-item">
