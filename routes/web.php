@@ -27,7 +27,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/about-us', 'aboutUs')->name('about-us');
     Route::get('/contact-us', 'contact')->name('contact-us');
     Route::get('/faq', 'faq')->name('faq');
-    Route::get('/reservation', 'reservation')->name('reservation');
+    // Route::get('/reservation', 'reservation')->name('reservation');
+});
+
+Route::middleware(['auth', 'check_role:customer'])->group(function () {
+    Route::get('/hotels/{hotel}/reserve', [HomeController::class, 'reservation'])->name('hotels.reserve');
 });
 
 Route::controller(HotelController::class)->group(function () {

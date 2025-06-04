@@ -320,7 +320,36 @@
                 @empty
                     <div>No Rooms Available at this moment to show...</div>
                 @endforelse
-
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="wpo-section-title s2 wow fadeInUp" data-wow-duration="1200ms">
+                        @if ($hotel->rooms->count() > 0)
+                            @auth
+                                @if (auth()->user()->hasRole('customer'))
+                                    <a href="{{ route('hotels.reserve', $hotel->id) }}" class="theme-btn">
+                                        Make a Reservation
+                                        <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}" class="theme-btn">
+                                        Make a Reservation
+                                        <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
+                                    </a>
+                                @endif
+                            @else
+                                <a href="{{ route('login') }}" class="theme-btn">
+                                    Make a Reservation
+                                    <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
+                                </a>
+                            @endauth
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </section>
