@@ -30,17 +30,19 @@ class SocialController extends Controller
         }
         Auth::login($user);
 
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') || $user->hasRole('hotel-clerk') || $user->hasRole('hotel-manager') ) {
             return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('customer') || $user->hasRole('travel-company')) {
+            return redirect()->route('dashboard');
+        } else {
+            abort(403, 'Unauthorized role.');
         }
-
-        return redirect()->route('dashboard');
     }
 
     public function oneTap($request)
     {
         $client = new \GuzzleHttp\Client;
-        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token='.$request->id);
+        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token=' . $request->id);
         $response = json_decode($request->getBody());
         $user = User::where('email', $response->email)->first();
 

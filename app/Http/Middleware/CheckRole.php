@@ -20,6 +20,6 @@ class CheckRole
             return $next($request);
         }
 
-        return redirect('/admin');
+        return redirect('/dashboard');
     }
 }
