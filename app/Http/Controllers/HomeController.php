@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -43,8 +44,31 @@ class HomeController extends Controller
         return view('pages.faq');
     }
 
-    public function reservation()
+    public function reservation($hotelId)
     {
-        return view('reservation');
+        $hotel = Hotel::with('rooms', 'services')->findOrFail($hotelId);
+
+        $roomImages = $hotel->rooms
+            ->pluck('images')
+            ->flatten()
+            ->filter()
+            ->toArray();
+
+        $roomImageUrls = $this->getImageUrls($roomImages);
+
+        return view('reservation', compact('hotel', 'roomImageUrls'));
+    }
+
+    private function getImageUrls(array $imagePaths)
+    {
+        return collect($imagePaths)->map(function ($path) {
+            $exists = Storage::disk('s3')->exists($path);
+
+            if ($exists) {
+                return Storage::disk('s3')->url($path);
+            }
+
+            return null;
+        })->filter()->values()->toArray();
     }
 }
