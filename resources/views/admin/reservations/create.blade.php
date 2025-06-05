@@ -402,7 +402,7 @@
                 });
             });
 
-            showStep(currentStep); // Initialize to Step 1
+            showStep(currentStep);
         });
 
 
@@ -419,28 +419,26 @@
                 checkout.setAttribute('min', checkinDate);
             });
 
-            function disableBookedDates(input) {
-                input.addEventListener('input', function() {
-                    const selectedDate = this.value;
-                    if (bookedDates.includes(selectedDate)) {
-                        alert('This date is already booked. Please choose another date.');
-                        this.value = '';
-                    }
-                });
-            }
+            // function disableBookedDates(input) {
+            //     input.addEventListener('input', function() {
+            //         const selectedDate = this.value;
+            //         if (bookedDates.includes(selectedDate)) {
+            //             alert('This date is already booked. Please choose another date.');
+            //             this.value = '';
+            //         }
+            //     });
+            // }
 
-            disableBookedDates(checkin);
-            disableBookedDates(checkout);
+            // disableBookedDates(checkin);
+            // disableBookedDates(checkout);
         });
 
         flatpickr("#checkin", {
             minDate: "today",
-            disable: bookedDates
         });
 
         flatpickr("#checkout", {
             minDate: "today",
-            disable: bookedDates
         });
 
         $(document).ready(function() {
@@ -483,9 +481,9 @@
                         }
                     },
                     error: function(xhr) {
-                        errorDiv.removeClass('d-none').text(
-                            '❌ Something went wrong! Please try again.');
-                        console.error(xhr);
+                        // errorDiv.removeClass('d-none').text(
+                        //     '❌ Something went wrong! Please try again.');
+                        // console.error(xhr);
                     }
                 });
             });
@@ -510,6 +508,25 @@
                     customerEmailDiv.classList.add('d-none');
                 }
             });
+
+            const checkin = document.getElementById('checkin');
+            const checkout = document.getElementById('checkout');
+            const guests = document.getElementById('guests');
+
+            checkin.addEventListener('change', autoFetchRooms);
+            checkout.addEventListener('change', autoFetchRooms);
+            guests.addEventListener('change', autoFetchRooms);
+
+            function autoFetchRooms() {
+                let checkinDate = $('#checkin').val();
+                let checkoutDate = $('#checkout').val();
+                let guestsCount = $('#guests').val();
+
+                if (checkinDate && checkoutDate && guestsCount) {
+                    $('#filterHotel').trigger('click');
+                }
+            }
+
         });
 
         document.querySelector('input[name="card_number"]').addEventListener('input', function(e) {
@@ -614,8 +631,10 @@
                 })
                 .then(data => {
                     toast.success("Success!", "Reservation Created Successfully!");
-                    window.location.href =
-                        "{{ route('admin.reservation.index') }}";
+
+                    setTimeout(function() {
+                        window.location.href = "{{ route('admin.reservation.index') }}";
+                    }, 2000);
                 })
                 .catch(error => {
                     toast.success("Error!", "Failed to create reservation. Please try again.");

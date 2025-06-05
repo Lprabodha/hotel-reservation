@@ -61,7 +61,6 @@ class ReservationController extends Controller
             'rooms' => $hotel->rooms,
             'bookedDates' => $bookedDates,
         ]);
-
     }
 
     /**
@@ -69,6 +68,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
             DB::beginTransaction();
 
@@ -84,10 +84,22 @@ class ReservationController extends Controller
             $checkoutDate = Carbon::parse($request->checkout);
             $nights = $checkinDate->diffInDays($checkoutDate);
 
+            if (empty($request->rooms) || !is_array($request->rooms)) {
+                throw new \Exception('No rooms selected.');
+            }
+
             $firstRoom = Room::where('id', $request->rooms[0])->firstOrFail();
             $hotelId = $firstRoom->hotel_id;
 
-            $totalPrice = 0;
+            $specialRequests = $request->special_requests;
+
+            $totalGuests = $request->guests;
+            if (!$totalGuests) {
+                $totalGuests = Room::whereIn('id', $request->rooms)->sum('occupancy');
+            }
+
+            $totalPrice = Room::whereIn('id', $request->rooms)
+                ->sum('price_per_night') * $nights;
 
             $reservation = Reservation::create([
                 'user_id' => $userId,
@@ -95,8 +107,8 @@ class ReservationController extends Controller
                 'check_in_date' => $request->checkin,
                 'check_out_date' => $request->checkout,
                 'status' => 'booked',
-                'number_of_guests' => $request->guests,
-                'special_requests' => $request->special_requests,
+                'number_of_guests' => $totalGuests,
+                'special_requests' => $specialRequests,
                 'total_price' => $totalPrice,
                 'payment_status' => 'pending',
                 'payment_method' => $paymentMethod,
@@ -104,6 +116,7 @@ class ReservationController extends Controller
             ]);
 
             $reservation->rooms()->sync($request->rooms);
+            Room::whereIn('id', $request->rooms)->update(['is_available' => false]);
 
             DB::commit();
 
@@ -200,7 +213,7 @@ class ReservationController extends Controller
                 $nestedData['action'] = '
                     <a href="#" class="btn btn-outline-primary-600 radius-8 px-20 py-11">View</a>
                     <a href="#" class="btn btn-outline-lilac-600 radius-8 px-20 py-11">Edit</a>
-                    <button onclick="deleteReservation('.$r->id.')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
+                    <button onclick="deleteReservation(' . $r->id . ')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
                 ';
                 $data[] = $nestedData;
             }

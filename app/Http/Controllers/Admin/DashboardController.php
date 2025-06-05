@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         info($hotel);
 
-        $roomsQuery = $hotel->rooms()->where('is_available', 1);
+        $roomsQuery = $hotel->rooms();
 
         if ($request->filled('checkin') && $request->filled('checkout')) {
             $checkin = $request->checkin;
@@ -66,6 +66,7 @@ class DashboardController extends Controller
         return response()->json([
             'html' => $html,
         ]);
+
     }
 
     public function getCustomers()
