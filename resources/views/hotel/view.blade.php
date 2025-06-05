@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="blog-sidebar room-sidebar">
-                        <div class="widget check-widget">
+                        {{-- <div class="widget check-widget">
                             <h3>Check Availability</h3>
                             <form>
                                 <!-- Datepicker as text field -->
@@ -220,7 +220,7 @@
                                     <a href="cart.html" class="theme-btn">Check Availability</a>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                         {{-- <div class="widget recent-post-widget">
                             <h3>Related Posts</h3>
                             <div class="posts">

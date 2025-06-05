@@ -158,8 +158,8 @@
             background: linear-gradient(to right, #e67e22, #f39c12);
         }
 
-        input[type=checkbox] + label:before {
-            margin-left: 395px;
+        input[type=checkbox]+label:before {
+            margin-left: 290px;
         }
 
         /* Mobile adjustments */
@@ -192,6 +192,14 @@
                 border-bottom: 1px solid #eee;
             }
         }
+
+        .room-card {
+            height: 180px;
+        }
+
+        .card-img {
+            border-radius: 10px;
+        }
     </style>
 
     <div class="container reservation-page">
@@ -202,14 +210,14 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 <!-- Hotel Card -->
                 {{-- @dd($hotel) --}}
                 <div class="card hotel-card">
                     @if (!empty($hotel->images[0]))
-                        <img src="{{ Storage::disk('s3')->url($hotel->images[0]) }}" class="card-img" style="object-fit: cover; width: 800px !important; height: 400px !important;"
-                            alt="Hotel Image">
+                        <img src="{{ Storage::disk('s3')->url($hotel->images[0]) }}" class="card-img"
+                            style="object-fit: cover; width: 100% !important; height: 400px !important;" alt="Hotel Image">
                     @else
                         <img src="{{ Vite::asset('resources/images/default-room.jpg') }}" class="card-img"
                             alt="Hotel image">
@@ -230,153 +238,185 @@
                         </div>
                         <p>{{ $hotel->description }}</p>
                         <p>
-                            {{ $hotel->services->pluck('name')->implode(' ·|· ') }}
+                            {{ $hotel->services->pluck('name')->implode(' --- ') }}
                         </p>
                     </div>
                 </div>
 
                 {{-- Rooms cards list here --}}
-                @foreach ($hotel->rooms as $room)
-                    <div class="card room-card mb-4">
-                        <div class="row no-gutters">
+                @foreach ($hotel->rooms->chunk(2) as $roomPair)
+                    <div class="row mb-4">
+                        @foreach ($roomPair as $room)
                             <div class="col-md-6">
-                                @if (!empty($room->images[0]))
-                                    <img src="{{ Storage::disk('s3')->url($room->images[0]) }}" class="card-img" style="object-fit: cover; width: 217px !important; height: 136px !important;"
-                                        alt="Room Image">
-                                @else
-                                    <img src="{{ Vite::asset('resources/images/default-room.jpg') }}" class="card-img" style="object-fit: cover; width: 217px !important; height: 136px !important;"
-                                        alt="No image">
-                                @endif
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">Room {{ $room->room_number }} - {{ ucfirst($room->room_type) }}
-                                    </h5>
-                                    <p class="card-text">Price per night: ${{ $room->price_per_night }}</p>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="selected_rooms[]"
-                                            value="{{ $room->id }}" id="room{{ $room->id }}">
-                                        <label class="form-check-label" for="room{{ $room->id }}">
-                                            Select this room
-                                        </label>
+                                <div class="card room-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-5">
+                                            @if (!empty($room->images[0]))
+                                                <img src="{{ Storage::disk('s3')->url($room->images[0]) }}" class="card-img"
+                                                    style="object-fit: cover; width: 100%; height: 136px;" alt="Room Image">
+                                            @else
+                                                <img src="{{ Vite::asset('resources/images/default-room.jpg') }}"
+                                                    class="card-img" style="object-fit: cover; width: 100%; height: 136px;"
+                                                    alt="No image">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Room {{ $room->room_number }} -
+                                                    {{ ucfirst($room->room_type) }}</h5>
+                                                <p class="card-text">Price per night: ${{ $room->price_per_night }}</p>
+                                                <div class="form-check">
+                                                    <input class="form-check-input room-checkbox" type="checkbox"
+                                                        id="room{{ $room->id }}" data-id="{{ $room->id }}"
+                                                        data-name="Room {{ $room->room_number }} - {{ ucfirst($room->room_type) }}"
+                                                        data-price="{{ $room->price_per_night }}">
+
+                                                    <label class="form-check-label" for="room{{ $room->id }}">
+                                                        Select this room
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 @endforeach
 
-                <!-- Booking Details -->
-                <div class="card">
-                    <h3 class="section-title">Your Booking Details</h3>
-                    <table class="details-table">
-                        <tr>
-                            <td>Check-in</td>
-                            <td>Sat, Jun 14, 2025 — 3:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Check-out</td>
-                            <td>Sun, Jun 15, 2025 — Until 11:00 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Total length of stay</td>
-                            <td>1 night</td>
-                        </tr>
-                        <tr>
-                            <td>You selected</td>
-                            <td>2 rooms for 2 adults</td>
-                        </tr>
-                        <tr>
-                            <td>Room Type</td>
-                            <td>2 × Deluxe Studio</td>
-                        </tr>
-                    </table>
-                    <a href="#"
-                        style="font-size: 14px; color: #007bff; text-decoration: underline; margin-top: 10px; display: inline-block;">Change
-                        your selection</a>
-                </div>
 
-                <!-- Price Summary -->
-                <div class="card">
-                    <h3 class="section-title">Your Price Summary</h3>
-                    <div class="price-summary">
-                        <ul>
-                            <li>Original price <span>US$703.22</span></li>
-                            <li>Getaway Deal <span>– US$140.64</span></li>
-                            <li class="total">Final Price <span>US$562.58</span></li>
-                        </ul>
+                <!-- Booking Details -->
+                <form action="#" method="POST">
+                    @csrf
+                    <div class="card">
+                        <h3 class="section-title">Your Booking Details</h3>
+
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <div class="form-group mb-3" style="width: 30%">
+                                <label for="checkin">Check-in Date</label>
+                                <input type="date" class="form-control" name="checkin" required>
+                            </div>
+
+                            <div class="form-group mb-3" style="width: 30%">
+                                <label for="checkout">Check-out Date</label>
+                                <input type="date" class="form-control" name="checkout" required>
+                            </div>
+
+                            <div class="form-group mb-3" style="width: 30%">
+                                <label for="guests">Number of Guests</label>
+                                <input type="number" class="form-control" name="guests" min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="special_requests">Special Requests</label>
+                            <textarea class="form-control" name="special_requests" rows="2"></textarea>
+                        </div>
+
+                        {{-- Hidden fields --}}
+                        <input type="hidden" name="customer_type" value="individual">
+                        <input type="hidden" name="customer_email" value="{{ auth()->id() }}">
+                        <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
+                        <input type="hidden" name="rooms[]" id="selected-rooms">
+
+                        {{-- Optional card payment input fields --}}
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <div class="form-group mb-3" style="width: 30%;">
+                                <label>Card Number</label>
+                                <input type="text" name="card_number" class="form-control"
+                                    placeholder="XXXX XXXX XXXX XXXX">
+                            </div>
+                            <div class="form-row mb-3" style="width: 30%;">
+                                <div class="col">
+                                    <label>Card Expiry</label>
+                                    <input type="text" name="card_expire_date" class="form-control"
+                                        placeholder="MM/YY">
+                                </div>
+                            </div>
+                            <div class="form-row mb-3" style="width: 30%;">
+                                <div class="col">
+                                    <label>CVV</label>
+                                    <input type="text" name="csv" class="form-control" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <h3 class="section-title">Your Price Summary</h3>
+                            <div class="price-summary">
+                                <ul id="selected-room-list">
+                                    {{-- Dynamically inserted via JS --}}
+                                </ul>
+                                <hr>
+                                <li class="total">Final Price: <span id="final-price">$0.00</span></li>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="theme-btn">Confirm Reservation</button>
+                        </div>
                     </div>
-                </div>
+                </form>
 
             </div>
 
-            <!-- Right Section — Billing and Payment -->
-            <div class="col-lg-4">
-                <!-- Billing Address Form -->
-                <div class="card">
-                    <h3 class="section-title">Billing Address</h3>
-                    <div class="contact-form form-style">
-                        <div class="row">
-                            <div class="col-12">
-                                <label>Email Address</label>
-                                <input type="email" placeholder="Your email" name="email">
-                            </div>
-                            <div class="col-12">
-                                <label>Phone No.</label>
-                                <input type="text" placeholder="Your phone number" name="phone">
-                            </div>
-                            <div class="col-12">
-                                <label>Special Requests</label>
-                                <textarea name="special_requests" placeholder="Any special requirements or preferences?"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </div>
+    <script>
+        const selectedRoomsInputContainer = document.getElementById('selected-rooms');
+        const roomCheckboxes = document.querySelectorAll('.room-checkbox');
+        const roomList = document.getElementById('selected-room-list');
+        const finalPriceEl = document.getElementById('final-price');
+        const checkinInput = document.querySelector('input[name="checkin"]');
+        const checkoutInput = document.querySelector('input[name="checkout"]');
 
-                <!-- Payment Method -->
-                <div class="card">
-                    <h3 class="section-title">Payment Method</h3>
-                    <div class="payment-method">
-                        <ul>
-                            <li>
-                                <input type="radio" id="card" name="payment" checked>
-                                <label for="card">Payment By Card</label>
-                            </li>
-                            <li>
-                                <input type="radio" id="cash" name="payment">
-                                <label for="cash">Cash On Delivery</label>
-                            </li>
-                        </ul>
-                    </div>
+        function getNights() {
+            const checkin = new Date(checkinInput.value);
+            const checkout = new Date(checkoutInput.value);
+            if (!checkin || !checkout || checkin >= checkout) return 0;
+            const diffTime = Math.abs(checkout - checkin);
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
 
-                    <!-- Card Details Form -->
-                    <div class="contact-form form-style">
-                        <div class="row">
-                            <div class="col-12">
-                                <label>Card Holder Name</label>
-                                <input type="text" placeholder="Name on Card" name="card_holder">
-                            </div>
-                            <div class="col-12">
-                                <label>Card Number</label>
-                                <input type="text" placeholder="XXXX XXXX XXXX XXXX" name="card_number">
-                            </div>
-                            <div class="col-6">
-                                <label>CVV</label>
-                                <input type="text" placeholder="CVV" name="cvv">
-                            </div>
-                            <div class="col-6">
-                                <label>Expire Date</label>
-                                <input type="text" placeholder="MM/YY" name="expiry_date">
-                            </div>
-                            <div class="col-12 text-center">
-                                <button type="submit" class="theme-btn">Place Order</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        function updateSelectedRooms() {
+            const selected = [];
+            let totalPrice = 0;
+            const nights = getNights();
 
-            </div> <!-- end right col -->
+            roomList.innerHTML = ''; // Clear list
+            // Remove all old hidden inputs
+            document.querySelectorAll('input[name="rooms[]"]').forEach(el => el.remove());
 
-        </div> <!-- end row -->
-    </div> <!-- end container -->
+            roomCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    const id = cb.dataset.id;
+                    const name = cb.dataset.name;
+                    const price = parseFloat(cb.dataset.price);
+                    const subtotal = price * nights;
+
+                    // Add to display
+                    const li = document.createElement('li');
+                    li.textContent = `${name} × ${nights} night(s): $${subtotal.toFixed(2)}`;
+                    roomList.appendChild(li);
+
+                    totalPrice += subtotal;
+
+                    // Add hidden input
+                    const hidden = document.createElement('input');
+                    hidden.type = 'hidden';
+                    hidden.name = 'rooms[]';
+                    hidden.value = id;
+                    document.querySelector('form').appendChild(hidden);
+                }
+            });
+
+            finalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        // Trigger updates
+        roomCheckboxes.forEach(cb => cb.addEventListener('change', updateSelectedRooms));
+        checkinInput.addEventListener('change', updateSelectedRooms);
+        checkoutInput.addEventListener('change', updateSelectedRooms);
+    </script>
 @endsection
