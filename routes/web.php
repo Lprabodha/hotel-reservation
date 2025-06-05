@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReservationController as ControllersReservationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::controller(HomeController::class)->group(function () {
 Route::middleware(['auth', 'check_role:customer'])->group(function () {
     Route::get('/hotels/{hotel}/reserve', [HomeController::class, 'reservation'])->name('hotels.reserve');
 });
+Route::post('/reservation', [ControllersReservationController::class, 'store'])->name('reservation.store');
 
 Route::controller(HotelController::class)->group(function () {
     Route::get('/hotels', 'index')->name('hotels');

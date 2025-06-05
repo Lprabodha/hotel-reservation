@@ -287,7 +287,7 @@
 
 
                 <!-- Booking Details -->
-                <form action="#" method="POST">
+                <form action="{{ route('reservation.store') }}" method="POST">
                     @csrf
                     <div class="card">
                         <h3 class="section-title">Your Booking Details</h3>
@@ -318,7 +318,6 @@
                         <input type="hidden" name="customer_type" value="individual">
                         <input type="hidden" name="customer_email" value="{{ auth()->id() }}">
                         <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
-                        <input type="hidden" name="rooms[]" id="selected-rooms">
 
                         {{-- Optional card payment input fields --}}
                         <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -330,8 +329,7 @@
                             <div class="form-row mb-3" style="width: 30%;">
                                 <div class="col">
                                     <label>Card Expiry</label>
-                                    <input type="text" name="card_expire_date" class="form-control"
-                                        placeholder="MM/YY">
+                                    <input type="text" name="card_expire_date" class="form-control" placeholder="MM/YY">
                                 </div>
                             </div>
                             <div class="form-row mb-3" style="width: 30%;">
@@ -342,16 +340,17 @@
                             </div>
                         </div>
 
-                        <div class="card mt-4">
+                        <div id="selected-rooms"></div>
+
+                        <!-- Display selected room list -->
+                        <div class="card">
                             <h3 class="section-title">Your Price Summary</h3>
                             <div class="price-summary">
-                                <ul id="selected-room-list">
-                                    {{-- Dynamically inserted via JS --}}
-                                </ul>
-                                <hr>
+                                <ul id="selected-room-list"></ul>
                                 <li class="total">Final Price: <span id="final-price">$0.00</span></li>
                             </div>
                         </div>
+
 
                         <div class="text-center">
                             <button type="submit" class="theme-btn">Confirm Reservation</button>
@@ -372,49 +371,57 @@
         const checkoutInput = document.querySelector('input[name="checkout"]');
 
         function getNights() {
-            const checkin = new Date(checkinInput.value);
-            const checkout = new Date(checkoutInput.value);
-            if (!checkin || !checkout || checkin >= checkout) return 0;
-            const diffTime = Math.abs(checkout - checkin);
-            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+
+            if (!checkin || !checkout) return 0;
+
+            const start = new Date(checkin);
+            const end = new Date(checkout);
+
+            const timeDiff = end - start;
+
+            if (isNaN(timeDiff) || timeDiff <= 0) return 0;
+
+            return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
         }
 
         function updateSelectedRooms() {
-            const selected = [];
-            let totalPrice = 0;
             const nights = getNights();
+            let totalPrice = 0;
 
-            roomList.innerHTML = ''; // Clear list
-            // Remove all old hidden inputs
-            document.querySelectorAll('input[name="rooms[]"]').forEach(el => el.remove());
+            roomList.innerHTML = '';
+            selectedRoomsInputContainer.innerHTML = '';
 
             roomCheckboxes.forEach(cb => {
                 if (cb.checked) {
                     const id = cb.dataset.id;
                     const name = cb.dataset.name;
                     const price = parseFloat(cb.dataset.price);
+
+                    if (isNaN(price)) return;
+
                     const subtotal = price * nights;
 
-                    // Add to display
                     const li = document.createElement('li');
                     li.textContent = `${name} × ${nights} night(s): $${subtotal.toFixed(2)}`;
                     roomList.appendChild(li);
 
-                    totalPrice += subtotal;
-
-                    // Add hidden input
                     const hidden = document.createElement('input');
                     hidden.type = 'hidden';
                     hidden.name = 'rooms[]';
                     hidden.value = id;
-                    document.querySelector('form').appendChild(hidden);
+                    selectedRoomsInputContainer.appendChild(hidden);
+
+                    totalPrice += subtotal;
                 }
             });
 
-            finalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+            finalPriceEl.textContent = nights === 0 ?
+                'Please select valid check-in and check-out dates.' :
+                `$${totalPrice.toFixed(2)}`;
         }
 
-        // Trigger updates
         roomCheckboxes.forEach(cb => cb.addEventListener('change', updateSelectedRooms));
         checkinInput.addEventListener('change', updateSelectedRooms);
         checkoutInput.addEventListener('change', updateSelectedRooms);
