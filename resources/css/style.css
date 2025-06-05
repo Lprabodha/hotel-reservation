@@ -2446,7 +2446,7 @@ a.ui-button:active,
   }
 }
 .wpo-site-header .navbar-header .navbar-brand img {
-  max-width: 170px;
+  max-width: 150px;
 }
 @media (max-width: 991px) {
   .wpo-site-header .navbar-collapse.collapse {
@@ -2475,7 +2475,7 @@ a.ui-button:active,
 
 @media (max-width: 440px) {
   .wpo-site-header .navbar-header .navbar-brand img {
-    max-width: 170px;
+    max-width: 150px;
   }
 }
 @media (max-width: 370px) {
