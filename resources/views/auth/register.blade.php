@@ -8,12 +8,12 @@
                     <form class="wpo-accountWrapper"method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="wpo-accountInfo image">
-                            <img src="{{ asset('images/login.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/img/login.png') }}" alt="">
                         </div>
                         <div class="wpo-accountForm form-style">
                             <div class="fromTitle">
                                 <h2>Signup</h2>
-                                <p>Sign into your pages account</p>
+                                <p>Sign into your account</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
@@ -86,8 +86,7 @@
                                 </a>
                             </div>
 
-                            <p class="subText mt-2">Don't have an account? <a href="{{ route('login') }}">Create free
-                                    account</a>
+                            <p class="subText mt-2">Do you already have an account? <a href="{{ route('login') }}">Log In</a>
                             </p>
                         </div>
                     </form>

@@ -16,7 +16,7 @@
                             <div class="wpo-accountForm form-style">
                                 <div class="fromTitle">
                                     <h2>Login</h2>
-                                    <p>Sign into your pages account</p>
+                                    <p>Sign into your account</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-12">
@@ -75,8 +75,7 @@
                                         <span>Log in with Google</span>
                                     </a>
                                 </div>
-                                <p class="subText mt-1">Don't have an account? <a href="{{ route('register') }}">Create free
-                                        account</a>
+                                <p class="subText mt-1">Don't have an account? <a href="{{ route('register') }}">Create an account</a>
                                 </p>
                             </div>
                         </form>
