@@ -67,6 +67,7 @@ class TravelCompaniesController extends Controller
                 'email' => $email,
                 'contact_number' => $request->contact_number,
                 'address' => $request->address,
+                'discount' => $request->discount,
             ]);
 
             try {
@@ -75,6 +76,7 @@ class TravelCompaniesController extends Controller
                     'password' => $password,
                     'email' => $email,
                     'login_url' => url('/login'),
+                    'template' => 'user-invitation',
                 ];
 
                 Mail::to($email)->send(new SendMail($data));
@@ -137,7 +139,7 @@ class TravelCompaniesController extends Controller
                 $nestedData['name'] = $r->name;
                 $nestedData['email'] = $r->email;
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
-                $nestedData['action'] = '<a class="btn btn-outline-lilac-600 radius-8 px-20 py-11"  href='.route('admin.travel-companies.edit', $r->id).'> <i class="fas fa-trash"></i> Edit</a>&nbsp;&nbsp<a class="btn btn-outline-danger-600 radius-8 px-20 py-11"  onClick="deleteUser('.$r->id.')"> <i class="fas fa-trash"></i> Delete</a>';
+                $nestedData['action'] = '<a class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center"  href='.route('admin.travel-companies.edit', $r->id).'> <iconify-icon icon="lucide:edit"></iconify-icon></a>&nbsp;&nbsp<a class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center"  onClick="deleteUser('.$r->id.')"> <iconify-icon icon="mingcute:delete-2-line"></iconify-icon></a>';
                 $data[] = $nestedData;
             }
         }

@@ -60,7 +60,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Phone</label>
                                 <div class="icon-field">
                                     <span class="icon">
@@ -76,7 +76,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Address</label>
                                 <div class="icon-field">
                                     <span class="icon">
@@ -86,6 +86,22 @@
                                         class="form-control @error('address') is-invalid @enderror"
                                         placeholder="Enter Company address" value="{{ old('address') }}">
                                     @error('address')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Discount Rate</label>
+                                <div class="icon-field">
+                                    <span class="icon">
+                                        <iconify-icon icon="ic:baseline-discount"></iconify-icon>
+                                    </span>
+                                    <input type="text" name="discount"
+                                        class="form-control @error('discount') is-invalid @enderror"
+                                        placeholder="Enter Discount(%)" value="{{ old('discount') }}">
+                                    @error('discount')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

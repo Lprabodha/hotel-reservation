@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->text('address')->nullable();
             $table->string('contact_number')->nullable();
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
     }

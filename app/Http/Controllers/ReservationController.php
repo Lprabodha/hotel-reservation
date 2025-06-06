@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use Illuminate\Http\Request;
 use App\Models\Room;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -78,12 +78,13 @@ class ReservationController extends Controller
             $reservation->rooms()->sync($request->rooms);
 
             DB::commit();
+
             return redirect()->back()->with('success', 'Reservation successful!');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e);
 
-            return redirect()->back()->withErrors(['error' => 'Reservation failed: ' . $e->getMessage()]);
+            return redirect()->back()->withErrors(['error' => 'Reservation failed: '.$e->getMessage()]);
         }
     }
 

@@ -40,13 +40,13 @@
                             <td>{{ $room->occupancy }}</td>
                             <td>${{ number_format($room->price_per_night, 2) }}</td>
                             <td>
-                                <span class="px-24 py-4 rounded-pill fw-medium text-sm 
+                                <span class="px-24 py-4 rounded-pill fw-medium text-sm
                                     {{ $room->is_available ? 'bg-success-focus text-success-main' : 'bg-danger-focus text-danger-main' }}">
                                     {{ $room->is_available ? 'Available' : 'Unavailable' }}
                                 </span>
                             </td>
                             <td class="d-flex gap-2 items-center">
-                                <a href="#"
+                                <a href="{{route('hotel', ['slug' => $room->hotel->slug])}}" target="_blank"
                                    class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                                 </a>
