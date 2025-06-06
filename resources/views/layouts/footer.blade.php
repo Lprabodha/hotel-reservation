@@ -7,7 +7,7 @@
                     <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                         <div class="widget about-widget">
                             <div class="logo widget-title">
-                                <img src="{{asset('images/logo.svg')}}" alt="blog">
+                                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="blog">
                             </div>
                             <p>Discover the best stays across Sri Lanka with ease and trusted reviews.</p>
                             <br>
