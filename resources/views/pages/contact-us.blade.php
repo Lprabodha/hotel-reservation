@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="office-info-text">
                                         <h2>Address</h2>
-                                        <p>7 Green Lake Street Crawfordsville, IN 47933</p>
+                                        <p>123 Galle Road, Colombo, Sri Lanka</p>
                                     </div>
                                 </div>
                             </div>
@@ -49,8 +49,8 @@
                                     </div>
                                     <div class="office-info-text">
                                         <h2>Email Us</h2>
-                                        <p>hotel@gmail.com</p>
-                                        <p>hotel@gmail.com</p>
+                                        <p>info@click2checkin.com</p>
+                                        <p>support@click2checkin.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -63,8 +63,8 @@
                                     </div>
                                     <div class="office-info-text">
                                         <h2>Call Now</h2>
-                                        <p>+1 800 123 456 789</p>
-                                        <p>+1 800 123 654 987</p>
+                                        <p>+94 77 123 4567</p>
+                                        <p>+94 77 123 2269</p>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +72,7 @@
                     </div>
                     <div class="wpo-contact-title">
                         <h2>Have Any Question?</h2>
-                        <p>It is a long established fact that a reader will be distracted
-                            content of a page when looking.</p>
+                        <p>Finding the right stay is easy — but we’re here to help if you need anything along the way.</p>
                     </div>
                     <div class="wpo-contact-form-area">
                         <form method="post" class="contact-validation-active" id="contact-form-main">
@@ -91,11 +90,9 @@
                             </div>
                             <div>
                                 <select name="subject" id="subject" class="form-control">
-                                    <option disabled="disabled" selected>Services</option>
-                                    <option>Rooms & Appartment</option>
-                                    <option>Food & Restaurant</option>
-                                    <option>Spa & Fitness</option>
-                                    <option>Event & Party</option>
+                                    <option disabled="disabled" selected>Customer Type</option>
+                                    <option>Private User</option>
+                                    <option>Travel Company</option>
                                 </select>
                             </div>
                             <div class="fullwidth">

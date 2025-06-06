@@ -252,7 +252,7 @@
                                 <div class="image">
                                     <img src="images/places-videos/1.jpg" alt="">
                                     <div class="video-holder">
-                                        <a href="https://www.youtube.com/embed/kcftdnS0YGE" class="video-btn"
+                                        <a href="https://youtu.be/VPIfjLqUfxE?si=1CLt6Jnz3Sgthls0" class="video-btn"
                                             data-type="iframe">
                                             <div class="icon">
                                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
@@ -448,7 +448,7 @@
     </section>
     <!-- end of featured-->
 
-    <!-- start of authorlist-->
+    <!-- start of authorlist
     <section class="authorlist-section section-padding">
         <div class="container">
             <div class="row align-items-center">
@@ -699,7 +699,7 @@
     <!-- end of testimonial -->
 
 
-    <!-- start of places-->
+    <!-- start of places
     <section class="places-section section-padding">
         <div class="container">
             <div class="wraper">
@@ -804,7 +804,7 @@
     </section>
     <!-- end of places-->
 
-    <!-- start of blog-->
+    <!-- start of blog
     <section class="blog-section section-padding">
         <div class="container">
             <div class="row justify-content-center">
