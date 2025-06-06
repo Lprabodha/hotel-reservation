@@ -1,67 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <style>
-        .room-checkbox {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10;
-        }
-
-        .card {
-            position: relative;
-        }
-
-        .wizard-fieldset {
-            display: none;
-        }
-
-        .wizard-fieldset.show {
-            display: block;
-        }
-
-        #filterError {
-            font-size: 0.85rem;
-            padding: 10px;
-            margin-top: 15px;
-        }
-
-        #filterError2 {
-            font-size: 0.85rem;
-            padding: 10px;
-            margin-top: 15px;
-        }
-
-        <style>.select2-container--bootstrap4 .select2-selection--single {
-            height: calc(2.5rem + 2px);
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border: 1px solid #ced4da;
-            border-radius: 0.375rem;
-            background-color: #fff;
-            width: 100%;
-        }
-
-        .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
-            line-height: 2.2rem;
-            padding-left: 0;
-        }
-
-        .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow {
-            height: calc(2.5rem + 2px);
-            top: 0;
-            right: 10px;
-        }
-
-        .form-wizard-list__item {
-            width: 33.3% !important;
-        }
-    </style>
-
-    </style>
-
     <div class="dashboard-main-body">
         <div class="card">
             <div class="card-header">
@@ -246,6 +185,67 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('style')
+    <style>
+        .room-checkbox {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+
+        .card {
+            position: relative;
+        }
+
+        .wizard-fieldset {
+            display: none;
+        }
+
+        .wizard-fieldset.show {
+            display: block;
+        }
+
+        #filterError {
+            font-size: 0.85rem;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        #filterError2 {
+            font-size: 0.85rem;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        .select2-container--bootstrap4 .select2-selection--single {
+            height: calc(2.5rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            background-color: #fff;
+            width: 100%;
+        }
+
+        .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+            line-height: 2.2rem;
+            padding-left: 0;
+        }
+
+        .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow {
+            height: calc(2.5rem + 2px);
+            top: 0;
+            right: 10px;
+        }
+
+        .form-wizard-list__item {
+            width: 33.3% !important;
+        }
+    </style>
 @endsection
 
 

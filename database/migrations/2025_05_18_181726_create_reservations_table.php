@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
             $table->date('check_in_date');
             $table->date('check_out_date');
-            $table->enum('status', ['booked', 'cancelled', 'no_show', 'checked_in', 'checked_out', 'completed'])
+            $table->enum('status', ['pending', 'booked', 'cancelled', 'no_show', 'checked_in', 'checked_out', 'completed'])
                 ->default('booked');
             $table->integer('number_of_guests');
             $table->string('special_requests')->nullable();

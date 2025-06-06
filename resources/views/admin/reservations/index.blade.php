@@ -50,7 +50,7 @@
                 <table id="reservation-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Confirmation Number</th>
                             <th>Guest Email</th>
                             <th>Hotel</th>
                             <th>Reservation Date</th>
@@ -165,5 +165,35 @@
                 }, 300);
             }
         }, 3000);
+
+
+        function changeReservationStatus(reservationId, newStatus) {
+            if (!confirm('Are you sure you want to change the status?')) return;
+
+            const toast = new ToastMagic();
+
+            fetch("{{ route('admin.reservation.changeStatus', ['id' => '__id__']) }}".replace('__id__', reservationId), {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: newStatus
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        toast.success("Success!", "Status updated successfully!");
+                    } else {
+                        toast.success("Error!", "Failed to update status.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred.');
+                });
+        }
     </script>
 @endsection

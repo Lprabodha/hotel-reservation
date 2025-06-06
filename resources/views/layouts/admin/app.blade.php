@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="/assets/css/admin/lib/audioplayer.css">
     <link rel="stylesheet" href="/assets/css/admin/lib/style.css">
 
+    @yield('style')
 
     @vite(['resources/sass/admin/main.scss'])
 
@@ -46,9 +47,6 @@
             @include('layouts.admin.header')
 
             @yield('content')
-
-
-
             @include('layouts.admin.footer')
         </main>
     </div>
