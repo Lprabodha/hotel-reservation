@@ -8,12 +8,8 @@
                     <div class="col-lg-6 col-12">
                         <div class="hero-content-slider">
                             <div class="item">
-                                <h2 class="wow fadeInLeftSlow" data-wow-duration="1400ms">Capturing the Beauty of
-                                    the
-                                    World.</h2>
-                                <p class="wow fadeInLeftSlow" data-wow-duration="1600ms">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit sed do eiusmod tempor
-                                    incididunt ut labore.</p>
+                                <h2 class="wow fadeInLeftSlow" data-wow-duration="1400ms">Escape to Paradise with Click2Checkin.</h2>
+                                <p class="wow fadeInLeftSlow" data-wow-duration="1600ms">From golden beaches to cool hills, find the stay that suits your journey.</p>
                                 <div class="hero-btn wow fadeInLeftSlow" data-wow-duration="1800ms">
                                     <a href="{{ route('hotel', ['slug' => Str::uuid()]) }}" class="theme-btn">find your
                                         hotel</a>
