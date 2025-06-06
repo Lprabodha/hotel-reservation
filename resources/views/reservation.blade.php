@@ -204,7 +204,6 @@
 
     <div class="container reservation-page">
 
-        <!-- Reservation Page Title -->
         <div class="page-title">
             <h1>Reservation</h1>
         </div>
@@ -243,50 +242,15 @@
                     </div>
                 </div>
 
-                {{-- Rooms cards list here --}}
-                {{-- @foreach ($hotel->rooms->chunk(2) as $roomPair)
-                    <div class="row mb-4">
-                        @foreach ($roomPair as $room)
-                            <div class="col-md-6">
-                                <div class="card room-card">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-5">
-                                            @if (!empty($room->images[0]))
-                                                <img src="{{ Storage::disk('s3')->url($room->images[0]) }}" class="card-img"
-                                                    style="object-fit: cover; width: 100%; height: 136px;" alt="Room Image">
-                                            @else
-                                                <img src="{{ Vite::asset('resources/images/default-room.jpg') }}"
-                                                    class="card-img" style="object-fit: cover; width: 100%; height: 136px;"
-                                                    alt="No image">
-                                            @endif
-                                        </div>
-                                        <div class="col-md-7">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Room {{ $room->room_number }} -
-                                                    {{ ucfirst($room->room_type) }}</h5>
-                                                <p class="card-text">Price per night: ${{ $room->price_per_night }}</p>
-                                                <div class="form-check">
-                                                    <input class="form-check-input room-checkbox" type="checkbox"
-                                                        id="room{{ $room->id }}" data-id="{{ $room->id }}"
-                                                        data-name="Room {{ $room->room_number }} - {{ ucfirst($room->room_type) }}"
-                                                        data-price="{{ $room->price_per_night }}">
-
-                                                    <label class="form-check-label" for="room{{ $room->id }}">
-                                                        Select this room
-                                                    </label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach --}}
-
-
                 <!-- Booking Details -->
+                <div id="flash-message" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+                <script>
+                    const flashMessageData = {
+                        success: @json(session('success')),
+                        error: @json(session('error'))
+                    };
+                </script>
+
                 <form action="{{ route('reservation.store') }}" method="POST">
                     @csrf
                     <div class="card">
@@ -323,7 +287,6 @@
                         <input type="hidden" name="customer_email" value="{{ auth()->id() }}">
                         <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
-                        {{-- Optional card payment input fields --}}
                         <div style="display: flex; justify-content: space-between; width: 100%;">
                             <div class="form-group mb-3" style="width: 30%;">
                                 <label>Card Number</label>
@@ -346,7 +309,6 @@
 
                         <div id="selected-rooms"></div>
 
-                        <!-- Display selected room list -->
                         <div class="card">
                             <h3 class="section-title">Your Price Summary</h3>
                             <div class="price-summary">
@@ -363,7 +325,7 @@
                 </form>
 
                 <div class="row mb-4" id="available-rooms-container">
-                    {{-- Rooms will be loaded here by JavaScript --}}
+                    {{-- Rooms will be loaded here by js after the dates seleted --}}
                 </div>
 
 
@@ -382,7 +344,6 @@
         const finalPriceEl = document.getElementById('final-price');
         const roomsContainer = document.getElementById('available-rooms-container');
 
-        // Calculate number of nights between check-in and check-out
         function getNights() {
             const checkin = checkinInput.value;
             const checkout = checkoutInput.value;
@@ -398,7 +359,6 @@
             return Math.ceil(diff / (1000 * 60 * 60 * 24));
         }
 
-        // Update selected room list and final price
         function updateSelectedRooms() {
             const nights = getNights();
             let totalPrice = 0;
@@ -432,7 +392,6 @@
                 `$${totalPrice.toFixed(2)}`;
         }
 
-        // Handle check availability button click
         checkAvailabilityBtn.addEventListener('click', function() {
             const checkin = checkinInput.value;
             const checkout = checkoutInput.value;
@@ -483,12 +442,10 @@
                     `;
                     });
 
-                    // Bind change event to the new checkboxes
                     document.querySelectorAll('.room-checkbox').forEach(cb => {
                         cb.addEventListener('change', updateSelectedRooms);
                     });
 
-                    // Auto-update prices based on current inputs
                     updateSelectedRooms();
                 })
                 .catch(error => {
@@ -497,13 +454,46 @@
                 });
         });
 
-        // Update price summary on date changes
         checkinInput.addEventListener('change', updateSelectedRooms);
         checkoutInput.addEventListener('change', updateSelectedRooms);
 
-        // If you have checkboxes initially loaded (before any AJAX), bind events to them too
         document.querySelectorAll('.room-checkbox').forEach(cb => {
             cb.addEventListener('change', updateSelectedRooms);
+        });
+    </script>
+    <script>
+        function showFlashMessage(type, message) {
+            const flash = document.getElementById('flash-message');
+            if (!message) return;
+
+            flash.innerHTML = `
+            <div style="
+                background-color: ${type === 'success' ? '#d4edda' : '#f8d7da'};
+                color: ${type === 'success' ? '#155724' : '#721c24'};
+                border: 1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'};
+                padding: 12px 16px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+                min-width: 250px;
+                font-family: sans-serif;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                transition: opacity 0.3s ease;
+            ">
+                ${message}
+            </div>
+        `;
+
+            setTimeout(() => {
+                flash.innerHTML = '';
+            }, 4000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (flashMessageData.success) {
+                showFlashMessage('success', flashMessageData.success);
+            } else if (flashMessageData.error) {
+                showFlashMessage('error', flashMessageData.error);
+            }
         });
     </script>
 @endsection

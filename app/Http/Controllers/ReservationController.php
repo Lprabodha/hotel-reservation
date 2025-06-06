@@ -86,7 +86,7 @@ class ReservationController extends Controller
             DB::rollBack();
             Log::error($e);
 
-            return redirect()->back()->withErrors(['error' => 'Reservation failed: '.$e->getMessage()]);
+            return redirect()->back()->with('error', 'Reservation failed. Please try again.');
         }
     }
 
