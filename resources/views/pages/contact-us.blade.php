@@ -121,7 +121,7 @@
         <h2 class="hidden">Contact map</h2>
         <div class="wpo-contact-map">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.9147703055!2d-74.11976314309273!3d40.69740344223377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbd!4v1547528325671"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.87298541254!2d80.1496373!3d6.0558916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae174d3f0f3e2d1%3A0x2b9b9b9b9b9b9b9b!2sGalle%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1622547890123!5m2!1sen!2slk"
                 allowfullscreen></iframe>
         </div>
     </section>
