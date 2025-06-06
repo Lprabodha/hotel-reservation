@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
+use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
@@ -10,6 +12,8 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ReservationController extends Controller
@@ -76,6 +80,9 @@ class ReservationController extends Controller
                 ? $request->customer_email
                 : $request->travel_agency;
 
+            $user = User::where('user_id', $userId)->first();
+            $email = $user->email;
+
             $paymentMethod = ($request->card_number && $request->card_expire_date && $request->csv)
                 ? 'credit_card'
                 : 'none';
@@ -84,17 +91,19 @@ class ReservationController extends Controller
             $checkoutDate = Carbon::parse($request->checkout);
             $nights = $checkinDate->diffInDays($checkoutDate);
 
-            if (empty($request->rooms) || !is_array($request->rooms)) {
+            if (empty($request->rooms) || ! is_array($request->rooms)) {
                 throw new \Exception('No rooms selected.');
             }
 
             $firstRoom = Room::where('id', $request->rooms[0])->firstOrFail();
             $hotelId = $firstRoom->hotel_id;
 
+            $hotel = Hotel::where('id', $hotelId)->first();
+
             $specialRequests = $request->special_requests;
 
             $totalGuests = $request->guests;
-            if (!$totalGuests) {
+            if (! $totalGuests) {
                 $totalGuests = Room::whereIn('id', $request->rooms)->sum('occupancy');
             }
 
@@ -119,6 +128,23 @@ class ReservationController extends Controller
             Room::whereIn('id', $request->rooms)->update(['is_available' => false]);
 
             DB::commit();
+
+            try {
+                $data = [
+                    'title' => 'Thank You for Your Reservation:' . $reservation->confirmation_number,
+                    'email' => $email,
+                    'template' => 'reservation',
+                    'reservation_id' => $reservation->confirmation_number,
+                    'date' => Carbon::parse($request->checkin)->diffForHumans(),
+                    'hotel_name' => $hotel->name,
+                    'hotel_location' => $hotel->location,
+                    'reservation_url' => route('about-us'),
+                ];
+
+                Mail::to($email)->send(new SendMail($data));
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: '.$e->getMessage());
+            }
 
             return response()->json([
                 'success' => true,
@@ -155,8 +181,14 @@ class ReservationController extends Controller
         if (! auth()->user()->hasRole('super-admin')) {
             $user = auth()->user();
             $hotel = $user->hotels()->first();
-            $query->where('hotel_id', $hotel->id);
+
+            if ($hotel) {
+                $query->where('hotel_id', $hotel->id);
+            } else {
+                $query->whereRaw('0 = 1');
+            }
         }
+
 
         $totalData = $query->count();
 
@@ -211,9 +243,9 @@ class ReservationController extends Controller
                     default => '<span class="badge bg-light">Unknown</span>',
                 };
                 $nestedData['action'] = '
-                    <a href="#" class="btn btn-outline-primary-600 radius-8 px-20 py-11">View</a>
-                    <a href="#" class="btn btn-outline-lilac-600 radius-8 px-20 py-11">Edit</a>
-                    <button onclick="deleteReservation(' . $r->id . ')" class="btn btn-outline-danger-600 radius-8 px-20 py-11">Delete</button>
+                    <a href="#" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center"> <iconify-icon icon="iconamoon:eye-light"></iconify-icon></a>
+                    <a href="#" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center"><iconify-icon icon="lucide:edit"></iconify-icon></a>
+                    <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center"><iconify-icon icon="mingcute:delete-2-line"></iconify-icon></button>
                 ';
                 $data[] = $nestedData;
             }

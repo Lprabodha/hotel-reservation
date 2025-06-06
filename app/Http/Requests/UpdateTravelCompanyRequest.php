@@ -33,6 +33,7 @@ class UpdateTravelCompanyRequest extends FormRequest
             ],
             'contact_number' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
+            'discount' => 'required|integer',
         ];
     }
 }

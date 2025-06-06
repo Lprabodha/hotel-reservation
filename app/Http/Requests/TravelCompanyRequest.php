@@ -32,6 +32,7 @@ class TravelCompanyRequest extends FormRequest
             ],
             'contact_number' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
+            'discount' => 'required|integer',
 
         ];
     }
@@ -47,6 +48,8 @@ class TravelCompanyRequest extends FormRequest
             'contact_number.max' => 'The phone number may not be greater than 20 characters.',
             'address.string' => 'The address must be a string.',
             'address.max' => 'The address may not be greater than 255 characters.',
+            'discount.required' => 'The discount name is required',
+            'discount.integer' => 'The discount  must be a integer',
         ];
     }
 }

@@ -15,6 +15,7 @@ class TravelCompany extends Model
         'email',
         'contact_number',
         'address',
+        'discount',
     ];
 
     public function user()

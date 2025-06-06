@@ -54,6 +54,10 @@
             top: 0;
             right: 10px;
         }
+
+        .form-wizard-list__item {
+            width: 33.3% !important;
+        }
     </style>
 
     </style>

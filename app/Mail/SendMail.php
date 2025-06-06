@@ -28,7 +28,7 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Travel Company Invitation Mail',
+            subject: $this->data->title,
         );
     }
 
@@ -38,7 +38,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.user-invitation',
+            view: 'emails.'.$this->data->template,
             with: ['mailData' => $this->data],
         );
     }
