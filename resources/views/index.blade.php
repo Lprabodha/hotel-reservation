@@ -606,7 +606,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="1400ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/1.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/nadeesha.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Nadeesha Fernando</h3>
@@ -621,7 +621,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="1600ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/2.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/amal.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Amal Perera</h3>
@@ -636,7 +636,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="1800ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/3.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/kavindi.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Kavindi Silva</h3>
@@ -651,7 +651,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="2000ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/4.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/ruwan.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Ruwan Jayasuriya</h3>
@@ -666,7 +666,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="2200ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/5.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/ishani.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Ishani Wijesinghe</h3>
@@ -681,7 +681,7 @@
                 <div class="testimonial-card wow fadeInUp" data-wow-duration="2400ms">
                     <div class="top-content">
                         <div class="image">
-                            <img src="images/testimonial/6.jpg" alt="Customer Photo">
+                            <img src="{{ Vite::asset('resources/images/image/sameera.jpg') }}" alt="Customer">
                         </div>
                         <div class="text">
                             <h3>Sameera Rajapaksa</h3>
