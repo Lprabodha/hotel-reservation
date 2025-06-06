@@ -105,7 +105,7 @@
                         </div>
                         <div class="places-item">
                             <div class="image">
-                                <img src="images/popular-places/2.jpg" alt="">
+                                <img src="{{ Vite::asset('resources/images/image/kandy.jpg') }}" alt="">
                             </div>
                             <div class="content">
                                 <h2>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="places-item">
                             <div class="image">
-                                <img src="images/popular-places/3.jpg" alt="">
+                                <img src="{{ Vite::asset('resources/images/image/colombo.jpg') }}" alt="">
                             </div>
                             <div class="content">
                                 <h2>
