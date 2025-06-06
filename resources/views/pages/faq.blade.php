@@ -40,15 +40,13 @@
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseOne" aria-expanded="true"
                                                     aria-controls="collapseOne">
-                                                    What types of cases does your law firm handle?
+                                                     How do I make a hotel reservation on Click2Checkin?
                                                 </button>
                                             </h3>
                                             <div id="collapseOne" class="accordion-collapse collapse show"
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
-                                                        exercitationem pariatur iure nemo esse repellendus est quo
-                                                        recusandae. Delectus, maxime.</p>
+                                                    <p>Just search for your destination, choose your check-in and check-out dates, and select a hotel. Click “Book Now” and follow the steps to confirm your reservation.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,15 +55,13 @@
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                     aria-expanded="false" aria-controls="collapseTwo">
-                                                    Before hiring a lawyer, what kind of questions should I ask?
+                                                    Can I cancel or change my booking?
                                                 </button>
                                             </h3>
                                             <div id="collapseTwo" class="accordion-collapse collapse"
                                                 aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
-                                                        exercitationem pariatur iure nemo esse repellendus est quo
-                                                        recusandae. Delectus, maxime.</p>
+                                                    <p>Yes. Most bookings can be changed or cancelled, depending on the hotel’s policy. You can manage your booking through your account dashboard or contact our support team for help.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,16 +70,13 @@
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                     aria-expanded="false" aria-controls="collapseThree">
-                                                    Should I meet with multiple attorneys and shop around before
-                                                    hiring one?
+                                                    Is it safe to pay online through Click2Checkin?
                                                 </button>
                                             </h3>
                                             <div id="collapseThree" class="accordion-collapse collapse"
                                                 aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
-                                                        exercitationem pariatur iure nemo esse repellendus est quo
-                                                        recusandae. Delectus, maxime.</p>
+                                                    <p>Absolutely. We use secure payment gateways and encrypted technology to protect your personal and payment information.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,16 +85,13 @@
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                                     aria-expanded="false" aria-controls="collapseFour">
-                                                    In addition to billable hours, what other costs can lawyer's
-                                                    charge for?
+                                                     Can travel agencies use Click2Checkin to book for their clients?
                                                 </button>
                                             </h3>
                                             <div id="collapseFour" class="accordion-collapse collapse"
                                                 aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
-                                                        exercitationem pariatur iure nemo esse repellendus est quo
-                                                        recusandae. Delectus, maxime.</p>
+                                                    <p>Yes. Travel companies can register under a special account type and manage multiple bookings for their clients easily through our system.</p>
                                                 </div>
                                             </div>
                                         </div>
