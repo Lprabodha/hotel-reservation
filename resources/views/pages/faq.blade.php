@@ -85,11 +85,26 @@
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                                     aria-expanded="false" aria-controls="collapseFour">
-                                                     Can travel agencies use Click2Checkin to book for their clients?
+                                                    Do I need to create an account to check hotels?
                                                 </button>
                                             </h3>
                                             <div id="collapseFour" class="accordion-collapse collapse"
                                                 aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <p>No, you can check as a guest. But creating an account allows you to track your bookings, save preferences, and get exclusive deals.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                    aria-expanded="false" aria-controls="collapseThree">
+                                                    Can travel agencies use Click2Checkin to book for their clients?
+                                                </button>
+                                            </h3>
+                                            <div id="collapseThree" class="accordion-collapse collapse"
+                                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     <p>Yes. Travel companies can register under a special account type and manage multiple bookings for their clients easily through our system.</p>
                                                 </div>
@@ -104,7 +119,7 @@
             </div>
         </div> <!-- end container -->
     </section>
-    <!-- end faq-section -->
+    <!-- end faq-section 
 
     <div class="question-area section-padding">
         <div class="container">
@@ -150,5 +165,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection
