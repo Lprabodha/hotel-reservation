@@ -35,6 +35,8 @@ Route::middleware(['auth', 'check_role:customer'])->group(function () {
     Route::get('/hotels/{hotel}/reserve', [HomeController::class, 'reservation'])->name('hotels.reserve');
 });
 Route::post('/reservation', [ControllersReservationController::class, 'store'])->name('reservation.store');
+Route::get('/check-availability', [ControllersReservationController::class, 'checkAvailability']);
+
 
 Route::controller(HotelController::class)->group(function () {
     Route::get('/hotels', 'index')->name('hotels');

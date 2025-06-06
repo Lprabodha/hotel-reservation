@@ -31,8 +31,8 @@
                         </div>
                     </div>
                 @empty
-                    <img src="{{ Vite::asset('resources/images/default-hotel.webp') }}" alt="" width="350px" height="500px"
-                                style="object-fit: cover;">
+                    <img src="{{ Vite::asset('resources/images/default-hotel.webp') }}" alt="" width="350px"
+                        height="500px" style="object-fit: cover;">
                 @endforelse
             </div>
         </div>
@@ -72,14 +72,14 @@
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{ $hotelsImagesUrls[0] ?? Vite::asset('resources/images/default-hotel.webp') }}" alt="" width="529px"
-                                                height="406px">
+                                            <img src="{{ $hotelsImagesUrls[0] ?? Vite::asset('resources/images/default-hotel.webp') }}"
+                                                alt="" width="529px" height="406px">
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <div class="room-d-img">
-                                            <img src="{{ $roomsImagesUrls[0] ?? Vite::asset('resources/images/default-room.jpg') }}" alt="" width="529px"
-                                                height="406px">
+                                            <img src="{{ $roomsImagesUrls[0] ?? Vite::asset('resources/images/default-room.jpg') }}"
+                                                alt="" width="529px" height="406px">
                                         </div>
                                     </div>
                                     {{-- @dd($hotel) --}}
@@ -255,15 +255,48 @@
                                 </div>
                             </div>
                         </div> --}}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <div class="wpo-section-title s2 wow fadeInUp" data-wow-duration="1200ms">
+                                        @if ($hotel->rooms->count() > 0)
+                                            @auth
+                                                @if (auth()->user()->hasRole('customer'))
+                                                    <a href="{{ route('hotels.reserve', $hotel->id) }}" class="theme-btn">
+                                                        Make a Reservation
+                                                        <iconify-icon icon="mingcute:square-arrow-right-line"
+                                                            class="text-xl"></iconify-icon>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="theme-btn">
+                                                        Make a Reservation
+                                                        <iconify-icon icon="mingcute:square-arrow-right-line"
+                                                            class="text-xl"></iconify-icon>
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('login') }}" class="theme-btn">
+                                                    Make a Reservation
+                                                    <iconify-icon icon="mingcute:square-arrow-right-line"
+                                                        class="text-xl"></iconify-icon>
+                                                </a>
+                                            @endauth
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="widget wpo-instagram-widget">
                             <div class="widget-title">
                                 <h3>Discover Our Rooms</h3>
                             </div>
                             <ul class="d-flex">
                                 @forelse ($roomsImagesUrls as $roomImageUrl)
-                                    <li><a href="#"><img src="{{ $roomImageUrl }}" alt="" width="117px" height="100px"></a></li>
+                                    <li><a href="#"><img src="{{ $roomImageUrl }}" alt="" width="117px"
+                                                height="100px"></a></li>
                                 @empty
-                                    <li><a href="#"><img src="{{ Vite::asset('resources/images/default-room.jpg') }}" alt=""  width="117px" height="100px"></a></li>
+                                    <li><a href="#"><img src="{{ Vite::asset('resources/images/default-room.jpg') }}"
+                                                alt="" width="117px" height="100px"></a></li>
                                 @endforelse
                             </ul>
                         </div>
@@ -320,36 +353,6 @@
                 @empty
                     <div>No Rooms Available at this moment to show...</div>
                 @endforelse
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-12">
-                    <div class="wpo-section-title s2 wow fadeInUp" data-wow-duration="1200ms">
-                        @if ($hotel->rooms->count() > 0)
-                            @auth
-                                @if (auth()->user()->hasRole('customer'))
-                                    <a href="{{ route('hotels.reserve', $hotel->id) }}" class="theme-btn">
-                                        Make a Reservation
-                                        <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
-                                    </a>
-                                @else
-                                    <a href="{{ route('login') }}" class="theme-btn">
-                                        Make a Reservation
-                                        <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
-                                    </a>
-                                @endif
-                            @else
-                                <a href="{{ route('login') }}" class="theme-btn">
-                                    Make a Reservation
-                                    <iconify-icon icon="mingcute:square-arrow-right-line" class="text-xl"></iconify-icon>
-                                </a>
-                            @endauth
-                        @endif
-                    </div>
-                </div>
             </div>
         </div>
     </section>

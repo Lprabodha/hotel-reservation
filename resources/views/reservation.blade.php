@@ -244,7 +244,7 @@
                 </div>
 
                 {{-- Rooms cards list here --}}
-                @foreach ($hotel->rooms->chunk(2) as $roomPair)
+                {{-- @foreach ($hotel->rooms->chunk(2) as $roomPair)
                     <div class="row mb-4">
                         @foreach ($roomPair as $room)
                             <div class="col-md-6">
@@ -283,7 +283,7 @@
                             </div>
                         @endforeach
                     </div>
-                @endforeach
+                @endforeach --}}
 
 
                 <!-- Booking Details -->
@@ -292,7 +292,7 @@
                     <div class="card">
                         <h3 class="section-title">Your Booking Details</h3>
 
-                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div class="form-group mb-3" style="width: 30%">
                                 <label for="checkin">Check-in Date</label>
                                 <input type="date" class="form-control" name="checkin" required>
@@ -303,9 +303,13 @@
                                 <input type="date" class="form-control" name="checkout" required>
                             </div>
 
-                            <div class="form-group mb-3" style="width: 30%">
+                            <div class="form-group mb-3" style="width: 15%">
                                 <label for="guests">Number of Guests</label>
                                 <input type="number" class="form-control" name="guests" min="1" required>
+                            </div>
+                            <div class="text-center" style="width: 15%">
+                                <button type="button" class="btn btn-primary" id="check-availability-btn">List Available
+                                    Rooms</button>
                             </div>
                         </div>
 
@@ -358,18 +362,27 @@
                     </div>
                 </form>
 
+                <div class="row mb-4" id="available-rooms-container">
+                    {{-- Rooms will be loaded here by JavaScript --}}
+                </div>
+
+
             </div>
 
         </div>
     </div>
     <script>
-        const selectedRoomsInputContainer = document.getElementById('selected-rooms');
-        const roomCheckboxes = document.querySelectorAll('.room-checkbox');
-        const roomList = document.getElementById('selected-room-list');
-        const finalPriceEl = document.getElementById('final-price');
         const checkinInput = document.querySelector('input[name="checkin"]');
         const checkoutInput = document.querySelector('input[name="checkout"]');
+        const guestsInput = document.querySelector('input[name="guests"]');
+        const checkAvailabilityBtn = document.getElementById('check-availability-btn');
 
+        const selectedRoomsInputContainer = document.getElementById('selected-rooms');
+        const roomList = document.getElementById('selected-room-list');
+        const finalPriceEl = document.getElementById('final-price');
+        const roomsContainer = document.getElementById('available-rooms-container');
+
+        // Calculate number of nights between check-in and check-out
         function getNights() {
             const checkin = checkinInput.value;
             const checkout = checkoutInput.value;
@@ -379,13 +392,13 @@
             const start = new Date(checkin);
             const end = new Date(checkout);
 
-            const timeDiff = end - start;
+            const diff = end - start;
+            if (isNaN(diff) || diff <= 0) return 0;
 
-            if (isNaN(timeDiff) || timeDiff <= 0) return 0;
-
-            return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            return Math.ceil(diff / (1000 * 60 * 60 * 24));
         }
 
+        // Update selected room list and final price
         function updateSelectedRooms() {
             const nights = getNights();
             let totalPrice = 0;
@@ -393,28 +406,25 @@
             roomList.innerHTML = '';
             selectedRoomsInputContainer.innerHTML = '';
 
-            roomCheckboxes.forEach(cb => {
-                if (cb.checked) {
-                    const id = cb.dataset.id;
-                    const name = cb.dataset.name;
-                    const price = parseFloat(cb.dataset.price);
+            document.querySelectorAll('.room-checkbox:checked').forEach(cb => {
+                const id = cb.dataset.id;
+                const name = cb.dataset.name;
+                const price = parseFloat(cb.dataset.price);
+                if (isNaN(price)) return;
 
-                    if (isNaN(price)) return;
+                const subtotal = price * nights;
 
-                    const subtotal = price * nights;
+                const li = document.createElement('li');
+                li.textContent = `${name} × ${nights} night(s): $${subtotal.toFixed(2)}`;
+                roomList.appendChild(li);
 
-                    const li = document.createElement('li');
-                    li.textContent = `${name} × ${nights} night(s): $${subtotal.toFixed(2)}`;
-                    roomList.appendChild(li);
+                const hidden = document.createElement('input');
+                hidden.type = 'hidden';
+                hidden.name = 'rooms[]';
+                hidden.value = id;
+                selectedRoomsInputContainer.appendChild(hidden);
 
-                    const hidden = document.createElement('input');
-                    hidden.type = 'hidden';
-                    hidden.name = 'rooms[]';
-                    hidden.value = id;
-                    selectedRoomsInputContainer.appendChild(hidden);
-
-                    totalPrice += subtotal;
-                }
+                totalPrice += subtotal;
             });
 
             finalPriceEl.textContent = nights === 0 ?
@@ -422,8 +432,78 @@
                 `$${totalPrice.toFixed(2)}`;
         }
 
-        roomCheckboxes.forEach(cb => cb.addEventListener('change', updateSelectedRooms));
+        // Handle check availability button click
+        checkAvailabilityBtn.addEventListener('click', function() {
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+            const guests = guestsInput.value;
+
+            if (!checkin || !checkout || !guests) {
+                alert('Please enter check-in, check-out dates, and number of guests.');
+                return;
+            }
+
+            fetch(`/check-availability?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
+                .then(response => response.json())
+                .then(data => {
+                    roomsContainer.innerHTML = '';
+
+                    if (!data.rooms || data.rooms.length === 0) {
+                        roomsContainer.innerHTML = '<p>No rooms available for selected dates and guests.</p>';
+                        return;
+                    }
+
+                    data.rooms.forEach(room => {
+                        roomsContainer.innerHTML += `
+                        <div class="col-md-6">
+                            <div class="card room-card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-5">
+                                        <img src="${room.image}" class="card-img" style="object-fit: cover; width: 100%; height: 136px;" alt="Room Image">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Room ${room.room_number} - ${room.room_type}</h5>
+                                            <p class="card-text">Price per night: $${room.price_per_night}</p>
+                                            <div class="form-check">
+                                                <input class="form-check-input room-checkbox" type="checkbox"
+                                                    id="room-${room.id}"
+                                                    data-id="${room.id}"
+                                                    data-name="Room ${room.room_number} - ${room.room_type}"
+                                                    data-price="${room.price_per_night}">
+                                                <label class="form-check-label" for="room-${room.id}">
+                                                    Select this room
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    });
+
+                    // Bind change event to the new checkboxes
+                    document.querySelectorAll('.room-checkbox').forEach(cb => {
+                        cb.addEventListener('change', updateSelectedRooms);
+                    });
+
+                    // Auto-update prices based on current inputs
+                    updateSelectedRooms();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to fetch available rooms.');
+                });
+        });
+
+        // Update price summary on date changes
         checkinInput.addEventListener('change', updateSelectedRooms);
         checkoutInput.addEventListener('change', updateSelectedRooms);
+
+        // If you have checkboxes initially loaded (before any AJAX), bind events to them too
+        document.querySelectorAll('.room-checkbox').forEach(cb => {
+            cb.addEventListener('change', updateSelectedRooms);
+        });
     </script>
 @endsection

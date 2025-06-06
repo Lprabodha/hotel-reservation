@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
 
 class ReservationController extends Controller
@@ -118,5 +120,38 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+    }
+
+    public function checkAvailability(Request $request)
+    {
+        $request->validate([
+            'checkin' => 'required|date',
+            'checkout' => 'required|date|after:checkin',
+        ]);
+
+        $checkin = Carbon::parse($request->checkin);
+        $checkout = Carbon::parse($request->checkout);
+
+        $conflictingReservations = DB::table('reservation_room')
+            ->join('reservations', 'reservation_room.reservation_id', '=', 'reservations.id')
+            ->where('check_in_date', '<', $checkout)
+            ->where('check_out_date', '>', $checkin)
+            ->pluck('room_id');
+
+        $availableRooms = Room::whereNotIn('id', $conflictingReservations)
+            ->get()
+            ->map(function ($room) {
+                return [
+                    'id' => $room->id,
+                    'room_number' => $room->room_number,
+                    'room_type' => ucfirst($room->room_type),
+                    'price_per_night' => $room->price_per_night,
+                    'image' => !empty($room->images[0])
+                                ? Storage::disk('s3')->url($room->images[0])
+                                : Vite::asset('resources/images/default-room.jpg'),
+                ];
+            });
+
+        return response()->json(['rooms' => $availableRooms]);
     }
 }
