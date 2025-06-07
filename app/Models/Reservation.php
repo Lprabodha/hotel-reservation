@@ -30,10 +30,6 @@ class Reservation extends Model
         'card_number',
     ];
 
-    protected $casts = [
-        'check_in_date' => 'datetime:Y-m-d',
-        'check_out_date' => 'datetime:Y-m-d',
-    ];
 
     public function rooms()
     {
