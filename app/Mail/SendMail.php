@@ -22,13 +22,26 @@ class SendMail extends Mailable
         $this->data = $data;
     }
 
+    protected function getValue($key)
+    {
+        if (is_array($this->data) && isset($this->data[$key])) {
+            return $this->data[$key];
+        }
+
+        if (is_object($this->data) && isset($this->data->$key)) {
+            return $this->data->$key;
+        }
+
+        return null;
+    }
+
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->data->title,
+            subject: $this->getValue('title'),
         );
     }
 
@@ -38,7 +51,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.'.$this->data->template,
+            view: 'emails.' . $this->getValue('template'),
             with: ['mailData' => $this->data],
         );
     }

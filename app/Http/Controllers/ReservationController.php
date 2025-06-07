@@ -81,21 +81,26 @@ class ReservationController extends Controller
 
             $reservation->rooms()->sync($request->rooms);
             $reservation->load('hotel');
+            // dd($reservation);
 
-            $mailData = (object)[
-                'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
-                'name' => auth()->user()?->name ?? 'Guest',
-                'reservation_id' => $reservation->confirmation_number,
-                'date' => $reservation->check_in_date->format('Y-m-d'),
-                'time' => '12:00 PM',
-                'hotel_name' => $reservation->hotel->name ?? 'N/A',
-                'hotel_location' => $reservation->hotel->address ?? 'N/A',
-                'location' => $reservation->hotel->city ?? 'N/A',
-                'reservation_url' => route('reservation.confirmed', ['reservation' => $reservation->id]),
-                'template' => 'reservation-confirmation',
-            ];
-
-            Mail::to(auth()->user()->email)->send(new SendMail($mailData));
+            try {  
+                $mailData = [
+                    'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
+                    'name' => auth()->user()?->name ?? 'Guest',
+                    'reservation_id' => $reservation->confirmation_number,
+                    'date' => $reservation->check_in_date->format('Y-m-d'),
+                    'time' => '12:00 PM',
+                    'hotel_name' => $reservation->hotel->name ?? 'N/A',
+                    'hotel_location' => $reservation->hotel->address ?? 'N/A',
+                    'location' => $reservation->hotel->city ?? 'N/A',
+                    'reservation_url' => route('about-us'),
+                    'template' => 'reservation',
+                ];
+    
+                Mail::to(auth()->user()->email)->send(new SendMail($mailData));
+            } catch (\Exception $e) {
+                Log::error($e);
+            }
 
             $reservation->rooms()->sync($request->rooms);
 
