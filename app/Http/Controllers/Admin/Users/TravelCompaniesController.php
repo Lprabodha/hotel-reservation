@@ -162,17 +162,13 @@ class TravelCompaniesController extends Controller
         $user = User::findOrFail($id);
         $travelCompany = $user->travelCompany;
 
-        if (! $travelCompany) {
-            return redirect()->route('admin.travel-companies.index')->with('error', 'Travel Company not found.');
-        }
-
         return view('admin.users.travel-companies.edit', compact('travelCompany'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTravelCompanyRequest $request)
+    public function update(Request $request)
     {
         $travelCompany = TravelCompany::with('user')->findOrFail($request->id);
 
@@ -185,7 +181,6 @@ class TravelCompaniesController extends Controller
 
         $travelCompany->user->update([
             'name' => $request->company_name,
-            'email' => $request->email,
         ]);
 
         return redirect()

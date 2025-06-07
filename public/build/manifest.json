@@ -1379,8 +1379,8 @@
     "src": "resources/images/admin/chat/1.png"
   },
   "resources/images/admin/user.png": {
-    "file": "assets/1-BD-cC3Ws.png",
-    "src": "resources/images/admin/chat/1.png"
+    "file": "assets/user-D-EjudNB.png",
+    "src": "resources/images/admin/user.png"
   },
   "resources/images/admin/users/user1.png": {
     "file": "assets/1-BD-cC3Ws.png",
@@ -2081,6 +2081,10 @@
   "resources/images/ui-icons_555555_256x240.png": {
     "file": "assets/ui-icons_555555_256x240-CHLUvOir.png",
     "src": "resources/images/ui-icons_555555_256x240.png"
+  },
+  "resources/images/user.png": {
+    "file": "assets/user-D__q57DX.png",
+    "src": "resources/images/user.png"
   },
   "resources/images/video-bg.jpg": {
     "file": "assets/video-bg-CJHAEXkX.jpg",

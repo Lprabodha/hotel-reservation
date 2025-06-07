@@ -275,7 +275,7 @@
                 <div class="dropdown">
                     <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
                         data-bs-toggle="dropdown">
-                        <img src="https://randomuser.me/api/portraits/med/men/75.jpg" alt="image"
+                        <img src="{{ Vite::asset('resources/images/user.png') }}" alt="image"
                             class="w-40-px h-40-px object-fit-cover rounded-circle">
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-sm">

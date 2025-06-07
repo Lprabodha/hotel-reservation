@@ -195,7 +195,7 @@ class PaymentController extends Controller
 
         Payment::create([
             'bill_id' => $bill->id,
-            'method' => 'card',
+            'method' => 'credit_card',
             'amount' => $bill->total_amount,
             'paid_at' => Carbon::now(),
         ]);

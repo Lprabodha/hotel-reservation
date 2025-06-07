@@ -31,25 +31,26 @@
                                         @enderror
 
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-12">
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input id="password" type="password"
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div style="position: relative;">
+                                            <input id="passwordInput" type="password"
                                                 class="form-control @error('password') is-invalid @enderror" name="password"
                                                 required autocomplete="current-password" placeholder="Enter your password">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default reveal6" type="button"><i
-                                                        class="ti-eye"></i></button>
-                                            </span>
 
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-
+                                            <button type="button" class="btn reveal6"
+                                                style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: none; border: none;">
+                                                <i class="ti-eye" id="togglePasswordIcon"></i>
+                                            </button>
                                         </div>
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="check-box-wrap">
                                             <div class="input-box">
@@ -57,7 +58,7 @@
                                                 <label for="fruit4">Remember Me</label>
                                             </div>
                                             <div class="forget-btn">
-                                                <a href="forgot.html">Forgot Password?</a>
+                                                <a href="{{ route('password.request') }}">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +76,8 @@
                                         <span>Log in with Google</span>
                                     </a>
                                 </div>
-                                <p class="subText mt-1">Don't have an account? <a href="{{ route('register') }}">Create an account</a>
+                                <p class="subText mt-1">Don't have an account? <a href="{{ route('register') }}">Create an
+                                        account</a>
                                 </p>
                             </div>
                         </form>
@@ -86,4 +88,16 @@
 
     </div>
     <!-- end of page-wrapper -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePasswordBtn = document.querySelector('.reveal6');
+            const passwordInput = document.getElementById('passwordInput');
+            const icon = document.getElementById('togglePasswordIcon');
+
+            togglePasswordBtn.addEventListener('click', function() {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+            });
+        });
+    </script>
 @endsection

@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\TravelCompany;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -193,6 +194,7 @@ class ReservationController extends Controller
             } catch (\Exception $e) {
                 Log::error('Email failed to send: ' . $e->getMessage());
             }
+
             return redirect()->route('admin.reservation.index')->with('success', 'Reservation created successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -329,7 +331,15 @@ class ReservationController extends Controller
             ';
             }
 
-            if ($r->status != 'cancelled' || $r->status != 'no_show' || $r->status != 'checked_out' || $r->status != 'completed') {
+            if ($r->status == 'completed') {
+                $action .= '
+                    <a href="' . route('admin.reservation.download', $r->id) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                        <iconify-icon icon="la:file-invoice"></iconify-icon>
+                    </a>
+                ';
+            }
+
+            if ($r->status != 'cancelled' && $r->status != 'no_show' && $r->status != 'checked_out' && $r->status != 'completed') {
 
                 $action .= '
             <button onclick="deleteReservation(' . $r->id . ')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
@@ -357,25 +367,19 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        $reservation = Reservation::where('confirmation_number', $id)->first();
+        $reservation = Reservation::where('confirmation_number', $id)->firstOrFail();
 
-        if (! $reservation) {
-            return redirect()->route('admin.reservation.index')->with('error', 'Reservation not found.');
-        }
-
-        $user = Auth::user();
-
-        if (! $user->hasRole('hotel-clerk')) {
+        if (!auth()->user()->hasRole('hotel-clerk')) {
             return redirect()->back()->with('error', 'Access denied.');
         }
-
-        $hotel = $user->hotels()->with(['rooms' => function ($q) {
-            $q->where('is_available', 1);
-        }])->first();
 
         if (Carbon::parse($reservation->check_in_date)->isToday() || Carbon::parse($reservation->check_in_date)->isPast()) {
             return redirect()->back()->with('error', 'Cannot edit a reservation that has already started.');
         }
+
+        $hotel = auth()->user()->hotels()->with(['rooms' => function ($q) {
+            $q->where('is_available', 1);
+        }])->first();
 
         $bookedDates = [];
 
@@ -399,13 +403,68 @@ class ReservationController extends Controller
         return view('admin.reservations.edit', compact('reservation', 'hotel', 'bookedDates'));
     }
 
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $reservation = Reservation::findOrFail($id);
+
+        if (Carbon::parse($reservation->check_in_date)->isToday() || Carbon::parse($reservation->check_in_date)->isPast()) {
+            return redirect()->back()->with('error', 'Cannot edit a reservation that has already started.');
+        }
+
+        $request->validate([
+            'checkin' => 'required|date|after:today',
+            'checkout' => 'required|date|after:checkin',
+            'guests' => 'required|integer|min:1',
+            'rooms' => 'required|array|min:1',
+        ]);
+
+        $extraNight = false;
+        $checkoutDate = Carbon::parse($request->checkout);
+
+        $lastPossibleCheckout = Carbon::parse($reservation->check_out_date)->copy()->addDay();
+
+        if ($checkoutDate->gt($reservation->check_out_date)) {
+            if ($checkoutDate->eq($lastPossibleCheckout)) {
+                $extraNight = true;
+            } else {
+                return back()->with('error', 'Only one extra night can be added.');
+            }
+        }
+
+        $bookedDates = Reservation::where('hotel_id', $reservation->hotel_id)
+            ->where('id', '!=', $reservation->id)
+            ->get()
+            ->flatMap(function ($r) {
+                return CarbonPeriod::create(
+                    Carbon::parse($r->check_in_date),
+                    Carbon::parse($r->check_out_date)->subDay()
+                )->map->format('Y-m-d');
+            })->unique();
+
+        $selectedDates = CarbonPeriod::create($request->checkin, $checkoutDate->subDay())->map->format('Y-m-d');
+
+        foreach ($selectedDates as $date) {
+            if ($bookedDates->contains($date)) {
+                return back()->with('error', 'One or more selected dates are already booked.');
+            }
+        }
+
+        $reservation->update([
+            'check_in_date' => $request->checkin,
+            'check_out_date' => $request->checkout,
+            'guests' => $request->guests,
+            'special_requests' => $request->special_requests,
+        ]);
+
+        $reservation->rooms()->sync($request->rooms);
+
+        return redirect()->route('admin.reservation.index')->with('success', 'Reservation updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -541,5 +600,16 @@ class ReservationController extends Controller
             'success' => true,
             'message' => 'Status updated successfully.',
         ]);
+    }
+
+    public function downloadInvoice($id)
+    {
+        $reservation = Reservation::with(['user', 'bill.services'])->findOrFail($id);
+        $reservationRooms = $reservation->rooms;
+        $bill = $reservation->bill;
+
+        $pdf = Pdf::loadView('admin.reservations.invoice_pdf', compact('reservation', 'reservationRooms', 'bill'));
+
+        return $pdf->download('invoice_' . $reservation->confirmation_number . '.pdf');
     }
 }

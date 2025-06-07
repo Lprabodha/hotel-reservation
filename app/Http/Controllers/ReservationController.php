@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\SendMail;
 use App\Models\Reservation;
 use App\Models\Room;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -91,7 +92,7 @@ class ReservationController extends Controller
 
             try {
                 $mailData = [
-                    'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
+                    'title' => 'Reservation Confirmed: '.$reservation->confirmation_number,
                     'name' => auth()->user()?->name ?? 'Guest',
                     'reservation_id' => $reservation->confirmation_number,
                     'date' => $reservation->check_in_date->format('Y-m-d'),
@@ -180,7 +181,7 @@ class ReservationController extends Controller
                     'room_number' => $room->room_number,
                     'room_type' => ucfirst($room->room_type),
                     'price_per_night' => $room->price_per_night,
-                    'image' => !empty($room->images[0])
+                    'image' => ! empty($room->images[0])
                         ? Storage::disk('s3')->url($room->images[0])
                         : Vite::asset('resources/images/default-room.jpg'),
                 ];
@@ -189,11 +190,21 @@ class ReservationController extends Controller
         return response()->json(['rooms' => $availableRooms]);
     }
 
-
     public function reservationConfirmed(Reservation $reservation)
     {
         $reservation->load('rooms', 'hotel');
 
         return view('thank-you-page', compact('reservation'));
+    }
+
+    public function downloadInvoice($id)
+    {
+        $reservation = Reservation::with(['user', 'bill.services'])->findOrFail($id);
+        $reservationRooms = $reservation->rooms;
+        $bill = $reservation->bill;
+
+        $pdf = Pdf::loadView('dashboard.invoice_pdf', compact('reservation', 'reservationRooms', 'bill'));
+
+        return $pdf->download('invoice_'.$reservation->confirmation_number.'.pdf');
     }
 }

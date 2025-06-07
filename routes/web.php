@@ -41,6 +41,7 @@ Route::controller(ControllersReservationController::class)->group(function () {
     Route::post('/reservation', 'store')->name('reservation.store');
     Route::get('/check-availability', 'checkAvailability');
     Route::get('/reservation-confirmed/{reservation}', 'reservationConfirmed')->name('reservation.confirmed');
+    Route::get('/reservations/{reservation}/download', 'downloadInvoice')->name('reservation.download');
 });
 
 Route::controller(HotelController::class)->group(function () {
@@ -155,6 +156,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_p
             Route::get('/reservations/view/{id}', 'view')->name('view');
             Route::get('/reservations/payment/{id}', 'payment')->name('payment');
             Route::post('/reservations/{id}/change-status', 'changeStatus')->name('changeStatus');
+            Route::get('/admin/reservations/{reservation}/download', 'downloadInvoice')->name('download');
         });
     });
 
@@ -187,7 +189,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_p
             Route::post('/customers', 'show')->name('show');
         });
     });
-
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/room-filter', [AdminDashboardController::class, 'fetchRooms'])->name('room-filter');
