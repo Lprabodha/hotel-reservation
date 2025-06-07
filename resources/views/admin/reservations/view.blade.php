@@ -20,16 +20,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
-                    <a href="javascript:void(0)"
-                        class="btn btn-sm btn-primary-600 radius-8 d-inline-flex align-items-center gap-1">
-                        <iconify-icon icon="pepicons-pencil:paper-plane" class="text-xl"></iconify-icon>
-                        Send Invoice
-                    </a>
-                    <a href="javascript:void(0)"
+                    <a href="{{ route('admin.reservation.download', $reservation->id) }}"
                         class="btn btn-sm btn-warning radius-8 d-inline-flex align-items-center gap-1">
                         <iconify-icon icon="solar:download-linear" class="text-xl"></iconify-icon>
-                        Download
+                        Download Invoice
                     </a>
+
                     <button type="button" class="btn btn-sm btn-danger radius-8 d-inline-flex align-items-center gap-1"
                         onclick="printInvoice()">
                         <iconify-icon icon="basil:printer-outline" class="text-xl"></iconify-icon>
@@ -245,4 +241,17 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        function printInvoice() {
+            const printContents = document.getElementById('invoice').innerHTML;
+            const originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        }
+    </script>
 @endsection

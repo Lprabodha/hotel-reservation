@@ -1,6 +1,10 @@
 @extends('layouts.admin.app')
 
 @section('content')
+    @php
+        $today = date('Y-m-d');
+    @endphp
+
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Reservation Request</h6>
@@ -25,11 +29,11 @@
                             <div class="row gy-3">
                                 <div class="col-6">
                                     <label class="form-label">Check in date</label>
-                                    <input type="date" name="check_in_date" class="form-control" required>
+                                    <input type="date" name="check_in_date" class="form-control" required min="{{ $today }}">
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label">Check out date</label>
-                                    <input type="date" name="check_out_date" class="form-control" required>
+                                    <input type="date" name="check_out_date" class="form-control" required min="{{ $today }}">
                                 </div>
 
                                 <div class="col-12">

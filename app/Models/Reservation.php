@@ -27,7 +27,12 @@ class Reservation extends Model
         'auto_cancelled',
         'no_show_billed',
         'hotel_id',
-        'card_number'
+        'card_number',
+    ];
+
+    protected $casts = [
+        'check_in_date' => 'datetime:Y-m-d',
+        'check_out_date' => 'datetime:Y-m-d',
     ];
 
     public function rooms()
@@ -43,5 +48,10 @@ class Reservation extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class);
+    }
+
+    public function bill()
+    {
+        return $this->hasOne(Bill::class);
     }
 }
