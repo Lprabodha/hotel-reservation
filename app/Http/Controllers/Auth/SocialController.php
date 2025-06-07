@@ -35,7 +35,7 @@ class SocialController extends Controller
         } elseif ($user->hasRole('customer') || $user->hasRole('travel-company')) {
             return redirect()->route('dashboard');
         } else {
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.dashboard');
         }
     }
 
