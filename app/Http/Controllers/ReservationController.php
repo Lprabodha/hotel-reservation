@@ -146,7 +146,7 @@ class ReservationController extends Controller
                     'room_number' => $room->room_number,
                     'room_type' => ucfirst($room->room_type),
                     'price_per_night' => $room->price_per_night,
-                    'image' => !empty($room->images[0])
+                    'image' => ! empty($room->images[0])
                                 ? Storage::disk('s3')->url($room->images[0])
                                 : Vite::asset('resources/images/default-room.jpg'),
                 ];

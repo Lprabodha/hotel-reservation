@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,19 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $user = auth()->user();
+
+        if ($user->role === 'super-admin') {
+            $reservations = Reservation::select('id', 'confirmation_number', 'check_in_date', 'check_out_date', 'status')->get();
+        } else {
+            $hotelIds = $user->hotels->pluck('id')->toArray();
+
+            $reservations = Reservation::select('id', 'confirmation_number', 'check_in_date', 'check_out_date', 'status')
+                ->whereIn('hotel_id', $hotelIds)
+                ->get();
+        }
+
+        return view('admin.index', compact('reservations'));
     }
 
     public function fetchRooms(Request $request)
@@ -66,7 +79,6 @@ class DashboardController extends Controller
         return response()->json([
             'html' => $html,
         ]);
-
     }
 
     public function getCustomers()

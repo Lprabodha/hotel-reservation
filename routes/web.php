@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
 use App\Http\Controllers\Admin\ReservationController;
@@ -28,7 +29,6 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/about-us', 'aboutUs')->name('about-us');
     Route::get('/contact-us', 'contact')->name('contact-us');
     Route::get('/faq', 'faq')->name('faq');
-    // Route::get('/reservation', 'reservation')->name('reservation');
 });
 
 Route::middleware(['auth', 'check_role:customer'])->group(function () {
@@ -36,7 +36,6 @@ Route::middleware(['auth', 'check_role:customer'])->group(function () {
 });
 Route::post('/reservation', [ControllersReservationController::class, 'store'])->name('reservation.store');
 Route::get('/check-availability', [ControllersReservationController::class, 'checkAvailability']);
-
 
 Route::controller(HotelController::class)->group(function () {
     Route::get('/hotels', 'index')->name('hotels');
@@ -141,6 +140,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::post('/reservations/update', 'update')->name('update');
             Route::post('/reservations/destroy', 'destroy')->name('destroy');
             Route::get('/reservations/filter', 'fetchRooms')->name('filter');
+            Route::get('/reservations/view/{id}', 'view')->name('view');
+            Route::get('/reservations/payment/{id}', 'payment')->name('payment');
+            Route::post('/reservations/{id}/change-status', 'changeStatus')->name('changeStatus');
+            Route::post('/reservations/{reservation}/cash-payment', 'cashPayment')->name('cashPayment');
+            Route::post('/reservations/{reservation}/stripe-payment', 'stripePayment')->name('stripePayment');
+        });
+    });
+
+    Route::controller(CustomersController::class)->group(function () {
+        Route::name('customers.')->group(function () {
+            Route::get('/customers', 'index')->name('index');
+            Route::post('/customers', 'show')->name('show');
         });
     });
 
