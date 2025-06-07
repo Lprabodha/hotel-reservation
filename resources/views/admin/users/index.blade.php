@@ -1,9 +1,6 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
-
     <div class="dashboard-main-body">
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
@@ -82,9 +79,6 @@
 @endsection
 
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         $('#user-table').DataTable({

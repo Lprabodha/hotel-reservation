@@ -25,13 +25,22 @@
             @if ($isAdminRoute)
 
                 <li>
-                    <a href="{{route('admin.reservation.index')}}" class="d-flex align-items-center gap-2">
+                    <a href="{{ route('admin.reservation.index') }}" class="d-flex align-items-center gap-2">
                         <iconify-icon icon="tabler:brand-booking" width="25" height="25"></iconify-icon>
                         <span class="ms-2">Reservation</span>
                     </a>
                 </li>
 
-                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('manager'))
+                @if (auth()->user()->hasRole('hotel-clerk') || auth()->user()->hasRole('hotel-manager'))
+                    <li>
+                        <a href="{{ route('admin.customers.index') }}" class="d-flex align-items-center gap-2">
+                            <iconify-icon icon="ix:customer-filled" width="25" height="25"></iconify-icon>
+                            <span class="ms-2">Customers</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('hotel-manager'))
                     <li>
                         <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center gap-2">
                             <iconify-icon icon="fa6-solid:hotel" width="25" height="25"></iconify-icon>
@@ -48,7 +57,7 @@
                 @endif
 
 
-                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('manager'))
+                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('hotel-manager'))
                     <li>
                         <a href="chat-message.html" class="d-flex align-items-center gap-2">
                             <iconify-icon icon="tdesign:money" width="25" height="25"></iconify-icon>

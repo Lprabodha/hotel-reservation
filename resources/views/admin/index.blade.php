@@ -20,7 +20,8 @@
 
             @if (auth()->user()->hasRole('hotel-clerk'))
                 <div class="ms-auto m-2">
-                    <a href="{{route('admin.reservation.create')}}" class="btn btn-primary d-flex align-items-center gap-2">
+                    <a href="{{ route('admin.reservation.create') }}"
+                        class="btn btn-primary d-flex align-items-center gap-2">
                         <i class="bi bi-plus-lg"></i> + New Reservation
                     </a>
                 </div>
@@ -139,88 +140,21 @@
         </div>
 
         <div class="row gy-4 mt-1">
-            <div class="col-xxl-6 col-xl-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between">
-                            <h6 class="text-lg mb-0">Sales Statistic</h6>
-                            <select class="form-select bg-base form-select-sm w-auto">
-                                <option>Yearly</option>
-                                <option>Monthly</option>
-                                <option>Weekly</option>
-                                <option>Today</option>
-                            </select>
-                        </div>
-                        <div class="d-flex flex-wrap align-items-center gap-2 mt-8">
-                            <h6 class="mb-0">$27,200</h6>
-                            <span
-                                class="text-sm fw-semibold rounded-pill bg-success-focus text-success-main border br-success px-8 py-4 line-height-1 d-flex align-items-center gap-1">
-                                10% <iconify-icon icon="bxs:up-arrow" class="text-xs"></iconify-icon>
-                            </span>
-                            <span class="text-xs fw-medium">+ $1500 Per Day</span>
-                        </div>
-                        <div id="chart" class="pt-28 apexcharts-tooltip-style-1"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-xl-6">
-                <div class="card h-100 radius-8 border">
+            <div class="col-xxl-12 col-lg-8">
+                <div class="card h-100 p-0">
                     <div class="card-body p-24">
-                        <h6 class="mb-12 fw-semibold text-lg mb-16">Total Subscriber</h6>
-                        <div class="d-flex align-items-center gap-2 mb-20">
-                            <h6 class="fw-semibold mb-0">5,000</h6>
-                            <p class="text-sm mb-0">
-                                <span
-                                    class="bg-danger-focus border br-danger px-8 py-2 rounded-pill fw-semibold text-danger-main text-sm d-inline-flex align-items-center gap-1">
-                                    10%
-                                    <iconify-icon icon="iconamoon:arrow-down-2-fill" class="icon"></iconify-icon>
-                                </span>
-                                - 20 Per Day
-                            </p>
+                        <div id='wrap'>
+                            <div id='reservation-calendar'></div>
+                            <div style='clear:both'></div>
                         </div>
-
-                        <div id="barChart" class="barChart"></div>
-
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-3 col-xl-6">
-                <div class="card h-100 radius-8 border-0 overflow-hidden">
-                    <div class="card-body p-24">
-                        <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
-                            <h6 class="mb-2 fw-bold text-lg">Users Overview</h6>
-                            <div class="">
-                                <select class="form-select form-select-sm w-auto bg-base border text-secondary-light">
-                                    <option>Today</option>
-                                    <option>Weekly</option>
-                                    <option>Monthly</option>
-                                    <option>Yearly</option>
-                                </select>
-                            </div>
-                        </div>
+        </div>
 
+        <div class="row gy-4 mt-1">
 
-                        <div id="userOverviewDonutChart"></div>
-
-                        <ul class="d-flex flex-wrap align-items-center justify-content-between mt-3 gap-3">
-                            <li class="d-flex align-items-center gap-2">
-                                <span class="w-12-px h-12-px radius-2 bg-primary-600"></span>
-                                <span class="text-secondary-light text-sm fw-normal">New:
-                                    <span class="text-primary-light fw-semibold">500</span>
-                                </span>
-                            </li>
-                            <li class="d-flex align-items-center gap-2">
-                                <span class="w-12-px h-12-px radius-2 bg-yellow"></span>
-                                <span class="text-secondary-light text-sm fw-normal">Subscribed:
-                                    <span class="text-primary-light fw-semibold">300</span>
-                                </span>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-9 col-xl-12">
+            <div class="col-xxl-12 col-xl-12">
                 <div class="card h-100">
                     <div class="card-body p-24">
 
@@ -230,7 +164,7 @@
                                     <button class="nav-link d-flex align-items-center active" id="pills-to-do-list-tab"
                                         data-bs-toggle="pill" data-bs-target="#pills-to-do-list" type="button"
                                         role="tab" aria-controls="pills-to-do-list" aria-selected="true">
-                                        Latest Registered
+                                        Latest Customers
                                         <span
                                             class="text-sm fw-semibold py-6 px-12 bg-neutral-500 rounded-pill text-white line-height-1 ms-12 notification-alert">35</span>
                                     </button>
@@ -240,7 +174,7 @@
                                         data-bs-toggle="pill" data-bs-target="#pills-recent-leads" type="button"
                                         role="tab" aria-controls="pills-recent-leads" aria-selected="false"
                                         tabindex="-1">
-                                        Latest Subscribe
+                                        Latest Reservations
                                         <span
                                             class="text-sm fw-semibold py-6 px-12 bg-neutral-500 rounded-pill text-white line-height-1 ms-12 notification-alert">35</span>
                                     </button>
@@ -482,97 +416,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-3 col-xl-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
-                            <h6 class="mb-2 fw-bold text-lg mb-0">Top Performer</h6>
-                            <a href="javascript:void(0)"
-                                class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
-                                View All
-                                <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
-                            </a>
-                        </div>
 
-                        <div class="mt-32">
-
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-24">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user1.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Dianne Russell</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$20</span>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-24">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user2.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Wade Warren</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$20</span>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-24">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user3.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Albert Flores</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$30</span>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-24">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user4.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Bessie Cooper</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$40</span>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between gap-3 mb-24">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user5.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Arlene McCoy</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$10</span>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between gap-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/images/users/user1.png" alt=""
-                                        class="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden">
-                                    <div class="flex-grow-1">
-                                        <h6 class="text-md mb-0 fw-medium">Arlene McCoy</h6>
-                                        <span class="text-sm text-secondary-light fw-medium">Agent ID: 36254</span>
-                                    </div>
-                                </div>
-                                <span class="text-primary-light text-md fw-medium">$10</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
             <div class="col-xxl-6 col-xl-12">
                 <div class="card h-100">
                     <div class="card-body">
@@ -778,8 +622,87 @@
     </div>
 @endsection
 
-
 @section('scripts')
     <script src="/assets/js/admin/lib/apexcharts.min.js"></script>
     @vite(['resources/js/admin/homeOneChart.js'])
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var reservations = @json($reservations);
+
+            if ($('#reservation-calendar').fullCalendar('getCalendar')) {
+                $('#reservation-calendar').fullCalendar('destroy');
+            }
+
+            var calendar = $('#reservation-calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: 'agendaDay,agendaWeek,month',
+                    right: 'prev,next today'
+                },
+                editable: true,
+                firstDay: 1,
+                selectable: true,
+                defaultView: 'month',
+                axisFormat: 'h:mm',
+                columnFormat: {
+                    month: 'ddd',
+                    week: 'ddd d',
+                    day: 'dddd M/d',
+                    agendaDay: 'dddd d'
+                },
+                titleFormat: {
+                    month: 'MMMM yyyy',
+                    week: "MMMM yyyy",
+                    day: 'MMMM yyyy'
+                },
+                allDaySlot: false,
+                selectHelper: true,
+                dayClick: function(date, allDay, jsEvent, view) {
+                    if (allDay) {
+                        calendar.fullCalendar('changeView', 'agendaDay')
+                            .fullCalendar('gotoDate', date.getFullYear(), date.getMonth(), date
+                                .getDate());
+                    }
+                },
+                events: reservations.map(function(reservation) {
+                    let color = '';
+                    switch (reservation.status) {
+                        case 'booked':
+                            color = '#3b82f6';
+                            break;
+                        case 'checked_in':
+                            color = '#6366f1';
+                            break;
+                        case 'checked_out':
+                            color = '#22c55e';
+                            break;
+                        case 'cancelled':
+                            color = '#ef4444';
+                            break;
+                        case 'no_show':
+                            color = '#facc15';
+                            break;
+                        case 'pending':
+                        default:
+                            color = '#9ca3af';
+                            break;
+                    }
+
+                    return {
+                        id: reservation.id,
+                        title: reservation.confirmation_number + ' (' + reservation.status.replace(
+                            '_', ' ') + ')',
+                        start: reservation.check_in_date,
+                        end: reservation.check_out_date,
+                        backgroundColor: color,
+                        borderColor: color,
+                        textColor: '#fff'
+                    };
+                })
+            });
+        });
+    </script>
 @endsection

@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="/assets/css/admin/lib/audioplayer.css">
     <link rel="stylesheet" href="/assets/css/admin/lib/style.css">
 
+    @yield('style')
 
     @vite(['resources/sass/admin/main.scss'])
 
@@ -46,9 +47,6 @@
             @include('layouts.admin.header')
 
             @yield('content')
-
-
-
             @include('layouts.admin.footer')
         </main>
     </div>
@@ -62,6 +60,7 @@
     <script src="/assets/js/admin/lib/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="/assets/js/admin/lib/jquery-jvectormap-world-mill-en.js"></script>
     <script src="/assets/js/admin/lib/magnifc-popup.min.js"></script>
+    <script src="/assets/js/admin/full-calendar.js"></script>
     <script src="/assets/js/admin/lib/slick.min.js"></script>
     <script src="/assets/js/admin/lib/prism.js"></script>
     <script src="/assets/js/admin/lib/file-upload.js"></script>
