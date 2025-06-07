@@ -18,14 +18,14 @@ return new class extends Migration
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->enum('status', ['pending', 'booked', 'cancelled', 'no_show', 'checked_in', 'checked_out', 'completed'])
-                ->default('booked');
+                ->default('pending');
             $table->integer('number_of_guests');
             $table->string('special_requests')->nullable();
             $table->string('cancellation_reason')->nullable();
             $table->string('cancellation_date')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->decimal('discount_rate', 5, 2)->nullable();
-            $table->enum('payment_status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
+            $table->enum('payment_status', ['pending', 'paid', 'failed', 'refunded', 'unpaid'])->default('pending');
             $table->enum('payment_method', ['cash', 'credit_card', 'online', 'none'])->nullable();
             $table->string('confirmation_number')->unique();
             $table->text('note')->nullable();

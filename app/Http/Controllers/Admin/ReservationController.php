@@ -262,7 +262,7 @@ class ReservationController extends Controller
             $nestedData['guest_email'] = $r->user->email ?? 'N/A';
             $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
             $nestedData['reservation_date'] = $r->check_in_date;
-            if (Auth::user()->hasRole(['hotel-clerk', 'super-admin'])) {
+            if (Auth::user()->hasRole(['hotel-clerk'])) {
                 $nestedData['status'] = '
                     <select onchange="changeReservationStatus('.$r->id.', this.value)" class="form-select form-select-sm">
                         <option value="booked" '.($r->status == 'booked' ? 'selected' : '').'>Booked</option>
