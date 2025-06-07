@@ -69,9 +69,16 @@
                                             <option value="">Tamil</option>
                                          </select>
                                     </div>
-                                    <div class="close-form">
-                                        <a class="theme-btn" href="{{route('login')}}">sign up</a>
-                                    </div>
+                                    @auth
+                                        @if (auth()->user()->hasRole('customer'))
+                                            <a href="{{ route('hotels') }}" class="theme-btn" style="min-width: 235px;">Make a Reservation</a>
+                                        @endif
+                                    @else
+                                        <div class="close-form">
+                                            <a class="theme-btn" href="{{route('login')}}">sign up</a>
+                                        </div>
+                                    @endauth
+                                    
                                 </div>
                             </div>
                         </div>

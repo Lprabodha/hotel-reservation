@@ -398,7 +398,7 @@
             const guests = guestsInput.value;
 
             if (!checkin || !checkout || !guests) {
-                alert('Please enter check-in, check-out dates, and number of guests.');
+                showFlashMessage('error', 'Please enter check-in, check-out dates, and number of guests.');
                 return;
             }
 
@@ -408,7 +408,7 @@
                     roomsContainer.innerHTML = '';
 
                     if (!data.rooms || data.rooms.length === 0) {
-                        roomsContainer.innerHTML = '<p>No rooms available for selected dates and guests.</p>';
+                        showFlashMessage('error', 'No rooms available for selected dates and guests.');
                         return;
                     }
 
@@ -447,10 +447,11 @@
                     });
 
                     updateSelectedRooms();
+                    showFlashMessage('success', 'Rooms loaded successfully.');
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Failed to fetch available rooms.');
+                    showFlashMessage('error', 'Failed to fetch available rooms.');
                 });
         });
 
