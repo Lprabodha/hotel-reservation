@@ -292,7 +292,7 @@ class ReservationController extends Controller
                 </a>
             ';
 
-            if ($r->status == 'checked_out' && auth()->user()->hasRole('hotel-clark')) {
+            if ($r->status == 'checked_out') {
                 $action .= '
                     <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
