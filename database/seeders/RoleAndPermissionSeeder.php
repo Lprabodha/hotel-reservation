@@ -89,7 +89,7 @@ class RoleAndPermissionSeeder extends Seeder
         $superAdminRole->syncPermissions(Permission::all());
 
         $travelCompanyRole = Role::firstOrCreate(['name' => 'travel-company']);
-        $travelCompanyRole->syncPermissions(['list-hotels', 'create-hotels', 'edit-hotels', 'delete-hotels', 'view-reports']);
+        $travelCompanyRole->syncPermissions(['list-bookings', 'create-bookings']);
 
         $hotelManagerRole = Role::firstOrCreate(['name' => 'hotel-manager']);
         $hotelManagerRole->syncPermissions(['list-rooms', 'create-rooms', 'edit-rooms', 'delete-rooms', 'view-reports', 'list-bookings']);
