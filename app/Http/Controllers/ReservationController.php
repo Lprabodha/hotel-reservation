@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
@@ -78,10 +80,28 @@ class ReservationController extends Controller
             ]);
 
             $reservation->rooms()->sync($request->rooms);
+            $reservation->load('hotel');
+
+            $mailData = (object)[
+                'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
+                'name' => auth()->user()?->name ?? 'Guest',
+                'reservation_id' => $reservation->confirmation_number,
+                'date' => $reservation->check_in_date->format('Y-m-d'),
+                'time' => '12:00 PM',
+                'hotel_name' => $reservation->hotel->name ?? 'N/A',
+                'hotel_location' => $reservation->hotel->address ?? 'N/A',
+                'location' => $reservation->hotel->city ?? 'N/A',
+                'reservation_url' => route('reservation.confirmed', ['reservation' => $reservation->id]),
+                'template' => 'reservation-confirmation',
+            ];
+
+            Mail::to(auth()->user()->email)->send(new SendMail($mailData));
+
+            $reservation->rooms()->sync($request->rooms);
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Reservation successful!');
+            return redirect()->route('reservation.confirmed', ['reservation' => $reservation->id]);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e);
@@ -153,5 +173,12 @@ class ReservationController extends Controller
             });
 
         return response()->json(['rooms' => $availableRooms]);
+    }
+
+    public function reservationConfirmed(Reservation $reservation)
+    {
+        $reservation->load('rooms', 'hotel');
+
+        return view('thank-you-page', compact('reservation'));
     }
 }

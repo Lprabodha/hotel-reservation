@@ -24,7 +24,7 @@
                                 <span>Discover and book your perfect stay</span>
                             </div>
                             <form>
-                                <div class="input-item">
+                                {{-- <div class="input-item">
                                     <input class="form-control" type="text" placeholder="Location:">
                                     <div class="icon">
                                         <svg width="14" height="19" viewBox="0 0 14 19" fill="none">
@@ -34,7 +34,7 @@
                                         </svg>
 
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="input-item">
                                     <input class="form-control" type="text" id="check-in" placeholder="Check In:">
                                     <div class="icon">

@@ -149,20 +149,20 @@
             </div>
 
             <form action="" method="GET" class="search-form">
-                <div class="row align-items-center">
-                    <div class="col-md-3 col-12">
+                <div class="row align-items-center" style="display: flex; flex-wrap: wrap; justify-content: between;">
+                    {{-- <div class="col-md-3 col-12">
                         <input type="text" name="location" class="form-control" placeholder="Location:">
-                    </div>
-                    <div class="col-md-2 col-6">
+                    </div> --}}
+                    <div class="col-md-2 col-6" style="width: 24%">
                         <input type="date" name="checkin" class="form-control" placeholder="Check In:">
                     </div>
-                    <div class="col-md-2 col-6">
+                    <div class="col-md-2 col-6" style="width: 24%">
                         <input type="date" name="checkout" class="form-control" placeholder="Check Out:">
                     </div>
-                    <div class="col-md-2 col-6">
+                    <div class="col-md-2 col-6" style="width: 24%">
                         <input type="number" name="guests" class="form-control" placeholder="Guests:">
                     </div>
-                    <div class="col-md-3 col-12 text-center">
+                    <div class="col-md-3 col-12 text-center" style="width: 24%">
                         <button type="submit" class="search-btn">Search Hotel</button>
                     </div>
                 </div>

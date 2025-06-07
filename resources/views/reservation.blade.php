@@ -288,6 +288,18 @@
                         <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
                         <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <div class="form-group mb-3" style="width: 45%;">
+                                <label for="customer_name">Name</label>
+                                <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                            </div>
+
+                            <div class="form-group mb-3" style="width: 45%;">
+                                <label for="customer_email">Email</label>
+                                <input type="email" class="form-control" value="{{ auth()->user()->email }}" disabled>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
                             <div class="form-group mb-3" style="width: 30%;">
                                 <label>Card Number</label>
                                 <input type="text" name="card_number" class="form-control"
@@ -327,10 +339,7 @@
                 <div class="row mb-4" id="available-rooms-container">
                     {{-- Rooms will be loaded here by js after the dates seleted --}}
                 </div>
-
-
             </div>
-
         </div>
     </div>
     <script>
