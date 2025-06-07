@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
+    protected $fillable = [
+        'reservation_id',
+        'room_charges',
+        'extra_charges',
+        'discount',
+        'taxes',
+        'total_amount',
+        'status',
+    ];
+
     public function reservation()
     {
         return $this->belongsTo(Reservation::class);
