@@ -51,7 +51,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.' . $this->getValue('template'),
+            view: 'emails.'.$this->getValue('template'),
             with: ['mailData' => $this->data],
         );
     }
