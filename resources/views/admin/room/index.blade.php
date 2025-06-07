@@ -1,6 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <div class="card basic-data-table">
         <div class="card-header d-flex justify-content-between">
             <h5 class="card-title mb-0">Manage Rooms</h5>
@@ -38,7 +39,7 @@
                             <td>{{ $room->room_number }}</td>
                             <td>{{ ucfirst($room->room_type) }}</td>
                             <td>{{ $room->occupancy }}</td>
-                            <td>${{ number_format($room->price_per_night, 2) }}</td>
+                            <td>Rs.{{ number_format($room->price_per_night, 2) }}</td>
                             <td>
                                 <span class="px-24 py-4 rounded-pill fw-medium text-sm
                                     {{ $room->is_available ? 'bg-success-focus text-success-main' : 'bg-danger-focus text-danger-main' }}">
@@ -74,4 +75,14 @@
             </table>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                pageLength: 10,
+                responsive: true
+            });
+        });
+    </script>
 @endsection

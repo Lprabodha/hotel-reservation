@@ -325,7 +325,7 @@
                             <h3 class="section-title">Your Price Summary</h3>
                             <div class="price-summary">
                                 <ul id="selected-room-list"></ul>
-                                <li class="total">Final Price: <span id="final-price">$0.00</span></li>
+                                <li class="total">Final Price: <span id="final-price">Rs.0.00</span></li>
                             </div>
                         </div>
 
@@ -384,7 +384,7 @@
                 const subtotal = price * nights;
 
                 const li = document.createElement('li');
-                li.textContent = `${name} × ${nights} night(s): $${subtotal.toFixed(2)}`;
+                li.textContent = `${name} × ${nights} night(s): Rs.${subtotal.toFixed(2)}`;
                 roomList.appendChild(li);
 
                 const hidden = document.createElement('input');
@@ -398,7 +398,7 @@
 
             finalPriceEl.textContent = nights === 0 ?
                 'Please select valid check-in and check-out dates.' :
-                `$${totalPrice.toFixed(2)}`;
+                `Rs.${totalPrice.toFixed(2)}`;
         }
 
         checkAvailabilityBtn.addEventListener('click', function() {

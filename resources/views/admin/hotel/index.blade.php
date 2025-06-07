@@ -1,6 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <div class="card basic-data-table">
         <div class="card-header d-flex justify-content-between">
             <h5 class="card-title mb-0">Manage Hotels</h5>
@@ -73,4 +74,14 @@
             </table>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                pageLength: 10,
+                responsive: true
+            });
+        });
+    </script>
 @endsection
