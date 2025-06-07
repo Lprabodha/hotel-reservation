@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
@@ -144,8 +145,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::get('/reservations/view/{id}', 'view')->name('view');
             Route::get('/reservations/payment/{id}', 'payment')->name('payment');
             Route::post('/reservations/{id}/change-status', 'changeStatus')->name('changeStatus');
-            Route::post('/reservations/{reservation}/cash-payment', 'cashPayment')->name('cashPayment');
-            Route::post('/reservations/{reservation}/stripe-payment', 'stripePayment')->name('stripePayment');
+        });
+    });
+
+    Route::controller(PaymentController::class)->group(function () {
+        Route::name('payments.')->group(function () {
+            Route::get('/payments', 'index')->name('index');
+            Route::post('/payments', 'show')->name('show');
+            Route::post('/payments/{reservation}/cash-payment', 'cashPayment')->name('cashPayment');
+            Route::post('/payments/{reservation}/stripe-payment', 'stripePayment')->name('stripePayment');
+            Route::get('payments/stripe-success/{reservation}', 'stripeSuccess')->name('stripe.success');
         });
     });
 

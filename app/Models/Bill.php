@@ -23,6 +23,7 @@ class Bill extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'bill_service')->withPivot('charge')->withTimestamps();
+        return $this->belongsToMany(Service::class, 'bill_service', 'bill_id', 'service_id')
+            ->withPivot('charge');
     }
 }

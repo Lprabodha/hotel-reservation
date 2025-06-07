@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
+use App\Models\Bill;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -16,8 +17,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Stripe\Checkout\Session;
-use Stripe\Stripe;
 
 class ReservationController extends Controller
 {
@@ -291,12 +290,17 @@ class ReservationController extends Controller
                 <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
-                <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-info-light text-warning-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                    <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
-                </a>
             ';
 
-            if ($r->status !== 'completed') {
+            if ($r->status == 'checked_out' && auth()->user()->hasRole('hotel-clark')) {
+                $action .= '
+                    <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                        <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
+                    </a>
+                ';
+            }
+
+            if ($r->status == 'pending') {
                 $action .= '
                     <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="lucide:edit"></iconify-icon>
@@ -354,6 +358,8 @@ class ReservationController extends Controller
             return redirect()->route('admin.reservation.index');
         }
 
+        $bill = Bill::with('services')->where('reservation_id', $reservation->id)->first();
+
         $reservationRooms = [];
 
         $checkIn = Carbon::parse($reservation->check_in_date);
@@ -408,6 +414,8 @@ class ReservationController extends Controller
             return redirect()->route('admin.reservation.index');
         }
 
+        $services = $reservation->hotel->services;
+
         $reservationRooms = [];
 
         $checkIn = Carbon::parse($reservation->check_in_date);
@@ -450,7 +458,7 @@ class ReservationController extends Controller
             ];
         }
 
-        return view('admin.reservations.payment', compact('reservation', 'reservationRooms'));
+        return view('admin.reservations.payment', compact('reservation', 'reservationRooms', 'services'));
     }
 
     public function changeStatus(Request $request, $id)
@@ -467,41 +475,5 @@ class ReservationController extends Controller
             'success' => true,
             'message' => 'Status updated successfully.',
         ]);
-    }
-
-    public function cashPayment(Request $request, Reservation $reservation)
-    {
-        $reservation->payment_status = 'paid';
-        $reservation->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function stripePayment(Request $request, Reservation $reservation)
-    {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        $subtotal = $reservation->total_price;
-        $extraTotal = collect($request->services)->sum('price');
-        $totalAmount = $subtotal + $extraTotal;
-
-        $checkoutSession = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'lkr',
-                    'product_data' => [
-                        'name' => 'Hotel Reservation Payment',
-                    ],
-                    'unit_amount' => $totalAmount * 100,
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('admin.reservation.index').'?success=true',
-            'cancel_url' => route('admin.reservation.index').'?cancelled=true',
-        ]);
-
-        return response()->json(['url' => $checkoutSession->url]);
     }
 }

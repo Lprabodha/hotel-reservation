@@ -83,9 +83,9 @@ class ReservationController extends Controller
             $reservation->load('hotel');
             // dd($reservation);
 
-            try {  
+            try {
                 $mailData = [
-                    'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
+                    'title' => 'Reservation Confirmed: '.$reservation->confirmation_number,
                     'name' => auth()->user()?->name ?? 'Guest',
                     'reservation_id' => $reservation->confirmation_number,
                     'date' => $reservation->check_in_date->format('Y-m-d'),
@@ -96,7 +96,7 @@ class ReservationController extends Controller
                     'reservation_url' => route('about-us'),
                     'template' => 'reservation',
                 ];
-    
+
                 Mail::to(auth()->user()->email)->send(new SendMail($mailData));
             } catch (\Exception $e) {
                 Log::error($e);

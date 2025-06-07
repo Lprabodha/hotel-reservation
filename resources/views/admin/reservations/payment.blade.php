@@ -12,7 +12,7 @@
                     class="btn btn-sm btn-primary-600 radius-8 d-inline-flex align-items-center gap-1" data-bs-toggle="modal"
                     data-bs-target="#addServiceModal">
                     <iconify-icon icon="simple-line-icons:plus" class="text-xl"></iconify-icon>
-                    Add Extra Services
+                    Add Extra Service
                 </button>
             </div>
 
@@ -61,23 +61,31 @@
                                                 <th>#</th>
                                                 <th>Service Name</th>
                                                 <th>Price</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="extraServicesTableBody"></tbody>
+                                        <tbody id="extraServicesTableBody">
+                                            <!-- Services will be populated by JS -->
+                                        </tbody>
                                     </table>
                                 </div>
 
                                 <div class="d-flex justify-content-end mt-4">
-                                    <table class="text-sm">
+                                    <table class="text-sm" id="totalsTable">
                                         <tbody>
                                             <tr>
-                                                <td>Subtotal:</td>
-                                                <td>LKR: {{ number_format($reservation->total_price, 2) }}</td>
+                                                <td>Room Charges:</td>
+                                                <td id="roomSubtotal">LKR: {{ number_format($reservation->total_price, 2) }}
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>Total:</td>
-                                                <td id="totalAmount">LKR: {{ number_format($reservation->total_price, 2) }}
-                                                </td>
+                                                <td>Extra Services:</td>
+                                                <td id="servicesSubtotal">LKR: 0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Grand Total:</strong></td>
+                                                <td id="totalAmount"><strong>LKR:
+                                                        {{ number_format($reservation->total_price, 2) }}</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -86,7 +94,6 @@
                                 <div class="mt-4">
                                     <h5 class="mb-3 fw-semibold">Payment Method</h5>
                                     <div class="d-flex flex-column gap-3">
-
                                         <label
                                             class="payment-option p-3 border rounded d-flex align-items-center gap-3 cursor-pointer"
                                             for="cashPayment">
@@ -109,7 +116,6 @@
                                                     Stripe.</div>
                                             </div>
                                         </label>
-
                                     </div>
 
                                     <button class="btn btn-success w-100 mt-4" onclick="proceedToPayment()">Proceed to
@@ -120,41 +126,46 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Add Service Modal -->
-        <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <form id="extraServiceForm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Extra Service</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label>Service Name</label>
-                                <input type="text" class="form-control" id="serviceName" required>
+            <!-- Add Service Modal -->
+            <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form id="extraServiceForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Extra Service</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                            <div class="mb-3">
-                                <label>Service Price (LKR)</label>
-                                <input type="number" class="form-control" id="servicePrice" required min="0">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label>Select Service</label>
+                                    <select class="form-select" id="serviceSelect" required>
+                                        <option value="" disabled selected>Select a service</option>
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id }}" data-name="{{ $service->name }}"
+                                                data-price="{{ $service->pivot->charge }}">
+                                                {{ $service->name }} - LKR {{ number_format($service->pivot->charge, 2) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Add Service</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Add Service</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-
     </div>
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let extraServices = [];
 
@@ -162,17 +173,22 @@
 
         extraServiceForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('serviceName').value;
-            const price = parseFloat(document.getElementById('servicePrice').value);
+            const serviceSelect = document.getElementById('serviceSelect');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+
+            const id = selectedOption.value;
+            const name = selectedOption.getAttribute('data-name');
+            const price = parseFloat(selectedOption.getAttribute('data-price'));
 
             if (name && price >= 0) {
                 extraServices.push({
+                    id,
                     name,
                     price
                 });
                 updateServiceTable();
                 $('#addServiceModal').modal('hide');
-                this.reset();
+                serviceSelect.selectedIndex = 0;
             }
         });
 
@@ -184,24 +200,49 @@
             extraServices.forEach((service, index) => {
                 totalExtra += service.price;
                 tableBody.innerHTML += `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${service.name}</td>
-            <td>LKR: ${service.price.toFixed(2)}</td>
-        </tr>
-    `;
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${service.name}</td>
+                    <td>LKR: ${service.price.toFixed(2)}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="removeService(${index})">Remove</button>
+                    </td>
+                </tr>
+            `;
             });
 
-            const subtotal = {{ $reservation->total_price }};
-            const total = subtotal + totalExtra;
-            document.getElementById('totalAmount').innerText = `LKR: ${total.toFixed(2)}`;
+            const roomSubtotal = {{ $reservation->total_price }};
+            const grandTotal = roomSubtotal + totalExtra;
+
+            document.getElementById('roomSubtotal').innerText = `LKR: ${roomSubtotal.toFixed(2)}`;
+            document.getElementById('servicesSubtotal').innerText = `LKR: ${totalExtra.toFixed(2)}`;
+            document.getElementById('totalAmount').innerHTML = `<strong>LKR: ${grandTotal.toFixed(2)}</strong>`;
+        }
+
+        function removeService(index) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to remove this service?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, remove it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    extraServices.splice(index, 1);
+                    updateServiceTable();
+                }
+            });
         }
 
         function proceedToPayment() {
             const method = document.querySelector('input[name="paymentMethod"]:checked').value;
 
-            if (method === 'cash') {
-                fetch("{{ route('admin.reservation.cashPayment', $reservation->id) }}", {
+            const toast = new ToastMagic();
+
+            fetch(method === 'cash' ? "{{ route('admin.payments.cashPayment', $reservation->id) }}" :
+                    "{{ route('admin.payments.stripePayment', $reservation->id) }}", {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -211,31 +252,21 @@
                             services: extraServices
                         })
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert('Payment successful (Cash).');
-                        window.location.href = "{{ route('admin.reservation.index') }}";
-                    });
-            } else {
-                fetch("{{ route('admin.reservation.stripePayment', $reservation->id) }}", {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            services: extraServices
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.url) {
-                            window.location.href = data.url;
-                        } else {
-                            alert('Stripe Session creation failed.');
-                        }
-                    });
-            }
+                .then(response => response.json())
+                .then(data => {
+                    if (method === 'cash') {
+
+                        toast.success("Success!", "Payment successful (Cash).");
+
+                        setTimeout(function() {
+                            window.location.href = "{{ route('admin.reservation.index') }}";
+                        }, 2000);
+                    } else if (data.url) {
+                        window.location.href = data.url;
+                    } else {
+                        toast.error("Error!", "Something went wrong.");
+                    }
+                });
         }
     </script>
 @endsection
