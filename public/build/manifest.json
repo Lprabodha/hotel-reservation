@@ -60,7 +60,7 @@
     "isEntry": true
   },
   "resources/css/style.css": {
-    "file": "assets/style-FO6unzfn.css",
+    "file": "assets/style-B2ATDbxP.css",
     "src": "resources/css/style.css",
     "isEntry": true
   },
@@ -2022,6 +2022,10 @@
     "file": "assets/side-img-2-B5g2doPj.jpg",
     "src": "resources/images/slider/side-img-2.jpg"
   },
+  "resources/images/slider/slide-05.jpg": {
+    "file": "assets/slide-05-CXEzoo6G.jpg",
+    "src": "resources/images/slider/slide-05.jpg"
+  },
   "resources/images/slider/slide-1.jpg": {
     "file": "assets/slide-1-Dhs98DLp.jpg",
     "src": "resources/images/slider/slide-1.jpg"
@@ -2039,7 +2043,7 @@
     "src": "resources/images/slider/slide-4.png"
   },
   "resources/images/slider/slide-5.jpg": {
-    "file": "assets/slide-5-CXEzoo6G.jpg",
+    "file": "assets/slide-5-AM080RwY.jpg",
     "src": "resources/images/slider/slide-5.jpg"
   },
   "resources/images/slider/slide-6.jpg": {
@@ -2112,7 +2116,7 @@
     "isEntry": true
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-DT7iKYZh.css",
+    "file": "assets/app-DUTivl_A.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }

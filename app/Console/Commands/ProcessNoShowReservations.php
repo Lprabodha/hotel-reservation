@@ -52,6 +52,7 @@ class ProcessNoShowReservations extends Command
                 ]);
 
                 $reservation->no_show_billed = 1;
+                $reservation->payment_status = 'failed';
                 $reservation->save();
             }
         });

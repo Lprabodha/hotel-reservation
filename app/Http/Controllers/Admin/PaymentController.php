@@ -54,7 +54,6 @@ class PaymentController extends Controller
 
         $limit = $request->input('length');
         $start = $request->input('start');
-        $orderColumn = $columns[$request->input('order.0.column')];
         $orderDirection = $request->input('order.0.dir', 'asc');
 
         $query = Bill::with('reservation');
@@ -91,7 +90,7 @@ class PaymentController extends Controller
 
             $action = '
                 <a href="" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
-                    <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
+                    <iconify-icon icon="material-symbols:download"></iconify-icon>
                 </a>
             ';
 
@@ -120,6 +119,7 @@ class PaymentController extends Controller
     public function cashPayment(Request $request, Reservation $reservation)
     {
         $reservation->payment_status = 'paid';
+        $reservation->status = 'completed';
         $reservation->save();
 
         $this->createBill($reservation, $request->services);
@@ -139,16 +139,16 @@ class PaymentController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'lkr',
+                    'currency' => 'usd',
                     'product_data' => [
                         'name' => 'Hotel Reservation Payment',
                     ],
-                    'unit_amount' => $totalAmount * 100,
+                    'unit_amount' => (int) ($totalAmount * 1000),
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('admin.reservation.stripe.success', ['reservation' => $reservation->id]),
+            'success_url' => route('admin.payments.stripe.success', ['reservation' => $reservation->id]),
             'cancel_url' => route('admin.reservation.index').'?cancelled=true',
         ]);
 
@@ -160,6 +160,7 @@ class PaymentController extends Controller
     public function stripeSuccess(Request $request, Reservation $reservation)
     {
         $reservation->payment_status = 'paid';
+        $reservation->status = 'completed';
         $reservation->save();
 
         $services = session()->get('stripe_services_'.$reservation->id, []);
