@@ -100,6 +100,56 @@ Deployed to AWS EC2 via GitHub Actions.
 
 ---
 
+
+## 🧪 Running Unit & Feature Tests
+
+This project includes Unit Tests and Feature Tests to ensure stability and reliability.
+
+### How to Run Tests
+
+1. **Create a test database:**
+
+   Ensure you have a separate database for testing in your `.env.testing` file:
+
+   ```makefile
+   DB_CONNECTION=mysql
+   DB_DATABASE=hotel_reservation_test
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+2. **Run Migrations for Testing:**
+
+   ```bash
+   php artisan migrate --env=testing
+   ```
+
+3. **Execute Tests:**
+
+   ```bash
+   php artisan test
+   ```
+
+   Or if you prefer PestPHP syntax:
+
+   ```bash
+   ./vendor/bin/pest
+   ```
+
+#### Example Test Commands
+
+```bash
+# Run all tests
+php artisan test
+
+# Run only Feature tests
+php artisan test --testsuite=Feature
+
+# Run specific test file
+php artisan test tests/Feature/Admin/ReservationControllerTest.php
+```
+
+
 ## 🤝 Contributing
 
 We love contributions from the community!  
@@ -142,3 +192,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 Happy coding! 😊
+
+---
