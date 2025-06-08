@@ -76,6 +76,8 @@
     <script src="/assets/js/admin/lib/prism.js"></script>
     <script src="/assets/js/admin/lib/file-upload.js"></script>
     <script src="/assets/js/admin/lib/audioplayer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     @vite(['resources/js/admin/app.js'])
     @yield('scripts')
