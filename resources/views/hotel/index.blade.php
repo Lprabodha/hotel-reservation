@@ -151,16 +151,16 @@
             <form action="" method="GET" class="search-form">
                 <div class="row align-items-center" style="display: flex; flex-wrap: wrap; justify-content: between;">
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="date" name="check_in" id="check-in" class="form-control" placeholder="Check In:"
-                            value="{{ $checkIn }}">
+                        <input type="text" name="check_in" id="check-in" autocomplete="off" class="form-control"
+                            placeholder="Check In:" value="{{ $checkIn }}">
                     </div>
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="date" name="check_out" id="check-out" class="form-control" placeholder="Check Out:"
-                            value="{{ $checkOut }}">
+                        <input type="text" name="check_out" autocomplete="off" id="check-out" class="form-control"
+                            placeholder="Check Out:" value="{{ $checkOut }}">
                     </div>
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="number" name="guests" id="guests" class="form-control" placeholder="Guests:"
-                            value="{{ $guests }}" min="1" max="10">
+                        <input type="number" name="guests" autocomplete="off" id="guests" class="form-control"
+                            placeholder="Guests:" value="{{ $guests }}" min="1" max="10">
                     </div>
                     <div class="col-md-3 col-12 text-center" style="width: 24%">
                         <button type="submit" id="search-btn" class="search-btn">Search Hotel</button>
@@ -210,7 +210,22 @@
                     </div>
 
                 @empty
-                    <div>No Hotels Available at this moment to show...</div>
+                    <div class="d-flex justify-content-center align-items-center bg-white text-center rounded shadow-sm flex-column py-5 px-4"
+                        style="min-height: 300px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#6c757d" class="mb-3"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 1.5a6.5 6.5 0 1 1 0 13.001A6.5 6.5 0 0 1 8 1.5zm0 2a.75.75 0 0 1 .743.648L8.75 4.25v3a.75.75 0 0 1-1.493.102L7.25 7.25v-3a.75.75 0 0 1 .75-.75zm.002 6a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z" />
+                        </svg>
+
+                        <h5 class="text-secondary fw-semibold mb-2">No Hotels Available</h5>
+                        <p class="text-muted mb-3">Unfortunately, we couldn’t find any available hotels matching your search
+                            criteria.</p>
+
+                        <a href="{{ route('hotels') }}" class="btn btn-outline-primary btn-sm">
+                            Explore All Hotels
+                        </a>
+                    </div>
                 @endforelse
             </div>
         </div>
@@ -225,6 +240,15 @@
             const url = `{{ route('hotels') }}?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}`;
 
             window.location.href = url;
+        });
+
+        document.getElementById('guests').addEventListener('input', function(e) {
+            const max = 100;
+            const min = 1;
+            let value = parseInt(e.target.value, 10);
+
+            if (value > max) e.target.value = max;
+            if (value < min) e.target.value = min;
         });
     </script>
 @endsection

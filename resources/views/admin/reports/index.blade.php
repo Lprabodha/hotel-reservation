@@ -93,6 +93,28 @@
             </div>
 
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="filter-status" class="form-label">Status</label>
+                        <select class="form-select filter-status" name="status">
+                            <option value="">All</option>
+                            <option value="booked">Booked</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="pending">Pending</option>
+                            <option value="checked_in">Checked In</option>
+                            <option value="checked_out">Checked Out</option>
+                            <option value="no_show">No Show</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filter-date" class="form-label">Reservation Date</label>
+                        <input type="date" class="form-control filter-date" name="date">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn-primary w-100 filter-btn">Apply Filters</button>
+                    </div>
+                </div>
+
                 <table id="latest-reservation-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -230,66 +252,69 @@
         });
 
         $('#latest-reservation-table').DataTable({
-            "processing": true,
-            "serverSide": true,
+            processing: true,
+            serverSide: true,
             dom: '<"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 text-end"B>>' +
                 '<"row"<"col-sm-12"tr>>' +
                 '<"row mt-3"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             buttons: [{
                     extend: 'copyHtml5',
-                    className: 'w-50-px h-32-px bg-primary-light text-primary-600  d-inline-flex align-items-center justify-content-center',
+                    className: 'w-50-px h-32-px bg-primary-light text-primary-600 d-inline-flex align-items-center justify-content-center',
                     text: '<iconify-icon icon="solar:copy-bold"></iconify-icon>'
                 },
                 {
                     extend: 'csvHtml5',
-                    className: 'w-50-px h-32-px bg-primary-light text-success-600  d-inline-flex align-items-center justify-content-center',
+                    className: 'w-50-px h-32-px bg-primary-light text-success-600 d-inline-flex align-items-center justify-content-center',
                     text: '<iconify-icon icon="material-symbols:csv"></iconify-icon>'
                 },
                 {
                     extend: 'print',
-                    className: 'w-50-px h-32-px bg-primary-light text-primary-600  d-inline-flex align-items-center justify-content-center',
+                    className: 'w-50-px h-32-px bg-primary-light text-primary-600 d-inline-flex align-items-center justify-content-center',
                     text: '<iconify-icon icon="material-symbols:print"></iconify-icon>'
                 }
             ],
-            "ajax": {
-                "url": "{{ route('admin.reports.latest-reservation') }}",
-                "type": "POST",
-                "data": {
-                    "_token": "{{ csrf_token() }}"
-                },
+            ajax: {
+                url: "{{ route('admin.reports.latest-reservation') }}",
+                type: "POST",
+                data: function(d) {
+                    d._token = "{{ csrf_token() }}";
+                    d.status = $('.filter-status').val();
+                    d.date = $('.filter-date').val();
+                }
             },
-            "columns": [{
-                    "data": "id",
-                    "searchable": true,
-                    "orderable": true
+            columns: [{
+                    data: "id",
+                    searchable: true,
+                    orderable: true
                 },
                 {
-                    "data": "guest_email",
-                    "searchable": true,
-                    "orderable": true
+                    data: "guest_email",
+                    searchable: true,
+                    orderable: true
                 },
                 {
-                    "data": "hotel_name",
-                    "searchable": true,
-                    "orderable": true
+                    data: "hotel_name",
+                    searchable: true,
+                    orderable: true
                 },
                 {
-                    "data": "reservation_date",
-                    "searchable": true,
-                    "orderable": true
+                    data: "reservation_date",
+                    searchable: true,
+                    orderable: true
                 },
                 {
-                    "data": "status",
-                    "searchable": true,
-                    "orderable": true
+                    data: "status",
+                    searchable: true,
+                    orderable: true
                 },
                 {
-                    "data": "action",
-                    "searchable": false,
-                    "orderable": false
+                    data: "action",
+                    searchable: false,
+                    orderable: false
                 }
             ]
         });
+
 
         $('#noshow-reservation-table').DataTable({
             "processing": true,
@@ -351,6 +376,12 @@
                     "orderable": false
                 }
             ]
+        });
+    </script>
+
+    <script>
+        $('.filter-btn').on('click', function() {
+            $('#latest-reservation-table').DataTable().ajax.reload();
         });
     </script>
 @endsection

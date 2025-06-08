@@ -168,7 +168,7 @@
                                                                             class="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
                                                                             title="Delete">
                                                                             <iconify-icon
-                                                                                icon="mdi:trash-can-outline"></iconify-icon>
+                                                                                icon="material-symbols:cancel"></iconify-icon>
                                                                         </button>
                                                                     </form>
                                                                 @endif
