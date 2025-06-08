@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\ReservationRequest;
 use App\Models\TravelCompany;
@@ -139,10 +140,10 @@ class DashboardController extends Controller
                 default => 'badge bg-light',
             };
 
-            $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
+            $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
 
             $action = '
-                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
@@ -218,9 +219,9 @@ class DashboardController extends Controller
             $nestedData['id'] = $r->id;
             $nestedData['confirmation_number'] = $r->reservation->confirmation_number ?? '-';
             $nestedData['payment_method'] = $r->payment->method ?? '-';
-            $nestedData['extra_charges'] = 'LKR '.number_format($r->extra_charges, 2);
-            $nestedData['discount'] = 'LKR '.number_format($r->discount, 2);
-            $nestedData['total_amount'] = 'LKR '.number_format($r->total_amount, 2);
+            $nestedData['extra_charges'] = 'LKR ' . number_format($r->extra_charges, 2);
+            $nestedData['discount'] = 'LKR ' . number_format($r->discount, 2);
+            $nestedData['total_amount'] = 'LKR ' . number_format($r->total_amount, 2);
             $nestedData['status'] = $r->status == 'paid'
                 ? '<span class="badge bg-success">Paid</span>'
                 : '<span class="badge bg-danger">Unpaid</span>';
@@ -233,7 +234,7 @@ class DashboardController extends Controller
 
             if ($r->status == 'paid') {
                 $action .= '
-                    <button type="button" onclick="refundBill('.$r->id.')" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <button type="button" onclick="refundBill(' . $r->id . ')" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="gridicons:refund"></iconify-icon>
                     </button>
                 ';
@@ -311,7 +312,8 @@ class DashboardController extends Controller
 
     public function requestReservation(Request $request)
     {
-        return view('dashboard.travel-company.reservation-request');
+        $hotels = Hotel::select('id', 'name', 'location')->get();
+        return view('dashboard.travel-company.reservation-request', compact('hotels'));
     }
 
     public function storeRequestReservation(Request $request)
@@ -320,6 +322,7 @@ class DashboardController extends Controller
             'check_in_date' => 'required|date',
             'check_out_date' => 'required|date|after:check_in_date',
             'description' => 'nullable|string',
+            'hotel_id' => 'required|exists:hotels,id',
         ]);
 
         $user = Auth::user()->travelCompany;
@@ -329,6 +332,7 @@ class DashboardController extends Controller
             'check_in_date' => $validated['check_in_date'],
             'check_out_date' => $validated['check_out_date'],
             'description' => $validated['description'] ?? null,
+            'hotel_id' => $request->input('hotel_id'),
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Reservation request submitted successfully.');

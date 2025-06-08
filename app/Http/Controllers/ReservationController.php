@@ -141,9 +141,9 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Request $request)
     {
-        //
+
     }
 
     /**

@@ -119,18 +119,19 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">Card Number</label>
-                                    <input type="text" inputmode="numeric" maxlength="12"
+                                    <input type="number" inputmode="numeric" maxlength="16"
                                         class="form-control wizard-required" placeholder="Enter Card Number"
                                         name="card_number">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">Card Expiration(MM/YY)</label>
                                     <input type="text" maxlength="6" class="form-control wizard-required"
-                                        placeholder="MM/YY" name="card_expire_date">
+                                        placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" required
+                                        name="card_expire_date">
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="form-label">CVV Number</label>
-                                    <input type="number" maxlength="5" class="form-control wizard-required"name="csv"
+                                    <input type="number" maxlength="3" class="form-control wizard-required"name="csv"
                                         placeholder="CVV Number">
                                 </div>
                                 <div class="form-group d-flex justify-content-end gap-3 mt-5">
@@ -325,12 +326,18 @@
                         readonlyCheckout.value = checkout;
                     }
 
-                    if (currentStep === 1) {
-                        const customerType = customerTypeSelect.value;
-                        const customerEmail = customerEmailSelect.value;
-                        const travelAgency = travelAgencySelect.value;
-                        const checkinDate = checkInInput.value;
 
+                    if (currentStep === 1) {
+                        const customerType = customerTypeSelect.value.trim();
+                        const customerEmail = customerEmailSelect.value.trim();
+                        const travelAgency = travelAgencySelect.value.trim();
+                        const checkinDate = checkInInput.value.trim();
+
+                        // Reset error display
+                        wizardError2.classList.add('d-none');
+                        wizardError2.innerText = '';
+
+                        // Validate customer type
                         if (customerType === '') {
                             e.preventDefault();
                             wizardError2.classList.remove('d-none');
@@ -354,17 +361,56 @@
                             return;
                         }
 
+                        // Validate card details if required
                         if (isCardDetailsRequired(checkinDate)) {
-                            if (!cardNumberInput.value || !cardExpirationInput.value || !cvvInput
-                                .value) {
+                            const cardNumber = cardNumberInput.value.trim();
+                            const cardExpiration = cardExpirationInput.value.trim();
+                            const cvv = cvvInput.value.trim();
+
+                            // Patterns
+                            const cardPattern = /^\d{16}$/;
+                            const expirePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+                            const cvvPattern = /^\d{3}$/;
+
+                            if (!cardPattern.test(cardNumber)) {
+                                e.preventDefault();
+                                wizardError2.classList.remove('d-none');
+                                wizardError2.innerText = '❌ Card number must be 16 digits!';
+                                return;
+                            }
+
+                            if (!expirePattern.test(cardExpiration)) {
                                 e.preventDefault();
                                 wizardError2.classList.remove('d-none');
                                 wizardError2.innerText =
-                                    '❌ Card details are required for reservations beyond today!';
+                                    '❌ Card expiration must be in MM/YY format!';
+                                return;
+                            }
+
+                            const [mm, yy] = cardExpiration.split('/').map(Number);
+                            const fullYear = 2000 + yy;
+
+                            const today = new Date();
+                            const currentMonth = today.getMonth() + 1;
+                            const currentYear = today.getFullYear();
+
+                            if (fullYear < currentYear || (fullYear === currentYear && mm <
+                                    currentMonth)) {
+                                e.preventDefault();
+                                wizardError2.classList.remove('d-none');
+                                wizardError2.innerText = '❌ Card is expired!';
+                                return;
+                            }
+
+                            if (!cvvPattern.test(cvv)) {
+                                e.preventDefault();
+                                wizardError2.classList.remove('d-none');
+                                wizardError2.innerText = '❌ CVV must be 3 digits!';
                                 return;
                             }
                         }
                     }
+
 
                     if (currentStep < fieldsets.length - 1) {
                         currentStep++;
@@ -510,7 +556,7 @@
         });
 
         document.querySelector('input[name="card_number"]').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 12); // Only digits, max 12
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 16); // Only digits, max 12
         });
 
         $(document).ready(function() {

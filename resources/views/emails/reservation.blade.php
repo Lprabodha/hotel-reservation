@@ -72,7 +72,7 @@
 <body>
     <div class="email-container">
         <h1>{{ $mailData['title'] }}</h1>
-        <p>Dear {{ $mailData['name'] }},</p>
+        <p>Dear {{ $mailData['name'] ?? 'Valued Customer' }},</p>
 
         <p>Thank you for booking with <strong>Click2Clickin</strong>! We’re delighted to confirm your reservation and
             look forward to welcoming you. Below you will find the details of your booking for your convenience.</p>

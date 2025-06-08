@@ -33,6 +33,7 @@ class DashboardController extends Controller
     public function fetchRooms(Request $request)
     {
 
+        info($request);
         $user = auth()->user();
         $hotel = $user->hotels()->first();
 
