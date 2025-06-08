@@ -67,6 +67,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return $user->assignRole('customer');
+        $user->assignRole('customer');
+
+        session()->flash('success', 'Welcome '.$user->name.'! Your account has been created successfully.');
+
+        return $user;
     }
 }

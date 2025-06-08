@@ -26,4 +26,9 @@ class Bill extends Model
         return $this->belongsToMany(Service::class, 'bill_service', 'bill_id', 'service_id')
             ->withPivot('charge');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

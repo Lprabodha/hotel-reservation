@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\Bill;
 use App\Models\Hotel;
 use App\Models\Reservation;
@@ -181,7 +182,7 @@ class ReservationController extends Controller
                     'reservation_url' => route('about-us'),
                 ];
 
-                Mail::to($email)->send(new \App\Mail\SendMail($data));
+                Mail::to($email)->send(new SendMail($data));
             } catch (\Exception $e) {
                 Log::error('Email failed to send: '.$e->getMessage());
             }
@@ -268,17 +269,20 @@ class ReservationController extends Controller
             $nestedData['guest_email'] = $r->user->email ?? 'N/A';
             $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
             $nestedData['reservation_date'] = $r->check_in_date;
-            if (Auth::user()->hasRole(['hotel-clerk'])) {
+
+            $allowedStatuses = ['booked', 'checked_in', 'checked_out', 'pending'];
+
+            if (Auth::user()->hasRole('hotel-clerk') && in_array($r->status, $allowedStatuses)) {
                 $nestedData['status'] = '
                     <select onchange="changeReservationStatus('.$r->id.', this.value)" class="form-select form-select-sm">
-                        <option value="booked" '.($r->status == 'booked' ? 'selected' : '').'>Booked</option>
-                        <option value="checked_in" '.($r->status == 'checked_in' ? 'selected' : '').'>Checked In</option>
-                        <option value="checked_out" '.($r->status == 'checked_out' ? 'selected' : '').'>Checked Out</option>
-                        <option value="cancelled" '.($r->status == 'cancelled' ? 'selected' : '').'>Cancelled</option>
-                        <option value="no_show" '.($r->status == 'no_show' ? 'selected' : '').'>No Show</option>
-                        <option value="completed" '.($r->status == 'completed' ? 'selected' : '').'>Completed</option>
-                    </select>
                 ';
+
+                foreach ($allowedStatuses as $status) {
+                    $selected = ($r->status == $status) ? 'selected' : '';
+                    $nestedData['status'] .= '<option value="'.$status.'" '.$selected.'>'.ucfirst(str_replace('_', ' ', $status)).'</option>';
+                }
+
+                $nestedData['status'] .= '</select>';
             } else {
                 $statusBadgeClass = match ($r->status) {
                     'booked' => 'badge bg-success',

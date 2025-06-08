@@ -26,6 +26,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Confirmation Number</th>
+                            <th>Payment Method</th>
                             <th>Extra charges</th>
                             <th>Discount</th>
                             <th>Total amount</th>
@@ -89,6 +90,11 @@
                 },
                 {
                     "data": "confirmation_number",
+                    "searchable": true,
+                    "orderable": true
+                },
+                {
+                    "data": "payment_method",
                     "searchable": true,
                     "orderable": true
                 },

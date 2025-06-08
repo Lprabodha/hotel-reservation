@@ -180,8 +180,10 @@
                 .then(data => {
                     if (data.success) {
                         toast.success("Success!", "Status updated successfully!");
+                        location.reload()
                     } else {
                         toast.success("Error!", "Failed to update status.");
+                        location.reload()
                     }
                 })
                 .catch(error => {
