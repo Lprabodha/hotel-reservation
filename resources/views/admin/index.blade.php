@@ -28,7 +28,7 @@
             @endif
         </div>
 
-        <div class="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
+        <div class="d-flex flex-wrap gap-3">
             <div class="col">
                 <div class="card shadow-none border bg-gradient-start-1 h-100">
                     <div class="card-body p-20">
@@ -49,7 +49,7 @@
                             Last 30 days users
                         </p>
                     </div>
-                </div><!-- card end -->
+                </div>
             </div>
             <div class="col">
                 <div class="card shadow-none border bg-gradient-start-2 h-100">
@@ -70,37 +70,15 @@
                             Last 30 days reservations
                         </p>
                     </div>
-                </div><!-- card end -->
+                </div>
             </div>
-            {{-- <div class="col">
-                <div class="card shadow-none border bg-gradient-start-3 h-100">
-                    <div class="card-body p-20">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                            <div>
-                                <p class="fw-medium text-primary-light mb-1">Total Free Users</p>
-                                <h6 class="mb-0">5,000</h6>
-                            </div>
-                            <div
-                                class="w-50-px h-50-px bg-info rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="fluent:people-20-filled"
-                                    class="text-white text-2xl mb-0"></iconify-icon>
-                            </div>
-                        </div>
-                        <p class="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span class="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon
-                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon> +200</span>
-                            Last 30 days users
-                        </p>
-                    </div>
-                </div><!-- card end -->
-            </div> --}}
             <div class="col">
                 <div class="card shadow-none border bg-gradient-start-4 h-100">
                     <div class="card-body p-20">
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p class="fw-medium text-primary-light mb-1">Total Income</p>
-                                <h6 class="mb-0">Rs{{ $totalRevenue }}</h6>
+                                <h6 class="mb-0">Rs{{ $reservations->sum('total_price') }}</h6>
                             </div>
                             <div
                                 class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
@@ -109,37 +87,16 @@
                         </div>
                         <p class="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
                             <span class="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon
-                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon> +Rs{{ $totalRevenue }}</span>
+                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon> +Rs{{ $reservations->sum('total_price') }}</span>
                             Last 30 days income
                         </p>
                     </div>
-                </div><!-- card end -->
+                </div>
             </div>
-            {{-- <div class="col">
-                <div class="card shadow-none border bg-gradient-start-5 h-100">
-                    <div class="card-body p-20">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                            <div>
-                                <p class="fw-medium text-primary-light mb-1">Total Expense</p>
-                                <h6 class="mb-0">$30,000</h6>
-                            </div>
-                            <div
-                                class="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="fa6-solid:file-invoice-dollar"
-                                    class="text-white text-2xl mb-0"></iconify-icon>
-                            </div>
-                        </div>
-                        <p class="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span class="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon
-                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon> +$5,000</span>
-                            Last 30 days expense
-                        </p>
-                    </div>
-                </div><!-- card end -->
-            </div> --}}
+            
         </div>
 
-        <div class="row gy-4 mt-1">
+        <div class="row gy-1 mt-2">
             <div class="col-xxl-12 col-lg-8">
                 <div class="card h-100 p-0">
                     <div class="card-body p-24">

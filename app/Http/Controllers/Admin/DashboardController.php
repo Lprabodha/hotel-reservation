@@ -17,8 +17,6 @@ class DashboardController extends Controller
 
         $users = User::orderBy('created_at', 'desc')->take(10)->get();
 
-        $totalRevenue = Reservation::sum('total_price');
-
         $customers = User::whereHas('roles', function ($query) {
             $query->where('name', 'customer');
         })->orderBy('created_at', 'desc')->take(10)->get();
@@ -28,12 +26,10 @@ class DashboardController extends Controller
         } else {
             $hotelIds = $user->hotels->pluck('id')->toArray();
 
-            $reservations = Reservation::select('id', 'confirmation_number', 'check_in_date', 'check_out_date', 'status')
-                ->whereIn('hotel_id', $hotelIds)
-                ->get();
+            $reservations = Reservation::whereIn('hotel_id', $hotelIds)->get();
         }
 
-        return view('admin.index', compact('reservations', 'users', 'totalRevenue', 'customers'));
+        return view('admin.index', compact('reservations', 'users', 'customers'));
     }
 
     public function fetchRooms(Request $request)
