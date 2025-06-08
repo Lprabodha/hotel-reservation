@@ -308,7 +308,7 @@
             We've sent a confirmation email with all the details. We look forward to serving you!
         </p>
 
-        <a href="/" class="home-button">Return to Home</a>
+        <a href="{{route('dashboard')}}" class="home-button">Return to Home</a>
     </div>
 
     <script>
@@ -320,7 +320,7 @@
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
-                
+
                 ripple.style.cssText = `
                     position: absolute;
                     width: ${size}px;
@@ -333,11 +333,11 @@
                     animation: ripple 0.6s linear;
                     pointer-events: none;
                 `;
-                
+
                 button.style.position = 'relative';
                 button.style.overflow = 'hidden';
                 button.appendChild(ripple);
-                
+
                 setTimeout(() => ripple.remove(), 600);
             });
         });

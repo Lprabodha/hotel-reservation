@@ -58,6 +58,9 @@ Route::group(['middleware' => ['role_or_permission:customer|travel-company']], f
         Route::post('/show/reservations', 'showReservation')->name('show.reservations');
         Route::get('/reservations/view/{id}', 'viewReservation')->name('view.reservations');
         Route::get('/request-reservations', 'requestReservation')->name('request.reservations');
+        Route::post('/store-reservations', 'storeRequestReservation')->name('store.request.reservations');
+        Route::post('/cancel-reservations/{id}', 'cancelReservation')->name('cancel.reservations');
+        Route::get('/user-profile', 'getUserProfile')->name('view.profile');
     });
 });
 
@@ -166,13 +169,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_p
     });
 
     Route::controller(ReportController::class)->group(function () {
-        Route::name('reports.')->group(function () {
-            Route::get('/reports', 'index')->name('index');
-            Route::get('/reports-payments', 'payments')->name('payments');
-            Route::post('/past-bill', 'bill')->name('bill');
-            Route::post('/latest-reservation', 'latestReservation')->name('latest-reservation');
-            Route::post('/past-reservation', 'pastReservation')->name('past-reservation');
-            Route::post('/noshow-reservation', 'noShowReservation')->name('noshow-reservation');
+        Route::group(['middleware' => ['role_or_permission:hotel-manager']], function () {
+            Route::name('reports.')->group(function () {
+                Route::get('/reports', 'index')->name('index');
+                Route::get('/reports-payments', 'payments')->name('payments');
+                Route::post('/past-bill', 'bill')->name('bill');
+                Route::post('/latest-reservation', 'latestReservation')->name('latest-reservation');
+                Route::post('/past-reservation', 'pastReservation')->name('past-reservation');
+                Route::post('/noshow-reservation', 'noShowReservation')->name('noshow-reservation');
+            });
         });
     });
 
@@ -182,6 +187,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_p
             Route::post('/customers', 'show')->name('show');
         });
     });
+
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/room-filter', [AdminDashboardController::class, 'fetchRooms'])->name('room-filter');

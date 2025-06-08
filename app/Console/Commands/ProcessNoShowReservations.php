@@ -35,6 +35,17 @@ class ProcessNoShowReservations extends Command
         $yesterday = Carbon::yesterday();
 
         DB::transaction(function () use ($yesterday) {
+
+            $toMarkNoShow = Reservation::where('status', 'confirmed')
+                ->whereDate('check_in_date', $yesterday)
+                ->whereNotNull('card_number')
+                ->get();
+
+            foreach ($toMarkNoShow as $reservation) {
+                $reservation->status = 'no_show';
+                $reservation->save();
+            }
+
             $noShowReservations = Reservation::where('status', 'no_show')
                 ->whereDate('check_in_date', $yesterday)
                 ->where('no_show_billed', 0)

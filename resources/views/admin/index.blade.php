@@ -87,13 +87,14 @@
                         </div>
                         <p class="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
                             <span class="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon
-                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon> +Rs{{ $reservations->sum('total_price') }}</span>
+                                    icon="bxs:up-arrow" class="text-xs"></iconify-icon>
+                                +Rs{{ $reservations->sum('total_price') }}</span>
                             Last 30 days income
                         </p>
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <div class="row gy-1 mt-2">
@@ -168,7 +169,8 @@
                                                                     class="text-2xl mb-0"></iconify-icon>
                                                             </div>
                                                             <div class="flex-grow-1">
-                                                                <h6 class="text-md mb-0 fw-medium">{{ $customer->name }}</h6>
+                                                                <h6 class="text-md mb-0 fw-medium">{{ $customer->name }}
+                                                                </h6>
                                                                 <span
                                                                     class="text-sm text-secondary-light fw-medium">{{ $customer->email }}</span>
                                                             </div>
@@ -314,5 +316,18 @@
                 })
             });
         });
+    </script>
+
+    <script>
+        setTimeout(function() {
+            let alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+            }
+        }, 3000);
     </script>
 @endsection

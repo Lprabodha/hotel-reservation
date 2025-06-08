@@ -20,24 +20,28 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <label class="form-label">Check in date</label>
-                                <input type="date" name="check_in_date" class="form-control" placeholder="Enter Last Name">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label">Check out date</label>
-                                <input type="date" name="check_out_date" class="form-control" placeholder="Enter Email">
-                            </div>
+                        <form action="{{ route('store.request.reservations') }}" method="POST">
+                            @csrf
+                            <div class="row gy-3">
+                                <div class="col-6">
+                                    <label class="form-label">Check in date</label>
+                                    <input type="date" name="check_in_date" class="form-control" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label">Check out date</label>
+                                    <input type="date" name="check_out_date" class="form-control" required>
+                                </div>
 
-                            <div class="col-12">
-                                <label class="form-label">Description</label>
-                                <textarea name="description" class="form-control" id="description" cols="30" rows="2"></textarea>
+                                <div class="col-12">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" cols="30" rows="2"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary-600">Submit Request</button>
+                                </div>
                             </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary-600">Submit Request</button>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

@@ -65,6 +65,12 @@ class ReservationController extends Controller
                 ? 'credit_card'
                 : 'none';
 
+            $maskedCard = null;
+            if ($request->card_number) {
+                $lastFour = substr($request->card_number, -4);
+                $maskedCard = 'xxxx'.$lastFour;
+            }
+
             $reservation = Reservation::create([
                 'user_id' => auth()->check() ? auth()->id() : null,
                 'hotel_id' => $hotelId,
@@ -76,12 +82,12 @@ class ReservationController extends Controller
                 'status' => 'booked',
                 'payment_status' => 'pending',
                 'payment_method' => $paymentMethod,
+                'card_number' => $maskedCard,
                 'confirmation_number' => strtoupper(Str::random(10)),
             ]);
 
             $reservation->rooms()->sync($request->rooms);
             $reservation->load('hotel');
-            // dd($reservation);
 
             try {
                 $mailData = [
@@ -172,8 +178,8 @@ class ReservationController extends Controller
                     'room_type' => ucfirst($room->room_type),
                     'price_per_night' => $room->price_per_night,
                     'image' => ! empty($room->images[0])
-                                ? Storage::disk('s3')->url($room->images[0])
-                                : Vite::asset('resources/images/default-room.jpg'),
+                        ? Storage::disk('s3')->url($room->images[0])
+                        : Vite::asset('resources/images/default-room.jpg'),
                 ];
             });
 

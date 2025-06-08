@@ -79,7 +79,6 @@
 @endsection
 
 @section('scripts')
-
     <script>
         $('#user-table').DataTable({
             "processing": true,
@@ -199,5 +198,18 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        setTimeout(function() {
+            let alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+            }
+        }, 3000);
     </script>
 @endsection

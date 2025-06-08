@@ -332,10 +332,8 @@ class ReportController extends Controller
             $statusBadgeClass = match ($r->status) {
                 'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-success-focus text-success-main',
-                'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-primary-focus text-primary-main',
-                'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-secondary-focus text-secondary-main',
+                'checked_in' => 'bg-info-focus text-info-main px-24 py-4 rounded-pill fw-medium text-sm',
+                'checked_out' => 'bg-info-focus text-info-main px-24 py-4 rounded-pill fw-medium text-sm',
                 'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-danger-focus text-danger-main',
                 'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
@@ -432,10 +430,8 @@ class ReportController extends Controller
             $statusBadgeClass = match ($r->status) {
                 'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-success-focus text-success-main',
-                'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-primary-focus text-primary-main',
-                'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-secondary-focus text-secondary-main',
+                'checked_in' => 'bg-info-focus text-info-main px-24 py-4 rounded-pill fw-medium text-sm',
+                'checked_out' => 'bg-info-focus text-info-main px-24 py-4 rounded-pill fw-medium text-sm',
                 'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-danger-focus text-danger-main',
                 'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
