@@ -297,6 +297,8 @@ class ReservationController extends Controller
                                     bg-warning-focus text-warning-main',
                     'completed' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-success-focus text-success-main',
+                    'pending' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
                     default => 'badge bg-light',
                 };
 
@@ -318,14 +320,19 @@ class ReservationController extends Controller
             }
 
             if ($r->status == 'pending') {
+                if (\Carbon\Carbon::parse($r->check_out_date)->isFuture()) {
+                    $action .= '
+            <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                <iconify-icon icon="lucide:edit"></iconify-icon>
+            </a>
+            ';
+                }
+
                 $action .= '
-                    <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                        <iconify-icon icon="lucide:edit"></iconify-icon>
-                    </a>
-                    <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
-                        <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
-                    </button>
-                ';
+            <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+            </button>
+        ';
             }
 
             $nestedData['action'] = $action;
@@ -345,9 +352,48 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $reservation = Reservation::where('confirmation_number', $id)->first();
+
+        if (! $reservation) {
+            return redirect()->route('admin.reservation.index')->with('error', 'Reservation not found.');
+        }
+
+        $user = Auth::user();
+
+        if (! $user->hasRole('hotel-clerk')) {
+            return redirect()->back()->with('error', 'Access denied.');
+        }
+
+        $hotel = $user->hotels()->with(['rooms' => function ($q) {
+            $q->where('is_available', 1);
+        }])->first();
+
+        if (Carbon::parse($reservation->check_in_date)->isToday() || Carbon::parse($reservation->check_in_date)->isPast()) {
+            return redirect()->back()->with('error', 'Cannot edit a reservation that has already started.');
+        }
+
+        $bookedDates = [];
+
+        $reservations = Reservation::where('hotel_id', $hotel->id)
+            ->where('id', '!=', $reservation->id)
+            ->get();
+
+        foreach ($reservations as $r) {
+            $period = CarbonPeriod::create(
+                Carbon::parse($r->check_in_date),
+                Carbon::parse($r->check_out_date)->subDay()
+            );
+
+            foreach ($period as $date) {
+                $bookedDates[] = $date->format('Y-m-d');
+            }
+        }
+
+        $bookedDates = array_unique($bookedDates);
+
+        return view('admin.reservations.edit', compact('reservation', 'hotel', 'bookedDates'));
     }
 
     /**
