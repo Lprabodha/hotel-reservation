@@ -68,6 +68,13 @@
                                             <button class="btn btn-default reveal2 toggle-password" type="button"><i
                                                     class="ti-eye"></i></button>
                                         </span>
+
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
@@ -86,7 +93,8 @@
                                 </a>
                             </div>
 
-                            <p class="subText mt-2">Do you already have an account? <a href="{{ route('login') }}">Log In</a>
+                            <p class="subText mt-2">Do you already have an account? <a href="{{ route('login') }}">Log
+                                    In</a>
                             </p>
                         </div>
                     </form>

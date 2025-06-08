@@ -111,40 +111,29 @@
     </script>
 
     <script>
-        function deleteUser(id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to delete this Hotel Clerks!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "<?= route('admin.hotel-clerks.destroy') ?>",
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            Swal.fire('Deleted!', response.success, 'success')
-                                .then(() => location.reload());
-                        },
-                        error: function(response) {
-                            Swal.fire({
-                                title: "Error",
-                                text: response.responseText,
-                                icon: "error",
-                            });
-                        }
-                    });
-                }
-            });
+        function deleteReservation(id) {
+            if (confirm("Are you sure you want to delete this reservation?")) {
+
+                const toast = new ToastMagic();
+
+                $.ajax({
+                    url: "{{ route('admin.reservation.destroy') }}",
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        toast.success("Success!", "Reservation deleted successfully!");
+                        location.reload();
+                    },
+                    error: function(xhr) {
+                        toast.error("Error!", xhr.responseText);
+                    }
+                });
+            }
         }
     </script>
 

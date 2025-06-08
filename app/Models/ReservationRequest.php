@@ -11,6 +11,7 @@ class ReservationRequest extends Model
         'check_in_date',
         'check_out_date',
         'description',
+        'hotel_id'
     ];
 
     public function travelCompany()
