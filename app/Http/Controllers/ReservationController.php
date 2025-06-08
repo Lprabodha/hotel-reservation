@@ -91,7 +91,7 @@ class ReservationController extends Controller
 
             try {
                 $mailData = [
-                    'title' => 'Reservation Confirmed: '.$reservation->confirmation_number,
+                    'title' => 'Reservation Confirmed: ' . $reservation->confirmation_number,
                     'name' => auth()->user()?->name ?? 'Guest',
                     'reservation_id' => $reservation->confirmation_number,
                     'date' => $reservation->check_in_date->format('Y-m-d'),
@@ -158,10 +158,12 @@ class ReservationController extends Controller
         $request->validate([
             'checkin' => 'required|date',
             'checkout' => 'required|date|after:checkin',
+            'hotel_id' => 'required|exists:hotels,id',
         ]);
 
         $checkin = Carbon::parse($request->checkin);
         $checkout = Carbon::parse($request->checkout);
+        $hotelId = $request->hotel_id;
 
         $conflictingReservations = DB::table('reservation_room')
             ->join('reservations', 'reservation_room.reservation_id', '=', 'reservations.id')
@@ -170,6 +172,7 @@ class ReservationController extends Controller
             ->pluck('room_id');
 
         $availableRooms = Room::whereNotIn('id', $conflictingReservations)
+            ->where('hotel_id', $hotelId)
             ->get()
             ->map(function ($room) {
                 return [
@@ -177,7 +180,7 @@ class ReservationController extends Controller
                     'room_number' => $room->room_number,
                     'room_type' => ucfirst($room->room_type),
                     'price_per_night' => $room->price_per_night,
-                    'image' => ! empty($room->images[0])
+                    'image' => !empty($room->images[0])
                         ? Storage::disk('s3')->url($room->images[0])
                         : Vite::asset('resources/images/default-room.jpg'),
                 ];
@@ -185,6 +188,7 @@ class ReservationController extends Controller
 
         return response()->json(['rooms' => $availableRooms]);
     }
+
 
     public function reservationConfirmed(Reservation $reservation)
     {
