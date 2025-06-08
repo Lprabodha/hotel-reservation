@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $today = date('Y-m-d');
+    @endphp
+
     <section class="hero-section-s3">
         <div class="hero-wraper">
             <div class="container">
@@ -26,9 +30,9 @@
                                 <span>Discover and book your perfect stay</span>
                             </div>
                             <form>
-
                                 <div class="input-item">
-                                    <input class="form-control" type="text" id="check-in" placeholder="Check In:">
+                                    <input class="form-control" type="text" min="{{ $today }}" id="check-in" placeholder="Check In:"
+                                        autocomplete="off">
                                     <div class="icon">
                                         <svg width="13" height="16" viewBox="0 0 13 16" fill="none">
                                             <path
@@ -39,7 +43,8 @@
                                     </div>
                                 </div>
                                 <div class="input-item">
-                                    <input class="form-control" type="text" id="check-out" placeholder="Check Out:">
+                                    <input class="form-control" type="text" min="{{ $today }}" id="check-out" placeholder="Check Out:"
+                                        autocomplete="off">
                                     <div class="icon">
                                         <svg width="13" height="16" viewBox="0 0 13 16" fill="none">
                                             <path
@@ -50,7 +55,8 @@
                                     </div>
                                 </div>
                                 <div class="input-item">
-                                    <input class="form-control" type="text" id="guests" placeholder="Guests:">
+                                    <input class="form-control" min="1" max="10" type="number" id="guests"
+                                        placeholder="Guests:" autocomplete="off">
                                     <div class="icon">
                                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none">
                                             <path
@@ -557,6 +563,15 @@
             const url = `{{ route('hotels') }}?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}`;
 
             window.location.href = url;
+        });
+
+        document.getElementById('guests').addEventListener('input', function(e) {
+            const max = 100;
+            const min = 1;
+            let value = parseInt(e.target.value, 10);
+
+            if (value > max) e.target.value = max;
+            if (value < min) e.target.value = min;
         });
     </script>
 @endsection

@@ -178,7 +178,7 @@
                                                                         class="bg-warning-focus bg-hover-warning-200 text-warning-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
                                                                         title="View">
                                                                         <iconify-icon
-                                                                            icon="material-symbols:download"></iconify-icon>
+                                                                            icon="material-symbols:cancel"></iconify-icon>
                                                                     </a>
                                                                 @endif
                                                             </div>
