@@ -27,6 +27,7 @@ class Reservation extends Model
         'auto_cancelled',
         'no_show_billed',
         'hotel_id',
+        'card_number'
     ];
 
     public function rooms()
