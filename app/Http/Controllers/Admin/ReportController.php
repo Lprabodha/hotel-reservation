@@ -176,9 +176,10 @@ class ReportController extends Controller
             0 => 'id',
             1 => 'guest_email',
             2 => 'hotel_name',
-            3 => 'reservation_date',
-            4 => 'status',
-            5 => 'action',
+            3 => 'check_in_date',
+            4 => 'check_out_date',
+            5 => 'status',
+            6 => 'action',
         ];
 
         $query = Reservation::query();
@@ -242,15 +243,15 @@ class ReportController extends Controller
             $nestedData['id'] = $r->confirmation_number;
             $nestedData['guest_email'] = $r->user->email ?? 'N/A';
             $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
-            $nestedData['reservation_date'] = $r->check_in_date;
-
+            $nestedData['check_in_date'] = $r->check_in_date;
+            $nestedData['check_out_date'] = $r->check_out_date;
             $statusBadgeClass = match ($r->status) {
                 'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-success-focus text-success-main',
                 'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-primary-focus text-primary-main',
+                                    bg-success-focus text-success-main',
                 'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
-                                    bg-secondary-focus text-secondary-main',
+                                    bg-success-focus text-success-main',
                 'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-danger-focus text-danger-main',
                 'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
@@ -288,9 +289,10 @@ class ReportController extends Controller
             0 => 'id',
             1 => 'guest_email',
             2 => 'hotel_name',
-            3 => 'reservation_date',
-            4 => 'status',
-            5 => 'action',
+            3 => 'check_in_date',
+            4 => 'check_out_date',
+            5 => 'status',
+            6 => 'action',
         ];
 
         $query = Reservation::query();
@@ -342,7 +344,8 @@ class ReportController extends Controller
             $nestedData['id'] = $r->confirmation_number;
             $nestedData['guest_email'] = $r->user->email ?? 'N/A';
             $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
-            $nestedData['reservation_date'] = $r->check_in_date;
+            $nestedData['check_in_date'] = $r->check_in_date;
+            $nestedData['check_out_date'] = $r->check_out_date;
 
             $statusBadgeClass = match ($r->status) {
                 'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
@@ -387,9 +390,10 @@ class ReportController extends Controller
             0 => 'id',
             1 => 'guest_email',
             2 => 'hotel_name',
-            3 => 'reservation_date',
-            4 => 'status',
-            5 => 'action',
+            3 => 'check_in_date',
+            4 => 'check_out_date',
+            5 => 'status',
+            6 => 'action',
         ];
 
         $query = Reservation::query();
@@ -440,7 +444,8 @@ class ReportController extends Controller
             $nestedData['id'] = $r->confirmation_number;
             $nestedData['guest_email'] = $r->user->email ?? 'N/A';
             $nestedData['hotel_name'] = $r->hotel->name ?? 'N/A';
-            $nestedData['reservation_date'] = $r->check_in_date;
+            $nestedData['check_in_date'] = $r->check_in_date;
+            $nestedData['check_out_date'] = $r->check_out_date;
 
             $statusBadgeClass = match ($r->status) {
                 'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm

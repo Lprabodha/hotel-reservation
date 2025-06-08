@@ -305,10 +305,24 @@
                             return;
                         }
 
-                        if (checkin >= checkout) {
+                        const checkinDate = new Date(checkin);
+                        const checkoutDate = new Date(checkout);
+
+                        if (checkinDate >= checkoutDate) {
                             e.preventDefault();
                             wizardError.classList.remove('d-none');
                             wizardError.innerText = '❌ Check-Out Date must be after Check-In Date!';
+                            return;
+                        }
+
+                        const maxCheckoutDate = new Date(checkinDate);
+                        maxCheckoutDate.setMonth(maxCheckoutDate.getMonth() + 3);
+
+                        if (checkoutDate > maxCheckoutDate) {
+                            e.preventDefault();
+                            wizardError.classList.remove('d-none');
+                            wizardError.innerText =
+                                '❌ Check-Out Date must be within 3 months of Check-In Date!';
                             return;
                         }
 
@@ -325,6 +339,7 @@
                         readonlyCheckin.value = checkin;
                         readonlyCheckout.value = checkout;
                     }
+
 
 
                     if (currentStep === 1) {
