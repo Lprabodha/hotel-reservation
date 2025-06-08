@@ -6,8 +6,7 @@
             <h6 class="fw-semibold mb-0">Reservation View</h6>
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
-                    <a href="{{ route('dashboard') }}"
-                        class="d-flex align-items-center gap-1 hover-text-primary">
+                    <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
                         Dashboard
                     </a>
@@ -245,4 +244,19 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        setTimeout(function() {
+            let alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+            }
+        }, 3000);
+    </script>
 @endsection

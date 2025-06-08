@@ -275,7 +275,7 @@
                 <div class="dropdown">
                     <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
                         data-bs-toggle="dropdown">
-                        <img src="{{ Vite::asset('resources/images/admin/user.png') }}" alt="image"
+                        <img src="https://randomuser.me/api/portraits/med/men/75.jpg" alt="image"
                             class="w-40-px h-40-px object-fit-cover rounded-circle">
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-sm">
@@ -292,7 +292,7 @@
                         </div>
                         <ul class="to-top-list">
 
-                            {{-- <li>
+                            <li>
                                 <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
                                     href="{{ Auth::user()->getRoleNames()->contains('customer') ||
                                     Auth::user()->getRoleNames()->contains('travel-company')
@@ -300,7 +300,7 @@
                                         : route('admin.users.view.profile') }}">
                                     <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My
                                     Profile</a>
-                            </li> --}}
+                            </li>
                             <li>
                                 <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3"
                                     href="{{ route('logout') }}"

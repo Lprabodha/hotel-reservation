@@ -603,21 +603,26 @@
                     body: formData
                 })
                 .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong');
+                    if (!response.ok) {
+                        throw new Error('Network response was not OK');
                     }
+                    return response.json();
                 })
                 .then(data => {
-                    toast.success("Success!", "Reservation Created Successfully!");
+                    console.log("Redirecting to:", "{{ route('admin.reservation.index') }}");
+                    if (data.success) {
+                        toast.success("Success!", "Reservation Created Successfully!");
 
-                    setTimeout(function() {
-                        window.location.href = "{{ route('admin.reservation.index') }}";
-                    }, 2000);
+                        setTimeout(function() {
+                            window.location.href = "{{ route('admin.reservation.index') }}";
+                        }, 500);
+                    } else {
+                        toast.error("Error!", data.message || "Failed to create reservation.");
+                    }
                 })
                 .catch(error => {
-                    toast.success("Error!", "Failed to create reservation. Please try again.");
+                    console.error("Fetch error:", error);
+                    toast.error("Error!", "Something went wrong. Please try again.");
                 });
         }
     </script>

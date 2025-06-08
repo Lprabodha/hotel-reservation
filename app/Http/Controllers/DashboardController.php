@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\Reservation;
+use App\Models\ReservationRequest;
 use App\Models\TravelCompany;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -64,6 +65,11 @@ class DashboardController extends Controller
             'totalPayments',
             'totalSuccessReservations'
         ));
+    }
+
+    public function getUserProfile()
+    {
+        return view('admin.users.user-profile');
     }
 
     public function showReservation(Request $request)
@@ -306,5 +312,41 @@ class DashboardController extends Controller
     public function requestReservation(Request $request)
     {
         return view('dashboard.travel-company.reservation-request');
+    }
+
+    public function storeRequestReservation(Request $request)
+    {
+        $validated = $request->validate([
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date|after:check_in_date',
+            'description' => 'nullable|string',
+        ]);
+
+        $user = Auth::user()->travelCompany;
+
+        ReservationRequest::create([
+            'travel_company_id' => $user->id,
+            'check_in_date' => $validated['check_in_date'],
+            'check_out_date' => $validated['check_out_date'],
+            'description' => $validated['description'] ?? null,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Reservation request submitted successfully.');
+    }
+
+    public function cancelReservation($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        if ($reservation->status === 'booked' && Carbon::parse($reservation->check_in_date)->isFuture()) {
+            $reservation->status = 'cancelled';
+            $reservation->cancellation_reason = 'Customer Cancel the reservation';
+            $reservation->cancellation_date = now();
+            $reservation->save();
+
+            return redirect()->back()->with('success', 'Reservation cancelled successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Reservation cannot be cancelled.');
     }
 }

@@ -143,16 +143,38 @@
                                                     <td>
                                                         @php
                                                             $status = $reservation->status;
-                                                            $badgeClass = $statusClasses[$status] ?? 'badge bg-light'; // default if not matched
+                                                            $badgeClass = $statusClasses[$status] ?? 'badge bg-light';
                                                         @endphp
                                                         <span class="{{ $badgeClass }}">
                                                             {{ ucfirst($status) }}
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a href="{{route('view.reservations', ['id' => $reservation->confirmation_number])}}"
-                                                            class="btn rounded-pill btn-info-100 text-info-600 radius-8 px-20 py-11">
-                                                            <iconify-icon icon="lucide:view"></iconify-icon></a>
+                                                        <div class="d-flex flex-wrap justify-content-center gap-2"
+                                                            style="width: 60px;">
+                                                            <div class="d-flex gap-2 justify-content-center w-200">
+                                                                <a href="{{ route('view.reservations', ['id' => $reservation->confirmation_number]) }}"
+                                                                    class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                                                                    title="View">
+                                                                    <iconify-icon icon="mdi:eye-outline"></iconify-icon>
+                                                                </a>
+                                                                @if ($reservation->status == 'booked')
+                                                                    <form
+                                                                        action="{{ route('cancel.reservations', ['id' => $reservation->id]) }}"
+                                                                        method="POST"
+                                                                        onsubmit="return confirm('Are you sure?')">
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                                                                            title="Delete">
+                                                                            <iconify-icon
+                                                                                icon="mdi:trash-can-outline"></iconify-icon>
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @empty
@@ -217,4 +239,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        setTimeout(function() {
+            let alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+            }
+        }, 3000);
+    </script>
 @endsection
