@@ -83,10 +83,10 @@ class RegisterController extends Controller
 
             Mail::to($user->email)->send(new SendMail($data));
         } catch (\Exception $e) {
-            Log::error('Email failed to send: ' . $e->getMessage());
+            Log::error('Email failed to send: '.$e->getMessage());
         }
 
-        session()->flash('success', 'Welcome ' . $user->name . '! Your account has been created successfully.');
+        session()->flash('success', 'Welcome '.$user->name.'! Your account has been created successfully.');
 
         return $user;
     }

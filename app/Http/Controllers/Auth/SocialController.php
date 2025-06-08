@@ -42,7 +42,7 @@ class SocialController extends Controller
 
                 Mail::to($user->email)->send(new SendMail($data));
             } catch (\Exception $e) {
-                Log::error('Email failed to send: ' . $e->getMessage());
+                Log::error('Email failed to send: '.$e->getMessage());
             }
         }
         Auth::login($user);
@@ -59,7 +59,7 @@ class SocialController extends Controller
     public function oneTap($request)
     {
         $client = new \GuzzleHttp\Client;
-        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token=' . $request->id);
+        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token='.$request->id);
         $response = json_decode($request->getBody());
         $user = User::where('email', $response->email)->first();
 

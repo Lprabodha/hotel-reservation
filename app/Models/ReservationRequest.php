@@ -12,4 +12,9 @@ class ReservationRequest extends Model
         'check_out_date',
         'description',
     ];
+
+    public function travelCompany()
+    {
+        return $this->belongsTo(TravelCompany::class);
+    }
 }
