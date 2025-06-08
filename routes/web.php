@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CustomersController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HotelController as AdminHotelController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
@@ -155,6 +156,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::post('/payments/{reservation}/cash-payment', 'cashPayment')->name('cashPayment');
             Route::post('/payments/{reservation}/stripe-payment', 'stripePayment')->name('stripePayment');
             Route::get('payments/stripe-success/{reservation}', 'stripeSuccess')->name('stripe.success');
+        });
+    });
+
+    Route::controller(ReportController::class)->group(function () {
+        Route::name('reports.')->group(function () {
+            Route::get('/reports', 'index')->name('index');
+            Route::get('/payments', 'payments')->name('payments');
+            Route::post('/past-bill', 'bill')->name('bill');
+            Route::post('/latest-reservation', 'latestReservation')->name('latest-reservation');
+            Route::post('/past-reservation', 'pastReservation')->name('past-reservation');
+            Route::post('/noshow-reservation', 'noShowReservation')->name('noshow-reservation');
         });
     });
 

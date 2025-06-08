@@ -24,12 +24,15 @@
 
             @if ($isAdminRoute)
 
-                <li>
-                    <a href="{{ route('admin.reservation.index') }}" class="d-flex align-items-center gap-2">
-                        <iconify-icon icon="tabler:brand-booking" width="25" height="25"></iconify-icon>
-                        <span class="ms-2">Reservation</span>
-                    </a>
-                </li>
+
+                @if (!auth()->user()->hasRole('hotel-manager'))
+                    <li>
+                        <a href="{{ route('admin.reservation.index') }}" class="d-flex align-items-center gap-2">
+                            <iconify-icon icon="tabler:brand-booking" width="25" height="25"></iconify-icon>
+                            <span class="ms-2">Reservation</span>
+                        </a>
+                    </li>
+                @endif
 
                 @if (auth()->user()->hasRole('hotel-clerk') || auth()->user()->hasRole('hotel-manager'))
                     <li>
@@ -40,7 +43,7 @@
                     </li>
                 @endif
 
-                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('hotel-manager'))
+                @if (auth()->user()->hasRole('super-admin'))
                     <li>
                         <a href="{{ route('admin.hotels') }}" class="d-flex align-items-center gap-2">
                             <iconify-icon icon="fa6-solid:hotel" width="25" height="25"></iconify-icon>
@@ -57,18 +60,33 @@
                 @endif
 
 
-                @if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('hotel-manager'))
+                @if (auth()->user()->hasRole('super-admin'))
                     <li>
                         <a href="{{ route('admin.payments.index') }}" class="d-flex align-items-center gap-2">
                             <iconify-icon icon="tdesign:money" width="25" height="25"></iconify-icon>
                             <span class="ms-2">Payments</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="chat.html" class="d-flex align-items-center gap-2">
-                            <iconify-icon icon="lsicon:report-filled" width="25" height="25"></iconify-icon>
-                            <span class="ms-2">Reports</span>
+                @endif
+
+                @if (auth()->user()->hasRole('hotel-manager'))
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">
+                            <iconify-icon icon="mdi:file-report-outline" class="menu-icon"></iconify-icon>
+                            <span>Reports</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('admin.reports.index') }}">
+                                    <iconify-icon icon="carbon:summary-kpi" class="menu-icon"></iconify-icon>
+                                    Summary & Reservation</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.reports.payments') }}">
+                                    <iconify-icon icon="material-symbols:payments" class="menu-icon"></iconify-icon>
+                                    Payments</a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
 
