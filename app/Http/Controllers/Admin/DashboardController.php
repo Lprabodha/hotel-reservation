@@ -65,14 +65,14 @@ class DashboardController extends Controller
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center gap-2">
                         <iconify-icon icon="mdi:guest-room" class="text-xxl"></iconify-icon>
-                        <h6 class="text-lg mb-0">Room #' . $room->room_number . '</h6>
+                        <h6 class="text-lg mb-0">Room #'.$room->room_number.'</h6>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="rooms[]" value="' . $room->id . '" id="room_' . $room->id . '">
+                        <input class="form-check-input" type="checkbox" name="rooms[]" value="'.$room->id.'" id="room_'.$room->id.'">
                     </div>
                 </div>
-                <p class="card-text text-muted mb-2"><strong>Room Type:</strong> ' . $room->room_type . '</p>
-                <p class="card-text text-muted mb-0"><strong>Max Guests:</strong> ' . $room->occupancy . '</p>
+                <p class="card-text text-muted mb-2"><strong>Room Type:</strong> '.$room->room_type.'</p>
+                <p class="card-text text-muted mb-0"><strong>Max Guests:</strong> '.$room->occupancy.'</p>
             </div>
         </div>
     </div>';
