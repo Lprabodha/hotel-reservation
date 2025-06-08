@@ -298,7 +298,7 @@
                         {{-- Hidden fields --}}
                         <input type="hidden" name="customer_type" value="individual">
                         <input type="hidden" name="customer_email" value="{{ auth()->id() }}">
-                        <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
+                        <input id="hotel-id" type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
                         <div style="display: flex; justify-content: space-between; width: 100%;">
                             <div class="form-group mb-3" style="width: 45%;">
@@ -328,7 +328,7 @@
                             <div class="form-row mb-3" style="width: 30%;">
                                 <div class="col">
                                     <label>CVV</label>
-                                    <input type="text" name="csv" class="form-control" placeholder="123">
+                                    <input type="text" name="csv" class="form-control" placeholder="123" maxlength="3">
                                 </div>
                             </div>
                         </div>
@@ -361,6 +361,7 @@
         const checkoutInput = document.querySelector('input[name="checkout"]');
         const guestsInput = document.querySelector('input[name="guests"]');
         const checkAvailabilityBtn = document.getElementById('check-availability-btn');
+        const hotelId = document.getElementById('hotel-id').value;
 
         const selectedRoomsInputContainer = document.getElementById('selected-rooms');
         const roomList = document.getElementById('selected-room-list');
@@ -425,7 +426,7 @@
                 return;
             }
 
-            fetch(`/check-availability?checkin=${checkin}&checkout=${checkout}&guests=${guests}`)
+            fetch(`/check-availability?checkin=${checkin}&checkout=${checkout}&guests=${guests}&hotel_id=${hotelId}`)
                 .then(response => response.json())
                 .then(data => {
                     roomsContainer.innerHTML = '';
