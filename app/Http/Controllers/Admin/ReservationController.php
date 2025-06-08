@@ -7,6 +7,7 @@ use App\Mail\SendMail;
 use App\Models\Bill;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\ReservationRequest;
 use App\Models\Room;
 use App\Models\TravelCompany;
 use App\Models\User;
@@ -28,6 +29,11 @@ class ReservationController extends Controller
     public function index()
     {
         return view('admin.reservations.index');
+    }
+
+    public function request()
+    {
+        return view('admin.reservations.request');
     }
 
     /**
@@ -205,6 +211,68 @@ class ReservationController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function requestShow(Request $request)
+    {
+        $columns = [
+            0 => 'travel_company',
+            1 => 'check_in_date',
+            2 => 'check_out_date',
+            3 => 'description',
+            4 => 'action',
+        ];
+
+        $totalData = ReservationRequest::count();
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $orderColumnIndex = $request->input('order.0.column', 0);
+        $orderDirection = $request->input('order.0.dir', 'asc');
+        $orderBy = $columns[$orderColumnIndex];
+
+        $query = ReservationRequest::with('travelCompany');
+
+        if (! empty($request->input('search.value'))) {
+            $search = $request->input('search.value');
+            $query->where(function ($q) use ($search) {
+                $q->where('description', 'like', "%{$search}%")
+                    ->orWhereHas('travelCompany', function ($tc) use ($search) {
+                        $tc->where('name', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        $totalFiltered = $query->count();
+
+        $requests = $query->offset($start)
+            ->limit($limit)
+            ->orderBy($orderBy === 'travel_company' ? 'travel_company_id' : $orderBy, $orderDirection)
+            ->get();
+
+        $data = [];
+
+        foreach ($requests as $r) {
+            $data[] = [
+                'travel_company' => $r->travelCompany->company_name ?? 'N/A',
+                'check_in_date' => Carbon::parse($r->check_in_date)->format('Y-m-d'),
+                'check_out_date' => Carbon::parse($r->check_out_date)->format('Y-m-d'),
+                'description' => $r->description,
+                'action' => '
+                <button type="button" onclick="viewRequest('.$r->id.')"
+                    class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <iconify-icon icon="line-md:confirm"></iconify-icon>
+                </button>
+            ',
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data,
+        ]);
     }
 
     /**

@@ -133,9 +133,9 @@ class ReportController extends Controller
             $nestedData['id'] = $r->id;
             $nestedData['confirmation_number'] = $r->reservation->confirmation_number ?? '-';
             $nestedData['payment_method'] = $r->payment->method ?? '-';
-            $nestedData['extra_charges'] = 'LKR ' . number_format($r->extra_charges, 2);
-            $nestedData['discount'] = 'LKR ' . number_format($r->discount, 2);
-            $nestedData['total_amount'] = 'LKR ' . number_format($r->total_amount, 2);
+            $nestedData['extra_charges'] = 'LKR '.number_format($r->extra_charges, 2);
+            $nestedData['discount'] = 'LKR '.number_format($r->discount, 2);
+            $nestedData['total_amount'] = 'LKR '.number_format($r->total_amount, 2);
             $nestedData['status'] = $r->status == 'paid'
                 ? '<span class="px-24 py-4 rounded-pill fw-medium text-sm
                                     bg-success-focus text-success-main">Paid</span>'
@@ -150,7 +150,7 @@ class ReportController extends Controller
 
             if ($r->status == 'paid') {
                 $action .= '
-                    <button type="button" onclick="refundBill(' . $r->id . ')" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <button type="button" onclick="refundBill('.$r->id.')" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="gridicons:refund"></iconify-icon>
                     </button>
                 ';
@@ -260,10 +260,10 @@ class ReportController extends Controller
                 default => 'badge bg-light',
             };
 
-            $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
+            $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
 
             $action = '
-                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
@@ -358,10 +358,10 @@ class ReportController extends Controller
                 default => 'badge bg-light',
             };
 
-            $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
+            $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
 
             $action = '
-                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
@@ -456,10 +456,10 @@ class ReportController extends Controller
                 default => 'badge bg-light',
             };
 
-            $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
+            $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
 
             $action = '
-                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';

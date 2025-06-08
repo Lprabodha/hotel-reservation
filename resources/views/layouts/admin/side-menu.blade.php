@@ -35,8 +35,8 @@
 
                     @if (auth()->user()->hasRole('hotel-clerk'))
                         <li>
-                            <a href="{{ route('admin.reservation.create') }}" class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="tabler:brand-booking" width="25" height="25"></iconify-icon>
+                            <a href="{{ route('admin.reservation.request') }}" class="d-flex align-items-center gap-2">
+                                <iconify-icon icon="akar-icons:chat-approve" width="25" height="25"></iconify-icon>
                                 <span class="ms-2">Reservation Request</span>
                             </a>
                         </li>

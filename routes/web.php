@@ -146,7 +146,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_p
     Route::controller(ReservationController::class)->group(function () {
         Route::name('reservation.')->group(function () {
             Route::get('/reservations', 'index')->name('index');
+            Route::get('/reservations-request', 'request')->name('request');
             Route::post('/reservations', 'show')->name('show');
+            Route::post('/reservations-request', 'requestShow')->name('reservations-request');
             Route::get('/reservations/create', 'create')->name('create');
             Route::post('/reservations/store', 'store')->name('store');
             Route::get('/reservations/{id}', 'edit')->name('edit');
