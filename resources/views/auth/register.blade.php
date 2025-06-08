@@ -44,67 +44,60 @@
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" placeholder="Your password here.." name="password"
-                                            class="form-control @error('password') is-invalid @enderror" required
-                                            autocomplete="new-password">
+                                        <input type="password" name="password" class="form-control" required placeholder="Enter your password here...">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default reveal3 toggle-password" type="button"><i
+                                            <button class="btn btn-default toggle-password" type="button"><i
                                                     class="ti-eye"></i></button>
                                         </span>
 
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <div class="form-group">
-                                        <label>Confirm Password</label>
-                                        <input id="password-confirm" type="password" placeholder="Your password here.."
-                                            name="password_confirmation" required autocomplete="new-password">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default reveal2 toggle-password" type="button"><i
-                                                    class="ti-eye"></i></button>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
                                         </span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <button type="submit" class="wpo-accountBtn">Sign Up</button>
+                                    @enderror
                                 </div>
                             </div>
-                            <h4 class="or"><span>OR</span></h4>
-
-                            <div class="d-flex justify-content-center mt-1">
-                                <a href="{{ route('social.login', 'google') }}"
-                                    class="btn btn-light border d-flex align-items-center px-4 py-2 rounded shadow-sm"
-                                    style="gap: 12px; font-weight: 500; font-size: 16px;">
-                                    <img src="{{ asset('images/google-icon.png') }}" alt="Google"
-                                        style="width:20px; height:20px;">
-                                    <span>Log in with Google</span>
-                                </a>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" name="password_confirmation" class="form-control" required placeholder="Confirm your password here...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default toggle-password" type="button"><i
+                                                class="ti-eye"></i></button>
+                                    </span>
+                                </div>
                             </div>
-
-                            <p class="subText mt-2">Do you already have an account? <a href="{{ route('login') }}">Log In</a>
-                            </p>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="submit" class="wpo-accountBtn">Sign Up</button>
+                            </div>
                         </div>
-                    </form>
+                        <h4 class="or"><span>OR</span></h4>
+
+                        <div class="d-flex justify-content-center mt-1">
+                            <a href="{{ route('social.login', 'google') }}"
+                                class="btn btn-light border d-flex align-items-center px-4 py-2 rounded shadow-sm"
+                                style="gap: 12px; font-weight: 500; font-size: 16px;">
+                                <img src="{{ asset('images/google-icon.png') }}" alt="Google"
+                                    style="width:20px; height:20px;">
+                                <span>Log in with Google</span>
+                            </a>
+                        </div>
+
+                        <p class="subText mt-2">Do you already have an account? <a href="{{ route('login') }}">Log In</a>
+                        </p>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+    </div>
 
-    @push('scripts')
-        <script>
-            document.querySelectorAll('.toggle-password').forEach(button => {
-                button.addEventListener('click', () => {
-                    const input = button.previousElementSibling;
-                    input.type = input.type === 'password' ? 'text' : 'password';
-                    button.querySelector('i').classList.toggle('ti-eye');
-                    button.querySelector('i').classList.toggle('ti-eye-off');
-                });
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.closest('.form-group').querySelector('input');
+                input.type = input.type === 'password' ? 'text' : 'password';
             });
-        </script>
-    @endpush
+        });
+    </script>
 @endsection
