@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\User;
+use AWS\CRT\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class DashboardController extends Controller
 {
@@ -13,8 +15,16 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role === 'super-admin') {
-            $reservations = Reservation::select('id', 'confirmation_number', 'check_in_date', 'check_out_date', 'status')->get();
+        $users = User::orderBy('created_at', 'desc')->take(10)->get();
+
+        $totalRevenue = Reservation::sum('total_price');
+
+        $customers = User::whereHas('roles', function ($query) {
+            $query->where('name', 'customer');
+        })->orderBy('created_at', 'desc')->take(10)->get();
+
+        if ($user->roles[0]->name === 'super-admin') {
+            $reservations = Reservation::orderBy('created_at', 'desc')->take(10)->get();
         } else {
             $hotelIds = $user->hotels->pluck('id')->toArray();
 
@@ -23,7 +33,7 @@ class DashboardController extends Controller
                 ->get();
         }
 
-        return view('admin.index', compact('reservations'));
+        return view('admin.index', compact('reservations', 'users', 'totalRevenue', 'customers'));
     }
 
     public function fetchRooms(Request $request)
@@ -64,13 +74,13 @@ class DashboardController extends Controller
                     <div class="card-body py-16 px-24">
                         <div class="d-flex align-items-center gap-2 mb-12">
                             <iconify-icon icon="mdi:guest-room" class="text-xxl"></iconify-icon>
-                            <h6 class="text-lg mb-0">Room Number - #'.$room->room_number.'</h6>
+                            <h6 class="text-lg mb-0">Room Number - #' . $room->room_number . '</h6>
                             <div class="room-checkbox">
-                                <input type="checkbox" name="rooms[]" value="'.$room->id.'" class="form-check-input">
+                                <input type="checkbox" name="rooms[]" value="' . $room->id . '" class="form-check-input">
                             </div>
                         </div>
-                        <p class="card-text text-muted mb-2">Room Type: '.$room->room_type.'</p>
-                        <p class="card-text text-muted mb-2">Max Guests: '.$room->occupancy.'</p>
+                        <p class="card-text text-muted mb-2">Room Type: ' . $room->room_type . '</p>
+                        <p class="card-text text-muted mb-2">Max Guests: ' . $room->occupancy . '</p>
                     </div>
                 </div>
             </div>';
