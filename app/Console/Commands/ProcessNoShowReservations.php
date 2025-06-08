@@ -16,7 +16,7 @@ class ProcessNoShowReservations extends Command
      *
      * @var string
      */
-    protected $signature = 'reservations:process-no-shows';
+    protected $signature = 'billing:no-show';
 
     /**
      * The console command description.

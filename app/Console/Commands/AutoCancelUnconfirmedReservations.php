@@ -14,7 +14,7 @@ class AutoCancelUnconfirmedReservations extends Command
      *
      * @var string
      */
-    protected $signature = 'reservations:auto-cancel-unconfirmed';
+    protected $signature = 'reservation:auto-cancel';
 
     /**
      * The console command description.
