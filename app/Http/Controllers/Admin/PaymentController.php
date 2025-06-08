@@ -103,8 +103,10 @@ class PaymentController extends Controller
             $nestedData['discount'] = 'LKR '.number_format($r->discount, 2);
             $nestedData['total_amount'] = 'LKR '.number_format($r->total_amount, 2);
             $nestedData['status'] = $r->status == 'paid'
-                ? '<span class="badge bg-success">Paid</span>'
-                : '<span class="badge bg-danger">Unpaid</span>';
+                ? '<span class="px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main">Paid</span>'
+                : '<span class="px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main">Unpaid</span>';
 
             $action = '
                 <a href="" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">

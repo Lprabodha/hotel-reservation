@@ -150,7 +150,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a href=""
+                                                        <a href="{{route('view.reservations', ['id' => $reservation->confirmation_number])}}"
                                                             class="btn rounded-pill btn-info-100 text-info-600 radius-8 px-20 py-11">
                                                             <iconify-icon icon="lucide:view"></iconify-icon></a>
                                                     </td>

@@ -285,12 +285,18 @@ class ReservationController extends Controller
                 $nestedData['status'] .= '</select>';
             } else {
                 $statusBadgeClass = match ($r->status) {
-                    'booked' => 'badge bg-success',
-                    'checked_in' => 'badge bg-primary',
-                    'checked_out' => 'badge bg-secondary',
-                    'cancelled' => 'badge bg-danger',
-                    'no_show' => 'badge bg-warning',
-                    'completed' => 'badge bg-success',
+                    'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
+                    'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-primary-focus text-primary-main',
+                    'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-secondary-focus text-secondary-main',
+                    'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main',
+                    'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-warning-focus text-warning-main',
+                    'completed' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
                     default => 'badge bg-light',
                 };
 

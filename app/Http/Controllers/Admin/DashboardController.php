@@ -36,8 +36,6 @@ class DashboardController extends Controller
         $user = auth()->user();
         $hotel = $user->hotels()->first();
 
-        info($hotel);
-
         $roomsQuery = $hotel->rooms();
 
         if ($request->filled('checkin') && $request->filled('checkout')) {
@@ -58,26 +56,26 @@ class DashboardController extends Controller
 
         $rooms = $roomsQuery->get();
 
-        info($rooms);
-
         $html = '';
         foreach ($rooms as $room) {
             $html .= '
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card radius-12 h-60">
-                    <div class="card-body py-16 px-24">
-                        <div class="d-flex align-items-center gap-2 mb-12">
-                            <iconify-icon icon="mdi:guest-room" class="text-xxl"></iconify-icon>
-                            <h6 class="text-lg mb-0">Room Number - #'.$room->room_number.'</h6>
-                            <div class="room-checkbox">
-                                <input type="checkbox" name="rooms[]" value="'.$room->id.'" class="form-check-input">
-                            </div>
-                        </div>
-                        <p class="card-text text-muted mb-2">Room Type: '.$room->room_type.'</p>
-                        <p class="card-text text-muted mb-2">Max Guests: '.$room->occupancy.'</p>
+    <div class="col-xxl-3 col-sm-6 mb-4">
+        <div class="card radius-12 h-100">
+            <div class="card-body py-3 px-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <iconify-icon icon="mdi:guest-room" class="text-xxl"></iconify-icon>
+                        <h6 class="text-lg mb-0">Room #' . $room->room_number . '</h6>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="rooms[]" value="' . $room->id . '" id="room_' . $room->id . '">
                     </div>
                 </div>
-            </div>';
+                <p class="card-text text-muted mb-2"><strong>Room Type:</strong> ' . $room->room_type . '</p>
+                <p class="card-text text-muted mb-0"><strong>Max Guests:</strong> ' . $room->occupancy . '</p>
+            </div>
+        </div>
+    </div>';
         }
 
         return response()->json([

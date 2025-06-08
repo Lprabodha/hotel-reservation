@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Reservation;
 use App\Models\TravelCompany;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -243,5 +245,66 @@ class DashboardController extends Controller
         ];
 
         return response()->json($json_data);
+    }
+
+    public function viewReservation($id)
+    {
+
+        $reservation = Reservation::where('confirmation_number', $id)->first();
+
+        if (! $reservation) {
+            return redirect()->route('dashboard');
+        }
+
+        $bill = Bill::with('services')->where('reservation_id', $reservation->id)->first();
+
+        $reservationRooms = [];
+
+        $checkIn = Carbon::parse($reservation->check_in_date);
+        $checkOut = Carbon::parse($reservation->check_out_date);
+        $nights = $checkIn->diffInDays($checkOut);
+
+        foreach ($reservation->rooms as $room) {
+            $rates = DB::table('room_rates')
+                ->where('room_id', $room->id)
+                ->pluck('amount', 'rate_type');
+
+            $dailyRate = $rates['daily'] ?? 0;
+            $weeklyRate = $rates['weekly'] ?? 0;
+            $monthlyRate = $rates['monthly'] ?? 0;
+
+            $remainingDays = $nights;
+            $price = 0;
+
+            if ($remainingDays >= 30 && $monthlyRate > 0) {
+                $months = intdiv($remainingDays, 30);
+                $price += $months * $monthlyRate;
+                $remainingDays -= $months * 30;
+            }
+
+            if ($remainingDays >= 7 && $weeklyRate > 0) {
+                $weeks = intdiv($remainingDays, 7);
+                $price += $weeks * $weeklyRate;
+                $remainingDays -= $weeks * 7;
+            }
+
+            if ($remainingDays > 0 && $dailyRate > 0) {
+                $price += $remainingDays * $dailyRate;
+            }
+
+            $reservationRooms[] = [
+                'id' => $room->id,
+                'occupancy' => $room->occupancy,
+                'room_type' => $room->room_type,
+                'price' => $price,
+            ];
+        }
+
+        return view('admin.reservations.view', compact('reservation', 'reservationRooms', 'bill'));
+    }
+
+    public function requestReservation(Request $request)
+    {
+        return view('dashboard.travel-company.reservation-request');
     }
 }
