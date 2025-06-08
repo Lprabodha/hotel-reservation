@@ -6,6 +6,7 @@ use App\Models\Room;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RoomControllerTest extends TestCase
 {
@@ -34,7 +35,7 @@ class RoomControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_rooms_index()
     {
         $response = $this->get(route('admin.rooms.index'));
@@ -43,7 +44,7 @@ class RoomControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_create_route()
     {
         $response = $this->get(route('admin.rooms.create'));
@@ -52,7 +53,7 @@ class RoomControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_store_route()
     {
         $roomData = [
@@ -71,7 +72,7 @@ class RoomControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_update_route()
     {
         $room = Room::create([
@@ -101,7 +102,7 @@ class RoomControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_validation_errors()
     {
         $response = $this->post(route('admin.rooms.store'), [

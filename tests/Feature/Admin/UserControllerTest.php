@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UserControllerTest extends TestCase
 {
@@ -24,7 +25,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_users_index()
     {
         $response = $this->get(route('admin.users.index'));
@@ -33,7 +34,7 @@ class UserControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_user_roles_route()
     {
         $response = $this->get(route('admin.users.role.index'));
@@ -42,7 +43,7 @@ class UserControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_delete_user_route()
     {
         $testUser = User::factory()->create();
@@ -55,7 +56,7 @@ class UserControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_user_profile_route()
     {
         $response = $this->get(route('admin.users.view.profile'));
@@ -64,7 +65,7 @@ class UserControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_change_user_role_route()
     {
         $testUser = User::factory()->create();

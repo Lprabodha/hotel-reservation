@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Reservation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PaymentControllerTest extends TestCase
 {
@@ -34,7 +35,7 @@ class PaymentControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_payments_index()
     {
         $response = $this->get(route('admin.payments.index'));
@@ -42,7 +43,7 @@ class PaymentControllerTest extends TestCase
         $response->assertStatus(302);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_show_payments_datatable()
     {
         // Create a reservation with hotel_id and check_in_date
@@ -64,7 +65,7 @@ class PaymentControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_process_cash_payment()
     {
         // Create a reservation with hotel_id and check_in_date
@@ -88,7 +89,7 @@ class PaymentControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_stripe_payment()
     {
         // Create a reservation with hotel_id and check_in_date
@@ -110,7 +111,7 @@ class PaymentControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_handle_stripe_success()
     {
         // Create a reservation with hotel_id and check_in_date

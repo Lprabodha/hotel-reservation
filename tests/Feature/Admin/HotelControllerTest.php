@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class HotelControllerTest extends TestCase
 {
@@ -22,7 +23,7 @@ class HotelControllerTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_hotels_index()
     {
         Hotel::create([
@@ -42,7 +43,7 @@ class HotelControllerTest extends TestCase
         $response->assertStatus(302);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_store_route()
     {
         $hotelData = [
@@ -65,7 +66,7 @@ class HotelControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_update_route()
     {
 
@@ -98,7 +99,7 @@ class HotelControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_access_delete_route()
     {
         $hotel = Hotel::create([
@@ -119,7 +120,7 @@ class HotelControllerTest extends TestCase
         $this->assertNotEquals(500, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_validation_errors()
     {
         $response = $this->post(route('admin.hotels.store'), [
