@@ -36,7 +36,7 @@ class ProcessNoShowReservations extends Command
 
         DB::transaction(function () use ($yesterday) {
 
-            $toMarkNoShow = Reservation::where('status', 'confirmed')
+            $toMarkNoShow = Reservation::whereIn('status', ['pending', 'booked'])
                 ->whereDate('check_in_date', $yesterday)
                 ->whereNotNull('card_number')
                 ->get();
