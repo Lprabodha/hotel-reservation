@@ -200,6 +200,17 @@
         .card-img {
             border-radius: 10px;
         }
+
+
+        .theme-btn:disabled {
+            background-color: #cccccc !important;
+            color: #666666 !important;
+            cursor: not-allowed !important;
+            border: none !important;
+            opacity: 0.5 !important;
+            pointer-events: none;
+            transition: background-color 0.3s ease;
+        }
     </style>
 
     <div class="container reservation-page">
@@ -259,12 +270,14 @@
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div class="form-group mb-3" style="width: 30%">
                                 <label for="checkin">Check-in Date</label>
-                                <input type="date" class="form-control" name="checkin" required>
+                                <input type="date" class="form-control" name="checkin" required
+                                    min="{{ now()->toDateString() }}">
                             </div>
 
                             <div class="form-group mb-3" style="width: 30%">
                                 <label for="checkout">Check-out Date</label>
-                                <input type="date" class="form-control" name="checkout" required>
+                                <input type="date" class="form-control" name="checkout" required
+                                    min="{{ now()->toDateString() }}">
                             </div>
 
                             <div class="form-group mb-3" style="width: 15%">
@@ -303,12 +316,13 @@
                             <div class="form-group mb-3" style="width: 30%;">
                                 <label>Card Number</label>
                                 <input type="text" name="card_number" class="form-control"
-                                    placeholder="XXXX XXXX XXXX XXXX">
+                                    placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
                             </div>
                             <div class="form-row mb-3" style="width: 30%;">
                                 <div class="col">
                                     <label>Card Expiry</label>
-                                    <input type="text" name="card_expire_date" class="form-control" placeholder="MM/YY">
+                                    <input type="text" name="card_expire_date" class="form-control" placeholder="MM/YY"
+                                        maxlength="5">
                                 </div>
                             </div>
                             <div class="form-row mb-3" style="width: 30%;">
@@ -503,6 +517,88 @@
                 showFlashMessage('success', flashMessageData.success);
             } else if (flashMessageData.error) {
                 showFlashMessage('error', flashMessageData.error);
+            }
+        });
+    </script>
+    <script>
+        const cardNumberInput = document.querySelector('input[name="card_number"]');
+        const cardExpireInput = document.querySelector('input[name="card_expire_date"]');
+        const cvvInput = document.querySelector('input[name="csv"]');
+        const confirmBtn = document.querySelector('.theme-btn[type="submit"]');
+        const reservationForm = document.getElementById('reservation-form');
+
+        function isTodayOrTomorrow(dateStr) {
+            const date = new Date(dateStr);
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+
+            today.setHours(0, 0, 0, 0);
+            tomorrow.setHours(0, 0, 0, 0);
+            date.setHours(0, 0, 0, 0);
+
+            return date <= tomorrow;
+        }
+
+        function validateCardRequirement() {
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+
+            const requiresCard = isTodayOrTomorrow(checkin) || isTodayOrTomorrow(checkout);
+
+            const cardFilled = cardNumberInput.value.trim().length === 16 &&
+                cardExpireInput.value.trim() !== '' &&
+                cvvInput.value.trim() !== '';
+
+            if (requiresCard) {
+                confirmBtn.disabled = !cardFilled;
+            } else {
+                confirmBtn.disabled = false;
+            }
+        }
+
+        function applyDummyCardIfNeeded(e) {
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+
+            const requiresCard = isTodayOrTomorrow(checkin) || isTodayOrTomorrow(checkout);
+
+            if (!requiresCard) {
+                cardNumberInput.value = '0000000000000000';
+                cardExpireInput.value = '01/30';
+                cvvInput.value = '000';
+            }
+        }
+
+        checkinInput.addEventListener('change', validateCardRequirement);
+        checkoutInput.addEventListener('change', validateCardRequirement);
+
+        cardNumberInput.addEventListener('input', validateCardRequirement);
+        cardExpireInput.addEventListener('input', validateCardRequirement);
+        cvvInput.addEventListener('input', validateCardRequirement);
+
+        if (reservationForm) {
+            reservationForm.addEventListener('submit', applyDummyCardIfNeeded);
+        }
+
+        window.addEventListener('DOMContentLoaded', validateCardRequirement);
+    </script>
+    <script>
+        const cardInput = document.querySelector('input[name="card_number"]');
+        cardInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '').substring(0, 16);
+            let formatted = value.match(/.{1,4}/g);
+            this.value = formatted ? formatted.join(' ') : '';
+        });
+    </script>
+    <script>
+        const expiryInput = document.querySelector('input[name="card_expire_date"]');
+        expiryInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '').substring(0, 4);
+            if (value.length >= 3) {
+                this.value = value.substring(0, 2) + '/' + value.substring(2);
+            } else {
+                this.value = value;
             }
         });
     </script>

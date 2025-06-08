@@ -72,6 +72,10 @@
                                     @auth
                                         @if (auth()->user()->hasRole('customer'))
                                             <a href="{{ route('hotels') }}" class="theme-btn" style="min-width: 235px;">Make a Reservation</a>
+                                        @else
+                                            <div class="close-form">
+                                                <a class="theme-btn" href="{{route('login')}}">sign up</a>
+                                            </div>
                                         @endif
                                     @else
                                         <div class="close-form">
