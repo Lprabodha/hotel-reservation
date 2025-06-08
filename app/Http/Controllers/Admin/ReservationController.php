@@ -153,7 +153,7 @@ class ReservationController extends Controller
             $maskedCard = null;
             if ($request->card_number) {
                 $lastFour = substr($request->card_number, -4);
-                $maskedCard = 'xxxx' . $lastFour;
+                $maskedCard = 'xxxx'.$lastFour;
             }
 
             $reservation = Reservation::create([
@@ -180,7 +180,7 @@ class ReservationController extends Controller
 
             try {
                 $data = [
-                    'title' => 'Thank You for Your Reservation: ' . $reservation->confirmation_number,
+                    'title' => 'Thank You for Your Reservation: '.$reservation->confirmation_number,
                     'email' => $email,
                     'template' => 'reservation',
                     'reservation_id' => $reservation->confirmation_number,
@@ -192,7 +192,7 @@ class ReservationController extends Controller
 
                 Mail::to($email)->send(new SendMail($data));
             } catch (\Exception $e) {
-                Log::error('Email failed to send: ' . $e->getMessage());
+                Log::error('Email failed to send: '.$e->getMessage());
             }
 
             return redirect()->route('admin.reservation.index')->with('success', 'Reservation created successfully.');
@@ -278,12 +278,12 @@ class ReservationController extends Controller
 
             if (Auth::user()->hasRole('hotel-clerk') && in_array($r->status, $allowedStatuses)) {
                 $nestedData['status'] = '
-                    <select onchange="changeReservationStatus(' . $r->id . ', this.value)" class="form-select form-select-sm">
+                    <select onchange="changeReservationStatus('.$r->id.', this.value)" class="form-select form-select-sm">
                 ';
 
                 foreach ($allowedStatuses as $status) {
                     $selected = ($r->status == $status) ? 'selected' : '';
-                    $nestedData['status'] .= '<option value="' . $status . '" ' . $selected . '>' . ucfirst(str_replace('_', ' ', $status)) . '</option>';
+                    $nestedData['status'] .= '<option value="'.$status.'" '.$selected.'>'.ucfirst(str_replace('_', ' ', $status)).'</option>';
                 }
 
                 $nestedData['status'] .= '</select>';
@@ -306,18 +306,18 @@ class ReservationController extends Controller
                     default => 'badge bg-light',
                 };
 
-                $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
+                $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
             }
 
             $action = '
-                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
 
             if ($r->status == 'checked_out') {
                 $action .= '
-                    <a href="' . route('admin.reservation.payment', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
                     </a>
                 ';
@@ -325,7 +325,7 @@ class ReservationController extends Controller
 
             if (\Carbon\Carbon::parse($r->check_out_date)->isFuture() && ($r->status != 'cancelled' && $r->status != 'no_show' && $r->status != 'checked_out' && $r->status != 'completed')) {
                 $action .= '
-            <a href="' . route('admin.reservation.edit', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+            <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                 <iconify-icon icon="lucide:edit"></iconify-icon>
             </a>
             ';
@@ -333,7 +333,7 @@ class ReservationController extends Controller
 
             if ($r->status == 'completed') {
                 $action .= '
-                    <a href="' . route('admin.reservation.download', $r->id) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="'.route('admin.reservation.download', $r->id).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="la:file-invoice"></iconify-icon>
                     </a>
                 ';
@@ -342,7 +342,7 @@ class ReservationController extends Controller
             if ($r->status != 'cancelled' && $r->status != 'no_show' && $r->status != 'checked_out' && $r->status != 'completed') {
 
                 $action .= '
-            <button onclick="deleteReservation(' . $r->id . ')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+            <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
                 <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
             </button>
         ';
@@ -369,7 +369,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::where('confirmation_number', $id)->firstOrFail();
 
-        if (!auth()->user()->hasRole('hotel-clerk')) {
+        if (! auth()->user()->hasRole('hotel-clerk')) {
             return redirect()->back()->with('error', 'Access denied.');
         }
 
@@ -402,7 +402,6 @@ class ReservationController extends Controller
 
         return view('admin.reservations.edit', compact('reservation', 'hotel', 'bookedDates'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -464,7 +463,6 @@ class ReservationController extends Controller
 
         return redirect()->route('admin.reservation.index')->with('success', 'Reservation updated successfully.');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -610,6 +608,6 @@ class ReservationController extends Controller
 
         $pdf = Pdf::loadView('admin.reservations.invoice_pdf', compact('reservation', 'reservationRooms', 'bill'));
 
-        return $pdf->download('invoice_' . $reservation->confirmation_number . '.pdf');
+        return $pdf->download('invoice_'.$reservation->confirmation_number.'.pdf');
     }
 }

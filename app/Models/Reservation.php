@@ -30,7 +30,6 @@ class Reservation extends Model
         'card_number',
     ];
 
-
     public function rooms()
     {
         return $this->belongsToMany(Room::class, 'reservation_room');
