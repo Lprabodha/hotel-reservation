@@ -52,4 +52,9 @@ class Hotel extends Model
     {
         return $this->belongsToMany(Service::class)->withPivot('charge');
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

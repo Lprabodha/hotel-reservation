@@ -58,15 +58,26 @@ class PaymentController extends Controller
 
         $query = Bill::with('reservation');
 
+        if (! auth()->user()->hasRole('super-admin')) {
+            $user = auth()->user();
+            $hotel = $user->hotels()->first();
+
+            $query = $query->whereHas('reservation', function ($q) use ($hotel) {
+                $q->where('hotel_id', $hotel->id);
+            });
+        }
+
         if (! empty($request->input('search.value'))) {
             $search = $request->input('search.value');
 
-            $query = $query->whereHas('reservation', function ($q) use ($search) {
-                $q->where('confirmation_number', 'like', "%{$search}%");
-            })->orWhere('extra_charges', 'like', "%{$search}%")
-                ->orWhere('discount', 'like', "%{$search}%")
-                ->orWhere('total_amount', 'like', "%{$search}%")
-                ->orWhere('status', 'like', "%{$search}%");
+            $query = $query->where(function ($query) use ($search) {
+                $query->whereHas('reservation', function ($q) use ($search) {
+                    $q->where('confirmation_number', 'like', "%{$search}%");
+                })->orWhere('extra_charges', 'like', "%{$search}%")
+                    ->orWhere('discount', 'like', "%{$search}%")
+                    ->orWhere('total_amount', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%");
+            });
         }
 
         $totalFiltered = $query->count();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Mail\SendMail;
 use App\Models\Bill;
 use App\Models\Hotel;
 use App\Models\Reservation;
@@ -94,7 +93,7 @@ class ReservationController extends Controller
             $checkoutDate = Carbon::parse($request->checkout);
             $nights = $checkinDate->diffInDays($checkoutDate);
 
-            if (empty($request->rooms) || !is_array($request->rooms)) {
+            if (empty($request->rooms) || ! is_array($request->rooms)) {
                 throw new \Exception('No rooms selected.');
             }
 
@@ -172,7 +171,7 @@ class ReservationController extends Controller
 
             try {
                 $data = [
-                    'title' => 'Thank You for Your Reservation: ' . $reservation->confirmation_number,
+                    'title' => 'Thank You for Your Reservation: '.$reservation->confirmation_number,
                     'email' => $email,
                     'template' => 'reservation',
                     'reservation_id' => $reservation->confirmation_number,
@@ -184,7 +183,7 @@ class ReservationController extends Controller
 
                 Mail::to($email)->send(new \App\Mail\SendMail($data));
             } catch (\Exception $e) {
-                Log::error('Email failed to send: ' . $e->getMessage());
+                Log::error('Email failed to send: '.$e->getMessage());
             }
 
             return response()->json([
@@ -271,13 +270,13 @@ class ReservationController extends Controller
             $nestedData['reservation_date'] = $r->check_in_date;
             if (Auth::user()->hasRole(['hotel-clerk'])) {
                 $nestedData['status'] = '
-                    <select onchange="changeReservationStatus(' . $r->id . ', this.value)" class="form-select form-select-sm">
-                        <option value="booked" ' . ($r->status == 'booked' ? 'selected' : '') . '>Booked</option>
-                        <option value="checked_in" ' . ($r->status == 'checked_in' ? 'selected' : '') . '>Checked In</option>
-                        <option value="checked_out" ' . ($r->status == 'checked_out' ? 'selected' : '') . '>Checked Out</option>
-                        <option value="cancelled" ' . ($r->status == 'cancelled' ? 'selected' : '') . '>Cancelled</option>
-                        <option value="no_show" ' . ($r->status == 'no_show' ? 'selected' : '') . '>No Show</option>
-                        <option value="completed" ' . ($r->status == 'completed' ? 'selected' : '') . '>Completed</option>
+                    <select onchange="changeReservationStatus('.$r->id.', this.value)" class="form-select form-select-sm">
+                        <option value="booked" '.($r->status == 'booked' ? 'selected' : '').'>Booked</option>
+                        <option value="checked_in" '.($r->status == 'checked_in' ? 'selected' : '').'>Checked In</option>
+                        <option value="checked_out" '.($r->status == 'checked_out' ? 'selected' : '').'>Checked Out</option>
+                        <option value="cancelled" '.($r->status == 'cancelled' ? 'selected' : '').'>Cancelled</option>
+                        <option value="no_show" '.($r->status == 'no_show' ? 'selected' : '').'>No Show</option>
+                        <option value="completed" '.($r->status == 'completed' ? 'selected' : '').'>Completed</option>
                     </select>
                 ';
             } else {
@@ -291,18 +290,18 @@ class ReservationController extends Controller
                     default => 'badge bg-light',
                 };
 
-                $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
+                $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
             }
 
             $action = '
-                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
 
             if ($r->status == 'checked_out') {
                 $action .= '
-                    <a href="' . route('admin.reservation.payment', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
                     </a>
                 ';
@@ -310,10 +309,10 @@ class ReservationController extends Controller
 
             if ($r->status == 'pending') {
                 $action .= '
-                    <a href="' . route('admin.reservation.edit', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="lucide:edit"></iconify-icon>
                     </a>
-                    <button onclick="deleteReservation(' . $r->id . ')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
                     </button>
                 ';
