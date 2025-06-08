@@ -92,7 +92,7 @@ class ReportController extends Controller
         $start = $request->input('start');
         $orderDirection = $request->input('order.0.dir', 'asc');
 
-        $query = Bill::with(['reservation', 'payment'])->where('status', 'paid');;
+        $query = Bill::with(['reservation', 'payment'])->where('status', 'paid');
 
         if (! auth()->user()->hasRole('super-admin')) {
             $user = auth()->user();

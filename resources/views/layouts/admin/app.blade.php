@@ -41,15 +41,26 @@
 
 <body>
     <div id="app">
-        @include('layouts.admin.side-menu')
-        <main class="py-4 dashboard-main">
 
+        @php
+            $hasSidebar = !Auth::user()->hasRole('travel-company') && !Auth::user()->hasRole('customer');
+        @endphp
+
+        @if ($hasSidebar)
+            @include('layouts.admin.side-menu')
+        @endif
+
+        <main class="py-4 dashboard-main"
+            style="{{ $hasSidebar ? '' : 'width: 100%; margin-left: 0; padding-left: 0;' }}">
             @include('layouts.admin.header')
 
             @yield('content')
+
             @include('layouts.admin.footer')
         </main>
+
     </div>
+
 
     <!-- Scripts -->
     <script src="/assets/js/admin/lib/jquery-3.7.1.min.js"></script>

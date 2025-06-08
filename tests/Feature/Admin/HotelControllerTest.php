@@ -6,8 +6,8 @@ use App\Enums\HotelType;
 use App\Models\Hotel;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class HotelControllerTest extends TestCase
 {
@@ -18,7 +18,7 @@ class HotelControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
     }
@@ -128,7 +128,7 @@ class HotelControllerTest extends TestCase
         ]);
 
         $this->assertNotEquals(500, $response->getStatusCode());
-        
+
         $this->assertContains($response->getStatusCode(), [302, 422]);
     }
 }

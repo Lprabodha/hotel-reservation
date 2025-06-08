@@ -9,29 +9,31 @@ use App\Models\Room;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 
 class ReportControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
+
     protected Hotel $hotel;
+
     protected Room $room;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         Role::create(['name' => 'hotel-clerk']);
         Role::create(['name' => 'super-admin']);
-        
+
         $this->user = User::factory()->create();
         $this->user->assignRole('hotel-clerk');
         $this->actingAs($this->user);
-        
+
         $this->hotel = Hotel::create([
             'name' => 'Test Hotel',
             'slug' => 'test-hotel',
@@ -43,10 +45,10 @@ class ReportControllerTest extends TestCase
             'country' => 'Test Country',
             'active' => true,
         ]);
-        
+
         $this->user->hotels()->attach($this->hotel->id);
-        
-         $this->room = Room::create([
+
+        $this->room = Room::create([
             'hotel_id' => $this->hotel->id,
             'room_number' => '101',
             'room_type' => 'double',
@@ -73,7 +75,7 @@ class ReportControllerTest extends TestCase
             'futureOccupancyRate',
             'roomRevenue',
             'extraRevenue',
-            'bills'
+            'bills',
         ]);
     }
 
@@ -116,7 +118,7 @@ class ReportControllerTest extends TestCase
             'start' => 0,
             'length' => 10,
             'order' => [['column' => 0, 'dir' => 'asc']],
-            'search' => ['value' => '']
+            'search' => ['value' => ''],
         ]);
 
         $this->assertNotEquals(404, $response->getStatusCode());
@@ -144,7 +146,7 @@ class ReportControllerTest extends TestCase
             'start' => 0,
             'length' => 10,
             'order' => [['column' => 0, 'dir' => 'asc']],
-            'search' => ['value' => '']
+            'search' => ['value' => ''],
         ]);
 
         $this->assertNotEquals(404, $response->getStatusCode());
@@ -172,7 +174,7 @@ class ReportControllerTest extends TestCase
             'start' => 0,
             'length' => 10,
             'order' => [['column' => 0, 'dir' => 'asc']],
-            'search' => ['value' => '']
+            'search' => ['value' => ''],
         ]);
 
         $this->assertNotEquals(404, $response->getStatusCode());

@@ -8,29 +8,31 @@ use App\Models\Room;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 
 class ReservationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
+
     protected Hotel $hotel;
+
     protected Room $room;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         Role::create(['name' => 'hotel-clerk']);
         Role::create(['name' => 'super-admin']);
-        
+
         $this->user = User::factory()->create();
         $this->user->assignRole('hotel-clerk');
         $this->actingAs($this->user);
-        
+
         $this->hotel = Hotel::create([
             'name' => 'Test Hotel',
             'slug' => 'test-hotel',
@@ -42,9 +44,9 @@ class ReservationControllerTest extends TestCase
             'country' => 'Test Country',
             'active' => true,
         ]);
-        
+
         $this->user->hotels()->attach($this->hotel->id);
-        
+
         $this->room = Room::create([
             'hotel_id' => $this->hotel->id,
             'room_number' => '101',
@@ -53,7 +55,7 @@ class ReservationControllerTest extends TestCase
             'is_available' => true,
             'price_per_night' => 100.00,
         ]);
-        
+
         \DB::table('room_rates')->insert([
             'room_id' => $this->room->id,
             'rate_type' => 'daily',
@@ -83,7 +85,7 @@ class ReservationControllerTest extends TestCase
     public function it_can_access_store_route()
     {
         $customer = User::factory()->create([
-            'email' => 'customer@test.com'
+            'email' => 'customer@test.com',
         ]);
 
         $reservationData = [
@@ -106,7 +108,7 @@ class ReservationControllerTest extends TestCase
     public function it_can_access_reservation_view()
     {
         $customer = User::factory()->create([
-            'email' => 'customer@test.com'
+            'email' => 'customer@test.com',
         ]);
 
         $reservation = Reservation::create([
@@ -135,7 +137,7 @@ class ReservationControllerTest extends TestCase
     public function it_can_change_reservation_status()
     {
         $customer = User::factory()->create([
-            'email' => 'customer@test.com'
+            'email' => 'customer@test.com',
         ]);
 
         $reservation = Reservation::create([
@@ -153,7 +155,7 @@ class ReservationControllerTest extends TestCase
         ]);
 
         $response = $this->post(route('admin.reservation.changeStatus', $reservation->id), [
-            'status' => 'checked_in'
+            'status' => 'checked_in',
         ]);
 
         $this->assertNotEquals(404, $response->getStatusCode());
