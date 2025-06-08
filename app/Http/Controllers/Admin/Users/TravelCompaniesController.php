@@ -96,8 +96,9 @@ class TravelCompaniesController extends Controller
             0 => 'id',
             1 => 'name',
             2 => 'email',
-            3 => 'status',
-            4 => 'action',
+            3 => 'discount',
+            4 => 'status',
+            5 => 'action',
         ];
 
         $totalData = User::role('travel-company')->count();
@@ -137,6 +138,7 @@ class TravelCompaniesController extends Controller
                 $nestedData['id'] = $r->id;
                 $nestedData['name'] = $r->name;
                 $nestedData['email'] = $r->email;
+                $nestedData['discount'] = $r->travelCompany->discount ?? '0%';
                 $nestedData['status'] = $r->is_active ? '<span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium">Active</span>' : '<span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium">Inactive</span>';
                 $nestedData['action'] = '<a class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center"  href='.route('admin.travel-companies.edit', $r->id).'> <iconify-icon icon="lucide:edit"></iconify-icon></a>&nbsp;&nbsp<a class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center"  onClick="deleteUser('.$r->id.')"> <iconify-icon icon="mingcute:delete-2-line"></iconify-icon></a>';
                 $data[] = $nestedData;

@@ -41,6 +41,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Discount (%)</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -79,6 +80,11 @@
                 },
                 {
                     "data": "email",
+                    "searchable": true,
+                    "orderable": true
+                },
+                {
+                    "data": "discount",
                     "searchable": true,
                     "orderable": true
                 },

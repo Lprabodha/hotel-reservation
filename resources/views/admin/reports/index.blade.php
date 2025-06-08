@@ -121,7 +121,8 @@
                             <th>Confirmation Number</th>
                             <th>Guest Email</th>
                             <th>Hotel</th>
-                            <th>Reservation Date</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -143,7 +144,8 @@
                             <th>Confirmation Number</th>
                             <th>Guest Email</th>
                             <th>Hotel</th>
-                            <th>Reservation Date</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -165,7 +167,8 @@
                             <th>Confirmation Number</th>
                             <th>Guest Email</th>
                             <th>Hotel</th>
-                            <th>Reservation Date</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -234,7 +237,12 @@
                     "orderable": true
                 },
                 {
-                    "data": "reservation_date",
+                    "data": "check_in_date",
+                    "searchable": true,
+                    "orderable": true
+                },
+                {
+                    "data": "check_out_date",
                     "searchable": true,
                     "orderable": true
                 },
@@ -298,7 +306,12 @@
                     orderable: true
                 },
                 {
-                    data: "reservation_date",
+                    data: "check_in_date",
+                    searchable: true,
+                    orderable: true
+                },
+                {
+                    data: "check_out_date",
                     searchable: true,
                     orderable: true
                 },
@@ -361,7 +374,12 @@
                     "orderable": true
                 },
                 {
-                    "data": "reservation_date",
+                    "data": "check_in_date",
+                    "searchable": true,
+                    "orderable": true
+                },
+                {
+                    "data": "check_out_date",
                     "searchable": true,
                     "orderable": true
                 },
