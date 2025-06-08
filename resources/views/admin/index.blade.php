@@ -78,7 +78,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p class="fw-medium text-primary-light mb-1">Total Income</p>
-                                <h6 class="mb-0">Rs{{ $reservations->sum('total_price') }}</h6>
+                                <h6 class="mb-0">Rs {{ number_format($reservations->sum('total_price'), 2) }}</h6>
                             </div>
                             <div
                                 class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
@@ -88,7 +88,7 @@
                         <p class="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
                             <span class="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon
                                     icon="bxs:up-arrow" class="text-xs"></iconify-icon>
-                                +Rs{{ $reservations->sum('total_price') }}</span>
+                                +Rs {{ number_format($reservations->sum('total_price'), 2) }}</span>
                             Last 30 days income
                         </p>
                     </div>
