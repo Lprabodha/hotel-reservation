@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
@@ -27,6 +30,20 @@ class SocialController extends Controller
                 'provider' => $provider,
             ]);
             $user->assignRole('customer');
+
+            try {
+                $data = [
+                    'title' => 'Welcome to Our Hotel Booking Platform',
+                    'template' => 'welcome',
+                    'login_url' => route('hotels'),
+                    'name' => $user->name,
+                    'reservation_url' => route('about-us'),
+                ];
+
+                Mail::to($user->email)->send(new SendMail($data));
+            } catch (\Exception $e) {
+                Log::error('Email failed to send: ' . $e->getMessage());
+            }
         }
         Auth::login($user);
 
@@ -42,7 +59,7 @@ class SocialController extends Controller
     public function oneTap($request)
     {
         $client = new \GuzzleHttp\Client;
-        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token='.$request->id);
+        $request = $client->get('https://oauth2.googleapis.com/tokeninfo?id_token=' . $request->id);
         $response = json_decode($request->getBody());
         $user = User::where('email', $response->email)->first();
 

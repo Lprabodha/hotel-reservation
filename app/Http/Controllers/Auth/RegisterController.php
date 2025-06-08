@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -69,7 +72,21 @@ class RegisterController extends Controller
 
         $user->assignRole('customer');
 
-        session()->flash('success', 'Welcome '.$user->name.'! Your account has been created successfully.');
+        try {
+            $data = [
+                'title' => 'Welcome to Our Hotel Booking Platform',
+                'template' => 'welcome',
+                'login_url' => route('hotels'),
+                'name' => $user->name,
+                'reservation_url' => route('about-us'),
+            ];
+
+            Mail::to($user->email)->send(new SendMail($data));
+        } catch (\Exception $e) {
+            Log::error('Email failed to send: ' . $e->getMessage());
+        }
+
+        session()->flash('success', 'Welcome ' . $user->name . '! Your account has been created successfully.');
 
         return $user;
     }

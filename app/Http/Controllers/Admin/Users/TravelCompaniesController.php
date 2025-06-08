@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TravelCompanyRequest;
-use App\Http\Requests\UpdateTravelCompanyRequest;
 use App\Mail\SendMail;
 use App\Models\TravelCompany;
 use App\Models\User;

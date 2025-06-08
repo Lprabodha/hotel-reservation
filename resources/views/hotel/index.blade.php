@@ -150,20 +150,20 @@
 
             <form action="" method="GET" class="search-form">
                 <div class="row align-items-center" style="display: flex; flex-wrap: wrap; justify-content: between;">
-                    {{-- <div class="col-md-3 col-12">
-                        <input type="text" name="location" class="form-control" placeholder="Location:">
-                    </div> --}}
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="date" name="checkin" class="form-control" placeholder="Check In:">
+                        <input type="date" name="check_in" id="check-in" class="form-control" placeholder="Check In:"
+                            value="{{ $checkIn }}">
                     </div>
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="date" name="checkout" class="form-control" placeholder="Check Out:">
+                        <input type="date" name="check_out" id="check-out" class="form-control" placeholder="Check Out:"
+                            value="{{ $checkOut }}">
                     </div>
                     <div class="col-md-2 col-6" style="width: 24%">
-                        <input type="number" name="guests" class="form-control" placeholder="Guests:">
+                        <input type="number" name="guests" id="guests" class="form-control" placeholder="Guests:"
+                            value="{{ $guests }}" min="1" max="10">
                     </div>
                     <div class="col-md-3 col-12 text-center" style="width: 24%">
-                        <button type="submit" class="search-btn">Search Hotel</button>
+                        <button type="submit" id="search-btn" class="search-btn">Search Hotel</button>
                     </div>
                 </div>
             </form>
@@ -215,4 +215,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const checkIn = encodeURIComponent(document.getElementById('check-in').value);
+            const checkOut = encodeURIComponent(document.getElementById('check-out').value);
+            const guests = encodeURIComponent(document.getElementById('guests').value);
+
+            const url = `{{ route('hotels') }}?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}`;
+
+            window.location.href = url;
+        });
+    </script>
 @endsection

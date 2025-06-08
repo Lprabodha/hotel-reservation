@@ -8,8 +8,10 @@
                     <div class="col-lg-6 col-12">
                         <div class="hero-content-slider">
                             <div class="item">
-                                <h2 class="wow fadeInLeftSlow" data-wow-duration="1400ms">Escape to Paradise with Click2Checkin.</h2>
-                                <p class="wow fadeInLeftSlow" data-wow-duration="1600ms">From golden beaches to cool hills, find the stay that suits your journey.</p>
+                                <h2 class="wow fadeInLeftSlow" data-wow-duration="1400ms">Escape to Paradise with
+                                    Click2Checkin.</h2>
+                                <p class="wow fadeInLeftSlow" data-wow-duration="1600ms">From golden beaches to cool hills,
+                                    find the stay that suits your journey.</p>
                                 <div class="hero-btn wow fadeInLeftSlow" data-wow-duration="1800ms">
                                     <a href="{{ route('hotel', ['slug' => Str::uuid()]) }}" class="theme-btn">find your
                                         hotel</a>
@@ -24,17 +26,7 @@
                                 <span>Discover and book your perfect stay</span>
                             </div>
                             <form>
-                                {{-- <div class="input-item">
-                                    <input class="form-control" type="text" placeholder="Location:">
-                                    <div class="icon">
-                                        <svg width="14" height="19" viewBox="0 0 14 19" fill="none">
-                                            <path
-                                                d="M7.101 18.386C6.653 17.798 6.268 17.266 5.946 16.79C4.532 14.802 3.384 12.891 2.502 11.057C2.222 10.469 2.005 9.965 1.851 9.545C1.641 8.985 1.487 8.46 1.389 7.97C0.983 5.912 1.466 4.113 2.838 2.573C4.14 1.089 5.813 0.388999 7.857 0.472999C8.767 0.500999 9.628 0.738999 10.44 1.187C11.252 1.621 11.938 2.209 12.498 2.951C13.058 3.693 13.429 4.512 13.611 5.408C13.835 6.514 13.772 7.613 13.422 8.705C12.82 10.595 11.819 12.611 10.419 14.753C10.013 15.383 9.376 16.307 8.508 17.525L7.626 18.764C7.598 18.792 7.577 18.813 7.563 18.827C7.549 18.855 7.493 18.827 7.395 18.743C7.311 18.659 7.213 18.54 7.101 18.386ZM10.566 6.794C10.58 6.276 10.461 5.786 10.209 5.324C9.971 4.848 9.628 4.463 9.18 4.169C8.746 3.861 8.27 3.693 7.752 3.665C7.164 3.637 6.618 3.749 6.114 4.001C5.624 4.239 5.232 4.589 4.938 5.051C4.644 5.513 4.483 6.045 4.455 6.647C4.427 7.165 4.539 7.662 4.791 8.138C5.057 8.6 5.414 8.985 5.862 9.293C6.31 9.587 6.793 9.741 7.311 9.755C7.885 9.783 8.417 9.678 8.907 9.44C9.397 9.188 9.789 8.831 10.083 8.369C10.377 7.907 10.538 7.382 10.566 6.794Z"
-                                                fill="#273958" />
-                                        </svg>
 
-                                    </div>
-                                </div> --}}
                                 <div class="input-item">
                                     <input class="form-control" type="text" id="check-in" placeholder="Check In:">
                                     <div class="icon">
@@ -58,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="input-item">
-                                    <input class="form-control" type="text" placeholder="Guests:">
+                                    <input class="form-control" type="text" id="guests" placeholder="Guests:">
                                     <div class="icon">
                                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none">
                                             <path
@@ -69,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="input-item s2">
-                                    <a href="{{ route('hotels') }}" class="theme-btn-s2">search hotel</a>
+                                    <button type="button" id="searchBtn" class="theme-btn-s2">Search Hotel</button>
                                 </div>
                             </form>
                         </div>
@@ -448,148 +440,6 @@
     </section>
     <!-- end of featured-->
 
-    <!-- start of authorlist
-    <section class="authorlist-section section-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-4 col-12">
-                    <div class="wpo-section-title s2 wow fadeInLeftSlow" data-wow-duration="1700ms">
-                        <span>// author list</span>
-                        <h2>Discover the Talented Authors in Our Click2Checkin.</h2>
-                        <a href="{{ route('about-us') }}" class="theme-btn">list your property</a>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-12">
-                    <div class="authorlist-wrap wow fadeInRightSlow" data-wow-duration="1700ms">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/1.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Esther Howard</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/2.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Jenny Wilson</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/3.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Kristin Watson</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/4.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Bessie Cooper</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/5.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Darlene Robertson</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                <div class="auth-card">
-                                    <div class="shape">
-                                        <svg viewBox="0 0 250 246" fill="none">
-                                            <path
-                                                d="M0 90.5622C0 85.4392 3.25219 80.8812 8.09651 79.2148L234.097 1.47079C241.887 -1.2093 250 4.57911 250 12.8182V234C250 240.627 244.627 246 238 246H12C5.37258 246 0 240.627 0 234V90.5622Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="images/authorlist/6.jpg" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating">
-                                            Rating: 4.8 (<img src="images/authorlist/star.svg" alt="">)
-                                        </div>
-                                        <h2>Marvin McKinney</h2>
-                                        <h4>Singapore</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of authorlist-->
 
     <!-- start of testimonial -->
     <section class="testimonial-section section-padding">
@@ -698,221 +548,15 @@
     </section>
     <!-- end of testimonial -->
 
+    <script>
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const checkIn = encodeURIComponent(document.getElementById('check-in').value);
+            const checkOut = encodeURIComponent(document.getElementById('check-out').value);
+            const guests = encodeURIComponent(document.getElementById('guests').value);
 
-    <!-- start of places
-    <section class="places-section section-padding">
-        <div class="container">
-            <div class="wraper">
-                <div class="wpo-section-title s2 wow fadeInLeftSlow" data-wow-duration="1700ms">
-                    <span>// nearby places</span>
-                    <h2>Nearby Places to Satiate Your Wanderlust.</h2>
-                </div>
-                <div class="places-wraper">
-                    <div class="gap-spase">
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1200ms">
-                        <div class="image">
-                            <img src="images/places/1.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">France</a>
-                            </h2>
-                            <span>20 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1400ms">
-                        <div class="image">
-                            <img src="images/places/2.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">United States</a>
-                            </h2>
-                            <span>18 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1600ms">
-                        <div class="image">
-                            <img src="images/places/3.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">Australia</a>
-                            </h2>
-                            <span>28 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1200ms">
-                        <div class="image">
-                            <img src="images/places/4.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">Spain</a>
-                            </h2>
-                            <span>30 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1400ms">
-                        <div class="image">
-                            <img src="images/places/5.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">Greece</a>
-                            </h2>
-                            <span>38 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1600ms">
-                        <div class="image">
-                            <img src="images/places/6.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">Maldives</a>
-                            </h2>
-                            <span>22 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="1800ms">
-                        <div class="image">
-                            <img src="images/places/7.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">new York</a>
-                            </h2>
-                            <span>42 minutes drive</span>
-                        </div>
-                    </div>
-                    <div class="places-item wow fadeInUp" data-wow-duration="2000ms">
-                        <div class="image">
-                            <img src="images/places/8.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h2>
-                                <a href="places-single.html">thailand</a>
-                            </h2>
-                            <span>27 minutes drive</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of places-->
+            const url = `{{ route('hotels') }}?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}`;
 
-    <!-- start of blog
-    <section class="blog-section section-padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 col-12">
-                    <div class="wpo-section-title s2 wow fadeInUp" data-wow-duration="1200ms">
-                        <span>// latest news</span>
-                        <h2>oin Our Blog for Travel Stories That Fuel Your Adventurous Spirit.</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-card wow fadeInUp" data-wow-duration="1500ms">
-                        <div class="image">
-                            <img src="images/blog/img-1.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>24 SEP 2023</span>
-                                        <span class="date">DATE</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text">
-                                <h2>
-                                    <a href="blog-single.html">Hotels Amidst Nature's Bounty for Nature
-                                        Enthusiasts.</a>
-                                </h2>
-                                <a href="blog-single.html" class="blog-btn">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-card wow fadeInUp" data-wow-duration="1700ms">
-                        <div class="image">
-                            <img src="images/blog/img-2.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>24 SEP 2023</span>
-                                        <span class="date">DATE</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text">
-                                <h2>
-                                    <a href="blog-single.html">Chic Boutique Hotels to Elevate Your Stay.</a>
-                                </h2>
-                                <a href="blog-single.html" class="blog-btn">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-card wow fadeInUp" data-wow-duration="1900ms">
-                        <div class="image">
-                            <img src="images/blog/img-3.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="top-content">
-                                <ul>
-                                    <li>
-                                        <span>24 SEP 2023</span>
-                                        <span class="date">DATE</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                    <li>
-                                        <span>02K</span>
-                                        <span class="date">Comment</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text">
-                                <h2>
-                                    <a href="blog-single.html">Experience 5-Star Stays Without Breaking the
-                                        Bank.</a>
-                                </h2>
-                                <a href="blog-single.html" class="blog-btn">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of blog-->
+            window.location.href = url;
+        });
+    </script>
 @endsection
