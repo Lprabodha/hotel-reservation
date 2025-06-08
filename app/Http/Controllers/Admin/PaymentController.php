@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\Bill;
+use App\Models\Payment;
 use App\Models\Reservation;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Str;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 
@@ -133,7 +140,14 @@ class PaymentController extends Controller
         $reservation->status = 'completed';
         $reservation->save();
 
-        $this->createBill($reservation, $request->services);
+        $bill = $this->createBill($reservation, $request->services, 'cash');
+
+        Payment::create([
+            'bill_id' => $bill->id,
+            'method' => 'cash',
+            'amount' => $bill->total_amount,
+            'paid_at' => Carbon::now(),
+        ]);
 
         return response()->json(['success' => true]);
     }
@@ -175,18 +189,27 @@ class PaymentController extends Controller
         $reservation->save();
 
         $services = session()->get('stripe_services_'.$reservation->id, []);
-        $this->createBill($reservation, $services);
+        $bill = $this->createBill($reservation, $services, 'card');
+
+        Payment::create([
+            'bill_id' => $bill->id,
+            'method' => 'card',
+            'amount' => $bill->total_amount,
+            'paid_at' => Carbon::now(),
+        ]);
 
         session()->forget('stripe_services_'.$reservation->id);
 
         return redirect()->route('admin.reservation.index')->with('success', 'Payment successful!');
     }
 
-    protected function createBill(Reservation $reservation, $services)
+    protected function createBill(Reservation $reservation, $services, $paymentMethod)
     {
         $subtotal = $reservation->total_price;
         $extraTotal = collect($services)->sum('price');
         $grandTotal = $subtotal + $extraTotal;
+
+        $userEmail = $reservation->user->email;
 
         $bill = Bill::create([
             'reservation_id' => $reservation->id,
@@ -203,5 +226,28 @@ class PaymentController extends Controller
                 'charge' => $service['price'],
             ]);
         }
+
+        try {
+            $mailData = [
+                'title' => 'Reservation Invoice: '.$reservation->confirmation_number,
+                'name' => $reservation->user->name,
+                'reservation_id' => $reservation->confirmation_number,
+                'invoice_number' => 'INV-'.strtoupper(Str::random(8)),
+                'check_in_date' => $reservation->check_in_date,
+                'check_out_date' => $reservation->check_out_date,
+                'hotel_name' => $reservation->hotel->name,
+                'hotel_location' => $reservation->hotel->location,
+                'total_amount' => $bill->total_amount,
+                'payment_method' => $paymentMethod,
+                'reservation_url' => route('admin.reservation.view', $reservation->confirmation_number),
+                'template' => 'reservation-invoice',
+            ];
+
+            Mail::to($userEmail)->send(new SendMail($mailData));
+        } catch (Exception $e) {
+            Log::error('Email failed to send: '.$e->getMessage());
+        }
+
+        return $bill;
     }
 }

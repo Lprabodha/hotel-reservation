@@ -78,11 +78,12 @@ class ReportController extends Controller
         $columns = [
             0 => 'id',
             1 => 'confirmation_number',
-            2 => 'extra_charges',
-            3 => 'discount',
-            4 => 'total_amount',
-            5 => 'status',
-            6 => 'action',
+            2 => 'payment_method',
+            3 => 'extra_charges',
+            4 => 'discount',
+            5 => 'total_amount',
+            6 => 'status',
+            7 => 'action',
         ];
 
         $totalData = Bill::count();
@@ -91,7 +92,7 @@ class ReportController extends Controller
         $start = $request->input('start');
         $orderDirection = $request->input('order.0.dir', 'asc');
 
-        $query = Bill::with('reservation');
+        $query = Bill::with(['reservation', 'payment'])->where('status', 'paid');;
 
         if (! auth()->user()->hasRole('super-admin')) {
             $user = auth()->user();
@@ -127,6 +128,7 @@ class ReportController extends Controller
         foreach ($posts as $r) {
             $nestedData['id'] = $r->id;
             $nestedData['confirmation_number'] = $r->reservation->confirmation_number ?? '-';
+            $nestedData['payment_method'] = $r->payment->method ?? '-';
             $nestedData['extra_charges'] = 'LKR '.number_format($r->extra_charges, 2);
             $nestedData['discount'] = 'LKR '.number_format($r->discount, 2);
             $nestedData['total_amount'] = 'LKR '.number_format($r->total_amount, 2);
