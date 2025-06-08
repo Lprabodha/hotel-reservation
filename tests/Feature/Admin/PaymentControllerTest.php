@@ -2,27 +2,28 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Models\User;
 use App\Models\Hotel;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class PaymentControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
+
     protected Hotel $hotel;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
-        
+
         $this->hotel = Hotel::create([
             'name' => 'Test Hotel',
             'slug' => 'test-hotel',
@@ -39,7 +40,7 @@ class PaymentControllerTest extends TestCase
     public function it_can_display_payments_index()
     {
         $response = $this->get(route('admin.payments.index'));
-        
+
         $response->assertStatus(302);
     }
 
@@ -60,7 +61,7 @@ class PaymentControllerTest extends TestCase
         ]);
 
         $response = $this->post(route('admin.payments.show'));
-        
+
         $this->assertNotEquals(404, $response->getStatusCode());
         $this->assertNotEquals(500, $response->getStatusCode());
     }

@@ -1,11 +1,12 @@
 <?php
+
 namespace Tests\Feature\Admin;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 
 class UserControllerTest extends TestCase
 {
@@ -16,10 +17,10 @@ class UserControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         Role::create(['name' => 'super-admin']);
         Role::create(['name' => 'customer']);
-        
+
         $this->user = User::factory()->create();
         $this->user->assignRole('super-admin');
         $this->actingAs($this->user);
@@ -29,7 +30,7 @@ class UserControllerTest extends TestCase
     public function it_can_access_users_index()
     {
         $response = $this->get(route('admin.users.index'));
-        
+
         $this->assertNotEquals(404, $response->getStatusCode());
         $this->assertNotEquals(500, $response->getStatusCode());
     }
@@ -38,7 +39,7 @@ class UserControllerTest extends TestCase
     public function it_can_access_user_roles_route()
     {
         $response = $this->get(route('admin.users.role.index'));
-        
+
         $this->assertNotEquals(404, $response->getStatusCode());
         $this->assertNotEquals(500, $response->getStatusCode());
     }
@@ -47,7 +48,7 @@ class UserControllerTest extends TestCase
     public function it_can_access_delete_user_route()
     {
         $testUser = User::factory()->create();
-        
+
         $response = $this->post(route('admin.users.delete'), [
             'id' => $testUser->id,
         ]);
@@ -60,7 +61,7 @@ class UserControllerTest extends TestCase
     public function it_can_access_user_profile_route()
     {
         $response = $this->get(route('admin.users.view.profile'));
-        
+
         $this->assertNotEquals(404, $response->getStatusCode());
         $this->assertNotEquals(500, $response->getStatusCode());
     }
@@ -70,7 +71,7 @@ class UserControllerTest extends TestCase
     {
         $testUser = User::factory()->create();
         $role = Role::create(['name' => 'admin']);
-        
+
         $response = $this->post(route('admin.users.role.change'), [
             'id' => $testUser->id,
             'role_id' => $role->id,

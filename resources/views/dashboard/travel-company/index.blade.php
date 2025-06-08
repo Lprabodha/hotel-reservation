@@ -3,7 +3,7 @@
 @section('content')
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-            <h6 class="fw-semibold mb-0">Hi {{ Auth::user()->name }} !</h6>
+            <h6 class="fw-semibold mb-0">Hi {{ $travelCompany->company_name }} !</h6>
         </div>
 
         @if (session('success'))
@@ -76,7 +76,7 @@
                 <a href="{{ route('hotels') }}"
                     class="btn btn-primary-500  text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
                     <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
-                    Add Reservations
+                    Make Reservations Request
                 </a>
             </div>
 

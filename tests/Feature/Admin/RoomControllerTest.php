@@ -1,24 +1,26 @@
 <?php
+
 namespace Tests\Feature\Admin;
 
 use App\Models\Hotel;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class RoomControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $user;
+
     protected Hotel $hotel;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
 
