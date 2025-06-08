@@ -8,6 +8,7 @@ use App\Models\Bill;
 use App\Models\Hotel;
 use App\Models\Reservation;
 use App\Models\Room;
+use App\Models\TravelCompany;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -93,21 +94,17 @@ class ReservationController extends Controller
             $checkoutDate = Carbon::parse($request->checkout);
             $nights = $checkinDate->diffInDays($checkoutDate);
 
-            if (empty($request->rooms) || ! is_array($request->rooms)) {
+            if (empty($request->rooms) || !is_array($request->rooms)) {
                 throw new \Exception('No rooms selected.');
             }
 
             $firstRoom = Room::where('id', $request->rooms[0])->firstOrFail();
             $hotelId = $firstRoom->hotel_id;
 
-            $hotel = Hotel::where('id', $hotelId)->first();
+            $hotel = Hotel::findOrFail($hotelId);
 
             $specialRequests = $request->special_requests;
-
-            $totalGuests = $request->guests;
-            if (! $totalGuests) {
-                $totalGuests = Room::whereIn('id', $request->rooms)->sum('occupancy');
-            }
+            $totalGuests = $request->guests ?: Room::whereIn('id', $request->rooms)->sum('occupancy');
 
             $totalPrice = 0;
 
@@ -142,6 +139,16 @@ class ReservationController extends Controller
                 $totalPrice += $roomPrice;
             }
 
+            $discountRate = 0;
+            if ($user->hasRole('travel-company')) {
+                $travelCompany = TravelCompany::where('user_id', $userId)->first();
+                if ($travelCompany && $travelCompany->discount > 0) {
+                    $discountRate = $travelCompany->discount;
+                    $discountAmount = ($totalPrice * $discountRate) / 100;
+                    $totalPrice = $totalPrice - $discountAmount;
+                }
+            }
+
             $reservation = Reservation::create([
                 'user_id' => $userId,
                 'hotel_id' => $hotelId,
@@ -151,6 +158,7 @@ class ReservationController extends Controller
                 'number_of_guests' => $totalGuests,
                 'special_requests' => $specialRequests,
                 'total_price' => $totalPrice,
+                'discount_rate' => $discountRate,
                 'payment_status' => 'pending',
                 'payment_method' => $paymentMethod,
                 'confirmation_number' => strtoupper(Str::random(10)),
@@ -164,19 +172,19 @@ class ReservationController extends Controller
 
             try {
                 $data = [
-                    'title' => 'Thank You for Your Reservation: '.$reservation->confirmation_number,
+                    'title' => 'Thank You for Your Reservation: ' . $reservation->confirmation_number,
                     'email' => $email,
                     'template' => 'reservation',
                     'reservation_id' => $reservation->confirmation_number,
-                    'date' => Carbon::parse($request->checkin)->diffForHumans(),
+                    'date' => Carbon::parse($request->checkin)->toFormattedDateString(),
                     'hotel_name' => $hotel->name,
                     'hotel_location' => $hotel->location,
                     'reservation_url' => route('about-us'),
                 ];
 
-                Mail::to($email)->send(new SendMail($data));
+                Mail::to($email)->send(new \App\Mail\SendMail($data));
             } catch (\Exception $e) {
-                Log::error('Email failed to send: '.$e->getMessage());
+                Log::error('Email failed to send: ' . $e->getMessage());
             }
 
             return response()->json([
@@ -263,13 +271,13 @@ class ReservationController extends Controller
             $nestedData['reservation_date'] = $r->check_in_date;
             if (Auth::user()->hasRole(['hotel-clerk'])) {
                 $nestedData['status'] = '
-                    <select onchange="changeReservationStatus('.$r->id.', this.value)" class="form-select form-select-sm">
-                        <option value="booked" '.($r->status == 'booked' ? 'selected' : '').'>Booked</option>
-                        <option value="checked_in" '.($r->status == 'checked_in' ? 'selected' : '').'>Checked In</option>
-                        <option value="checked_out" '.($r->status == 'checked_out' ? 'selected' : '').'>Checked Out</option>
-                        <option value="cancelled" '.($r->status == 'cancelled' ? 'selected' : '').'>Cancelled</option>
-                        <option value="no_show" '.($r->status == 'no_show' ? 'selected' : '').'>No Show</option>
-                        <option value="completed" '.($r->status == 'completed' ? 'selected' : '').'>Completed</option>
+                    <select onchange="changeReservationStatus(' . $r->id . ', this.value)" class="form-select form-select-sm">
+                        <option value="booked" ' . ($r->status == 'booked' ? 'selected' : '') . '>Booked</option>
+                        <option value="checked_in" ' . ($r->status == 'checked_in' ? 'selected' : '') . '>Checked In</option>
+                        <option value="checked_out" ' . ($r->status == 'checked_out' ? 'selected' : '') . '>Checked Out</option>
+                        <option value="cancelled" ' . ($r->status == 'cancelled' ? 'selected' : '') . '>Cancelled</option>
+                        <option value="no_show" ' . ($r->status == 'no_show' ? 'selected' : '') . '>No Show</option>
+                        <option value="completed" ' . ($r->status == 'completed' ? 'selected' : '') . '>Completed</option>
                     </select>
                 ';
             } else {
@@ -283,18 +291,18 @@ class ReservationController extends Controller
                     default => 'badge bg-light',
                 };
 
-                $nestedData['status'] = '<span class="'.$statusBadgeClass.'">'.ucfirst(str_replace('_', ' ', $r->status)).'</span>';
+                $nestedData['status'] = '<span class="' . $statusBadgeClass . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
             }
 
             $action = '
-                <a href="'.route('admin.reservation.view', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
+                <a href="' . route('admin.reservation.view', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                     <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                 </a>
             ';
 
             if ($r->status == 'checked_out') {
                 $action .= '
-                    <a href="'.route('admin.reservation.payment', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="' . route('admin.reservation.payment', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="streamline:payment-10-solid"></iconify-icon>
                     </a>
                 ';
@@ -302,10 +310,10 @@ class ReservationController extends Controller
 
             if ($r->status == 'pending') {
                 $action .= '
-                    <a href="'.route('admin.reservation.edit', ['id' => $r->confirmation_number]).'" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <a href="' . route('admin.reservation.edit', ['id' => $r->confirmation_number]) . '" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="lucide:edit"></iconify-icon>
                     </a>
-                    <button onclick="deleteReservation('.$r->id.')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                    <button onclick="deleteReservation(' . $r->id . ')" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
                         <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
                     </button>
                 ';
@@ -402,7 +410,7 @@ class ReservationController extends Controller
             ];
         }
 
-        return view('admin.reservations.view', compact('reservation', 'reservationRooms'));
+        return view('admin.reservations.view', compact('reservation', 'reservationRooms', 'bill'));
     }
 
     public function payment($id)

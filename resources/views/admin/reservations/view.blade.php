@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="dashboard-main-body">
-
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Reservation View</h6>
             <ul class="d-flex align-items-center gap-2">
@@ -107,12 +106,14 @@
                                                 <tr>
                                                     <td>Address</td>
                                                     <td class="ps-8">:
-                                                        {{ $reservation->user->address ?? '4517 Washington Ave, USA' }}</td>
+                                                        {{ $reservation->user->address ?? '4517 Washington Ave, USA' }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Phone number</td>
                                                     <td class="ps-8">:
-                                                        {{ $reservation->user->phone_number ?? '+1 543 2198' }}</td>
+                                                        {{ $reservation->user->phone_number ?? '+1 543 2198' }}
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -158,28 +159,66 @@
                                         </table>
                                     </div>
 
+                                    {{-- Extra Services --}}
+                                    @if ($bill && $bill->services->count() > 0)
+                                        <h6 class="text-lg fw-semibold mt-4 mb-3">Extra Services</h6>
+                                        <div class="table-responsive scroll-sm mb-4">
+                                            <table class="table bordered-table text-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Service Name</th>
+                                                        <th>Charge (LKR)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($bill->services as $index => $service)
+                                                        <tr>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $service->name }}</td>
+                                                            <td>LKR: {{ number_format($service->pivot->charge, 2) }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endif
+
                                     <div class="d-flex flex-wrap justify-content-between gap-3">
                                         <div></div>
                                         <div>
                                             <table class="text-sm">
                                                 <tbody>
                                                     <tr>
-                                                        <td class="pe-64">Subtotal:</td>
+                                                        <td class="pe-64">Room Charges:</td>
                                                         <td class="pe-16">
                                                             <span class="text-primary-light fw-semibold">LKR:
-                                                                {{ number_format($reservation->total_price, 2) }}</span>
+                                                                {{ number_format($bill->room_charges ?? 0, 2) }}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pe-64">Extra Charges:</td>
+                                                        <td class="pe-16">
+                                                            <span class="text-primary-light fw-semibold">LKR:
+                                                                {{ number_format($bill->extra_charges ?? 0, 2) }}
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="pe-64">Discount:</td>
                                                         <td class="pe-16">
-                                                            <span class="text-primary-light fw-semibold">LKR 0.00</span>
+                                                            <span class="text-primary-light fw-semibold">LKR:
+                                                                {{ number_format($bill->discount ?? 0, 2) }}
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="pe-64 border-bottom pb-4">Tax:</td>
                                                         <td class="pe-16 border-bottom pb-4">
-                                                            <span class="text-primary-light fw-semibold">LKR 0.00</span>
+                                                            <span class="text-primary-light fw-semibold">LKR:
+                                                                {{ number_format($bill->taxes ?? 0, 2) }}
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -188,13 +227,15 @@
                                                         </td>
                                                         <td class="pe-16 pt-4">
                                                             <span class="text-primary-light fw-semibold">LKR:
-                                                                {{ number_format($reservation->total_price, 2) }}</span>
+                                                                {{ number_format($bill->total_amount ?? $reservation->total_price, 2) }}
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    {{-- End of Totals --}}
                                 </div>
                             </div>
                         </div>
@@ -203,4 +244,5 @@
             </div>
         </div>
     </div>
+
 @endsection
