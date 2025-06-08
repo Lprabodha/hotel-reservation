@@ -133,8 +133,10 @@ class ReportController extends Controller
             $nestedData['discount'] = 'LKR '.number_format($r->discount, 2);
             $nestedData['total_amount'] = 'LKR '.number_format($r->total_amount, 2);
             $nestedData['status'] = $r->status == 'paid'
-                ? '<span class="badge bg-success">Paid</span>'
-                : '<span class="badge bg-danger">Unpaid</span>';
+                ? '<span class="px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main">Paid</span>'
+                : '<span class="px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main">Unpaid</span>';
 
             $action = '
                 <a href="" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
@@ -228,11 +230,18 @@ class ReportController extends Controller
             $nestedData['reservation_date'] = $r->check_in_date;
 
             $statusBadgeClass = match ($r->status) {
-                'booked' => 'badge bg-success',
-                'checked_in' => 'badge bg-primary',
-                'checked_out' => 'badge bg-secondary',
-                'cancelled' => 'badge bg-danger',
-                'completed' => 'badge bg-success',
+                'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
+                'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-primary-focus text-primary-main',
+                'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-secondary-focus text-secondary-main',
+                'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main',
+                'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-warning-focus text-warning-main',
+                'completed' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
                 default => 'badge bg-light',
             };
 
@@ -321,11 +330,18 @@ class ReportController extends Controller
             $nestedData['reservation_date'] = $r->check_in_date;
 
             $statusBadgeClass = match ($r->status) {
-                'booked' => 'badge bg-success',
-                'checked_in' => 'badge bg-primary',
-                'checked_out' => 'badge bg-secondary',
-                'cancelled' => 'badge bg-danger',
-                'completed' => 'badge bg-success',
+                'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
+                'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-primary-focus text-primary-main',
+                'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-secondary-focus text-secondary-main',
+                'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main',
+                'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-warning-focus text-warning-main',
+                'completed' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
                 default => 'badge bg-light',
             };
 
@@ -414,12 +430,18 @@ class ReportController extends Controller
             $nestedData['reservation_date'] = $r->check_in_date;
 
             $statusBadgeClass = match ($r->status) {
-                'booked' => 'badge bg-success',
-                'checked_in' => 'badge bg-primary',
-                'checked_out' => 'badge bg-secondary',
-                'cancelled' => 'badge bg-danger',
-                'completed' => 'badge bg-success',
-                'no_show' => 'badge bg-warning',
+                'booked' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
+                'checked_in' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-primary-focus text-primary-main',
+                'checked_out' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-secondary-focus text-secondary-main',
+                'cancelled' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-danger-focus text-danger-main',
+                'no_show' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-warning-focus text-warning-main',
+                'completed' => 'px-24 py-4 rounded-pill fw-medium text-sm
+                                    bg-success-focus text-success-main',
                 default => 'badge bg-light',
             };
 

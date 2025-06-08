@@ -73,7 +73,7 @@
         <div class="row gy-4 mt-1">
 
             <div class="d-flex justify-content-end">
-                <a href="{{ route('hotels') }}"
+                <a href="{{ route('request.reservations') }}"
                     class="btn btn-primary-500  text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
                     <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
                     Make Reservations Request
@@ -150,7 +150,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a href=""
+                                                        <a href="{{route('view.reservations', ['id' => $reservation->confirmation_number])}}"
                                                             class="btn rounded-pill btn-info-100 text-info-600 radius-8 px-20 py-11">
                                                             <iconify-icon icon="lucide:view"></iconify-icon></a>
                                                     </td>

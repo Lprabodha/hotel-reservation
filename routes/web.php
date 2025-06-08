@@ -36,9 +36,12 @@ Route::controller(HomeController::class)->group(function () {
 Route::middleware(['auth', 'check_role:customer'])->group(function () {
     Route::get('/hotels/{hotel}/reserve', [HomeController::class, 'reservation'])->name('hotels.reserve');
 });
-Route::post('/reservation', [ControllersReservationController::class, 'store'])->name('reservation.store');
-Route::get('/check-availability', [ControllersReservationController::class, 'checkAvailability']);
-Route::get('/reservation-confirmed/{reservation}', [ControllersReservationController::class, 'reservationConfirmed'])->name('reservation.confirmed');
+
+Route::controller(ControllersReservationController::class)->group(function () {
+    Route::post('/reservation', 'store')->name('reservation.store');
+    Route::get('/check-availability', 'checkAvailability');
+    Route::get('/reservation-confirmed/{reservation}', 'reservationConfirmed')->name('reservation.confirmed');
+});
 
 Route::controller(HotelController::class)->group(function () {
     Route::get('/hotels', 'index')->name('hotels');
@@ -46,18 +49,20 @@ Route::controller(HotelController::class)->group(function () {
 });
 
 // Authentication routes
-Route::group(['middleware' => ['check_role:customer,travel-company']], function () {
+Route::group(['middleware' => ['role_or_permission:customer|travel-company']], function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/dashboard/reservations', 'reservations')->name('dashboard.reservations');
         Route::get('/dashboard/user-profile', 'getUserProfile')->name('view.profile');
         Route::post('/show/reservations', 'showReservation')->name('show.reservations');
+        Route::get('/reservations/view/{id}', 'viewReservation')->name('view.reservations');
+        Route::get('/request-reservations', 'requestReservation')->name('request.reservations');
     });
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_role:hotel-clerk,hotel-manager,super-admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role_or_permission:hotel-clerk|hotel-manager|super-admin']], function () {
 
     Route::controller(UserController::class)->group(function () {
         // Users

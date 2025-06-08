@@ -55,7 +55,8 @@
                                 </div>
 
                                 <div class="col-md-3 d-flex align-items-end">
-                                    <button id="filterHotel" type="button" class="btn btn-primary w-100">Filter</button>
+                                    <button id="filterHotel" type="button" class="btn btn-primary w-100">Check
+                                        Availability</button>
                                 </div>
 
                                 <div id="filterError" class="alert alert-danger d-none text-center small" role="alert">
@@ -64,32 +65,7 @@
 
                             <div class="mb-40 mt-5">
                                 <div class="row gy-4" id="roomList">
-                                    @forelse ($rooms as $room)
-                                        <div class="col-xxl-3 col-sm-6">
-                                            <div class="card radius-12 h-60">
-                                                <div class="card-body py-16 px-24">
-                                                    <div class="d-flex align-items-center gap-2 mb-12">
-                                                        <iconify-icon icon="mdi:guest-room" class="text-xxl"></iconify-icon>
-                                                        <h6 class="text-lg mb-0">Room Number - #{{ $room->room_number }}
-                                                        </h6>
 
-                                                        <div class="room-checkbox">
-                                                            <input type="checkbox" id="room1" name="rooms[]"
-                                                                value="{{ $room->id }}" class="form-check-input">
-                                                        </div>
-                                                    </div>
-                                                    <p class="card-text text-muted mb-2">Room Type: {{ $room->room_type }}
-                                                    </p>
-                                                    <p class="card-text text-muted mb-2">Max Guests: {{ $room->occupancy }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        <div class="alert alert-primary" role="alert">
-                                            The hotel can’t be found!
-                                        </div>
-                                    @endforelse
                                 </div>
 
                                 <div class="form-group text-end mt-4">
