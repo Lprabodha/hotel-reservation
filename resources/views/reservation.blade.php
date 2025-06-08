@@ -328,7 +328,8 @@
                             <div class="form-row mb-3" style="width: 30%;">
                                 <div class="col">
                                     <label>CVV</label>
-                                    <input type="text" name="csv" class="form-control" placeholder="123" maxlength="3">
+                                    <input type="text" name="csv" class="form-control" placeholder="123"
+                                        maxlength="3">
                                 </div>
                             </div>
                         </div>
@@ -346,6 +347,9 @@
 
                         <div class="text-center">
                             <button type="submit" class="theme-btn">Confirm Reservation</button>
+                        </div>
+                        <div id="card-required-warning" style="color: #d9534f; margin-top: 10px; display: none;">
+                            To complete a reservation for today or tomorrow, card details are required.
                         </div>
                     </div>
                 </form>
@@ -426,7 +430,9 @@
                 return;
             }
 
-            fetch(`/check-availability?checkin=${checkin}&checkout=${checkout}&guests=${guests}&hotel_id=${hotelId}`)
+            fetch(
+                    `/check-availability?checkin=${checkin}&checkout=${checkout}&guests=${guests}&hotel_id=${hotelId}`
+                    )
                 .then(response => response.json())
                 .then(data => {
                     roomsContainer.innerHTML = '';
@@ -544,17 +550,20 @@
         function validateCardRequirement() {
             const checkin = checkinInput.value;
             const checkout = checkoutInput.value;
+            const warningEl = document.getElementById('card-required-warning');
 
             const requiresCard = isTodayOrTomorrow(checkin) || isTodayOrTomorrow(checkout);
 
-            const cardFilled = cardNumberInput.value.trim().length === 16 &&
+            const cardFilled = cardNumberInput.value.trim().replace(/\s/g, '').length === 16 &&
                 cardExpireInput.value.trim() !== '' &&
                 cvvInput.value.trim() !== '';
 
             if (requiresCard) {
                 confirmBtn.disabled = !cardFilled;
+                warningEl.style.display = cardFilled ? 'none' : 'block';
             } else {
                 confirmBtn.disabled = false;
+                warningEl.style.display = 'none';
             }
         }
 
