@@ -162,7 +162,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
     Route::controller(ReportController::class)->group(function () {
         Route::name('reports.')->group(function () {
             Route::get('/reports', 'index')->name('index');
-            Route::get('/payments', 'payments')->name('payments');
+            Route::get('/reports-payments', 'payments')->name('payments');
             Route::post('/past-bill', 'bill')->name('bill');
             Route::post('/latest-reservation', 'latestReservation')->name('latest-reservation');
             Route::post('/past-reservation', 'pastReservation')->name('past-reservation');
